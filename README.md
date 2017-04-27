@@ -25,7 +25,7 @@ Want to build something from scratch? use the [boilerplate](https://github.com/m
 ## Install
 
 ```sh
-$ git clone git://github.com/madhums/node-express-mongoose-demo.git
+$ git clone https://github.com/dongheng76/nodejs-demo.git
 $ npm install
 ```
 
@@ -52,7 +52,7 @@ then
 $ npm start
 ```
 
-Then visit [http://localhost:3000/](http://localhost:3000/)
+Then visit [http://localhost:80/](http://localhost:80/)
 
 ## Tests
 
