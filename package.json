@@ -3,7 +3,7 @@
   "description": "A demo app illustrating the usage of express, mongoose, passportjs, swig and other modules in nodejs",
   "keywords": [
     "express",
-    "mongoose",
+    "mysql",
     "mongodb",
     "passport",
     "demo"
@@ -39,7 +39,7 @@
     "express": "~4.14.0",
     "express-session": "~1.14.0",
     "forever": "~0.15.1",
-    "jade": "~1.11.0",
+    "ejs": "~2.3.3",
     "method-override": "~2.3.5",
     "mongoose": "~4.7.2",
     "morgan": "~1.7.0",
@@ -54,15 +54,19 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.3",
     "view-helpers": "~0.1.5",
-    "winston": "~2.3.0"
+    "winston": "~2.3.0",
+    "mysql": "~2.10.2",
+    "md5": "~2.1.0"
   },
   "devDependencies": {
+    "async": "^2.3.0",
     "babel-eslint": "~7.1.0",
     "babel-preset-stage-0": "~6.16.0",
     "babel-tape-runner": "~2.0.1",
     "eslint": "~3.12.0",
     "nodemon": "1.11.0",
     "supertest": "*",
-    "tape": "~4.6.0"
+    "tape": "~4.6.0",
+    "validator": "^7.0.0"
   }
 }

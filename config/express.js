@@ -16,13 +16,11 @@ const csrf = require('csurf');
 const cors = require('cors');
 const upload = require('multer')();
 
-const mongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const winston = require('winston');
 const helpers = require('view-helpers');
 const config = require('./');
 const pkg = require('../package.json');
-
 const env = process.env.NODE_ENV || 'development';
 
 /**
@@ -30,7 +28,6 @@ const env = process.env.NODE_ENV || 'development';
  */
 
 module.exports = function (app, passport) {
-
   // Compression middleware (should be placed before express.static)
   app.use(compression({
     threshold: 512
@@ -38,7 +35,7 @@ module.exports = function (app, passport) {
 
   app.use(cors());
 
-  // Static files middleware
+  //设置静态文件夹路径，已达到不被当成控制层的作用
   app.use(express.static(config.root + '/public'));
 
   // Use winston on production
@@ -57,7 +54,7 @@ module.exports = function (app, passport) {
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/app/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
 
   // expose package.json to views
   app.use(function (req, res, next) {
@@ -85,11 +82,7 @@ module.exports = function (app, passport) {
   app.use(session({
     resave: false,
     saveUninitialized: true,
-    secret: pkg.name,
-    store: new mongoStore({
-      url: config.db,
-      collection : 'sessions'
-    })
+    secret: pkg.name
   }));
 
   // use passport session

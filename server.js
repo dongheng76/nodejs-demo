@@ -1,7 +1,7 @@
 'use strict';
 
 /*
- * nodejs-express-mongoose-demo
+ * nodejs-demo
  * Copyright(c) 2013 Madhusudhan Srinivasa <madhums8@gmail.com>
  * MIT Licensed
  */
@@ -11,16 +11,15 @@
  */
 
 require('dotenv').config();
+const fs = require('fs');                               //文件读写工具包
+const join = require('path').join;                     //连接字符串方法
+const express = require('express');                   //express框架
+const passport = require('passport');                 //登录认证中间件
+const config = require('./config');                   //载入基本配置文件
+const http = require('http');
 
-const fs = require('fs');
-const join = require('path').join;
-const express = require('express');
-const mongoose = require('mongoose');
-const passport = require('passport');
-const config = require('./config');
-
-const models = join(__dirname, 'app/models');
-const port = process.env.PORT || 3000;
+const models = join(__dirname, 'app/models');         //取得模块地址
+const port = process.env.PORT || 80;
 const app = express();
 
 /**
@@ -34,23 +33,79 @@ fs.readdirSync(models)
   .filter(file => ~file.search(/^[^\.].*\.js$/))
   .forEach(file => require(join(models, file)));
 
-// Bootstrap routes
-require('./config/passport')(passport);
+// 启动时加入的 routes
 require('./config/express')(app, passport);
 require('./config/routes')(app, passport);
 
-connect()
-  .on('error', console.log)
-  .on('disconnected', connect)
-  .once('open', listen);
+/**
+ * Create HTTP server.
+ */
 
-function listen () {
-  if (app.get('env') === 'test') return;
-  app.listen(port);
-  console.log('Express app started on port ' + port);
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * 返回端口信息
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+  //初始化端口号
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
 }
 
-function connect () {
-  var options = { server: { socketOptions: { keepAlive: 1 } } };
-  return mongoose.connect(config.db, options).connection;
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+      ? 'Pipe ' + port
+      : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
 }
