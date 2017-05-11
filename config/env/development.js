@@ -5,5 +5,15 @@
  */
 
 module.exports = {
-  db: 'mongodb://localhost:27017/noobjs_dev'
+  // log files directory
+  logDirectory : "/logs/",
+
+  // mysql config
+  server : "localhost",
+  port : 3306,
+  user : "root",
+  password : "",
+  database : "nodejs_demo",
+  maxSockets : 80,//pool使用
+  timeout : 1,//pool使用
 };

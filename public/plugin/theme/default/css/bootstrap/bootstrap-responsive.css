@@ -208,6 +208,7 @@
   .row-fluid {
     width: 100%;
     *zoom: 1;
+    position:relative;
   }
   .row-fluid:before,
   .row-fluid:after {

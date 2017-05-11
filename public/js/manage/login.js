@@ -15,7 +15,10 @@ $(function () {
 
     $('#login').click(function(){
         $.post('/manage/signin',$('form[name="login"]').serialize(),function(data){
-            alert(data);
+            console.log(data);
+            if(data.result){
+                window.location.href = '/manage/panel';
+            }
         });
     });
 });

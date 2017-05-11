@@ -7,6 +7,15 @@ body {
 	padding: 0px;
 	/*-webkit-font-smoothing: antialiased;*/
 }
+
+#main{background-color:#F3F3F3;}
+#openClose {width:6px;margin:0 1px;cursor:pointer;margin-left:200px;float:left;}
+#left{position:absolute;left:0;top:0;width:200px;}
+.nav-tabs{margin-left:-1px;background-color:#F3F3F3;}
+#openClose,#openClose.close {background:#efefef url("../images/openclose.png") no-repeat -29px center;}
+#openClose.close {background-position:1px center;opacity:0.5;filter:alpha(opacity=50)}
+.content-ui{padding:0 10px;}
+
 h1,h2,h3,h4,h5 {
 	margin: 0;
 	line-height: inherit;
@@ -287,8 +296,8 @@ input.search{
 }
 #dashboard-menu .pointer {
 	position: absolute;
-	right: 9px;
-	top: 20px;
+	right: 3px;
+	top: 0px;
 }
 #dashboard-menu .pointer .arrow,
 #dashboard-menu .pointer .arrow_border {
@@ -409,8 +418,8 @@ input.search{
 .content {
 	min-width: 400px;
 	min-height: 620px;
-	margin-bottom: 100px;
-	padding-bottom: 50px;
+	margin-bottom: 10px;
+	padding-bottom: 20px;
 	overflow: hidden;
 	position: relative;
 	background: #fff;

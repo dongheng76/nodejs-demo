@@ -4,13 +4,11 @@
  * Module dependencies.
  */
 
-const user = require('../app/controllers/manage/user');
 const auth = require('./middlewares/authorization');
 
 /**
  * Route middlewares
  */
-
 const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
 const commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 
@@ -24,18 +22,22 @@ const fail = {
 module.exports = function (app, passport) {
   const pauth = passport.authenticate.bind(passport);
 
-  // user routes
-  app.get('/manage/login', user.login);
-  app.post('/manage/signin', user.signin);
-  app.get('/manage/signup', user.signup);
-  app.get('/manage/logout', user.logout);
-  app.post('/user/session',
+  //登录相关路由
+  require('../app/routes/manage/login')(app, passport);
+  //面板路由
+  require('../app/routes/manage/panel')(app, passport);
+  //用户路由
+  require('../app/routes/manage/user')(app, passport);
+  //文件路由
+  require('../app/routes/manage/file')(app, passport);
+
+  /*app.post('/user/session',
     pauth('local', {
       failureRedirect: '/login',
       failureFlash: 'Invalid email or password.'
     }), user.session);
   app.get('/user/:userId', user.show);
-  app.get('/auth/linkedin/callback', pauth('linkedin', fail), user.authCallback);
+  app.get('/auth/linkedin/callback', pauth('linkedin', fail), user.authCallback);*/
 
   /**
    * Error handling

@@ -1,0 +1,34 @@
+<!-- scripts -->
+<script src="/plugin/theme/default/js/bootstrap.min.js"></script>
+<script src="/plugin/theme/default/js/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="/plugin/theme/default/js/theme.js"></script>
+
+<!-- call this page plugins -->
+<script type="text/javascript">
+    $(function () {
+
+        // add uniform plugin styles to html elements
+        $("input:checkbox, input:radio").uniform();
+
+        // select2 plugin for select elements
+        $(".select2").select2({
+            placeholder: "请选择一个选项"
+        });
+
+        // datepicker plugin
+        $('.datepicker').datepicker({
+            language: "zh-CN",
+            autoclose: true,//选中之后自动隐藏日期选择框
+            clearBtn: true,//清除按钮
+            todayBtn: true,//今日按钮
+            format: "yyyy-mm-dd"//日期格式
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+
+        // wysihtml5 plugin on textarea
+        $(".wysihtml5").wysihtml5({
+            "font-styles": false
+        });
+    });
+</script>

@@ -1,0 +1,81 @@
+@charset "utf-8";
+
+.file_list {
+	background-color: #f2f2f2;
+	padding:20px;
+}
+
+.ui-selectable-helper {
+	position: absolute;
+	z-index: 100;
+	border: 1px dotted black;
+	background-color: #FFF;
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+}
+
+.file_list .file_item {
+	float:left;
+	border: 2px solid #FFF;
+	background-color: #fff;
+	margin-right: 15px;
+	margin-bottom:20px;
+	cursor: pointer;
+}
+
+.file_list .file_selected {
+	border: 2px solid #7ab24f;
+	background-color: #7ab24f;
+	color:#FFF;
+}
+
+.file_list .ui-selecting {
+	border: 2px solid #7ab24f;
+	background-color: #7ab24f;
+	color:#FFF;
+}
+
+.file_list .file_item .img_wrap {
+	width: 150px;
+	height: 150px;
+}
+
+.file_list .file_item .file_title {
+	line-height: 50px;
+	height: 50px;
+	text-align: center;
+}
+
+.file_list .file_item .file_title .file_title_content {
+	display: inline-block;
+	line-height: 50px;
+	max-width:120px;
+	text-align: center;
+	text-overflow: ellipsis;
+	vertical-align: middle;
+	overflow: hidden;
+	white-space: nowrap;
+	word-wrap: normal;
+}
+
+.file_list .file_item .file_title .file_title_suffix {
+	display: inline-block;
+	line-height: 50px;
+	vertical-align: middle;
+	text-align: center;
+	max-width:28px;
+	overflow:hidden;
+}
+
+.file_icon{
+	width:150px;
+	height:150px;
+	background: url(../images/file.png) 35px 30px no-repeat transparent;
+	background-color: #f2f2f2;
+}
+.folder_icon{
+	width:150px;
+	height:150px;
+	background: url(../images/folder.png) 25px 40px no-repeat transparent;
+	background-color: #f2f2f2;
+}

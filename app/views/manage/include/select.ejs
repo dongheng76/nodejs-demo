@@ -1,0 +1,8 @@
+<div class="ui-select" style="width:<%=width%>px">
+    <select  name="<%=name%>">
+        <option />
+        <% options.forEach(function(option){%>
+            <option value="<%=option.id%>"><%=option.label%></option>
+        <%})%>
+    </select>
+</div>

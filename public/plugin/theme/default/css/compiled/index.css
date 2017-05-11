@@ -35,8 +35,8 @@
 
 .section {
   border-top: 1px solid #edeff1;
-  margin-top: 100px;
-  padding-top: 45px;
+  margin-top: 0;
+  padding-top: 25px;
   box-shadow: inset 0px 3px 4px -1px #fafafa; }
 
 /* Stats chart */
@@ -114,13 +114,11 @@
     color: #516372; }
   .table-products .table td a {
     text-decoration: underline;
-    margin-top: 6px;
     display: inline-block; }
   .table-products .table th input[type="checkbox"] {
     margin-top: 4px; }
   .table-products .table input[type="checkbox"] {
     float: left;
-    margin-top: 11px;
     margin-right: 23px; }
   .table-products .table .img {
     height: 31px;
@@ -155,8 +153,8 @@
   .table-products .label {
     position: relative; }
   .table-products .pagination {
-    float: right;
-    margin-top: 35px; }
+    float: right;}
+.table-products .pagination li{display:inline;padding:5px;}
 
 /* responsive */
 @media (max-width: 767px) {

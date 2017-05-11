@@ -98,6 +98,14 @@ sub {
   bottom: -0.25em;
 }
 
+table .default_node, table .default_active_node {width:16px;height:16px;border: medium none; margin: 0; padding: 0;display: inline-block;}
+table .default_active_node {cursor: pointer;}
+table .default_open, table .default_last_open{background:url(../../img/allbgs.gif) no-repeat 0px 1px;width:16px;}
+table .default_shut, table .default_last_shut{background:url(../../img/allbgs.gif) no-repeat -16px 1px;width:16px;}
+table .default_hover_open, table .default_hover_last_open{background:url(../../img/allbgs.gif) no-repeat -32px 1px;width:16px;}
+table .default_hover_shut, table .default_hover_last_shut{background:url(../../img/allbgs.gif) no-repeat -48px 1px;width:16px;}
+
+
 img {
   width: auto\9;
   height: auto;
@@ -414,6 +422,10 @@ a:focus {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.row-fluid .field-box{
+  padding-bottom:10px;
 }
 
 .row-fluid [class*="span"]:first-child {
@@ -1093,7 +1105,7 @@ input[type="color"],
   display: inline-block;
   height: 20px;
   padding: 4px 6px;
-  margin-bottom: 10px;
+  margin-right:10px;
   font-size: 14px;
   line-height: 20px;
   color: #555555;
@@ -1251,10 +1263,10 @@ textarea::-webkit-input-placeholder {
   color: #999999;
 }
 
-.radio,
-.checkbox {
+.radio,.checkbox {
   min-height: 20px;
   padding-left: 20px;
+  float: left;
 }
 
 .radio input[type="radio"],
@@ -2157,66 +2169,83 @@ table th[class*="span"],
   margin-left: 0;
 }
 
+.table .sort{
+  cursor: pointer;
+}
+
+.table th .datagrid-sort-icon{
+  display: inline;
+  padding: 0 13px 0 0;
+  background: url(../../img/datagrid_icons.png) no-repeat -64px center;
+}
+
+.table .datagrid-sort-asc .datagrid-sort-icon{
+  background: url(../../img/datagrid_icons.png) no-repeat 0px center;
+}
+.table .datagrid-sort-desc .datagrid-sort-icon{
+  background: url(../../img/datagrid_icons.png) no-repeat -16px center;
+}
+
 .table td.span1,
 .table th.span1 {
   float: none;
-  width: 44px;
+  width: 10%;
   margin-left: 0;
 }
 
 .table td.span2,
 .table th.span2 {
   float: none;
-  width: 124px;
+  width: 20%;
   margin-left: 0;
 }
 
 .table td.span3,
 .table th.span3 {
   float: none;
-  width: 204px;
+  width: 30%;
   margin-left: 0;
 }
 
 .table td.span4,
 .table th.span4 {
   float: none;
-  width: 284px;
+  width: 40%;
   margin-left: 0;
 }
 
 .table td.span5,
 .table th.span5 {
   float: none;
-  width: 364px;
+  width: 50%;
   margin-left: 0;
 }
 
 .table td.span6,
 .table th.span6 {
   float: none;
-  width: 444px;
+  width: 60%;
   margin-left: 0;
 }
 
 .table td.span7,
 .table th.span7 {
   float: none;
-  width: 524px;
+  width: 70%;
   margin-left: 0;
 }
 
 .table td.span8,
 .table th.span8 {
   float: none;
-  width: 604px;
+  width: 80%;
   margin-left: 0;
 }
 
 .table td.span9,
 .table th.span9 {
   float: none;
-  width: 684px;
+  width: 90%;
   margin-left: 0;
 }
 
@@ -4964,10 +4993,11 @@ input[type="submit"].btn.btn-mini {
 }
 
 .pagination {
-  margin: 20px 0;
+  margin: 0 0;
 }
 
 .pagination ul {
+  float:right;
   display: inline-block;
   *display: inline;
   margin-bottom: 0;
@@ -6156,3 +6186,5 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+.auto_height, .auto-height{clear:both;height:0px;line-height:0px;font-size:0px;overflow:hidden;}

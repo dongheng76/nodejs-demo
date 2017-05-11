@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html class="login-bg" xmlns="http://www.w3.org/1999/html">
 <head>
-  <title>后台管理系统 - 登录</title>
+    <title>后台管理系统 - 登录</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- bootstrap -->
-  <link href="/plugin/theme/default/css/bootstrap/bootstrap.css" rel="stylesheet" />
-  <link href="/plugin/theme/default/css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
-  <link href="/plugin/theme/default/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+    <!-- bootstrap -->
+    <link href="/plugin/theme/default/css/bootstrap/bootstrap.css" rel="stylesheet"/>
+    <link href="/plugin/theme/default/css/bootstrap/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="/plugin/theme/default/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet"/>
 
-  <!-- global styles -->
-  <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/layout.css" />
-  <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/elements.css" />
-  <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/icons.css" />
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/elements.css"/>
+    <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/icons.css"/>
 
-  <!-- libraries -->
-  <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/lib/font-awesome.css" />
+    <!-- libraries -->
+    <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/lib/font-awesome.css"/>
 
-  <!-- this page specific styles -->
-  <link rel="stylesheet" href="/plugin/theme/default/css/compiled/signin.css" type="text/css" media="screen" />
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="/plugin/theme/default/css/compiled/signin.css" type="text/css" media="screen"/>
 
-  <!-- open sans font -->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+    <!-- open sans font -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'/>-->
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+    <!--[if lt IE 9]>
+    <script src="/js/common/html5shiv.min.js"></script>
+    <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
 <body>
 
 
 <!-- background switcher -->
 <div class="bg-switch visible-desktop">
-  <div class="bgs">
-    <a href="#" data-img="landscape.jpg" class="bg active">
-      <img src="/plugin/theme/default/img/bgs/landscape.jpg" />
-    </a>
-    <a href="#" data-img="blueish.jpg" class="bg">
-      <img src="/plugin/theme/default/img/bgs/blueish.jpg" />
-    </a>
-    <a href="#" data-img="7.jpg" class="bg">
-      <img src="/plugin/theme/default/img/bgs/7.jpg" />
-    </a>
-    <a href="#" data-img="8.jpg" class="bg">
-      <img src="/plugin/theme/default/img/bgs/8.jpg" />
-    </a>
-    <a href="#" data-img="9.jpg" class="bg">
-      <img src="/plugin/theme/default/img/bgs/9.jpg" />
-    </a>
-    <a href="#" data-img="10.jpg" class="bg">
-      <img src="/plugin/theme/default/img/bgs/10.jpg" />
-    </a>
-    <a href="#" data-img="11.jpg" class="bg">
-      <img src="/plugin/theme/default/img/bgs/11.jpg" />
-    </a>
-  </div>
+    <div class="bgs">
+        <a href="#" data-img="landscape.jpg" class="bg active">
+            <img src="/plugin/theme/default/img/bgs/landscape.jpg"/>
+        </a>
+        <a href="#" data-img="blueish.jpg" class="bg">
+            <img src="/plugin/theme/default/img/bgs/blueish.jpg"/>
+        </a>
+        <a href="#" data-img="7.jpg" class="bg">
+            <img src="/plugin/theme/default/img/bgs/7.jpg"/>
+        </a>
+        <a href="#" data-img="8.jpg" class="bg">
+            <img src="/plugin/theme/default/img/bgs/8.jpg"/>
+        </a>
+        <a href="#" data-img="9.jpg" class="bg">
+            <img src="/plugin/theme/default/img/bgs/9.jpg"/>
+        </a>
+        <a href="#" data-img="10.jpg" class="bg">
+            <img src="/plugin/theme/default/img/bgs/10.jpg"/>
+        </a>
+        <a href="#" data-img="11.jpg" class="bg">
+            <img src="/plugin/theme/default/img/bgs/11.jpg"/>
+        </a>
+    </div>
 </div>
 
 
 <div class="row-fluid login-wrapper">
-  <a href="index.html">
-    <img class="logo" src="/plugin/theme/default/img/logo-white.png" />
-  </a>
+    <a href="index.html">
+        <img class="logo" src="/plugin/theme/default/img/logo-white.png"/>
+    </a>
 
-  <div class="span4 box">
-    <div class="content-wrap">
-      <form method="post" action="/manage/signin" name="login">
-        <h6>Log in</h6>
-        <input type="hidden" name="_csrf" value="<%= csrf_token %>">
-        <input class="span12" type="text" name="login_name" placeholder="E-mail address" />
-        <input class="span12" type="password" name="password" placeholder="Your password" />
-        <a href="#" class="forgot">Forgot password?</a>
-        <div class="remember">
-          <input id="remember-me" type="checkbox" />
-          <label for="remember-me">Remember me</label>
+    <div class="span4 box">
+        <div class="content-wrap">
+            <form method="post" action="/manage/signin" name="login">
+                <h6>Log in</h6>
+                <input type="hidden" name="_csrf" value="<%= csrf_token %>">
+                <input class="span12" type="text" name="login_name" placeholder="E-mail address"/>
+                <input class="span12" type="password" name="password" placeholder="Your password"/>
+                <a href="#" class="forgot">Forgot password?</a>
+                <div class="remember">
+                    <input id="remember-me" type="checkbox"/>
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <button type="button" id="login" class="btn-glow primary login">登录</button>
+            </form>
         </div>
-        <button type="button" id="login" class="btn-glow primary login">登录</button>
-      </form>
     </div>
-  </div>
 
-  <div class="span4 no-account">
-    <p>Don't have an account?</p>
-    <a href="signup.html">Sign up</a>
-  </div>
+    <div class="span4 no-account">
+        <p>忘记登录密码?</p>
+        <a href="signup.html">Sign up</a>
+    </div>
 </div>
 
 <!-- scripts -->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/common/jquery-1.12.4.min.js"></script>
 <script src="/plugin/theme/default/js/bootstrap.min.js"></script>
 <script src="/plugin/theme/default/js/theme.js"></script>
 

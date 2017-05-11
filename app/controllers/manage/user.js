@@ -5,140 +5,107 @@
  */
 
 const async = require('async');
-const respond = require('../../utils/index');
-const mysqldb = require('../../../config/mysql_db');
-const md5 = require('md5');
+const utils = require('../../utils');
 const validator = require('validator');
-/**
- * Load
- */
-
-exports.load = function (req, res, next) {
-  try {
-
-  } catch (err) {
-    return next(err);
-  }
-  next();
-};
+const userDao = require('../../dao/user');
+const util = require('../../utils');
+const menuDao = require('../../dao/menu');
+const dictUtil = require('../../utils/dict_utils');
+const moment = require('moment');
 
 /**
- * Create user
+ * 创建用户
  */
-
 exports.create = function (req, res) {
 
-  try {
+  async.auto({
+    currentMenu:function(cb){
+      menuDao.queryMenuByHref("/manage/user",function(err, menu) {
+        if (err || !menu) {
+          cb(null, {});
+        } else{
+          cb(null, menu);
+        }
+      });
+    },
+    userTypes:function(cb){
+      dictUtil.getDictList('sys_user_type',function(err,userTypes){
+        cb(null, userTypes);
+      });
+    }
+  }, function (error, result) {
 
-  } catch (err) {
-
-  }
+    res.render('manage/user/create', {
+      currentMenu:result.currentMenu,
+      userTypes:result.userTypes
+    });
+  });
 };
 
 /**
- *  Show profile
+ *  显示用户详情
  */
-
 exports.show = function (req, res) {
 
 };
 
-exports.signin = function (req, res) {
-  //取出用户名和密码
-  let login_name = req.body.login_name;
-  let password = req.body.password;
+/**
+ *  保存一个用户信息
+ */
+exports.store = function (req, res) {
 
-  let params_error = [];
-  //检查用户是否合法
-  if(validator.isEmpty(login_name)){
-    error.push({loginname:'登录名不能为空！'});
-  }
-  if(validator.isEmpty(password)){
-    error.push({loginname:'密码不能为空！'});
-  }
+};
 
-  async.series({
-    queryUserByUserNameAndPwd: function (done) {
-      let sql = "select * from sys_user where login_name=? and password=? ";
+/**
+ *  删除一个用户信息
+ */
+exports.delete = function (req, res) {
 
-      mysqldb.query(sql,[login_name,md5(password)], function(err, rows, fields){
-        if (err) {
-          console.log(err);
+};
+
+exports.index = function (req, res) {
+  var currentPage = req.query.page ? req.query.page : 1; //获取当前页数，如果没有则为1
+  async.auto({
+    users: function (cb) {
+      userDao.queryAllUser(req,currentPage,20,function(err, users) {
+        if (err || !users) {
           return;
+        } else {
+          users.forEach(function (user) {
+            dictUtil.getDictLabel(user.user_type,'sys_user_type','未知',function(err,label){
+              user.user_type_label = label;
+            });
+            user.create_date = moment(user.create_date).format("YYYY-MM-DD HH:mm:ss");
+          });
+          cb(null, users);
         }
-        done(null, rows);
+      });
+    },
+    //查询用户数量
+    usersPage:['users', function(params,cb){
+      userDao.queryAllUserPage(req,20,currentPage,function(err, usersPage) {
+        if (err || !usersPage) {
+          cb(null, {});
+        } else{
+          cb(null, usersPage);
+        }
+      });
+    }],
+    currentMenu:function(cb){
+        menuDao.queryMenuByHref("/manage/user",function(err, menu) {
+        if (err || !menu) {
+          cb(null, {});
+        } else{
+          cb(null, menu);
+        }
       });
     }
   }, function (error, result) {
-    if(params_error.length>0){
-      res.json(params_error);
-      return ;
-    }
 
-    let user = result.queryUserByUserNameAndPwd;
-    console.log(user);
-    if(user.length>0){
-      //如果被匹配上查询用户角色及其菜单信息保存于redis中
-      res.json({
-        result:true,
-        userinfo:user[0]
-      });
-    }else{
-      res.json({
-        result:false,
-        error:'你输入的用户名或密码有错误请重试！'
-      });
-    }
+    res.render('manage/user/index', {
+      currentMenu:result.currentMenu,
+      users:result.users,
+      page:result.usersPage
+    });
   });
 };
-
-/**
- * Auth callback
- */
-exports.authCallback = login;
-
-/**
- * Show login form
- */
-
-exports.login = function (req, res) {
-  res.render('manage/login', {
-    title: 'Login'
-  });
-};
-
-/**
- * Show sign up form
- */
-
-exports.signup = function (req, res) {
-  res.render('users/signup', {
-    title: 'Sign up',
-    user: new User()
-  });
-};
-
-/**
- * Logout
- */
-
-exports.logout = function (req, res) {
-  req.logout();
-  res.redirect('/login');
-};
-
-/**
- * Session
- */
-
-exports.session = login;
-
-/**
- * Login
- */
-
-function login (req, res) {
-  const redirectTo = req.session.returnTo? req.session.returnTo : '/';
-  delete req.session.returnTo;
-  res.redirect(redirectTo);
-}

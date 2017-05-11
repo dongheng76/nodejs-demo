@@ -11,6 +11,7 @@ h1,h2,h3,h4,h5,h6{
 .label, .badge {font-weight: lighter;}
 .label-success, .badge-success {
 	background-color: rgb(129, 189, 130);
+	margin-top:6px;
 }
 .label-info, .badge-info {
 	background-color: rgb(104, 163, 213);
@@ -240,15 +241,15 @@ textarea::-webkit-input-placeholder {
 /* PAGINATION */
 
 .pagination {
-	margin: 8px 0;
+	margin: 0 0;
 }
 .pagination ul > li:last-child > a,
 .pagination ul > li:last-child > span,
 .pagination ul > li:first-child > a,
 .pagination ul > li:first-child > span{
-	font-size: 23px;
+	/*font-size: 23px;
 	color: #bcc6d3;
-	padding: 1px 9px 3px 9px;
+	padding: 1px 9px 3px 9px;*/
 }
 .pagination ul > li:last-child > a:hover,
 .pagination ul > li:last-child > span:hover,

@@ -1,11 +1,11 @@
 /* general table styles */
 .table-wrapper {
   width: 100%;
-  margin-bottom: 100px; }
+  margin-bottom: 25px; }
   .table-wrapper .filter-block {
     margin-bottom: 34px; }
     .table-wrapper .filter-block .ui-select {
-      margin-right: 20px;
+      margin-right: 10px;
       top: 1px;
       height: 24px;
       width: 150px; }
@@ -16,9 +16,7 @@
   .table-wrapper .table th input[type="checkbox"] {
     margin-top: 4px; }
   .table-wrapper .table input[type="checkbox"] {
-    float: left;
-    margin-top: 11px;
-    margin-right: 23px; }
+    float: left; }
   .table-wrapper .table .img {
     height: 31px;
     float: left;
@@ -39,9 +37,9 @@
     vertical-align: middle;
     color: #516372; }
   .table-wrapper .table ul.actions {
-    margin: 5px 0 0 0;
+    margin: 0 0 0 5px;
     padding: 0;
-    float: right; }
+    float: left; }
     .table-wrapper .table ul.actions li {
       display: inline;
       padding: 5px 6px 0px 3px; }
@@ -57,11 +55,11 @@
       .table-wrapper .table ul.actions i:hover {
         opacity: 1; }
   .table-wrapper .label {
-    position: relative; }
+    position: relative;
+  float: left;}
 
 /* products table specific styles */
 .table-wrapper.products-table a.name {
-  position: relative;
   top: 6px; }
 
 /* orders table specific styles */

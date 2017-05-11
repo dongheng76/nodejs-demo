@@ -5,7 +5,9 @@
  */
 
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 const compression = require('compression');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -14,7 +16,6 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
 const cors = require('cors');
-const upload = require('multer')();
 
 const flash = require('connect-flash');
 const winston = require('winston');
@@ -28,6 +29,9 @@ const env = process.env.NODE_ENV || 'development';
  */
 
 module.exports = function (app, passport) {
+  // default options
+  app.use(fileUpload());
+
   // Compression middleware (should be placed before express.static)
   app.use(compression({
     threshold: 512
@@ -66,7 +70,6 @@ module.exports = function (app, passport) {
   // bodyParser should be above methodOverride
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(upload.single('image'));
   app.use(methodOverride(function (req) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
@@ -78,16 +81,35 @@ module.exports = function (app, passport) {
 
   // CookieParser should be above session
   app.use(cookieParser());
-  app.use(cookieSession({ secret: 'secret' }));
+  //app.use(cookieSession({ secret: pkg.name }));
   app.use(session({
     resave: false,
     saveUninitialized: true,
-    secret: pkg.name
+    store: new RedisStore({
+      host:'127.0.0.1',
+      port:6379
+    }),
+    secret: pkg.name,
+    cookie: { maxAge: 60 * 60 * 1000 }
   }));
 
   // use passport session
   app.use(passport.initialize());
   app.use(passport.session());
+
+  //每次在进入路由前看看是否有用户或者菜单信息，有就放入locals中
+  app.use(function(req, res, next){
+    if(req.session.user!=undefined){
+      res.locals.user = req.session.user;
+    }
+    if(req.session.menus!=undefined){
+      res.locals.menus = req.session.menus;
+    }
+    if(req.session.sysmenus!=undefined){
+      res.locals.sysmenus = req.session.sysmenus;
+    }
+    next();
+  });
 
   // connect flash for flash messages - should be declared after sessions
   app.use(flash());
