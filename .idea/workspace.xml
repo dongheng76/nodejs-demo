@@ -2,781 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6aae11b7-e36d-49cf-ae2a-ac428dad36a9" name="Default" comment="v0.0.2">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/font/context-menu-icons.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/font/context-menu-icons.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/font/context-menu-icons.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/font/context-menu-icons.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/images/file.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/images/folder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/images/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/beep1.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/beep1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/beep2.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/beep2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/beep3.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/beep3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling1.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling2.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling3.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling4.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling4.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling5.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/bling5.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/blop.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/blop.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/boop1.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/boop1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/boop2.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/boop2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/boop3.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/boop3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/fonts/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/jquery-confirm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/themelayout.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/img/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/img/progressbar.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-go/static/favicon.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-python/static/favicon.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_chm.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_doc.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_exe.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_jpg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_mp3.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_mv.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_pdf.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_ppt.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_psd.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_rar.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_txt.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/fileTypeImages/icon_xls.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/alignicon.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/alignicon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/file-icons.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/file-icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/icons.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/progress.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/success.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/images/success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/background/images/bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/background/images/success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/images/charts0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/images/charts1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/images/charts2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/images/charts3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/images/charts4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/images/charts5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/0.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/bface.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/cface.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/fface.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/jxface2.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/neweditor-tab-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/tface.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/wface.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/images/yface.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/alignicon.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/icons.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/progress.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/success.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/images/success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/addimg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/brush.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/delimg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/delimgH.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/empty.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/emptyH.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/eraser.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/redo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/redoH.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/scale.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/scaleH.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/size.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/undo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/images/undoH.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/table/dragicon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/images/bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/images/pre0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/images/pre1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/images/pre2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/images/pre3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/images/pre4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/center_focus.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/file-icons.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/file-icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/icons.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/left_focus.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/none_focus.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/progress.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/right_focus.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/success.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/images/success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/wordimage/fClipboard_ueditor.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/wordimage/imageUploader.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/jsp/lib/commons-codec-1.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/jsp/lib/commons-fileupload-1.3.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/jsp/lib/commons-io-2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/jsp/lib/json.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/jsp/lib/ueditor-1.1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/addimage.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/alldeletebtnhoverskin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/alldeletebtnupskin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/background.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/button.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/deletedisable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/deleteenable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/listbackground.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/localimage.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/music.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/rotateleftdisable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/rotateleftenable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/rotaterightdisable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/rotaterightenable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/images/upload.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/zh-cn/images/copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/zh-cn/images/localimage.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/zh-cn/images/music.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/zh-cn/images/upload.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/anchor.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/arrow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/arrow_down.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/arrow_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/button-bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/cancelbutton.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/charts.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/cursor_h.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/cursor_h.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/cursor_v.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/cursor_v.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/dialog-title-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/filescan.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/highlighted.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/icons-all.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/icons.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/loaderror.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/lock.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/neweditor-tab-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/pagebreak.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/scale.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/sortable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/spacer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/sparator_v.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/table-cell-align.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/tangram-colorpicker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/toolbar_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/unhighlighted.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/upload.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/videologo.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/word.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/images/wordpaste.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/snapscreen/UEditorSnapscreen.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/font/vjs.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/font/vjs.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/font/vjs.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/video-js.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/Uploader.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/zeroclipboard/ZeroClipboard.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/apiMenu.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/apiMenu.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/background.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/chinese.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/close.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/contact-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/english.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/header-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/lightbulb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/overlay_arrow.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/overlay_arrow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/overlay_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/overlay_close_IE6.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/zTreeStandard.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/img/zTreeStandard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/1_close.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/1_open.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/diy/9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/line_conn.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/zTreeStandard.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/img/zTreeStandard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/left_menuForOutLook.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/left_menuForOutLook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/manage/file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/manage/login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/manage/panel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dao/file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dao/log.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dao/menu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dao/user.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/routes/manage/file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/routes/manage/login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/routes/manage/panel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/routes/manage/user.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/cache_utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/date_format.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/dict_utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/log.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/mysql_db.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/redis_utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/user_utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/file/index.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/head_res.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/header.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/manage_com_res.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/manage_footer_res.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/page.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/select.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/panel.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/user/create.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/user/index.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/common/html5shiv.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/common/jquery-1.12.4.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/global.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/jquery.contextMenu.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/jquery.contextMenu.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/jquery.imageManage.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/css/viewer.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/js/jquery-1.11.0.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/js/jquery-ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/js/jquery.contextMenu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/js/jquery.imagesManage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/js/jquery.ui.position.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/js/preview.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/imagesManage/js/viewer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Demo/Demo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Demo/Demo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Demo/Demo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Demo/Playground/Playground.Avatars.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Demo/Playground/Playground.Avatars.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Demo/Playground/Playground.Login.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Demo/Playground/Playground.Login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/audio/LICENCE.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/jBox.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/jBox.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/jBox.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Confirm/jBox.Confirm.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Confirm/jBox.Confirm.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Confirm/jBox.Confirm.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Image/jBox.Image.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Image/jBox.Image.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Image/jBox.Image.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Notice/jBox.Notice.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Notice/jBox.Notice.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/plugins/Notice/jBox.Notice.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/themes/NoticeFancy.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/themes/TooltipBorder.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/themes/TooltipBorderThick.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/themes/TooltipDark.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/themes/TooltipError.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/themes/TooltipSmall.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/Source/themes/TooltipSmallGray.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/documentation.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jBox-0.4.8/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/animations.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/callback.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/css/jquery-confirm.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/css/jquery-confirm.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/demo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/demo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/bundled.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/bundled.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/libs/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/demo/logo-name.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/dist/jquery-confirm.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/dist/jquery-confirm.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/js/jquery-confirm.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/table.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/text.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jquery-confirm/themes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/angularjs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/basic-plus.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/basic.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/bower-version-update.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/cors/postmessage.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/cors/result.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/css/demo-ie8.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/css/demo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/css/jquery.fileupload-noscript.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/css/jquery.fileupload-ui-noscript.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/css/jquery.fileupload-ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/css/jquery.fileupload.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/css/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/jquery-ui.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/cors/jquery.postmessage-transport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/cors/jquery.xdr-transport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-angular.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-audio.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-image.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-jquery-ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-process.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-validate.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload-video.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.fileupload.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/jquery.iframe-transport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/vendor/jquery.ui.widget.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-go/app.yaml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-go/app/main.go" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-go/static/robots.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-python/app.yaml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-python/main.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/gae-python/static/robots.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/php/Dockerfile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/php/UploadHandler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/php/docker-compose.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/php/files/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/php/files/.htaccess" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/server/php/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/test/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/jqueryFileUpload/test/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/theme/default/js/common.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/theme/default/js/json2.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/anchor/anchor.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/attachment.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/attachment.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/attachment/attachment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/background/background.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/background/background.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/background/background.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/chart.config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/charts.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/charts.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/charts/charts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/emotion.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/emotion.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/emotion/emotion.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/gmap/gmap.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/help/help.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/help/help.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/help/help.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/image.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/image.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/image/image.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/insertframe/insertframe.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/internal.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/link/link.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/map/map.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/map/show.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/music/music.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/music/music.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/music/music.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/preview/preview.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/scrawl.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/scrawl.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/scrawl/scrawl.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/searchreplace/searchreplace.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/searchreplace/searchreplace.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/snapscreen/snapscreen.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/spechars/spechars.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/spechars/spechars.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/table/edittable.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/table/edittable.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/table/edittable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/table/edittd.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/table/edittip.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/template.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/template.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/template/template.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/video.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/video.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/video/video.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/webapp/webapp.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/wordimage/tangram.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/wordimage/wordimage.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/dialogs/wordimage/wordimage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/jsp/config.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/jsp/controller.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/en/en.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/lang/zh-cn/zh-cn.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/css/ueditor.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/css/ueditor.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/default/dialogbase.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/themes/iframe.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/SyntaxHighlighter/shCore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/codemirror/codemirror.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/codemirror/codemirror.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/adapters/mootools-adapter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/adapters/mootools-adapter.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/adapters/prototype-adapter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/adapters/prototype-adapter.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/adapters/standalone-framework.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/adapters/standalone-framework.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/highcharts-more.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/highcharts-more.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/highcharts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/highcharts.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/annotations.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/annotations.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/canvas-tools.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/canvas-tools.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/data.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/data.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/drilldown.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/drilldown.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/exporting.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/exporting.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/funnel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/funnel.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/heatmap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/heatmap.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/map.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/map.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/no-data-to-display.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/modules/no-data-to-display.src.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/themes/dark-blue.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/themes/dark-green.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/themes/gray.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/themes/grid.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/highcharts/themes/skies.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/jquery-1.10.2.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/jquery-1.10.2.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/jquery-1.10.2.min.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/font/vjs.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/video-js.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/video-js.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/video.dev.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/video-js/video.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.custom.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.custom.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.flashonly.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.flashonly.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.html5only.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.html5only.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.withoutimage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/webuploader/webuploader.withoutimage.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/xss.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/zeroclipboard/ZeroClipboard.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/third-party/zeroclipboard/ZeroClipboard.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/ueditor.all.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/ueditor.all.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/ueditor.config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/ueditor.parse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ueditor/ueditor.parse.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/API_cn.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/api.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/common.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/common_ie6.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/apiCss/zTreeStyleForApi.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/fn.zTree._z.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/fn.zTree.destroy.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/fn.zTree.getZTreeObj.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/fn.zTree.init.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.autoParam.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.contentType.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.dataFilter.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.dataType.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.enable.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.otherParam.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.type.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.async.url.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeAsync.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeCheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeClick.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeCollapse.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeDblClick.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeDrag.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeDragOpen.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeDrop.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeEditName.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeExpand.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeMouseDown.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeMouseUp.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeRemove.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeRename.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.beforeRightClick.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onAsyncError.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onAsyncSuccess.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onCheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onClick.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onCollapse.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onDblClick.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onDrag.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onDrop.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onExpand.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onMouseDown.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onMouseUp.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onNodeCreated.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onRemove.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onRename.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.callback.onRightClick.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.check.autoCheckTrigger.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.check.chkDisabledInherit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.check.chkStyle.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.check.chkboxType.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.check.enable.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.check.nocheckInherit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.check.radioType.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.keep.leaf.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.keep.parent.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.key.checked.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.key.children.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.key.name.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.key.title.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.key.url.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.simpleData.enable.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.simpleData.idKey.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.simpleData.pIdKey.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.data.simpleData.rootPId.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.autoExpandTrigger.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.autoOpenTime.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.borderMax.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.borderMin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.inner.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.isCopy.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.isMove.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.maxShowNodeNum.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.minMoveSize.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.next.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.drag.prev.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.editNameSelectAll.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.enable.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.removeTitle.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.renameTitle.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.showRemoveBtn.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.edit.showRenameBtn.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.treeId.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.treeObj.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.addDiyDom.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.addHoverDom.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.autoCancelSelected.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.dblClickExpand.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.expandSpeed.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.fontCss.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.nameIsHTML.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.removeHoverDom.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.selectedMulti.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.showIcon.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.showLine.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/setting.view.showTitle.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.check_Child_State.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.check_Focus.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.checked.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.checkedOld.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.children.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.chkDisabled.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.click.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.diy.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.editNameFlag.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.getCheckStatus.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.getNextNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.getParentNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.getPreNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.halfCheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.icon.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.iconClose.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.iconOpen.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.iconSkin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.isAjaxing.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.isFirstNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.isHidden.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.isHover.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.isLastNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.isParent.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.level.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.name.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.nocheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.open.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.parentTId.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.tId.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.target.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.url.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/treeNode.zAsync.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.addNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.cancelEditName.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.cancelSelectedNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.checkAllNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.checkNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.copyNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.destroy.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.editName.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.expandAll.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.expandNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getChangeCheckedNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getCheckedNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getNodeByParam.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getNodeByTId.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getNodeIndex.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getNodesByFilter.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getNodesByParam.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getNodesByParamFuzzy.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.getSelectedNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.hideNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.hideNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.moveNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.reAsyncChildNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.refresh.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.removeChildNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.removeNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.selectNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.setChkDisabled.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.setEditable.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.setting.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.showNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.showNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.transformToArray.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.transformTozTreeNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/api/cn/zTreeObj.updateNode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/demo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/zTreeStyle.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/asyncData/getNodes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/asyncData/getNodesForBigData.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/bigdata/common.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/bigdata/diy_async.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/bigdata/page.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/async.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/async_fun.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/click.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/custom_font.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/custom_icon.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/custom_iconSkin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/expand.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/noicon.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/noline.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/otherMouse.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/searchNodes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/simpleData.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/standardData.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/update_fun.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/core/url.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/checkbox.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/checkbox_chkDisabled.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/checkbox_count.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/checkbox_fun.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/checkbox_halfCheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/checkbox_nocheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/radio.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/radio_chkDisabled.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/radio_fun.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/radio_halfCheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/excheck/radio_nocheck.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/async_edit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/drag.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/drag_fun.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/drag_super.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/edit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/edit_fun.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/edit_super.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exedit/multiTree.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exhide/checkbox.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exhide/common.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/exhide/radio.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/asyncForAll.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/checkbox_radio.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/diydom.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/dragWithOther.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/left_menu.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/left_menuForOutLook.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/oneclick.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/oneroot.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/rightClickMenu.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/select_menu.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/select_menu_checkbox.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/select_menu_radio.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/demo/cn/super/singlepath.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery-1.4.4.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.core-3.5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.core-3.5.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.excheck-3.5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.excheck-3.5.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.exedit-3.5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.exedit-3.5.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.exhide-3.5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery.ztree.exhide-3.5.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugin/ztree/3.5.12/log v3.x.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/controllers/articles.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/controllers/comments.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/controllers/tags.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/mailer/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/mailer/templates/comment.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/models/article.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/includes/foot.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/includes/footer.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/includes/head.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/includes/header.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/includes/messages.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/users/auth.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/users/show.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/users/signup.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/mysql_db.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/jquery.tagsinput.min.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/img/logo.png" afterPath="$PROJECT_DIR$/public/plugin/theme/default/img/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/manage/area.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/manage/menu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/manage/office.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dao/area.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dao/office.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/routes/manage/area.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/routes/manage/menu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/routes/manage/office.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/area/create.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/area/index.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/file/file_manage_template.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/finder.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/include/synch_tree.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/menu/index.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/manage/office/index.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/common/common.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/common/jquery.validate.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/manage/file.js" afterPath="$PROJECT_DIR$/app/controllers/manage/file.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/manage/login.js" afterPath="$PROJECT_DIR$/app/controllers/manage/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/manage/panel.js" afterPath="$PROJECT_DIR$/app/controllers/manage/panel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/manage/user.js" afterPath="$PROJECT_DIR$/app/controllers/manage/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/dao/file.js" afterPath="$PROJECT_DIR$/app/dao/file.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/dao/menu.js" afterPath="$PROJECT_DIR$/app/dao/menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/dao/user.js" afterPath="$PROJECT_DIR$/app/dao/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/manage/file.js" afterPath="$PROJECT_DIR$/app/routes/manage/file.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/manage/login.js" afterPath="$PROJECT_DIR$/app/routes/manage/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/manage/user.js" afterPath="$PROJECT_DIR$/app/routes/manage/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/utils/dict_utils.js" afterPath="$PROJECT_DIR$/app/utils/dict_utils.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/utils/index.js" afterPath="$PROJECT_DIR$/app/utils/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/manage/login.ejs" afterPath="$PROJECT_DIR$/app/views/manage/login.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/env/development.js" afterPath="$PROJECT_DIR$/config/env/development.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/express.js" afterPath="$PROJECT_DIR$/config/express.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/utils/mysql_db.js" afterPath="$PROJECT_DIR$/app/utils/mysql_db.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/manage/file/index.ejs" afterPath="$PROJECT_DIR$/app/views/manage/file/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/manage/include/head_res.ejs" afterPath="$PROJECT_DIR$/app/views/manage/include/head_res.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/manage/include/header.ejs" afterPath="$PROJECT_DIR$/app/views/manage/include/header.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/manage/include/select.ejs" afterPath="$PROJECT_DIR$/app/views/manage/include/select.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/manage/user/create.ejs" afterPath="$PROJECT_DIR$/app/views/manage/user/create.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/manage/user/index.ejs" afterPath="$PROJECT_DIR$/app/views/manage/user/index.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.js" afterPath="$PROJECT_DIR$/config/routes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/manage/login.js" afterPath="$PROJECT_DIR$/public/js/manage/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap-overrides.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap-overrides.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap-responsive.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap-responsive.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/compiled/index.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/compiled/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/compiled/tables.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/compiled/tables.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/compiled/web-app-icons.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/compiled/web-app-icons.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/layout.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugin/theme/default/css/lib/select2.css" afterPath="$PROJECT_DIR$/public/plugin/theme/default/css/lib/select2.css" />
     </list>
     <ignored path="node-express-mongoose-demo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -796,7 +61,112 @@
     <favorites_list name="node-express-mongoose-demo" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="menu.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/manage/menu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.535714">
+              <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="office.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/manage/office.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-147.92857">
+              <caret line="227" column="13" selection-start-line="227" selection-start-column="13" selection-end-line="227" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/manage/user.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.178572">
+              <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mysql_db.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/utils/mysql_db.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6721698">
+              <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/dao/menu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.3571428">
+              <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/manage/office/index.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.678572">
+              <caret line="155" column="123" selection-start-line="155" selection-start-column="123" selection-end-line="155" selection-end-column="123" />
+              <folding>
+                <element signature="n#style#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#3;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="office.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/dao/office.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.7792206">
+              <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="area.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/dao/area.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-25.785715">
+              <caret line="115" column="24" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/dao/user.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.6493506">
+              <caret line="136" column="17" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/utils/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.214286">
+              <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -812,57 +182,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/users/login.ejs" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/config/mysql_db.js" />
-        <option value="$PROJECT_DIR$/app/utils/log.js" />
-        <option value="$PROJECT_DIR$/app/models/article.js" />
-        <option value="$PROJECT_DIR$/public/js/manage/login.js" />
-        <option value="$PROJECT_DIR$/config/env/development.js" />
-        <option value="$PROJECT_DIR$/app/dao/menu.js" />
-        <option value="$PROJECT_DIR$/app/routes/manage.js" />
-        <option value="$PROJECT_DIR$/app/routes/manage/panel.js" />
-        <option value="$PROJECT_DIR$/app/routes/manage/login.js" />
-        <option value="$PROJECT_DIR$/app/controllers/manage/panel.js" />
-        <option value="$PROJECT_DIR$/app/views/manage/include/manage_com_js.ejs" />
-        <option value="$PROJECT_DIR$/app/views/manage/panel.ejs" />
-        <option value="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap-overrides.css" />
-        <option value="$PROJECT_DIR$/public/plugin/theme/default/css/compiled/index.css" />
-        <option value="$PROJECT_DIR$/app/utils/dict_util.js" />
-        <option value="$PROJECT_DIR$/app/utils/redis_util.js" />
-        <option value="$PROJECT_DIR$/app/utils/cache_utils.js" />
-        <option value="$PROJECT_DIR$/app/utils/dict_utils.js" />
-        <option value="$PROJECT_DIR$/app/utils/user_utils.js" />
-        <option value="$PROJECT_DIR$/app/controllers/manage/login.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/utils/redis_utils.js" />
-        <option value="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap.css" />
         <option value="$PROJECT_DIR$/app/views/manage/login.ejs" />
-        <option value="$PROJECT_DIR$/app/utils/mysql_db.js" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/app/views/manage/user/index.ejs" />
         <option value="$PROJECT_DIR$/app/views/manage/include/page.ejs" />
-        <option value="$PROJECT_DIR$/app/views/manage/include/select.ejs" />
-        <option value="$PROJECT_DIR$/app/views/manage/user/create.ejs" />
-        <option value="$PROJECT_DIR$/config/routes.js" />
-        <option value="$PROJECT_DIR$/app/views/manage/include/header.ejs" />
         <option value="$PROJECT_DIR$/public/plugin/theme/default/css/layout.css" />
         <option value="$PROJECT_DIR$/app/utils/multer_util.js" />
-        <option value="$PROJECT_DIR$/app/routes/manage/user.js" />
-        <option value="$PROJECT_DIR$/app/utils/index.js" />
-        <option value="$PROJECT_DIR$/app/dao/user.js" />
         <option value="$PROJECT_DIR$/app/dao/log.js" />
         <option value="$PROJECT_DIR$/config/express.js" />
-        <option value="$PROJECT_DIR$/app/controllers/manage/user.js" />
         <option value="$PROJECT_DIR$/public/plugin/imagesManage/js/jquery.imagesManage.js" />
         <option value="$PROJECT_DIR$/app/views/manage/include/manage_footer_res.ejs" />
         <option value="$PROJECT_DIR$/app/views/manage/include/manage_com_res.ejs" />
         <option value="$PROJECT_DIR$/public/plugin/jquery-confirm/css/jquery-confirm.css" />
-        <option value="$PROJECT_DIR$/app/routes/manage/file.js" />
         <option value="$PROJECT_DIR$/app/views/manage/include/head_res.ejs" />
-        <option value="$PROJECT_DIR$/app/views/manage/file/index.ejs" />
         <option value="$PROJECT_DIR$/app/dao/file.js" />
+        <option value="$PROJECT_DIR$/app/routes/manage/file.js" />
         <option value="$PROJECT_DIR$/app/controllers/manage/file.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/include/tree.ejs" />
+        <option value="$PROJECT_DIR$/app/controllers/manage/panel.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/include/finder.ejs" />
+        <option value="$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap.css" />
+        <option value="$PROJECT_DIR$/app/views/manage/file/file_manage_template.ejs" />
+        <option value="$PROJECT_DIR$/app/routes/manage/user.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/include/select.ejs" />
+        <option value="$PROJECT_DIR$/app/views/manage/file/index.ejs" />
+        <option value="$PROJECT_DIR$/app/controllers/manage/user.js" />
+        <option value="$PROJECT_DIR$/app/controllers/manage/login.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/include/header.ejs" />
+        <option value="$PROJECT_DIR$/app/routes/manage/login.js" />
+        <option value="$PROJECT_DIR$/public/js/common/common.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/include/synch_tree.ejs" />
+        <option value="$PROJECT_DIR$/app/utils/dict_utils.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/area/create.ejs" />
+        <option value="$PROJECT_DIR$/app/views/manage/user/index.ejs" />
+        <option value="$PROJECT_DIR$/app/controllers/manage/area.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/user/create.ejs" />
+        <option value="$PROJECT_DIR$/app/views/manage/area/index.ejs" />
+        <option value="$PROJECT_DIR$/app/routes/manage/area.js" />
+        <option value="$PROJECT_DIR$/app/routes/manage/menu.js" />
+        <option value="$PROJECT_DIR$/app/dao/user.js" />
+        <option value="$PROJECT_DIR$/app/utils/index.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/menu/index.ejs" />
+        <option value="$PROJECT_DIR$/app/controllers/manage/menu.js" />
+        <option value="$PROJECT_DIR$/app/routes/manage/office.js" />
+        <option value="$PROJECT_DIR$/config/routes.js" />
+        <option value="$PROJECT_DIR$/app/controllers/manage/office.js" />
+        <option value="$PROJECT_DIR$/app/dao/menu.js" />
+        <option value="$PROJECT_DIR$/app/dao/area.js" />
+        <option value="$PROJECT_DIR$/app/views/manage/office/index.ejs" />
+        <option value="$PROJECT_DIR$/app/dao/office.js" />
+        <option value="$PROJECT_DIR$/app/utils/mysql_db.js" />
       </list>
     </option>
   </component>
@@ -874,9 +244,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="38" />
+    <option name="x" value="791" />
+    <option name="y" value="3" />
     <option name="width" value="1932" />
-    <option name="height" value="1056" />
+    <option name="height" value="1060" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -903,6 +274,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1001,23 +373,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="plugin" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jBox-0.4.8" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Notice" />
+              <option name="myItemId" value="manage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1035,19 +395,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="plugin" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jBox-0.4.8" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1062,6 +414,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="files" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2017" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node-express-mongoose-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodejs-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1076,6 +458,42 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node-express-mongoose-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodejs-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="middlewares" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node-express-mongoose-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodejs-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="env" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1116,6 +534,84 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node-express-mongoose-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodejs-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node-express-mongoose-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodejs-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="office" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node-express-mongoose-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodejs-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1185,7 +681,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="area" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1203,11 +707,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage" />
+              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1268,11 +768,10 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../node-mongodb-express-ejs" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
@@ -1284,11 +783,11 @@
       <recent name="E:\workspaceNodejs\nodejs-demo\app\views\manage" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\workspaceNodejs\nodejs-demo\public\plugin" />
-      <recent name="E:\workspaceNodejs\nodejs-demo\app\dao" />
       <recent name="E:\workspaceNodejs\nodejs-demo\app\routes\manage" />
-      <recent name="E:\workspaceNodejs\nodejs-demo\app\views\manage\file" />
+      <recent name="E:\workspaceNodejs\nodejs-demo\app\views\manage\office" />
       <recent name="E:\workspaceNodejs\nodejs-demo\app\controllers\manage" />
+      <recent name="E:\workspaceNodejs\nodejs-demo\app\views\manage\menu" />
+      <recent name="E:\workspaceNodejs\nodejs-demo\app\views\manage\area" />
     </key>
   </component>
   <component name="RunManager">
@@ -1355,13 +854,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="38" y="0" width="1932" height="1056" extended-state="0" />
-    <editor active="false" />
+    <frame x="791" y="3" width="1932" height="1060" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23590814" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1790188" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1374,6 +872,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1395,287 +894,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/routes/manage/panel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.428571">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/common/jquery-1.12.4.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/js/json2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/manage/panel.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.428571">
-          <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap-overrides.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.410714">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/css/compiled/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40318626">
-          <caret line="117" column="52" selection-start-line="117" selection-start-column="52" selection-end-line="117" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/redis/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/date_format.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/manage/panel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.571428">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/cache_utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6493506">
-          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/redis_utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.857142">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/dict_utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3116884">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.821429">
-          <caret line="4999" column="14" selection-start-line="4999" selection-start-column="14" selection-end-line="4999" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/js/locales/bootstrap-datepicker.ar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.161905">
-          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/mysql_db.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.6753244">
-          <caret line="122" column="10" selection-start-line="122" selection-start-column="10" selection-end-line="122" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/manage/login.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.5">
-          <caret line="72" column="16" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/manage/include/select.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.75">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.5">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/jqueryFileUpload/js/cors/jquery.xdr-transport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29787233">
-          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/css/layout.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0761905">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/ztree/3.5.12/js/jquery-1.4.4.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/dao/menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21276596">
-          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/manage/user/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.021276595">
-          <caret line="119" column="51" selection-start-line="119" selection-start-column="6" selection-end-line="119" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/manage/user/create.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.75">
-          <caret line="30" column="70" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/manage/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.821428">
-          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/manage/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.642857">
-          <caret line="68" column="29" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/user_utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.5">
-          <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/dao/log.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6785714">
-          <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/express.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5744681">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="22" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/imagesManage/js/viewer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2765957">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1484893348880" expanded="true" signature="45513:46580" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/imagesManage/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7659575">
-          <caret line="49" column="38" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/plugin/imagesManage/js/jquery.contextMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1484893348860" expanded="true" signature="62031:62147" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/manage/include/page.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3617021">
-          <caret line="138" column="9" selection-start-line="138" selection-start-column="9" selection-end-line="138" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/manage/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4805195">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1683,7 +905,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.4042554">
           <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1691,9 +912,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1493857668000" expanded="true" signature="2607:2625" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1701,7 +919,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1709,7 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37990198">
           <caret line="323" column="20" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1717,7 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.06382979">
           <caret line="3" column="57" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1725,75 +940,338 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45023698">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/panel.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.974026">
+          <caret line="8" column="30" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/manage/include/head_res.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84241706">
-          <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
-          <folding />
+        <state vertical-scroll-proportion="-21.714285">
+          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/include/finder.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/common/jquery.validate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap-overrides.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.892857">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/manage/file.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="2" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/plugin/theme/default/css/bootstrap/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.821429">
+          <caret line="432" column="53" selection-start-line="432" selection-start-column="53" selection-end-line="432" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/include/select.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7142856">
+          <caret line="4" column="86" selection-start-line="4" selection-start-column="86" selection-end-line="4" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/manage/user.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.142858">
-          <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
-          <folding />
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/manage/file/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7916667">
-          <caret line="205" column="17" selection-start-line="205" selection-start-column="17" selection-end-line="205" selection-end-column="17" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#5629#6182#0#HTML" expanded="false" />
-            <element signature="e#7780#8048#0#HTML" expanded="false" />
-            <element signature="e#8695#9239#0#HTML" expanded="false" />
-            <element signature="e#9367#9882#0#HTML" expanded="false" />
-            <element signature="e#11950#14752#0#HTML" expanded="false" />
-            <element signature="e#14867#14945#0#HTML" expanded="false" />
-            <element signature="e#15111#15153#0#HTML" expanded="false" />
-            <element signature="e#15197#15222#0#HTML" expanded="false" />
-            <element signature="e#15250#15374#0#HTML" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.5106383">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/manage/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/manage/include/header.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5744681">
-          <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="226" column="58" selection-start-line="226" selection-start-column="58" selection-end-line="226" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/manage/panel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/include/synch_tree.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.6493506">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/file/file_manage_template.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.181818">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="24" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/utils/dict_utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.892858">
+          <caret line="33" column="84" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/manage/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3018868">
+          <caret line="106" column="14" selection-start-line="106" selection-start-column="14" selection-end-line="106" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/manage/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.785714">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/user/create.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.142857">
+          <caret line="181" column="25" selection-start-line="181" selection-start-column="25" selection-end-line="181" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/area/create.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.1047618">
+          <caret line="97" column="32" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/area/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.409524">
+          <caret line="109" column="48" selection-start-line="109" selection-start-column="48" selection-end-line="109" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/manage/area.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2077923">
+          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/manage/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/dao/file.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.785715">
-          <caret line="66" column="98" selection-start-line="66" selection-start-column="98" selection-end-line="66" selection-end-column="98" />
-          <folding />
+        <state vertical-scroll-proportion="-10.178572">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/dao/user.js">
+    <entry file="file://$PROJECT_DIR$/app/dao/log.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.464285">
-          <caret line="72" column="89" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="89" />
+        <state vertical-scroll-proportion="-2.7142856">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="16" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/common/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="19" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/manage/file.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40047392">
-          <caret line="168" column="69" selection-start-line="168" selection-start-column="69" selection-end-line="168" selection-end-column="69" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="200" column="12" selection-start-line="200" selection-start-column="8" selection-end-line="200" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/manage/area.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/menu/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.035715">
+          <caret line="75" column="36" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/manage/office.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/express.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="41" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.946429">
+          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/manage/panel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.535714">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/user/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8510638">
+          <caret line="160" column="7" selection-start-line="128" selection-start-column="4" selection-end-line="160" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/manage/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.535714">
+          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3571428">
+          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.6493506">
+          <caret line="136" column="17" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/area.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.785715">
+          <caret line="115" column="24" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/manage/office/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.678572">
+          <caret line="155" column="123" selection-start-line="155" selection-start-column="123" selection-end-line="155" selection-end-column="123" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#3;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/manage/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.178572">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/manage/office.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-147.92857">
+          <caret line="227" column="13" selection-start-line="227" selection-start-column="13" selection-end-line="227" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/utils/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.214286">
+          <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/office.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.7792206">
+          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/utils/mysql_db.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6721698">
+          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
           <folding />
         </state>
       </provider>

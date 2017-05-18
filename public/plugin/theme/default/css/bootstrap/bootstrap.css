@@ -428,6 +428,10 @@ a:focus {
   padding-bottom:10px;
 }
 
+.row-fluid .field-box input.error{border:1px solid #f3794d;}
+.row-fluid .field-box label.error{display: inline;color: #f3794d;}
+.row-fluid .field-box label.error_label{display:none;}
+
 .row-fluid [class*="span"]:first-child {
   margin-left: 0;
 }

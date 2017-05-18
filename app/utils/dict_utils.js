@@ -31,7 +31,7 @@ function getDictList(type,callback){
 
     cacheUtils.get(CACHE_DICT_MAP,function(err,obj){
         if(obj==null || obj.length==0){
-            mysql.query("select * from sys_dict where del_flag='0'",null, function(err, dicts) {
+            mysql.query("select * from sys_dict where del_flag='0' order by sort asc",null, function(err, dicts) {
                 cacheUtils.putCache(CACHE_DICT_MAP,dicts);
                 var dictsForType = [];
                 for(var i=0;i<dicts.length;i++){

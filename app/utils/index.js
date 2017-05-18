@@ -93,8 +93,9 @@ exports.isObject = function(obj){
 exports.makePage = function (pagePath,total, pagesize, page) {
   page = parseInt(page);
   var pagenum = Math.ceil(total / pagesize);
+
   var min = page > 3 ? page - 2 : 1;
-  var max = page + 2 > pagenum ? pagenum : min + 4;
+  var max = page + 2 > pagenum ? pagenum : min + 2;
   return {
     pagePath: pagePath,
     pagenum: pagenum,
@@ -119,7 +120,18 @@ exports.getSingleUrl = function(req){
   return url;
 }
 
-
+exports.getIPAdress = function(){
+  var interfaces = require('os').networkInterfaces();
+  for(var devName in interfaces){
+    var iface = interfaces[devName];
+    for(var i=0;i<iface.length;i++){
+      var alias = iface[i];
+      if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){
+        return alias.address;
+      }
+    }
+  }
+}
 
 //递归创建目录 异步方法
 function mkdirs(dirname, callback) {
@@ -150,3 +162,33 @@ function mkdirsSync(dirname) {
 
 exports.mkdirs = mkdirs;
 exports.mkdirsSync= mkdirsSync;
+
+/**
+ * 把规定的json数据换成treejson数据
+ * @param json
+ * @returns {Array}
+ */
+exports.jsonToTreeJson = function(json){
+  let treeJson = [];
+  //先找到第一层后开始递归
+  for(let i=0;i<json.length;i++){
+    if(json[i].parent_id=='1'){
+      findChildrenByPId(json,json[i]);
+      treeJson.push(json[i]);
+    }
+  }
+  return treeJson;
+}
+
+function findChildrenByPId(json,obj){
+  let children = [];
+  for(let i=0;i<json.length;i++){
+    if(json[i].parent_id==obj.id){
+      findChildrenByPId(json,json[i]);
+      children.push(json[i]);
+    }
+  }
+  if(children.length>0){
+    obj.children = children;
+  }
+}

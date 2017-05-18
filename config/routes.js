@@ -24,12 +24,27 @@ module.exports = function (app, passport) {
 
   //登录相关路由
   require('../app/routes/manage/login')(app, passport);
+
+  //后台权限部分
+  app.use(function (req, res, next) {
+    if(req.session.user!=undefined){
+      next();
+    }else{
+      res.redirect('/manage/login');
+    }
+  });
   //面板路由
   require('../app/routes/manage/panel')(app, passport);
   //用户路由
   require('../app/routes/manage/user')(app, passport);
   //文件路由
   require('../app/routes/manage/file')(app, passport);
+  //区域路由
+  require('../app/routes/manage/area')(app, passport);
+  //菜单路由
+  require('../app/routes/manage/menu')(app, passport);
+  //机构路由
+  require('../app/routes/manage/office')(app, passport);
 
   /*app.post('/user/session',
     pauth('local', {

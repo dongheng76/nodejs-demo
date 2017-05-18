@@ -15,7 +15,7 @@ exports.index = function (req, res) {
 
       return;
     } else {
-
+      
 
       res.render('manage/panel', {
         currentMenu: menu

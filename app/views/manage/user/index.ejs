@@ -79,7 +79,7 @@
           <% users.forEach(function(user){ %>
           <tr>
             <td>
-              <input type="checkbox" name="subCheckbox" userId="{{$user->id}}">
+              <input type="checkbox" name="subCheckbox" userId="<%=user.id%>">
               <a href="/manage/user?type={{$user->id}}" class="id"><%=user.id%></a>
             </td>
             <td class="description">
@@ -117,7 +117,7 @@
       </div>
     </div>
     <div class="pagination">
-      <%-include("../include/page",{a:234234324})%>
+      <%-include("../include/page")%>
     </div>
   </div>
 </div>
@@ -126,27 +126,39 @@
 
 <script type="text/javascript">
   function delUser(id) {
-    var submit = function (v, h, f) {
-      if (v == 'ok'){
-        $.ajax({
-          type:'post',
-          url:'/backend/user/delete?id='+id+'&_token={{ csrf_token() }}',
-          dataType:'json',
-          success:function(data){
-            if(data.result){
-              $.jBox.messager('感谢您的使用，删除成功。', '删除成功！');
-              window.location.reload();
-            }else{
-              $.jBox.messager('非常抱歉，系统或网络发生异常，请重试!', '修改失败！');
-            }
+    $.confirm({
+      title: '友情提示!',
+      content: '请确认是否真的要删除该用户，此操作不可逆请谨慎操作!',
+      boxWidth: '300px',
+      useBootstrap: false,
+      buttons: {
+        confirm: {
+          text: '确认',
+          btnClass:'btn-flat default',
+          action: function(){
+            $.post('/manage/user/delete',{
+              _csrf:'<%= csrf_token %>',
+              id:id
+            },function(data){
+              if(data.result){
+                noticeInfo('success','感谢您的使用，删除成功',function(){
+                  window.location.reload();
+                });
+              }else{
+                noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!')
+              }
+            });
           }
-        });
+        },
+        cancel: {
+          text: '取消',
+          btnClass:'btn-flat white',
+          action: function(){
+            return;
+          }
+        }
       }
-      else if (v == 'cancel'){
-
-      }
-    };
-    $.jBox.confirm("确定要删除该用户吗？", "提示", submit);
+    });
   }
 
   $('input[name="mainCheckbox"]').click(function(){
@@ -178,38 +190,50 @@
   });
 
   $('#dels').click(function(){
-    var submit = function (v, h, f) {
-      if (v == 'ok'){
-        var ids = '';
-        $('input[name="subCheckbox"]').each(function(){
-          if($(this).parent().hasClass('checked')){
-            ids += $(this).attr('userId')+'|';
-          }
-        });
-        if(ids==''){
-          $.jBox.messager('请选择至少一项后才能删除', '提示');
-          return true;
-        }
-
-        $.ajax({
-          type:'post',
-          url:'/backend/user/delete?id='+ids+'&_token={{ csrf_token() }}',
-          dataType:'json',
-          success:function(data){
-            if(data.result){
-              $.jBox.messager('感谢您的使用，删除成功。', '删除成功！');
-              window.location.reload();
-            }else{
-              $.jBox.messager('非常抱歉，系统或网络发生异常，请重试!', '修改失败！');
+    $.confirm({
+      title: '友情提示!',
+      content: '请确认是否真的要删除该用户，此操作不可逆请谨慎操作!',
+      boxWidth: '300px',
+      useBootstrap: false,
+      buttons: {
+        confirm: {
+          text: '确认',
+          btnClass:'btn-flat default',
+          action: function(){
+            var ids = '';
+            $('input[name="subCheckbox"]').each(function(){
+              if($(this).parent().hasClass('checked')){
+                ids += $(this).attr('userId')+'|';
+              }
+            });
+            if(ids==''){
+              noticeInfo('fail','请选择至少一项后才能删除');
+              return true;
             }
-          }
-        });
-      }
-      else if (v == 'cancel'){
 
+            $.post('/manage/user/delete',{
+              ids:ids,
+              _csrf:'<%= csrf_token %>'
+            },function(data){
+              if(data.result){
+                noticeInfo('success','感谢您的使用，删除成功',function(){
+                  window.location.reload();
+                });
+              }else{
+                noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!');
+              }
+            });
+          }
+        },
+        cancel: {
+          text: '取消',
+          btnClass:'btn-flat white',
+          action: function(){
+            return;
+          }
+        }
       }
-    };
-    $.jBox.confirm("确定要删除选择的所有用户吗？", "提示", submit);
+    });
   });
 
   $(window).load(function(){

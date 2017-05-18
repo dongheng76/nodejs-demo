@@ -30,6 +30,8 @@ const factory = {
                     console.log('Database connection successful');
                 }
             });
+        }).catch(function(error){
+            console.log(error);
         });
     },
     destroy:function(client){
@@ -38,6 +40,8 @@ const factory = {
                 resolve()
             })
             client.disconnect()
+        }).catch(function(error){
+            console.log(error);
         });
     }
 }
@@ -95,6 +99,9 @@ exports.query = function(sql, data, callback) {
             return;
         });
     }
+    pool.drain().then(function() {
+        pool.clear();
+    });
 };
 
 /**
@@ -138,6 +145,9 @@ exports.queryOne = function(sql, data, callback) {
             return;
         });
     }
+    pool.drain().then(function() {
+        pool.clear();
+    });
 };
 
 /**
@@ -180,4 +190,7 @@ exports.update = function(sql, data, callback) {
             return;
         });
     }
+    pool.drain().then(function() {
+        pool.clear();
+    });
 };

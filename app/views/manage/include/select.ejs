@@ -2,7 +2,7 @@
     <select  name="<%=name%>">
         <option />
         <% options.forEach(function(option){%>
-            <option value="<%=option.id%>"><%=option.label%></option>
+            <option value="<%=option.value%>" <% if(typeof(defaultValue)!='undefined'){%><% if(defaultValue==option.value){%>selected<%}%><%}%>><%=option.label%></option>
         <%})%>
     </select>
 </div>

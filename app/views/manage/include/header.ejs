@@ -208,10 +208,42 @@
                 </a>
             </li>
             <li class="settings hidden-phone">
-                <a href="signin.html" role="button">
+                <a href="javascript:void(0)" role="button" id="signup">
                     <i class="icon-share-alt"></i>
                 </a>
             </li>
+            <script type="application/javascript">
+                $('#signup').click(function(){
+                    $.confirm({
+                        title: '友情提示!',
+                        content: '你是否真的需要登出系统吗？',
+                        boxWidth: '300px',
+                        useBootstrap: false,
+                        buttons: {
+                            confirm: {
+                                text: '确认',
+                                btnClass:'btn-flat default',
+                                action: function(){
+                                    $.post('/manage/signup',{
+                                        _csrf:'<%= csrf_token %>'
+                                    },function(data){
+                                        if(data.result){
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                            },
+                            cancel: {
+                                text: '取消',
+                                btnClass:'btn-flat white',
+                                action: function(){
+                                    return;
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
         </ul>
     </div>
 </div>

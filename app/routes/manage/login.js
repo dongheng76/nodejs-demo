@@ -8,6 +8,6 @@ const login = require('../../controllers/manage/login');
 module.exports = function (app, passport) {
     app.get('/manage/login', login.login);
     app.post('/manage/signin', login.signin);
-    app.get('/manage/signup', login.signup);
+    app.post('/manage/signup', login.signup);
     app.get('/manage/logout', login.logout);
 };

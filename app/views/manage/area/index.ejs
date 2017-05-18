@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>区域管理 - 首页</title>
+  <% include  ../include/head_res.ejs %>
+  <% include  ../include/manage_com_res.ejs %>
+  <!-- jstree -->
+  <link href="/plugin/ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css" rel="stylesheet" type="text/css"/>
+  <script src="/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+  <style type="text/css">
+    .ztree {overflow:auto;margin:0;_margin-top:10px;padding:10px 0 0 10px;}
+    .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+  </style>
+<body>
+
+<% include  ../include/header.ejs %>
+
+<!-- sidebar -->
+<div id="sidebar-nav">
+  <ul id="dashboard-menu">
+  </ul>
+</div>
+<!-- end sidebar -->
+
+
+<!-- main container -->
+<div class="content">
+
+  <div class="container-fluid">
+    <div class="table-wrapper table-products products-table section">
+      <div class="row-fluid head">
+        <div class="span12">
+          <h4 style="float:left;display: inline-block">区域管理</h4>
+        </div>
+      </div>
+
+      <div id="treeTable" class="ztree">
+
+      </div>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          /* var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
+           var data = ${fns:toJson(list)}, rootId = "0";
+           addRow("#treeTableList", tpl, data, rootId, true);
+           $("#treeTable").treeTable({expandLevel : 5}); */
+          var setting = {
+            view: {
+              addHoverDom: addHoverDom,
+              removeHoverDom: removeHoverDom,
+              selectedMulti: false
+            },
+            async: {
+              enable: true,
+              url: "/manage/area/findareabypid",
+              autoParam: ["id=parent_id"],
+              otherParam: ["_csrf","<%= csrf_token %>"],
+              dataFilter: ajaxDataFilter
+            },
+            edit: {
+              enable: true,
+              editNameSelectAll: false,
+              showRemoveBtn: showRemoveBtn,
+              showRenameBtn: showRenameBtn
+            },
+            callback: {
+              onClick: zTreeOnClick,
+              beforeDrag: beforeDrag,
+              beforeEditName: beforeEditName,
+              beforeRemove: beforeRemove,
+              onRemove: onRemove,
+              onAsyncSuccess: zTreeOnAsyncSuccess
+            },
+            data:{
+              simpleData:{enable:true,idKey:"id",pIdKey:"parent_id",rootPId:'0'}
+            }
+          };
+          var currentFolder = $('#currentFolder').val();
+          var className = "dark";
+          var treeObj;
+
+          function zTreeOnAsyncError(event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown) {
+            /* var treeObj = $.fn.zTree.getZTreeObj(treeId);
+             var nodes = treeObj.getSelectedNodes();
+             alert(nodes.length); */
+          };
+          function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+          };
+
+          function ajaxDataFilter(treeId, parentNode, responseData) {
+            return responseData;
+          };
+          function beforeDrag(treeId, treeNodes) {
+            return false;
+          }
+          function beforeRemove(treeId, treeNode) {
+            className = (className === "dark" ? "":"dark");
+            var zTree = $.fn.zTree.getZTreeObj("treeTable");
+            zTree.selectNode(treeNode);
+            $.confirm({
+              title: '友情提示!',
+              content: '请确认是否真的要删除该区域吗，此操作不可逆请谨慎操作!',
+              boxWidth: '300px',
+              useBootstrap: false,
+              buttons: {
+                confirm: {
+                  text: '确认',
+                  btnClass:'btn-flat default',
+                  action: function(){
+                    $.post('/manage/area/delete',{
+                      _csrf:'<%= csrf_token %>',
+                      id:treeNode.id
+                    },function(data){
+                      if(data.result){
+                        noticeInfo('success','感谢您的使用，删除成功',function(){
+                          window.location.reload();
+                        });
+                      }else{
+                        noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!')
+                      }
+                    });
+                  }
+                },
+                cancel: {
+                  text: '取消',
+                  btnClass:'btn-flat white',
+                  action: function(){
+                    return;
+                  }
+                }
+              }
+            });
+            return false;
+          }
+          function onRemove(e, treeId, treeNode) {
+
+          }
+          function beforeEditName(treeId, treeNode, newName) {
+            window.location.href = '/manage/area/edit?id='+treeNode.id;
+            return false;
+          }
+          function onRename(e, treeId, treeNode) {
+          }
+          function showRemoveBtn(treeId, treeNode) {
+            return treeNode.id!=1;
+          }
+          function showRenameBtn(treeId, treeNode) {
+            return true;
+          }
+          function zTreeOnClick(event, treeId, treeNode) {
+
+          }
+
+          var newCount = 1;
+          function addHoverDom(treeId, treeNode) {
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.id).length>0) return;
+            var addStr = "<span class='button add' id='addBtn_" + treeNode.id + "' title='add node' onfocus='this.blur();'></span>";
+            sObj.after(addStr);
+            var addBtn = $("#addBtn_"+treeNode.id);
+            if (addBtn) addBtn.bind("click", function(){
+              window.location.href = '/manage/area/create?parent_id='+treeNode.id;
+            });
+          };
+
+          function removeHoverDom(treeId, treeNode) {
+            $("#addBtn_"+treeNode.id).unbind().remove();
+          };
+
+          function refreshTree(){
+            var data = <%-areas%>;
+            treeObj = $.fn.zTree.init($("#treeTable"), setting,data);
+
+            //如果默认一级大于1个就不进行节点展开了
+            if(data.length<=1){
+              // 默认展开一级节点
+              var nodes = treeObj.getNodesByParam("level", 0);
+              for(var i=0; i<nodes.length; i++) {
+                treeObj.expandNode(nodes[i], true, false, false);
+              }
+              //异步加载子节点（加载用户）
+              var nodesOne = treeObj.getNodesByParam("isParent", true);
+              for(var j=0; j<nodesOne.length; j++) {
+                treeObj.reAsyncChildNodes(nodesOne[j],"!refresh",true);
+              }
+            }
+          }
+          refreshTree();
+        });
+      </script>
+    </div>
+  </div>
+</div>
+
+<% include  ../include/manage_footer_res.ejs %>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<div id="<%=input%>Preview"></div>
+<% if(typeof(disabled)!='unefined'){ %>
+    <a href="javascript:" onclick="<%=input%>FinderOpen();" class="btn"><%if(selectMultiple){%>添加<%}else{%>选择<%}%></a>&nbsp;<a href="javascript:" onclick="<%=input%>DelAll();" class="btn">清除</a>
+<%}%>
+<script type="text/javascript">
+    function <%=input%>FinderOpen(){
+        var url = "/manage/file/simple?type=<%=type%>&isDialog=true&func=<%=input%>SelectAction&sm=<%if(typeof(selectMultiple)!='undefined'){%>1<%}else{%>0<%}%>&format=<%if(typeof(format)!='undefined'){%><%-format%><%}%>&showFormat=<%if(typeof(showFormat)!='undefined'){%><%-showFormat%><%}%>";
+        windowOpen(url,"${type=='images'?'图片':'文件'}管理",1000,700);
+    }
+
+    function <%=input%>SelectAction(files){
+        <%if(typeof(selectMultiple)!='undefined' && selectMultiple==true){%>
+            try{
+                var filesJson = JSON.parse($("#<%=input%>").val());
+                for(var i=0;i<files.length;i++){
+                    <%if(typeof(limitCount)!='undefined'){%>
+                        if(filesJson.length+i+1>parseInt('<%=limitCount%>')){
+                            showTip("上传数量最大不能超过<%=limitCount%>张");
+                            break;
+                        }
+                    <%}%>
+                    filesJson.push(files[i]);
+                }
+                $("#<%=input%>").val(JSON.stringify(filesJson));
+            }catch(e){
+                <%if(typeof(limitCount)!='undefined'){%>
+                    if(files.length>parseInt('<%=limitCount%>')){
+                        showTip("上传数量最大不能超过<%=limitCount%>张");
+                        return false;
+                    }
+                <%}%>
+                $("#<%=input%>").val(JSON.stringify(files));
+            }
+        <%}else{%>
+            $("#<%=input%>").val(JSON.stringify(files));
+        <%}%>
+        <%=input%>Preview(files);
+        //top.$.jBox.close();
+    }
+
+    function <%=input%>Callback(api){
+        ckfinderAPI = api;
+    }
+    function <%=input%>Del(obj){
+        var name = $(obj).parent().attr("name");
+        var filesJson = JSON.parse($("#<%=input%>").val());
+        for(var i=0;i<filesJson.length;i++){
+            if(filesJson[i].name == name){
+                filesJson.remove(i);
+                break;
+            }
+        }
+        $("#<%=input%>").val(JSON.stringify(filesJson));
+
+        <%=input%>Preview();
+    }
+    function <%=input%>DelAll(){
+        $("#<%=input%>").val("");
+        <%=input%>Preview();
+    }
+    function <%=input%>Preview(){
+        var isHas = false;
+        try{
+            var filesJson = JSON.parse($("#<%=input%>").val());
+            $("#<%=input%>Preview").children().remove();
+            for (var i=0; i<filesJson.length; i++){
+                if (filesJson[i]!=null){
+                    var fileFrame = $('<div></div>').addClass('ckfinder-imgFrame').attr('name',filesJson[i].name);
+                    <%if(typeof(showFormat)!='undefined'){%>
+                        var thumb = <%-showFormat.replace(/\@/g,'"')%>;
+                        filesJson[i].path =filesJson[i].path+filesJson[i].name+"_"+thumb.width+"x"+thumb.height;
+                    <%}%>
+                    <%if(typeof(showFormat)!='undefined'){%>
+                            fileFrame.css({
+                                width:thumb.width,
+                                height:thumb.height,
+                                float:'left',
+                                marginRight:'10px',
+                                border:'1px',
+                                borderColor:'#EEEEEE',
+                                borderStyle:'solid',
+                                backgroundPosition:'center center',
+                                backgroundImage:'url('+filesJson[i].path+"."+filesJson[i].suffix+')',
+                                backgroundRepeat:'no-repeat',
+                                marginBottom:'10px',
+                                position:'relative'
+                            });
+                    <%}%>
+                    <%if(type=='files'){%>
+                        fileFrame.css({
+                            width:150,
+                            height:150,
+                            float:'left',
+                            marginRight:'10px',
+                            border:'1px',
+                            borderColor:'#EEEEEE',
+                            borderStyle:'solid',
+                            backgroundPosition:'center center',
+                            //backgroundImage:'url('+ctxStatic+'/ckfinder/images/'+suffix+'.png)',
+                            backgroundRepeat:'no-repeat',
+                            marginBottom:'10px',
+                            position:'relative'
+                        });
+                        var fileName = $('<a target="_blank" href="'+ctxStatic+'/ckfinder/core/connector/java/connector.java?command=DownloadFile&type=files&langCode=zh-cn&newFileName='+filesJson[i].title+"."+filesJson[i].suffix+'&FileName='
+						+filesJson[i].path+"."+filesJson[i].suffix+'">'+filesJson[i].title+'.'+filesJson[i].suffix+'</a>').css({
+							height:30,
+							lineHeight:'30px',
+							position:'absolute',
+							bottom:0,
+							width:'100%',
+							left:0,
+							textAlign:'center'
+						}).appendTo(fileFrame);
+
+						var fileTypeImg = $('<img style="margin-left:32px;margin-top:10px;" src="'+ctxStatic+'/ckfinder/images/'+filesJson[i].suffix+'.png" width="84" height="108"/>').appendTo(fileFrame);
+                    <%}%>
+                    <%if(typeof(disabled)=='undefined' || disabled==true){%>
+                        var a = $('<a href="javascript:" style="font-size:14px;position:absolute;right:3px;top:0px;" onclick="<%=input%>Del(this)">×</a>').appendTo(fileFrame);
+                    <%}%>
+                    //imgFrame.append(img);
+                    $("#<%=input%>Preview").append(fileFrame);
+                    isHas = true;
+                }
+            }
+                $("#<%=input%>Preview").append('<div class="auto-height"></div>');
+        }
+        catch(e){
+        }
+        if (!isHas){
+            $("#<%=input%>Preview").html("<li style='list-style:none;padding-top:5px;'>无</li>");
+        }
+    }
+    <%=input%>Preview();
+</script>

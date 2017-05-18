@@ -3,6 +3,24 @@ const util = require('../utils');
 const uuidV1 = require('uuid/v1');
 
 /**
+ * 根据文件ID查询文件信息
+ */
+exports.queryFileByIds = function(ids,callback) {
+    mysql.query("select sf.* from sys_file sf where sf.id in ("+ids+")", null, function(err,files) {
+        callback(err, files);
+    });
+};
+
+/**
+ * 根据文件ID修改文件缩略图格式
+ */
+exports.updateFileFormatById = function(format,id,callback) {
+    mysql.update("update sys_file set format=? , update_date=now() where id=?", [format,id], function(err,result) {
+        callback(err, result);
+    });
+};
+
+/**
  * 根据文件类型查询我的目录信息
  */
 exports.queryCatalogByUser = function(req,type,callback) {
@@ -19,7 +37,7 @@ exports.queryCatalogByUser = function(req,type,callback) {
 exports.queryFileByCateId = function(req,cateId,type,currentPage,pagesize, callback) {
     let user = req.session.user;
 
-    mysql.query('select sf.* from sys_file sf where sf.del_flag=0 and sf.file_cate_id=? and sf.type=? and sf.create_by=? limit '+ (parseInt(currentPage) - 1) * pagesize + "," + pagesize,
+    mysql.query('select sf.* from sys_file sf where sf.del_flag=0 and sf.file_cate_id=? and sf.type=? and sf.create_by=? order by sf.create_date desc limit '+ (parseInt(currentPage) - 1) * pagesize + "," + pagesize,
     [ cateId,type,user.id ], function(err, files) {
         callback(err, files);
     });

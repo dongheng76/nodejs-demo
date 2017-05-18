@@ -1,0 +1,82 @@
+/**
+ * Created by Administrator on 2017/3/8.
+ */
+Array.prototype.remove = function(from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+};
+
+// 打开一个窗体
+function windowOpen(url, name, width, height){
+    var top=parseInt((window.screen.height-height)/2,10),left=parseInt((window.screen.width-width)/2,10),
+        options="location=no,menubar=no,toolbar=no,dependent=yes,minimizable=no,modal=yes,alwaysRaised=yes,"+
+            "resizable=yes,scrollbars=yes,"+"width="+width+",height="+height+",top="+top+",left="+left;
+    window.open(url ,name , options);
+}
+
+//打开操作成功通知
+function noticeInfo(type,title,callback){
+    switch (type){
+        case 'notice':
+            new jBox('Notice', {
+                theme: 'NoticeFancy',
+                attributes: {
+                    x: 'right',
+                    y: 'bottom'
+                },
+                color:'#FF5300',
+                content: title,
+                audio: '/plugin/jBox-0.4.8/Source/audio/bling2',
+                volume: 100,
+                animation: {open: 'slide:bottom', close: 'slide:left'},
+                onClose:callback
+            });
+            break;
+        case 'success':
+            new jBox('Notice', {
+                theme: 'NoticeFancy',
+                attributes: {
+                    x: 'right',
+                    y: 'bottom'
+                },
+                color:'green',
+                content: title,
+                audio: '/plugin/jBox-0.4.8/Source/audio/bling2',
+                volume: 100,
+                animation: {open: 'slide:bottom', close: 'slide:left'},
+                onClose:callback
+            });
+            break;
+        case 'fail':
+            new jBox('Notice', {
+                theme: 'NoticeFancy',
+                attributes: {
+                    x: 'right',
+                    y: 'bottom'
+                },
+                color:'red',
+                content: title,
+                audio: '/plugin/jBox-0.4.8/Source/audio/blop',
+                volume: 100,
+                animation: {open: 'slide:bottom', close: 'slide:left'},
+                onClose:callback
+            });
+            break;
+        default:
+            new jBox('Notice', {
+                theme: 'NoticeFancy',
+                attributes: {
+                    x: 'right',
+                    y: 'bottom'
+                },
+                color:'#FF5300',
+                content: title,
+                audio: '/plugin/jBox-0.4.8/Source/audio/bling2',
+                volume: 100,
+                animation: {open: 'slide:bottom', close: 'slide:left'},
+                onClose:callback
+            });
+            break;
+    }
+}
