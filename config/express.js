@@ -23,6 +23,7 @@ const helpers = require('view-helpers');
 const config = require('./');
 const pkg = require('../package.json');
 const env = process.env.NODE_ENV || 'development';
+const envConfig = require('./index');
 
 /**
  * Expose
@@ -86,8 +87,9 @@ module.exports = function (app, passport) {
     resave: false,
     saveUninitialized: true,
     store: new RedisStore({
-      host: '127.0.0.1',
-      port: 6379
+      host: envConfig.redis.server,
+      port: envConfig.redis.port,
+      password : envConfig.redis.password
     }),
     secret: pkg.name,
     cookie: { maxAge: 60 * 60 * 1000 }
