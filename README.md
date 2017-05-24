@@ -5,59 +5,56 @@
 [![Join Gitter Chat](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat)](https://gitter.im/madhums/node-express-mongoose-demo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
 
-# Nodejs Express Mongoose Demo
+# Nodejs Express Mysql Demo
 
-This is a demo node.js application illustrating various features used in everyday web development, with a fine touch of best practices. The demo app is a blog application where users (signing up using facebook, twitter, github and simple registrations) can create an article, delete an article and add comments on the article.
+这是一个非常全面的nodejs框架，不仅仅解决后台的框架和常用工具，还大幅度的为前端提供了很多丰富的插件，为开发提供很多便捷。目前版本主要是针对mysql为主的后台管理系统
 
-## Boilerplate
+## 我们核心解决的问题列表
 
-Want to build something from scratch? use the [boilerplate](https://github.com/madhums/node-express-mongoose)
+(一)业务方面
+1.登录注册权限控制
+2.用户管理、角色管理、菜单管理、区域管理、机构管理
+3.用户日志监控、系统监控
 
-* Checkout the [apps that are built using this approach](https://github.com/madhums/node-express-mongoose/wiki/Apps-built-using-this-approach)
-* The [wiki](https://github.com/madhums/node-express-mongoose/wiki) is wip, it has some information about the way application is setup.
+(二)系统方面
+1.上传工具及其下载功能、缩放、裁剪等功能
+2.支持excel上传下载处理
+3.支持mysql数据库的操作
+4.支持菜单访问权限的控制
+5.支持redis集群
+6.支持数据库读写分离
+7.支持生成静态文件处理
+8.提供分页查询前后台所需的相关工具
+9.提供前端常用插件如select选项卡、弹出框选属性选项卡(异步、同步都支持)、手机和PC富客服端编辑器
 
-## Requirements
+
+## 必须要安装的插件
 
 * [NodeJs](http://nodejs.org) >= 6.x 
-* [mongodb](http://mongodb.org)
 * ~~[imagemagick](http://www.imagemagick.org/script/index.php)~~
 
-## Install
+## 安装
 
 ```sh
 $ git clone https://github.com/dongheng76/nodejs-demo.git
 $ npm install
 ```
+##目录脚手架介绍
+-app 存放核心应用层的文件夹
+    -controllers 存放控制层的文件夹
+    -dao 存放数据库操作工具
+    -models 模型层使用orm规范需要的对象文件夹，目前无使用
+    -routes 常用路由集合的文件夹
+    -utils 常用与业务无关的工具类文件夹
+    -view 存放html页面的文件夹
+-config 核心配置的文件夹
+-db 存放系统sql备份的文件夹
+-public 存放静态文件的文件目录
 
-**NOTE:** Do not forget to set the facebook, twitter, google, linkedin and github `CLIENT_ID`s and `SECRET`s. In `development` env, you can set the env variables by doing
-
-```sh
-cp .env.example .env
-```
-
-and replace the values there. In `production` env, it is not safe to keep the ids and secrets in a file, so you need to set it up via commandline. If you are using heroku checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars).
-
-If you want to use image uploads, don't forget to set these env variables for
-imager config.
-
-```sh
-IMAGER_S3_KEY=AWS_S3_KEY
-IMAGER_S3_SECRET=AWS_S3_SECRET
-IMAGER_S3_BUCKET=AWS_S3_BUCKET
-```
-
-then
+## 正式启动
 
 ```sh
 $ npm start
-```
-
-Then visit [http://localhost:80/](http://localhost:80/)
-
-## Tests
-
-```sh
-$ npm test
 ```
 
 ## License
