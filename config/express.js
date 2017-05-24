@@ -39,7 +39,7 @@ module.exports = function (app, passport) {
 
   app.use(cors());
 
-  //设置静态文件夹路径，已达到不被当成控制层的作用
+  // 设置静态文件夹路径，已达到不被当成控制层的作用
   app.use(express.static(config.root + '/public'));
 
   // Use winston on production
@@ -81,13 +81,13 @@ module.exports = function (app, passport) {
 
   // CookieParser should be above session
   app.use(cookieParser());
-  //app.use(cookieSession({ secret: pkg.name }));
+  // app.use(cookieSession({ secret: pkg.name }));
   app.use(session({
     resave: false,
     saveUninitialized: true,
     store: new RedisStore({
-      host:'127.0.0.1',
-      port:6379
+      host: '127.0.0.1',
+      port: 6379
     }),
     secret: pkg.name,
     cookie: { maxAge: 60 * 60 * 1000 }
@@ -97,15 +97,15 @@ module.exports = function (app, passport) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  //每次在进入路由前看看是否有用户或者菜单信息，有就放入locals中
-  app.use(function(req, res, next){
-    if(req.session.user!=undefined){
+  // 每次在进入路由前看看是否有用户或者菜单信息，有就放入locals中
+  app.use(function (req, res, next) {
+    if (req.session.user != undefined) {
       res.locals.user = req.session.user;
     }
-    if(req.session.menus!=undefined){
+    if (req.session.menus != undefined) {
       res.locals.menus = req.session.menus;
     }
-    if(req.session.sysmenus!=undefined){
+    if (req.session.sysmenus != undefined) {
       res.locals.sysmenus = req.session.sysmenus;
     }
     next();

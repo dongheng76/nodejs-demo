@@ -45,6 +45,10 @@ module.exports = function (app, passport) {
   require('../app/routes/manage/menu')(app, passport);
   //机构路由
   require('../app/routes/manage/office')(app, passport);
+  //字典路由
+  require('../app/routes/manage/dict')(app, passport);
+  //角色路由
+  require('../app/routes/manage/role')(app, passport);
 
   /*app.post('/user/session',
     pauth('local', {

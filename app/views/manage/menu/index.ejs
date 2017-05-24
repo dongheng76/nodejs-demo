@@ -80,81 +80,85 @@
                 </ul>
               </td>
             </tr>
-            <%menu.children.forEach(function(sub_menu){%>
-              <tr class="treeNode" treeId="<%=sub_menu.id%>" parentIds="<%=sub_menu.parent_ids%>">
-                <td style="padding-left:30px;">
-                  <span arrow="true" class="default_active_node default_open"></span>
-                  <a href="#" class="name"><%=sub_menu.name%></a>
-                </td>
-                <td class="description">
-                  <%=sub_menu.href%>
-                </td>
-                <td>
-                  <%=sub_menu.sort%>
-                </td>
-                <td>
-                  <%=sub_menu.permission%>
-                </td>
-                <td>
-                  <span class="label label-success">有效</span>
-                  <ul class="actions">
-                    <li><a href="/manage/menu/create?parent_id=<%=sub_menu.id%>">添加下级菜单</a></li>
-                    <li><a href="/manage/menu/edit?id=<%=sub_menu.id%>">编辑</a></li>
-                    <li class="last"><a href="javascript:void(0)" onclick="javascript:delMenu('<%=sub_menu.id%>')">删除</a></li>
-                  </ul>
-                </td>
-              </tr>
-              <%sub_menu.children.forEach(function(sub_sub_menu){%>
-                <tr class="treeNode" treeId="<%=sub_sub_menu.id%>" parentIds="<%=sub_sub_menu.parent_ids%>">
-                  <td style="padding-left:60px;">
+            <% if(typeof(menu.children) != 'undefined'){%>
+              <%menu.children.forEach(function(sub_menu){%>
+                <tr class="treeNode" treeId="<%=sub_menu.id%>" parentIds="<%=sub_menu.parent_ids%>">
+                  <td style="padding-left:30px;">
                     <span arrow="true" class="default_active_node default_open"></span>
-                    <a href="#" class="name"><%=sub_sub_menu.name%></a>
+                    <a href="#" class="name"><%=sub_menu.name%></a>
                   </td>
                   <td class="description">
-                    <%=sub_sub_menu.href%>
+                    <%=sub_menu.href%>
                   </td>
                   <td>
-                    <%=sub_sub_menu.sort%>
+                    <%=sub_menu.sort%>
                   </td>
                   <td>
-                    <%=sub_sub_menu.permission%>
+                    <%=sub_menu.permission%>
                   </td>
                   <td>
                     <span class="label label-success">有效</span>
                     <ul class="actions">
-                      <li><a href="/manage/menu/create?parent_id={{$sysSubNextMenu->id}}">添加下级菜单</a></li>
-                      <li><a href="/manage/menu/edit?id={{$sysSubNextMenu->id}}">编辑</a></li>
-                      <li class="last"><a href="javascript:void(0)" onclick="javascript:delMenu('{{$sysSubNextMenu->id}}')">删除</a></li>
+                      <li><a href="/manage/menu/create?parent_id=<%=sub_menu.id%>">添加下级菜单</a></li>
+                      <li><a href="/manage/menu/edit?id=<%=sub_menu.id%>">编辑</a></li>
+                      <li class="last"><a href="javascript:void(0)" onclick="javascript:delMenu('<%=sub_menu.id%>')">删除</a></li>
                     </ul>
                   </td>
                 </tr>
-                <%if(typeof(sub_sub_menu.children)!='undefined' ){%>
-                  <%sub_sub_menu.children.forEach(function(sub_sub_sub_menu){%>
-                    <tr class="treeNode" treeId="<%=sub_sub_sub_menu.id%>" parentIds="<%=sub_sub_sub_menu.parent_ids%>">
-                      <td style="padding-left:80px;">
-                        <a href="#" class="name"><%=sub_sub_sub_menu.name%></a>
+                <% if(typeof(sub_menu.children) != 'undefined'){%>
+                  <%sub_menu.children.forEach(function(sub_sub_menu){%>
+                    <tr class="treeNode" treeId="<%=sub_sub_menu.id%>" parentIds="<%=sub_sub_menu.parent_ids%>">
+                      <td style="padding-left:60px;">
+                        <span arrow="true" class="default_active_node default_open"></span>
+                        <a href="#" class="name"><%=sub_sub_menu.name%></a>
                       </td>
                       <td class="description">
-                        <%=sub_sub_sub_menu.href%>
+                        <%=sub_sub_menu.href%>
                       </td>
                       <td>
-                        <%=sub_sub_sub_menu.sort%>
+                        <%=sub_sub_menu.sort%>
                       </td>
                       <td>
-                        <%=sub_sub_sub_menu.permission%>
+                        <%=sub_sub_menu.permission%>
                       </td>
                       <td>
                         <span class="label label-success">有效</span>
                         <ul class="actions">
-                          <li><a href="/manage/menu/edit?id=<%=sub_sub_sub_menu.id%>">编辑</a></li>
-                          <li class="last"><a href="javascript:void(0)" onclick="javascript:delMenu('<%=sub_sub_sub_menu.id%>')">删除</a></li>
+                          <li><a href="/manage/menu/create?parent_id=<%=sub_sub_menu.id%>">添加下级菜单</a></li>
+                          <li><a href="/manage/menu/edit?id=<%=sub_sub_menu.id%>">编辑</a></li>
+                          <li class="last"><a href="javascript:void(0)" onclick="javascript:delMenu('<%=sub_sub_menu.id%>')">删除</a></li>
                         </ul>
                       </td>
                     </tr>
+                    <%if(typeof(sub_sub_menu.children)!='undefined' ){%>
+                      <%sub_sub_menu.children.forEach(function(sub_sub_sub_menu){%>
+                        <tr class="treeNode" treeId="<%=sub_sub_sub_menu.id%>" parentIds="<%=sub_sub_sub_menu.parent_ids%>">
+                          <td style="padding-left:80px;">
+                            <a href="#" class="name"><%=sub_sub_sub_menu.name%></a>
+                          </td>
+                          <td class="description">
+                            <%=sub_sub_sub_menu.href%>
+                          </td>
+                          <td>
+                            <%=sub_sub_sub_menu.sort%>
+                          </td>
+                          <td>
+                            <%=sub_sub_sub_menu.permission%>
+                          </td>
+                          <td>
+                            <span class="label label-success">有效</span>
+                            <ul class="actions">
+                              <li><a href="/manage/menu/edit?id=<%=sub_sub_sub_menu.id%>">编辑</a></li>
+                              <li class="last"><a href="javascript:void(0)" onclick="javascript:delMenu('<%=sub_sub_sub_menu.id%>')">删除</a></li>
+                            </ul>
+                          </td>
+                        </tr>
+                      <%})%>
+                    <%}%>
                   <%})%>
                 <%}%>
               <%})%>
-            <%})%>
+            <%}%>
           <%})%>
           </tbody>
           <script type="application/javascript">
@@ -180,30 +184,6 @@
                 });
               }
             });
-
-            function delMenu(id) {
-              var submit = function (v, h, f) {
-                if (v == 'ok'){
-                  $.ajax({
-                    type:'post',
-                    url:'/backend/menu/delete?id='+id+'&_token={{ csrf_token() }}',
-                    dataType:'json',
-                    success:function(data){
-                      if(data.result){
-                        $.jBox.messager('感谢您的使用，删除成功。', '删除成功！');
-                        window.location.reload();
-                      }else{
-                        $.jBox.messager('非常抱歉，系统或网络发生异常，请重试!', '修改失败！');
-                      }
-                    }
-                  });
-                }
-                else if (v == 'cancel'){
-
-                }
-              };
-              $.jBox.confirm("确定要删除该菜单吗？", "提示", submit);
-            }
           </script>
         </table>
       </div>
@@ -214,10 +194,10 @@
 <% include  ../include/manage_footer_res.ejs %>
 
 <script type="text/javascript">
-  function delUser(id) {
+  function delMenu(id) {
     $.confirm({
       title: '友情提示!',
-      content: '请确认是否真的要删除该用户，此操作不可逆请谨慎操作!',
+      content: '请确认是否真的要删除该菜单，此操作不可逆请谨慎操作!',
       boxWidth: '300px',
       useBootstrap: false,
       buttons: {
@@ -225,7 +205,7 @@
           text: '确认',
           btnClass:'btn-flat default',
           action: function(){
-            $.post('/manage/user/delete',{
+            $.post('/manage/menu/delete',{
               _csrf:'<%= csrf_token %>',
               id:id
             },function(data){
@@ -276,53 +256,6 @@
     }else{
       $('input[name="mainCheckbox"]').parent().removeClass('checked');
     }
-  });
-
-  $('#dels').click(function(){
-    $.confirm({
-      title: '友情提示!',
-      content: '请确认是否真的要删除该用户，此操作不可逆请谨慎操作!',
-      boxWidth: '300px',
-      useBootstrap: false,
-      buttons: {
-        confirm: {
-          text: '确认',
-          btnClass:'btn-flat default',
-          action: function(){
-            var ids = '';
-            $('input[name="subCheckbox"]').each(function(){
-              if($(this).parent().hasClass('checked')){
-                ids += $(this).attr('userId')+'|';
-              }
-            });
-            if(ids==''){
-              noticeInfo('fail','请选择至少一项后才能删除');
-              return true;
-            }
-
-            $.post('/manage/user/delete',{
-              ids:ids,
-              _csrf:'<%= csrf_token %>'
-            },function(data){
-              if(data.result){
-                noticeInfo('success','感谢您的使用，删除成功',function(){
-                  window.location.reload();
-                });
-              }else{
-                noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!');
-              }
-            });
-          }
-        },
-        cancel: {
-          text: '取消',
-          btnClass:'btn-flat white',
-          action: function(){
-            return;
-          }
-        }
-      }
-    });
   });
 
   $(window).load(function(){
