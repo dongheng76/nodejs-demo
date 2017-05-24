@@ -41,12 +41,12 @@ $ npm install
 ```
 ##目录脚手架介绍
 -app 存放核心应用层的文件夹<br/>
-    -controllers 存放控制层的文件夹<br/>
-    -dao 存放数据库操作工具<br/>
-    -models 模型层使用orm规范需要的对象文件夹，目前无使用<br/>
-    -routes 常用路由集合的文件夹<br/>
-    -utils 常用与业务无关的工具类文件夹<br/>
-    -view 存放html页面的文件夹<br/>
+    &#9-controllers 存放控制层的文件夹<br/>
+    &#9-dao 存放数据库操作工具<br/>
+    &#9-models 模型层使用orm规范需要的对象文件夹，目前无使用<br/>
+    &#9-routes 常用路由集合的文件夹<br/>
+    &#9-utils 常用与业务无关的工具类文件夹<br/>
+    &#9-view 存放html页面的文件夹<br/>
 -config 核心配置的文件夹<br/>
 -db 存放系统sql备份的文件夹<br/>
 -public 存放静态文件的文件目录<br/>
