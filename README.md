@@ -39,7 +39,7 @@
 $ git clone https://github.com/dongheng76/nodejs-demo.git
 $ npm install
 ```
-##目录脚手架介绍<br/>
+## 目录脚手架介绍<br/>
 -app 存放核心应用层的文件夹<br/>
 　　-controllers 存放控制层的文件夹<br/>
 　　-dao 存放数据库操作工具<br/>
