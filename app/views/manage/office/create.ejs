@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>机构管理 - 首页</title>
+  <% include  ../include/head_res.ejs %>
+  <% include  ../include/manage_com_res.ejs %>
+  <!-- jstree -->
+  <link href="/plugin/ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css" rel="stylesheet" type="text/css"/>
+  <script src="/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+
+  <script src="/js/common/jquery.validate.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="/plugin/theme/default/css/compiled/web-app-icons.css" />
+<body>
+
+<% include  ../include/header.ejs %>
+
+<!-- sidebar -->
+<div id="sidebar-nav">
+  <ul id="dashboard-menu">
+  </ul>
+</div>
+<!-- end sidebar -->
+
+
+<!-- main container -->
+<div class="content">
+
+  <div class="container-fluid">
+    <div class="table-wrapper products-table section">
+      <div class="row-fluid head">
+        <div class="span12">
+          <h4 style="float:left;display: inline-block">新增机构</h4>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <form name="create" id="form" action="/manage/office/store"  method="post">
+          <input type="hidden" name="_csrf" value="<%= csrf_token %>">
+          <% if(typeof(office)!='undefined'){%>
+            <input type="hidden" name="id" value="<%=office.id%>"/>
+          <%}%>
+          <div class="row-fluid form-wrapper">
+            <!-- left column -->
+            <div class="span11 column">
+              <div class="field-box">
+                <label>所属上级机构:</label>
+                <input style="width:400px" disabled type="text" name="parent_label" <%if(typeof(parentOffice)!='undefined'){%> value="<%=parentOffice.name%>" <%}else{%> value="根目录菜单" <%}%>/>
+                <input type="hidden" name="parent_id" value="<%if(typeof(office)!='undefined'){%> <%=office.parent_id%> <%}else{%><%if(typeof(parentOffice)!='undefined'){%><%=parentOffice.id%><%}else{%>0<%}%><%}%>"/>
+              </div>
+              <div class="field-box">
+                <label>机构名称:</label>
+                <input style="width:400px" type="text" name="name" <%if(typeof(office)!='undefined'){%> value="<%=office.name%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>所属区域:</label>
+                <%if(typeof(office)!='undefined'){%>
+                  <%-include("../include/async_tree",{width:'400',name:'area_id',treejson:rootAreas,treeWidth:400,treeHeight:600,treeTitle:'请选择一个区域',url:"/manage/area/findareabypid",default_id:office.area_id,default_name:areaName})%>
+                <%}else{%>
+                  <%-include("../include/async_tree",{width:'400',name:'area_id',treejson:rootAreas,treeWidth:400,treeHeight:600,treeTitle:'请选择一个区域',url:"/manage/area/findareabypid"})%>
+                <%}%>
+              </div>
+              <div class="field-box">
+                <label>机构类型:</label>
+                <% if(typeof(office)!='undefined'){ %>
+                  <%-include("../include/select",{options:officeTypes,name:'type',width:400,defaultValue:office.type})%>
+                <%}else{%>
+                  <%-include("../include/select",{options:officeTypes,name:'type',width:400})%>
+                <%}%>
+              </div>
+              <div class="field-box">
+                <label>当前排序:</label>
+                <input style="width:400px" type="text" name="sort" <%if(typeof(maxSort)!='undefined'){%> value="<%=maxSort%>" <%}%> <%if(typeof(office)!='undefined'){%> value="<%=office.sort%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>机构负责人:</label>
+                <input style="width:400px" type="text" name="master" <%if(typeof(office)!='undefined'){%> value="<%=office.master%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>机构地址:</label>
+                <input style="width:400px" type="text" name="address" <%if(typeof(office)!='undefined'){%> value="<%=office.address%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>机构电话:</label>
+                <input style="width:400px" type="text" name="phone" <%if(typeof(office)!='undefined'){%> value="<%=office.phone%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>机构邮箱:</label>
+                <input style="width:400px" type="text" name="email" <%if(typeof(office)!='undefined'){%> value="<%=office.email%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>机构传真:</label>
+                <input style="width:400px" type="text" name="fax" <%if(typeof(office)!='undefined'){%> value="<%=office.fax%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>邮编:</label>
+                <input style="width:400px" type="text" name="code" <%if(typeof(office)!='undefined'){%> value="<%=office.code%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>备注:</label>
+                <textarea style="width:400px" name="remarks" rows="4"><% if(typeof(office)!='undefined'){ %><%=office.remarks%><%}%></textarea>
+              </div>
+            </div>
+          </div>
+          <% if(typeof(menu)!='undefined'){%>
+            <button type="submit" class="btn-glow inverse">确定修改</button>
+          <%}else{%>
+            <button type="submit" class="btn-glow inverse">确定添加</button>
+          <%}%>
+          <a class="btn-glow" href="javascript:window.history.back();">返回</a>
+        </form>
+      </div>
+    </div>
+    <script type="application/javascript">
+      $(window).ready(function(){
+        <% if(typeof(menu)!='undefined'){%>
+          $("#form").validate({
+          rules: {
+            parent_id: "required",
+            master: {
+              required: true,
+              minlength:2,
+              maxlength:12
+            },
+            name: {
+              required: true,
+              minlength:2,
+              maxlength:12
+            },
+            sort:"required"
+          },
+          messages: {
+            parent_id: "你必须选择一个所属父级机构",
+            name: {
+              required: "负责人必须填写",
+              minlength: "负责人至少2位字符",
+              maxlength: "负责人最多12位字符"
+            },
+            name: {
+              required: "机构名必须填写",
+              minlength: "机构名至少2位字符",
+              maxlength: "机构名最多12位字符"
+            },
+            sort:"排序号必须填写"
+          },
+          submitHandler:function(form){
+            $.post('/manage/office/store',$('form[name="create"]').serialize(),function(data){
+              if(data.result){
+                noticeInfo('success','感谢您的使用，修改成功',function(){
+                  window.history.back();
+                });
+              }else{
+                noticeInfo('fail',data.error);
+              }
+            }).error(function(data) {
+              $.jBox.messager(props, '创建失败！');
+            });
+          }
+        });
+        <%}else{%>
+          $("#form").validate({
+          rules: {
+            parent_id: "required",
+            master: {
+              required: true,
+              minlength:2,
+              maxlength:12
+            },
+            name: {
+              required: true,
+              minlength:2,
+              maxlength:12
+            },
+            sort:"required"
+          },
+          messages: {
+            parent_id: "你必须选择一个所属父级机构",
+            master: {
+              required: "负责人必须填写",
+              minlength: "负责人至少2位字符",
+              maxlength: "负责人最多12位字符"
+            },
+            name: {
+              required: "机构名必须填写",
+              minlength: "机构名至少2位字符",
+              maxlength: "机构名最多12位字符"
+            },
+            sort:"排序号必须填写"
+          },
+          submitHandler:function(form){
+            $.post('/manage/office/store',$('form[name="create"]').serialize(),function(data){
+              if(data.result){
+                noticeInfo('success','感谢您的使用，创建成功',function(){
+                  window.location.href='/manage/office';
+                });
+              }else{
+                noticeInfo('fail',data.error);
+              }
+            }).error(function(data) {
+              noticeInfo('fail','网络错误创建失败!请重试.');
+            });
+          }
+        });
+        <%}%>
+      });
+    </script>
+  </div>
+</div>
+
+<% include  ../include/manage_footer_res.ejs %>
+</body>
+</html>

@@ -39,10 +39,6 @@
       </div>
       <script type="text/javascript">
         $(document).ready(function() {
-          /* var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
-           var data = ${fns:toJson(list)}, rootId = "0";
-           addRow("#treeTableList", tpl, data, rootId, true);
-           $("#treeTable").treeTable({expandLevel : 5}); */
           var setting = {
             view: {
               addHoverDom: addHoverDom,
@@ -79,9 +75,6 @@
           var treeObj;
 
           function zTreeOnAsyncError(event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown) {
-            /* var treeObj = $.fn.zTree.getZTreeObj(treeId);
-             var nodes = treeObj.getSelectedNodes();
-             alert(nodes.length); */
           };
           function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
           };

@@ -11,46 +11,61 @@ const userDao = require('../../dao/user');
 const officeDao = require('../../dao/office');
 const util = require('../../utils');
 const menuDao = require('../../dao/menu');
+const areaDao = require('../../dao/area');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
+const co = require('co');
 
 /**
  * 创建机构
  */
 exports.create = function (req, res) {
+  let pId = req.query.parent_id ? req.query.parent_id : '0';
 
   async.auto({
-    currentMenu:function(cb){
-      menuDao.queryMenuByHref("/manage/user",function(err, menu) {
+    currentMenu: function (cb) {
+      menuDao.queryMenuByHref('/manage/office', function (err, menu) {
         if (err || !menu) {
           cb(null, {});
-        } else{
+        } else {
           cb(null, menu);
         }
       });
     },
-    userTypes:function(cb){
-      dictUtil.getDictList('sys_user_type',function(err,userTypes){
-        cb(null, userTypes);
+    officeTypes: function (cb) {
+      dictUtil.getDictList('sys_office_type', function (err, officeTypes) {
+        cb(null, officeTypes);
       });
     },
-    roles:function(cb){
-      userDao.queryRolesForAuth(req,function(err,roles){
-        cb(null, roles);
+    // 查询第一级区域信息
+    rootAreas: function (cb){
+      areaDao.queryAreasByPId('0',function (err,areas){
+        cb(null,areas);
       });
     },
-    offices:function(cb){
-      officeDao.queryOffice(function(err,offices){
-        cb(null, offices);
+    // 根据ID查询父亲机构信息
+    parentOffice: function (cb){
+      officeDao.queryOfficeById(pId,function (err,office){
+        cb(null,office);
+      });
+    },
+    // 根据父亲ID查询最大sort
+    maxSort: function (cb){
+      officeDao.queryMaxSortByPId(pId,function (err,sort){
+        if (sort != null){
+          cb(null,sort);
+        } else {
+          cb(null,0);
+        }
       });
     }
   }, function (error, result) {
-
-    res.render('manage/user/create', {
-      currentMenu:result.currentMenu,
-      userTypes:result.userTypes,
-      roles:result.roles,
-      offices:JSON.stringify(result.offices)
+    res.render('manage/office/create', {
+      currentMenu: result.currentMenu,
+      officeTypes: result.officeTypes,
+      parentOffice: result.parentOffice,
+      maxSort: parseInt(result.maxSort) + 10,
+      rootAreas: JSON.stringify(result.rootAreas)
     });
   });
 };
@@ -62,49 +77,53 @@ exports.edit = function (req, res) {
   let id = req.query.id;
 
   async.auto({
-    currentMenu:function(cb){
-      menuDao.queryMenuByHref("/manage/user",function(err, menu) {
+    currentMenu: function (cb) {
+      menuDao.queryMenuByHref('/manage/office', function (err, menu) {
         if (err || !menu) {
           cb(null, {});
-        } else{
+        } else {
           cb(null, menu);
         }
       });
     },
-    userTypes:function(cb){
-      dictUtil.getDictList('sys_user_type',function(err,userTypes){
-        cb(null, userTypes);
+    officeTypes: function (cb) {
+      dictUtil.getDictList('sys_office_type', function (err, officeTypes) {
+        cb(null, officeTypes);
       });
     },
-    roles:function(cb){
-      userDao.queryRolesForAuth(req,function(err,roles){
-        cb(null, roles);
+    // 查询第一级区域信息
+    rootAreas: function (cb){
+      areaDao.queryAreasByPId('0',function (err,areas){
+        cb(null,areas);
       });
     },
-    offices:function(cb){
-      officeDao.queryOffice(function(err,offices){
-        cb(null, offices);
+    // 根据ID查询父亲机构信息
+    office: function (cb){
+      officeDao.queryOfficeById(id,function (err,office){
+        cb(null,office);
       });
     },
-    userInfo:function(cb){
-      userDao.queryUserById(id,function(err,user){
-        cb(null, user);
+    // 查询父级office信息
+    parentOffice: ['office',function (param,cb){
+      officeDao.queryOfficeById(param.office.parent_id,function (err,office){
+        cb(null,office);
       });
-    },
-    userRoles:function(cb){
-      userDao.queryUserRolesById(id,function(err,roles){
-        cb(null, roles);
+    }],
+    // 查询所属区域ID家谱名称
+    areaName: ['office',function (param,cb){
+      areaDao.queryAreaGenealById(param.office.area_id,function (err,area_label){
+        cb(null,area_label);
       });
-    }
+    }]
   }, function (error, result) {
-    console.log(result.userInfo);
-    res.render('manage/user/create', {
-      currentMenu:result.currentMenu,
-      userTypes:result.userTypes,
-      roles:result.roles,
-      offices:JSON.stringify(result.offices),
-      userInfo:result.userInfo,
-      userRoles:result.userRoles
+
+    res.render('manage/office/create', {
+      currentMenu: result.currentMenu,
+      officeTypes: result.officeTypes,
+      office: result.office,
+      parentOffice: result.parentOffice,
+      areaName: result.areaName,
+      rootAreas: JSON.stringify(result.rootAreas)
     });
   });
 };
@@ -117,89 +136,73 @@ exports.show = function (req, res) {
 };
 
 /**
- *  保存一个用户信息
+ *  保存一个机构信息
  */
 exports.store = function (req, res) {
   async.auto({
     store: function (cb) {
-      let office_id = req.body.office_id;
-      let login_name = req.body.login_name;
-      let password = req.body.password;
-      let no = req.body.no;
+      let parent_id = req.body.parent_id;
       let name = req.body.name;
-      let email = req.body.email;
+      let area_id = req.body.area_id;
+      let type = req.body.type;
+      let sort = req.body.sort;
+      let master = req.body.master;
+      let address = req.body.address;
       let phone = req.body.phone;
-      let mobile = req.body.mobile;
-      let user_type = req.body.user_type;
-      let photo = req.body.photo;
-      let login_flag = req.body.login_flag;
+      let email = req.body.email;
+      let fax = req.body.fax;
+      let code = req.body.code;
       let remarks = req.body.remarks;
 
-      //登录名不能重复
-      userDao.queryUserByLoginId(login_name,function(err,user){
-        if(typeof(user)!='undefined' && user.id!=null){
-          cb(null,false);
-        }else{
-          //有ID就视为修改
-          if(typeof(req.body.id)!='undefined' && req.body.id!=''){
-            userDao.updateUser(req,function(err,result){
-              cb(null,result);
-            });
-          }else{
-            userDao.saveUser(office_id,login_name,password,no,name,email,phone,mobile,user_type,photo,login_flag,remarks,req,function(err,result){
-              cb(null,result);
-            });
-          }
-        }
-      });
+      // 有ID就视为修改
+      if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
+        officeDao.updateOffice(req, function (err, result) {
+          cb(null, result);
+        });
+      } else {
+        officeDao.saveOffice(parent_id, name, sort, area_id,code, type,address,master,phone,fax,email, remarks, req,function (err,office){
+          cb(null, office);
+        });
+      }
     }
   }, function (error, result) {
-    if(result.store){
+    if (result.store) {
       res.json({
-        result:true
+        result: true
       });
-    }else{
+    } else {
       res.json({
-        result:false,
-        error:'登录名重复请修改登录名'
+        result: false,
+        error: '登录名重复请修改登录名'
       });
     }
   });
 };
 
 /**
- *  删除一个用户信息
+ *  删除一个机构信息
  */
 exports.delete = function (req, res) {
   async.auto({
-    delUser:function(cb){
+    delUser: function (cb) {
 
-      if(req.body.id){
+      if (req.body.id) {
         let id = req.body.id;
-        userDao.delUserById(id,function(err,result){
-          cb(null,result);
+        officeDao.delOfficeById(id, function (err, result) {
+          cb(null, result);
         });
-      }else{
-        let ids = req.body.ids;
-        let idsAry = ids.split('|');
-
-        async.map(idsAry,function(id,idCallBack){
-          userDao.delUserById(id,function(err,result){
-            idCallBack(null, result);
-          });
-        }, function(err,result) {
-          cb(null,result);
-        });
+      } else {
+        cb(null, null);
       }
     }
   }, function (error, result) {
-    if(result.delUser){
+    if (result.delUser) {
       res.json({
-        result:true
+        result: true
       });
-    }else{
+    } else {
       res.json({
-        result:false
+        result: false
       });
     }
   });
@@ -207,25 +210,24 @@ exports.delete = function (req, res) {
 
 exports.index = function (req, res) {
   async.auto({
-    currentMenu:function(cb){
-        menuDao.queryMenuByHref("/manage/office",function(err, menu) {
-        if (err || !menu) {
-          cb(null, {});
-        } else{
-          cb(null, menu);
-        }
+      currentMenu: function (cb) {
+        menuDao.queryMenuByHref('/manage/office', function (err, menu) {
+          if (err || !menu) {
+            cb(null, {});
+          } else {
+            cb(null, menu);
+          }
+        });
+      },
+      offices: function (cb) {
+        officeDao.queryOfficeForRecursion(function (err, offices) {
+          cb(null, offices);
+        });
+      }
+    }, function (error, result) {
+      res.render('manage/office/index', {
+        currentMenu: result.currentMenu,
+        offices: result.offices
       });
-    },
-    offices:function(cb){
-      officeDao.queryOfficeForRecursion(function(err,offices){
-        cb(null,offices);
-      });
-    }
-  }, function (error, result) {
-
-    res.render('manage/office/index', {
-      currentMenu:result.currentMenu,
-      offices:result.offices
     });
-  });
 };

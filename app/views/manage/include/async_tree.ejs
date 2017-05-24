@@ -1,0 +1,104 @@
+<input style="width:<%= width %>px" type="text" name="<%= name %>_label" id="<%= name %>Modal" value="<%if(typeof(default_name)!='undefined'){%><%=default_name%><%}%>"/>
+<input type="hidden" name="<%= name %>" <%if(typeof(default_name)!='undefined'){%>value="<%=default_id%>"<%}%>/>
+
+<script type="application/javascript">
+
+    var <%= name %>ZtreeNodes = <%- treejson %>;
+
+    //如果有默认id就把整个属性找到进行
+    var <%= name %>TreeJox = new jBox('Modal', {
+        width: <%=treeWidth%>,
+        height: <%=treeHeight%>,
+        blockScroll: false,
+        animation: 'zoomIn',
+        draggable: 'title',
+        closeButton: true,
+        overlay: false,
+        reposition: false,
+        repositionOnOpen: false,
+        attach: $('#<%= name %>Modal'),
+        title: '<%=treeTitle%>',
+        content: '<div id="<%= name %>TreeContent" class="ztree"></div>',
+        footer:'<a class="btn-flat" id="<%= name %>ConfirmTree">确认</a>&nbsp;&nbsp;<a id="<%= name %>CancelTree" class="btn-flat white">取消</a>',
+        onCreated: function () {
+            var setting = {
+                view: {
+                    dblClickExpand: false,
+                    showLine: true,
+                    selectedMulti: false
+                },
+                async: {
+                    enable: true,
+                    url: '<%= url %>',
+                    autoParam: ["id=parent_id"],
+                    otherParam: ["_csrf","<%= csrf_token %>"],
+                    dataFilter: ajaxDataFilter
+                },
+                data: {
+                    simpleData: {
+                        enable: true,
+                        idKey: "id",
+                        pIdKey: "parent_id",
+                        rootPId: "0"
+                    }
+                },
+                callback: {
+                },
+                data:{
+                    simpleData:{enable:true,idKey:"id",pIdKey:"parent_id",rootPId:'0'}
+                }
+            };
+
+            function ajaxDataFilter(treeId, parentNode, responseData) {
+                return responseData;
+            };
+
+            //递归寻找祖先为止显示家谱
+            function showGenealogy(node,text){
+                if(text){
+                    text=node.name+'-'+text;
+                }else{
+                    text = '';
+                    text+=node.name;
+                }
+
+                //查看是否有上级，如果有就再次递归
+                var parentNode = node.getParentNode();
+                if(parentNode){
+                    return showGenealogy(parentNode,text);
+                }else{
+                    return text;
+                }
+            }
+
+            var <%= name %>TreeObj = $.fn.zTree.init($("#<%= name %>TreeContent"), setting, <%= name %>ZtreeNodes);
+            <%= name %>TreeObj.expandAll(true);
+
+            //如果默认一级大于1个就不进行节点展开了
+            if(<%= name %>ZtreeNodes.length<=1){
+              // 默认展开一级节点
+              var nodes = <%= name %>TreeObj.getNodesByParam("level", 0);
+              for(var i=0; i<nodes.length; i++) {
+                <%= name %>TreeObj.expandNode(nodes[i], true, false, false);
+              }
+              //异步加载子节点（加载用户）
+              var nodesOne = <%= name %>TreeObj.getNodesByParam("isParent", true);
+              for(var j=0; j<nodesOne.length; j++) {
+                <%= name %>TreeObj.reAsyncChildNodes(nodesOne[j],"!refresh",true);
+              }
+            }
+
+            $('#<%= name %>ConfirmTree').click(function(){
+                var nodes = <%= name %>TreeObj.getSelectedNodes();
+                var label = showGenealogy(nodes[0]);
+                $('input[name="<%= name %>_label"]').val(label);
+                $('input[name="<%= name %>"]').val(nodes[0].id);
+
+                <%= name %>TreeJox.close();
+            });
+            $('#<%= name %>CancelTree').click(function(){
+                <%= name %>TreeJox.close();
+            });
+        }
+    });
+</script>
