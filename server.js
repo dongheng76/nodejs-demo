@@ -15,7 +15,6 @@ const join = require('path').join; // 连接字符串方法
 const express = require('express'); // express框架
 const passport = require('passport'); // 登录认证中间件
 const http = require('http'); // 载入http
-const models = join(__dirname, 'app/models'); // 取得模块地址
 const port = process.env.PORT || 80;
 const app = express();
 
@@ -24,11 +23,6 @@ const app = express();
  */
 
 module.exports = app;
-
-// Bootstrap models
-fs.readdirSync(models)
-  .filter(file => ~file.search(/^[^\.].*\.js$/))
-  .forEach(file => require(join(models, file)));
 
 // 启动时加入的 routes
 require('./config/express')(app, passport);
