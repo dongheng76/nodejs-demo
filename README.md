@@ -1,10 +1,3 @@
-
-[![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
-[![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose-demo.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose-demo)
-[![Code climate](http://img.shields.io/codeclimate/github/madhums/node-express-mongoose-demo.svg?style=flat)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
-[![Join Gitter Chat](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat)](https://gitter.im/madhums/node-express-mongoose-demo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
-
 # Nodejs Express Mysql Demo
 
 这是一个非常全面的nodejs框架，不仅仅解决后台的框架和常用工具，还大幅度的为前端提供了很多丰富的插件，为开发提供很多便捷。目前版本主要是针对mysql为主的后台管理系统
@@ -56,6 +49,14 @@ $ npm install
 ```sh
 $ npm start
 ```
+
+## 测试地址与帐号
+http://nodejs-demo.com
+killer
+********
+
+## 联系我们
+QQ:6347536 注明nodejs-demo
 
 ## License
 
