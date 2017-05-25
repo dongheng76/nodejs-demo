@@ -51,7 +51,7 @@ $ npm start
 ```
 
 ## 测试地址与帐号
-http://nodejs-demo.com
+http://nodejs-demo.com/manage/login
 killer
 ********
 
