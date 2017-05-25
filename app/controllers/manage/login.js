@@ -105,9 +105,7 @@ exports.login = function (req, res) {
  * 注销
  */
 exports.signup = function (req, res) {
-  console.log('已经删除了');
   delete req.session.user;
-
   res.json({ result: true });
 };
 

@@ -97,7 +97,6 @@ exports.edit = function (req, res) {
       });
     }
   }, function (error, result) {
-    console.log(result.userInfo);
     res.render('manage/user/create', {
       currentMenu: result.currentMenu,
       userTypes: result.userTypes,
