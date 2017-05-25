@@ -9,16 +9,13 @@
 /**
  * Module dependencies
  */
-
-require('dotenv').config();
-const fs = require('fs');                               //文件读写工具包
-const join = require('path').join;                     //连接字符串方法
-const express = require('express');                   //express框架
-const passport = require('passport');                 //登录认证中间件
-const config = require('./config');                   //载入基本配置文件
-const http = require('http');
-
-const models = join(__dirname, 'app/models');         //取得模块地址
+require('./config'); // 载入基本配置文件
+const fs = require('fs'); // 文件读写工具包
+const join = require('path').join; // 连接字符串方法
+const express = require('express'); // express框架
+const passport = require('passport'); // 登录认证中间件
+const http = require('http'); // 载入http
+const models = join(__dirname, 'app/models'); // 取得模块地址
 const port = process.env.PORT || 80;
 const app = express();
 
@@ -80,9 +77,9 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-      ? 'Pipe ' + port
-      : 'Port ' + port;
+  var bind = typeof port === 'string' ?
+    'Pipe ' + port :
+    'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -103,9 +100,9 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+function onListening () {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-      ? 'pipe ' + addr
-      : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;
 }
