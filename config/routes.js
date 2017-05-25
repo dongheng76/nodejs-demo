@@ -86,7 +86,7 @@ module.exports = function (app, passport) {
       url: req.originalUrl,
       error: 'Not found'
     };
-    if (req.accepts('json')) return res.status(404).json(payload);
+    // if (req.accepts('json')) return res.status(404).json(payload);
     res.status(404).render('404', payload);
   });
 };
