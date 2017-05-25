@@ -20,37 +20,37 @@ const moment = require('moment');
 exports.create = function (req, res) {
 
   async.auto({
-    currentMenu:function(cb){
-      menuDao.queryMenuByHref("/manage/user",function(err, menu) {
+    currentMenu: function (cb) {
+      menuDao.queryMenuByHref("/manage/user", function (err, menu) {
         if (err || !menu) {
           cb(null, {});
-        } else{
+        } else {
           cb(null, menu);
         }
       });
     },
-    userTypes:function(cb){
-      dictUtil.getDictList('sys_user_type',function(err,userTypes){
+    userTypes: function (cb) {
+      dictUtil.getDictList('sys_user_type', function (err, userTypes) {
         cb(null, userTypes);
       });
     },
-    roles:function(cb){
-      userDao.queryRolesForAuth(req,function(err,roles){
+    roles: function (cb) {
+      userDao.queryRolesForAuth(req, function (err, roles) {
         cb(null, roles);
       });
     },
-    offices:function(cb){
-      officeDao.queryOffice(function(err,offices){
+    offices: function (cb) {
+      officeDao.queryOffice(function (err, offices) {
         cb(null, offices);
       });
     }
   }, function (error, result) {
 
     res.render('manage/user/create', {
-      currentMenu:result.currentMenu,
-      userTypes:result.userTypes,
-      roles:result.roles,
-      offices:JSON.stringify(result.offices)
+      currentMenu: result.currentMenu,
+      userTypes: result.userTypes,
+      roles: result.roles,
+      offices: JSON.stringify(result.offices)
     });
   });
 };
@@ -62,49 +62,49 @@ exports.edit = function (req, res) {
   let id = req.query.id;
 
   async.auto({
-    currentMenu:function(cb){
-      menuDao.queryMenuByHref("/manage/user",function(err, menu) {
+    currentMenu: function (cb) {
+      menuDao.queryMenuByHref("/manage/user", function (err, menu) {
         if (err || !menu) {
           cb(null, {});
-        } else{
+        } else {
           cb(null, menu);
         }
       });
     },
-    userTypes:function(cb){
-      dictUtil.getDictList('sys_user_type',function(err,userTypes){
+    userTypes: function (cb) {
+      dictUtil.getDictList('sys_user_type', function (err, userTypes) {
         cb(null, userTypes);
       });
     },
-    roles:function(cb){
-      userDao.queryRolesForAuth(req,function(err,roles){
+    roles: function (cb) {
+      userDao.queryRolesForAuth(req, function (err, roles) {
         cb(null, roles);
       });
     },
-    offices:function(cb){
-      officeDao.queryOffice(function(err,offices){
+    offices: function (cb) {
+      officeDao.queryOffice(function (err, offices) {
         cb(null, offices);
       });
     },
-    userInfo:function(cb){
-      userDao.queryUserById(id,function(err,user){
+    userInfo: function (cb) {
+      userDao.queryUserById(id, function (err, user) {
         cb(null, user);
       });
     },
-    userRoles:function(cb){
-      userDao.queryUserRolesById(id,function(err,roles){
+    userRoles: function (cb) {
+      userDao.queryUserRolesById(id, function (err, roles) {
         cb(null, roles);
       });
     }
   }, function (error, result) {
     console.log(result.userInfo);
     res.render('manage/user/create', {
-      currentMenu:result.currentMenu,
-      userTypes:result.userTypes,
-      roles:result.roles,
-      offices:JSON.stringify(result.offices),
-      userInfo:result.userInfo,
-      userRoles:result.userRoles
+      currentMenu: result.currentMenu,
+      userTypes: result.userTypes,
+      roles: result.roles,
+      offices: JSON.stringify(result.offices),
+      userInfo: result.userInfo,
+      userRoles: result.userRoles
     });
   });
 };
@@ -136,32 +136,32 @@ exports.store = function (req, res) {
       let remarks = req.body.remarks;
 
       //登录名不能重复
-      userDao.queryUserByLoginId(login_name,function(err,user){
-        if(typeof(user)!='undefined' && user.id!=null){
-          cb(null,false);
-        }else{
+      userDao.queryUserByLoginId(login_name, function (err, user) {
+        if (typeof (user) != 'undefined' && user.id != null) {
+          cb(null, false);
+        } else {
           //有ID就视为修改
-          if(typeof(req.body.id)!='undefined' && req.body.id!=''){
-            userDao.updateUser(req,function(err,result){
-              cb(null,result);
+          if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
+            userDao.updateUser(req, function (err, result) {
+              cb(null, result);
             });
-          }else{
-            userDao.saveUser(office_id,login_name,password,no,name,email,phone,mobile,user_type,photo,login_flag,remarks,req,function(err,result){
-              cb(null,result);
+          } else {
+            userDao.saveUser(office_id, login_name, password, no, name, email, phone, mobile, user_type, photo, login_flag, remarks, req, function (err, result) {
+              cb(null, result);
             });
           }
         }
       });
     }
   }, function (error, result) {
-    if(result.store){
+    if (result.store) {
       res.json({
-        result:true
+        result: true
       });
-    }else{
+    } else {
       res.json({
-        result:false,
-        error:'登录名重复请修改登录名'
+        result: false,
+        error: '登录名重复请修改登录名'
       });
     }
   });
@@ -172,34 +172,34 @@ exports.store = function (req, res) {
  */
 exports.delete = function (req, res) {
   async.auto({
-    delUser:function(cb){
+    delUser: function (cb) {
 
-      if(req.body.id){
+      if (req.body.id) {
         let id = req.body.id;
-        userDao.delUserById(id,function(err,result){
-          cb(null,result);
+        userDao.delUserById(id, function (err, result) {
+          cb(null, result);
         });
-      }else{
+      } else {
         let ids = req.body.ids;
         let idsAry = ids.split('|');
 
-        async.map(idsAry,function(id,idCallBack){
-          userDao.delUserById(id,function(err,result){
+        async.map(idsAry, function (id, idCallBack) {
+          userDao.delUserById(id, function (err, result) {
             idCallBack(null, result);
           });
-        }, function(err,result) {
-          cb(null,result);
+        }, function (err, result) {
+          cb(null, result);
         });
       }
     }
   }, function (error, result) {
-    if(result.delUser){
+    if (result.delUser) {
       res.json({
-        result:true
+        result: true
       });
-    }else{
+    } else {
       res.json({
-        result:false
+        result: false
       });
     }
   });
@@ -209,12 +209,12 @@ exports.index = function (req, res) {
   var currentPage = req.query.page ? req.query.page : 1; //获取当前页数，如果没有则为1
   async.auto({
     users: function (cb) {
-      userDao.queryAllUser(req,currentPage,20,function(err, users) {
+      userDao.queryAllUser(req, currentPage, 20, function (err, users) {
         if (err || !users) {
           return;
         } else {
           users.forEach(function (user) {
-            dictUtil.getDictLabel(user.user_type,'sys_user_type','未知',function(err,label){
+            dictUtil.getDictLabel(user.user_type, 'sys_user_type', '未知', function (err, label) {
               user.user_type_label = label;
             });
             user.create_date = moment(user.create_date).format("YYYY-MM-DD HH:mm:ss");
@@ -224,20 +224,20 @@ exports.index = function (req, res) {
       });
     },
     //查询用户数量
-    usersPage:['users', function(params,cb){
-      userDao.queryAllUserPage(req,20,currentPage,function(err, usersPage) {
+    usersPage: ['users', function (params, cb) {
+      userDao.queryAllUserPage(req, 20, currentPage, function (err, usersPage) {
         if (err || !usersPage) {
           cb(null, {});
-        } else{
+        } else {
           cb(null, usersPage);
         }
       });
     }],
-    currentMenu:function(cb){
-        menuDao.queryMenuByHref("/manage/user",function(err, menu) {
+    currentMenu: function (cb) {
+      menuDao.queryMenuByHref("/manage/user", function (err, menu) {
         if (err || !menu) {
           cb(null, {});
-        } else{
+        } else {
           cb(null, menu);
         }
       });
@@ -245,9 +245,9 @@ exports.index = function (req, res) {
   }, function (error, result) {
 
     res.render('manage/user/index', {
-      currentMenu:result.currentMenu,
-      users:result.users,
-      page:result.usersPage
+      currentMenu: result.currentMenu,
+      users: result.users,
+      page: result.usersPage
     });
   });
 };
