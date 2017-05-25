@@ -4,20 +4,20 @@
 
 const util = require('util');
 const mysql = require('mysql');
-const config = require("./../../config/index");
+const config = require('./../../config/index');
 const log = require('./log.js');
 
-console.log("init pool start..");
+console.log('init pool start..');
 
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: config.server,
-    user: config.user,
-    password: config.password,
-    database: config.database
+    host: config.mysql.server,
+    user: config.mysql.user,
+    password: config.mysql.password,
+    database: config.mysql.database
 });
 
-console.log("init pool end....");
+console.log('init pool end....');
 
 // 封装的基本mysql操作
 /**
