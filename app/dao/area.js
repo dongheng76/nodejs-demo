@@ -36,10 +36,10 @@ exports.queryChildrenMaxSort = function (pid, callback) {
  * 插入一条区域信息
  */
 exports.saveArea = function (parent_id, name, sort, code, type, remarks, req, callback) {
-    //取得用户信息
+    // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
-    //首先根据父亲ID查询父亲信息
+    // 首先根据父亲ID查询父亲信息
     mysql.queryOne("select * from sys_area where id=?", [parent_id], function (err, area) {
         if (err || !area) {
             callback(err, false);

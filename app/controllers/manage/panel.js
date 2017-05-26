@@ -8,18 +8,24 @@ const md5 = require('md5');
 const validator = require('validator');
 const menuDao = require('../../dao/menu');
 
-exports.index = function (req, res) {
+exports.PERMISSION = {
+};
 
-  menuDao.queryMenuByHref("/manage/panel",function(err, menu) {
-    if (err || !menu) {
 
-      return;
-    } else {
-      
+exports.ROUTER = {
+  '/manage/panel': function (req, res) {
 
-      res.render('manage/panel', {
-        currentMenu: menu
-      });
-    }
-  });
+    menuDao.queryMenuByHref('/manage/panel', function (err, menu) {
+      if (err || !menu) {
+
+        return;
+      } else {
+
+
+        res.render('manage/panel', {
+          currentMenu: menu
+        });
+      }
+    });
+  }
 };

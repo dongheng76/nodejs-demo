@@ -10,17 +10,17 @@ module.exports = {
 
   // mysql config
   mysql: {
-    server: 'localhost',
+    server: '118.89.177.58',
     port: 3306,
     user: 'root',
-    password: '',
+    password: 'dh07019459',
     database: 'nodejs_demo',
     maxSockets: 80, // pool使用
     timeout: 1, // pool使用
   },
   redis: {
-    server: '127.0.0.1',
-    // password: 'adminmima',
+    server: '118.89.177.58',
+    password: 'adminmima',
     port: 6379
   }
 };

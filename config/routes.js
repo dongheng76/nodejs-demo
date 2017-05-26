@@ -20,21 +20,13 @@ const fail = {
 };
 
 /**
- * 提供自动扫描路由和添加自定义路由功能
- * @param {*string} action 
+ * 提供自动扫描路由和权限以及验证权限的功能
+ * @param {express} app 
  */
 let Routes = function (app) {
-  let path = join(__dirname, '../app/controllers');
-  let methods = {};
-  /**
-   * 添加特殊路由
-   * @param {*string} routeUrl 路由地址
-   * @param {*string} methodPath /app/controllers开始的方法路径
-   */
-  this.use = function (routeUrl, methodPath) {
-    console.log('custom route : ' + routeUrl);
-    app.all(routeUrl, methods[methodPath]);
-  };
+  let path = join(__dirname, '../app/controllers'); // 全局路径
+  let permissions = {}; // 路由地址和权限属性的映射
+  let routes = {}; // 路由映射
   let scan = function (action) {
     action = action || '';
     action && (path += action);
@@ -42,22 +34,48 @@ let Routes = function (app) {
       .forEach((file) => {
         if (fs.statSync(path + '/' + file).isDirectory()) {
           scan(action + '/' + file);
-        } else {
-          let controller = require(path + '/' + file);
-          for (let method in controller) {
-            if (controller.hasOwnProperty(method)) {
-              var routeUrl = action + '/' + file.split('.')[0] + '/' + method;
-              methods[routeUrl] = controller[method];
-              console.log('scanning route : ' + routeUrl);
-              app.all(routeUrl, controller[method]);
+          return;
+        }
+        // 不是js文件直接跳过
+        if (!file.endsWith('.js')) {
+          return;
+        }
+        let controller = require(path + '/' + file);
+        for (let key in controller) {
+          if (key === 'PERMISSION' &&
+            Object.prototype.toString.call(controller[key]) === '[object Object]') {
+            let p = controller[key];
+            for (let url in p) {
+              permissions[url] = [p][url];
+            }
+          }
+          if (key === 'ROUTER' &&
+            Object.prototype.toString.call(controller[key]) === '[object Object]') {
+            let route = controller[key];
+            for (let url in route) {
+              if (Object.prototype.toString.call(route[url]) === '[object Function]') {
+                console.log('scanning route : ' + url);
+                routes[url] = route[url];
+              }
             }
           }
         }
+
       });
   };
-  console.log('scanning route start...');
+  console.log('scanning routes start...');
   scan();
-  console.log('scanning route end...');
+  console.log('scanning routes end...');
+
+  /**
+   * 执行添加路由到express
+   */
+  this.excute = function () {
+    for (let url in routes) {
+      app.use(url, routes[url]);
+    }
+  };
+
 };
 /**
  * 管理后台权限处理
@@ -109,6 +127,24 @@ module.exports = function (app, passport) {
   let permission = new Permission();
   permission.include('/manage');
   permission.exclude('/manage/login', '/manage/signin');
+
+  // 扫描全部路由地址
+  var routes = new Routes(app);
+  // // 添加特殊路由
+  // routes.use('/manage/panel', '/manage/panel/index');
+  // routes.use('/manage/user', '/manage/user/index');
+  // routes.use('/manage/file', '/manage/file/index');
+  // routes.use('/manage/area', '/manage/area/index');
+  // routes.use('/manage/menu', '/manage/menu/index');
+  // routes.use('/manage/office', '/manage/office/index');
+  // routes.use('/manage/dict', '/manage/dict/index');
+  // routes.use('/manage/log', '/manage/log/index');
+  // routes.use('/manage/role', '/manage/role/index');
+  // routes.use('/manage/login', '/manage/login/login');
+  // routes.use('/manage/signin', '/manage/login/signin');
+  // routes.use('/manage/signup', '/manage/login/signup');
+  // routes.use('/manage/logout', '/manage/login/logout');
+
   // 权限校验拦截
   app.use(function (req, res, next) {
     let user = req.session.user;
@@ -122,22 +158,7 @@ module.exports = function (app, passport) {
     next();
   });
 
-  // 自动扫描路由
-  var routes = new Routes(app);
-  // 添加特殊路由
-  routes.use('/manage/panel', '/manage/panel/index');
-  routes.use('/manage/user', '/manage/user/index');
-  routes.use('/manage/file', '/manage/file/index');
-  routes.use('/manage/area', '/manage/area/index');
-  routes.use('/manage/menu', '/manage/menu/index');
-  routes.use('/manage/office', '/manage/office/index');
-  routes.use('/manage/dict', '/manage/dict/index');
-  routes.use('/manage/log', '/manage/log/index');
-  routes.use('/manage/role', '/manage/role/index');
-  routes.use('/manage/login', '/manage/login/login');
-  routes.use('/manage/signin', '/manage/login/signin');
-  routes.use('/manage/signup', '/manage/login/signup');
-  routes.use('/manage/logout', '/manage/login/logout');
+  routes.excute(); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
 
   // // 面板路由
   // require('../app/routes/manage/panel')(app, passport);
