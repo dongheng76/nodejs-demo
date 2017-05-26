@@ -15,8 +15,7 @@ const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
 
-exports.PERMISSION = {
-};
+exports.PERMISSION = {};
 
 
 exports.ROUTER = {
@@ -248,7 +247,8 @@ exports.ROUTER = {
       res.render('manage/user/index', {
         currentMenu: result.currentMenu,
         users: result.users,
-        page: result.usersPage
+        page: result.usersPage,
+        condition: req.query
       });
     });
   }

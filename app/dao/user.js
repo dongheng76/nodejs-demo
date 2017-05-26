@@ -62,24 +62,31 @@ exports.queryUserMenuAuthority = function (userId, callback) {
  */
 exports.queryAllUser = function (req, currentPage, pagesize, callback) {
     let where = "where su.del_flag='0' ";
+    let order = ' order by ';
     let params = [];
-    if (req.query.name != null && req.query.name != "") {
+    if (req.query.name != null && req.query.name != '') {
         where += " and su.name like '%" + req.query.name + "%'";
     }
-    if (req.query.login_name != null && req.query.login_name != "") {
+    if (req.query.login_name != null && req.query.login_name != '') {
         where += " and su.login_name like '%" + req.query.login_name + "%'";
     }
-    if (req.query.create_date_start != null && req.query.create_date_start != "") {
-        where += " and su.create_date>=?";
+    if (req.query.create_date_start != null && req.query.create_date_start != '') {
+        where += ' and su.create_date>=?';
         params.push(req.query.create_date_start);
     }
-    if (req.query.create_date_end != null && req.query.create_date_end != "") {
-        where += " and su.create_date<=?";
+    if (req.query.create_date_end != null && req.query.create_date_end != '') {
+        where += ' and su.create_date<=?';
         params.push(req.query.create_date_end);
     }
+    if (typeof(req.query.sortName) != 'undefined' && typeof(req.query.sortOrder) != 'undefined'){
+        order += ' su.' + req.query.sortName + ' ' + req.query.sortOrder;
+    } else {
+        order += ' su.update_date desc';
+    }
 
-    mysql.query("select su.*,so.name as office_name from sys_user su left join sys_office so on su.office_id=so.id " + where
-        + " order by su.update_date desc limit " + (parseInt(currentPage) - 1) * pagesize + "," + pagesize,
+
+    mysql.query('select su.*,so.name as office_name from sys_user su left join sys_office so on su.office_id=so.id ' + where
+        + order + ' limit ' + (parseInt(currentPage) - 1) * pagesize + ',' + pagesize,
         params, function (err, users) {
             callback(err, users);
         });
@@ -89,24 +96,24 @@ exports.queryAllUser = function (req, currentPage, pagesize, callback) {
  * 查询用户所有信息的记录数
  */
 exports.queryAllUserPage = function (req, pagesize, currentPage, callback) {
-    let where = "where su.del_flag=0 ";
+    let where = 'where su.del_flag=0 ';
     let params = [];
-    if (req.query.name != null && req.query.name != "") {
+    if (req.query.name != null && req.query.name != '') {
         where += " and su.name like '%" + req.query.name + "%'";
     }
-    if (req.query.login_name != null && req.query.login_name != "") {
+    if (req.query.login_name != null && req.query.login_name != '') {
         where += " and su.login_name like '%" + req.query.login_name + "%'";
     }
-    if (req.query.create_date_start != null && req.query.create_date_start != "") {
-        where += " and su.create_date>=?";
+    if (req.query.create_date_start != null && req.query.create_date_start != '') {
+        where += ' and su.create_date>=?';
         params.push(req.query.create_date_start);
     }
-    if (req.query.create_date_end != null && req.query.create_date_end != "") {
-        where += " and su.create_date<=?";
+    if (req.query.create_date_end != null && req.query.create_date_end != '') {
+        where += ' and su.create_date<=?';
         params.push(req.query.create_date_end);
     }
 
-    mysql.queryOne("select count(*) as total from sys_user su " + where, params, function (err, val) {
+    mysql.queryOne('select count(*) as total from sys_user su ' + where, params, function (err, val) {
         callback(err, util.makePage(util.getSingleUrl(req), val.total, pagesize, currentPage));
     });
 };

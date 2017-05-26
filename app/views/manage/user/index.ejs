@@ -60,7 +60,8 @@
             <th class="span1">
               <span class="line"></span>所属机构
             </th>
-            <th class="span1 sort @if(isset($condition) && isset($condition['sortName']) && $condition['sortName']=='sys_user.create_date') datagrid-sort-{{$condition['sortOrder']}} @endif" sort="sys_user.create_date">
+            <th class="span1 sort <%if(typeof(condition)!='undefined' && typeof(condition.sortName)!='undefined' && typeof(condition.sortOrder)!='undefined'){%>datagrid-sort-<%=condition.sortOrder%><%}%>" 
+              sort="create_date">
               <span class="line"></span>注册日期
               <span class="datagrid-sort-icon"></span>
             </th>
@@ -80,7 +81,7 @@
           <tr>
             <td>
               <input type="checkbox" name="subCheckbox" userId="<%=user.id%>">
-              <a href="/manage/user?type={{$user->id}}" class="id"><%=user.id%></a>
+              <a href="#" class="id"><%=user.id%></a>
             </td>
             <td class="description">
               <%=user.name%>
@@ -254,7 +255,9 @@
         order = 'desc';
       }
 
-      window.location.href = '?sortName='+name+'&sortOrder='+order;
+      var url = changeParam('sortName',name,window.location.href);
+      url = changeParam('sortOrder',order,url);
+      window.location.href = url;
     });
   });
 </script>
