@@ -132,6 +132,7 @@ module.exports = function (app, passport) {
   routes.use('/manage/menu', '/manage/menu/index');
   routes.use('/manage/office', '/manage/office/index');
   routes.use('/manage/dict', '/manage/dict/index');
+  routes.use('/manage/log', '/manage/log/index');
   routes.use('/manage/role', '/manage/role/index');
   routes.use('/manage/login', '/manage/login/login');
   routes.use('/manage/signin', '/manage/login/signin');

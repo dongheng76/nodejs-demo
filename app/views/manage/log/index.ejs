@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>日志管理 - 首页</title>
+  <% include  ../include/head_res.ejs %>
+  <% include  ../include/manage_com_res.ejs %>
+<body>
+
+<% include  ../include/header.ejs %>
+
+<!-- sidebar -->
+<div id="sidebar-nav">
+  <ul id="dashboard-menu">
+  </ul>
+</div>
+<!-- end sidebar -->
+
+
+<!-- main container -->
+<div class="content">
+
+  <div class="container-fluid">
+    <div class="table-wrapper table-products products-table section">
+      <div class="row-fluid head">
+        <div class="span12">
+          <h4 style="float:left;display: inline-block">日志管理</h4>
+        </div>
+      </div>
+
+      <div class="row-fluid filter-block">
+        <form name="create" action="/manage/log" method="get">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+          <div class="pull-right">
+            操作日期：<input type="text" value="" class="input-medium datepicker" name="create_date_start"/>-&nbsp;<input type="text" value="" class="input-medium datepicker" name="create_date_end"/>
+            <button type="submit" class="btn-glow"><i class="icon-search"></i> 搜索</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="row-fluid">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th class="span1">
+              日志type
+            </th>
+            <th class="span1">
+              操作人
+            </th>
+            <th class="span1">
+              <span class="line"></span>操作title
+            </th>
+            <th class="span1">
+              <span class="line"></span>操作用户
+            </th>
+            <th class="span1">
+              <span class="line"></span>日志remote_addr
+            </th>
+            <th class="span1">
+              <span class="line"></span>日志request_uri
+            </th>
+            <th class="span1">
+              <span class="line"></span>日志method
+            </th>
+            <th class="span1">
+              <span class="line"></span>日志params
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <% logs.forEach(function(log){%>
+          <tr>
+            <td>
+              <%=log.type%>
+            </td>
+            <td>
+              <%=log.name%>(<%=log.login_name%>)
+            </td>
+            <td class="description">
+              <%=log.title%>
+            </td>
+            <td>
+              <%=log.create_date%>
+            </td>
+            <td>
+              <%=log.remote_addr%>
+            </td>
+            <td>
+              <%=log.request_uri%>
+            </td>
+            <td>
+              <%=log.method%>
+            </td>
+            <td>
+              <%=log.params%>
+            </td>
+           <!-- <td>
+                <span class="label label-success">有效</span>
+              <ul class="actions">
+              <li class="last"><a href="javascript:void(0)" onclick="javascript:delLog('<%=log.id%>')">删除</a></li>
+              </ul>
+            </td>-->
+          </tr>
+          <%})%>
+          <!-- row -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pagination">
+      <%-include("../include/page")%>
+    </div>
+  </div>
+</div>
+
+<% include  ../include/manage_footer_res.ejs %>
+
+<script type="text/javascript">
+  function delLog(id) {
+    $.confirm({
+      title: '友情提示!',
+      content: '请确认是否真的要删除该字典信息，此操作不可逆请谨慎操作!',
+      boxWidth: '300px',
+      useBootstrap: false,
+      buttons: {
+        confirm: {
+          text: '确认',
+          btnClass:'btn-flat default',
+          action: function(){
+            $.post('/manage/log/delete',{
+              _csrf:'<%= csrf_token %>',
+              id:id
+            },function(data){
+              if(data.result){
+                noticeInfo('success','感谢您的使用，删除成功',function(){
+                  window.location.reload();
+                });
+              }else{
+                noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!')
+              }
+            });
+          }
+        },
+        cancel: {
+          text: '取消',
+          btnClass:'btn-flat white',
+          action: function(){
+            return;
+          }
+        }
+      }
+    });
+  }
+
+  $('input[name="mainCheckbox"]').click(function(){
+    $('input[name="subCheckbox"]').each(function(){
+      if($('input[name="mainCheckbox"]').is(':checked')){
+        $(this).prop('checked',true);
+        $(this).parent().addClass('checked');
+      }else{
+        $(this).prop('checked',false);
+        $(this).parent().removeClass('checked');
+      }
+    });
+  });
+
+  $('input[name="subCheckbox"]').click(function(){
+    //有一个为假总的就为假
+    var checkbox = true;
+    $('input[name="subCheckbox"]').each(function(){
+      if(!$(this).prop('checked')){
+        checkbox = false;
+      }
+    });
+    $('input[name="mainCheckbox"]').prop('checked',checkbox);
+    if(checkbox){
+      $('input[name="mainCheckbox"]').parent().addClass('checked');
+    }else{
+      $('input[name="mainCheckbox"]').parent().removeClass('checked');
+    }
+  });
+
+ 
+
+  $(window).load(function(){
+    $('.table .sort').click(function(){
+      var name = $(this).attr('sort');
+      var order = '';
+      if($(this).hasClass('datagrid-sort-asc')){
+        $('.table .sort').removeClass('datagrid-sort-desc').removeClass('datagrid-sort-asc');
+        $(this).addClass('datagrid-sort-desc').removeClass('datagrid-sort-asc');
+        order = 'desc';
+      }else if($(this).hasClass('datagrid-sort-desc')){
+        $('.table .sort').removeClass('datagrid-sort-desc').removeClass('datagrid-sort-asc');
+        $(this).addClass('datagrid-sort-asc').removeClass('datagrid-sort-desc');
+        order = 'asc';
+      }else{
+        $('.table .sort').removeClass('datagrid-sort-desc').removeClass('datagrid-sort-asc');
+        $(this).addClass('datagrid-sort-desc').removeClass('datagrid-sort-asc');
+        order = 'desc';
+      }
+
+      window.location.href = '?sortName='+name+'&sortOrder='+order;
+    });
+  });
+</script>
+</body>
+</html>
