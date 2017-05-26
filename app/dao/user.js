@@ -127,13 +127,13 @@ exports.queryRolesForAuth = function (req, callback) {
  * 插入一条用户信息
  */
 exports.saveUser = function (office_id, login_name, password, no, name, email, phone, mobile, user_type, photo, login_flag, remarks, req, callback) {
-    //取得用户信息
+    // 取得用户信息
     let user = req.session.user;
     let userId = util.uuid();
     mysql.update("insert into sys_user(id,office_id,login_name,password,no,name,email,phone,mobile,user_type,photo,login_ip,login_date,"
         + "login_flag,create_by,create_date,update_by,update_date,remarks,del_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,now(),?,now(),?,0)",
         [userId, office_id, login_name, util.md5(password), no, name, email, phone, mobile, user_type, photo, util.getIPAdress(), login_flag, user.id, user.id, remarks], function (err, result) {
-            //成功插入用户信息后开始插入角色信息
+            // 成功插入用户信息后开始插入角色信息
             async.map(req.body.role, function (role, roleCallback) {
                 mysql.update("insert into sys_user_role(user_id,role_id) values(?,?)", [userId, role], function (err, result) {
                     roleCallback(null, result);
@@ -148,7 +148,7 @@ exports.saveUser = function (office_id, login_name, password, no, name, email, p
  * 修改一条用户信息
  */
 exports.updateUser = function (req, callback) {
-    //需要修改的字符串集
+    // 需要修改的字符串集
     let sets = '';
     if (req.body.office_id) {
         sets += ",office_id='" + req.body.office_id + "'";

@@ -21,7 +21,7 @@ exports.create = function (req, res) {
 
   async.auto({
     currentMenu: function (cb) {
-      menuDao.queryMenuByHref("/manage/user", function (err, menu) {
+      menuDao.queryMenuByHref('/manage/user', function (err, menu) {
         if (err || !menu) {
           cb(null, {});
         } else {
@@ -63,7 +63,7 @@ exports.edit = function (req, res) {
 
   async.auto({
     currentMenu: function (cb) {
-      menuDao.queryMenuByHref("/manage/user", function (err, menu) {
+      menuDao.queryMenuByHref('/manage/user', function (err, menu) {
         if (err || !menu) {
           cb(null, {});
         } else {
@@ -135,12 +135,12 @@ exports.store = function (req, res) {
       let login_flag = req.body.login_flag;
       let remarks = req.body.remarks;
 
-      //登录名不能重复
+      // 登录名不能重复
       userDao.queryUserByLoginId(login_name, function (err, user) {
         if (typeof (user) != 'undefined' && user.id != null) {
           cb(null, false);
         } else {
-          //有ID就视为修改
+          // 有ID就视为修改
           if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
             userDao.updateUser(req, function (err, result) {
               cb(null, result);
@@ -206,24 +206,26 @@ exports.delete = function (req, res) {
 };
 
 exports.index = function (req, res) {
-  var currentPage = req.query.page ? req.query.page : 1; //获取当前页数，如果没有则为1
+  var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
   async.auto({
     users: function (cb) {
       userDao.queryAllUser(req, currentPage, 20, function (err, users) {
         if (err || !users) {
-          return;
+          cb(null, []);
         } else {
-          users.forEach(function (user) {
+          async.map(users,function (user,userCallback){
+            user.create_date = moment(user.create_date).format('YYYY-MM-DD HH:mm:ss');
             dictUtil.getDictLabel(user.user_type, 'sys_user_type', '未知', function (err, label) {
               user.user_type_label = label;
+              userCallback(null,user);
             });
-            user.create_date = moment(user.create_date).format("YYYY-MM-DD HH:mm:ss");
+          },function (err,result){
+            cb(null, result);
           });
-          cb(null, users);
         }
       });
     },
-    //查询用户数量
+    // 查询用户数量
     usersPage: ['users', function (params, cb) {
       userDao.queryAllUserPage(req, 20, currentPage, function (err, usersPage) {
         if (err || !usersPage) {
@@ -234,7 +236,7 @@ exports.index = function (req, res) {
       });
     }],
     currentMenu: function (cb) {
-      menuDao.queryMenuByHref("/manage/user", function (err, menu) {
+      menuDao.queryMenuByHref('/manage/user', function (err, menu) {
         if (err || !menu) {
           cb(null, {});
         } else {

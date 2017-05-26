@@ -10199,9 +10199,8 @@ UE.plugins['defaultfilter'] = function () {
 UE.commands['imagemanage'] = {
 	execCommand: function() {
 		var me = this;
-        
-		var url = ctx+"/sys/user/userAlbum?type=images&isDialog=true&func="+me.options.input+"SelectAction&sm=1";
-		windowOpen(url,"文件管理",1000,700);
+		var url = "/manage/file/simple?type=images&isDialog=true&func="+me.options.input+"SelectAction&sm=1";
+		windowOpen(url,"图片管理",1000,700);
 	}, 
 	queryCommandState: function() { }
 };
