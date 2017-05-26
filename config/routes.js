@@ -72,7 +72,7 @@ let Routes = function (app) {
    */
   this.excute = function () {
     for (let url in routes) {
-      app.use(url, routes[url]);
+      app.all(url, routes[url]);
     }
   };
 
