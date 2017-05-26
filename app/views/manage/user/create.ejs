@@ -13,6 +13,12 @@
   <!-- 编辑器 -->
   <script type="text/javascript" charset="utf-8" src="/plugin/ueditor/ueditor.config.js"></script>
   <script type="text/javascript" charset="utf-8" src="/plugin/ueditor/ueditor.all.js"> </script>
+  <!-- 手机编辑器 -->
+  <link href="/plugin/squire/css/color.css" type="text/css" rel="stylesheet" />
+  <link href="/plugin/squire/css/squire.css" type="text/css" rel="stylesheet" />
+  <link href="/plugin/squire/css/stylesheet.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" charset="utf-8" src="/plugin/squire/js/colorpicker.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/plugin/squire/js/squire-raw.js"></script>
 <body>
 
 <% include  ../include/header.ejs %>
@@ -57,11 +63,16 @@
                   <%-include("../include/synch_tree",{width:'400',name:'office_id',treejson:offices,treeWidth:400,treeHeight:600,treeTitle:'请选择一个机构'})%>
                 <%}%>
               </div>
-              <div class="field-box">
+              <!--<div class="field-box">
                 <label>测试编辑器:</label>
                 <textarea id="testtest" name="content" style="width:99%;height:300px;"></textarea>
                 <%-include("../include/editor",{input:'testtest'})%>
               </div>
+              <div class="field-box">
+                <label>测试手机编辑器:</label>
+                <textarea id="squire" name="squire" style="display:none;"></textarea>
+                <%-include("../include/squire",{input:'squire'})%>
+              </div>-->
               <div class="field-box">
                 <label>用户工号:</label>
                 <input style="width:400px" type="text" name="no" <%if(typeof(userInfo)!='undefined'){%> value="<%=userInfo.no%>" <%}%>/>
