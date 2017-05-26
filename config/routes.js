@@ -1,10 +1,4 @@
 'use strict';
-
-/**
- * 文件读写工具包
- */
-const fs = require('fs');
-const join = require('path').join; // 连接字符串方法__dirname
 /*
  * Module dependencies.
  */
@@ -19,146 +13,36 @@ const fail = {
   failureRedirect: '/login'
 };
 
-/**
- * 提供自动扫描路由和权限以及验证权限的功能
- * @param {express} app 
- */
-let Routes = function (app) {
-  let path = join(__dirname, '../app/controllers'); // 全局路径
-  let permissions = {}; // 路由地址和权限属性的映射
-  let routes = {}; // 路由映射
-  let scan = function (action) {
-    action = action || '';
-    action && (path += action);
-    fs.readdirSync(path)
-      .forEach((file) => {
-        if (fs.statSync(path + '/' + file).isDirectory()) {
-          scan(action + '/' + file);
-          return;
-        }
-        // 不是js文件直接跳过
-        if (!file.endsWith('.js')) {
-          return;
-        }
-        let controller = require(path + '/' + file);
-        for (let key in controller) {
-          if (key === 'PERMISSION' &&
-            Object.prototype.toString.call(controller[key]) === '[object Object]') {
-            let p = controller[key];
-            for (let url in p) {
-              permissions[url] = [p][url];
-            }
-          }
-          if (key === 'ROUTER' &&
-            Object.prototype.toString.call(controller[key]) === '[object Object]') {
-            let route = controller[key];
-            for (let url in route) {
-              if (Object.prototype.toString.call(route[url]) === '[object Function]') {
-                console.log('scanning route : ' + url);
-                routes[url] = route[url];
-              }
-            }
-          }
-        }
-
-      });
-  };
-  console.log('scanning routes start...');
-  scan();
-  console.log('scanning routes end...');
-
-  /**
-   * 执行添加路由到express
-   */
-  this.excute = function () {
-    for (let url in routes) {
-      app.all(url, routes[url]);
-    }
-  };
-
-};
-/**
- * 管理后台权限处理
- */
-let Permission = function () {
-  let include = [];
-  let exclude = [];
-  /**
-   * 添加校验权限的路径
-   * @param {*string} path 包含权限校验的路径
-   */
-  this.include = function (...path) {
-    include = include.concat(path);
-  };
-  /**
-   * 排除校验权限的路径
-   * @param {*string} path 包含权限校验的开始路径
-   */
-  this.exclude = function (...path) {
-    exclude = exclude.concat(path);
-  };
-  /**
-   * 验证url是否需要校验
-   * @param {string} url 要验证的访问地址
-   * @returns {boolean} true 需要,false 不需要
-   */
-  this.check = function (url) {
-    for (let i = 0; i < exclude.length; i++) {
-      let patten = new RegExp('^' + exclude[i], 'i');
-      if (patten.test(url)) {
-        return false;
-      }
-    }
-    for (let i = 0; i < include.length; i++) {
-      let patten = new RegExp('^' + include[i], 'i');
-      if (patten.test(url)) {
-        return true;
-      }
-    }
-    return false;
-  };
-};
+const join = require('path').join; // 连接字符串方法
+const path = join(__dirname, '../app/controllers');
+const routeTools = require('./routeTools');
 
 /**
  * Expose routes
  */
-module.exports = function (app, passport) {
-  // 权限校验对象
-  let permission = new Permission();
-  permission.include('/manage');
-  permission.exclude('/manage/login', '/manage/signin');
-
-  // 扫描全部路由地址
-  var routes = new Routes(app);
-  // // 添加特殊路由
-  // routes.use('/manage/panel', '/manage/panel/index');
-  // routes.use('/manage/user', '/manage/user/index');
-  // routes.use('/manage/file', '/manage/file/index');
-  // routes.use('/manage/area', '/manage/area/index');
-  // routes.use('/manage/menu', '/manage/menu/index');
-  // routes.use('/manage/office', '/manage/office/index');
-  // routes.use('/manage/dict', '/manage/dict/index');
-  // routes.use('/manage/log', '/manage/log/index');
-  // routes.use('/manage/role', '/manage/role/index');
-  // routes.use('/manage/login', '/manage/login/login');
-  // routes.use('/manage/signin', '/manage/login/signin');
-  // routes.use('/manage/signup', '/manage/login/signup');
-  // routes.use('/manage/logout', '/manage/login/logout');
+module.exports = function (app) {
 
   // 权限校验拦截
   app.use(function (req, res, next) {
-    let user = req.session.user;
-    let url = req.originalUrl;
-    if (permission.check(url)) {
-      if (!user) { // 用户未登录
-        res.redirect('/manage/login');
-        return;
-      }
+    let result = routeTools.validate(req);
+    if (result === 'success') {
+      next();
+      return;
     }
-    next();
+    if (result === 'session') {
+      res.redirect('/manage/login');
+      return;
+    }
+    if (result === 'sign') {
+      res.res.json({
+        result: 403,
+        message: 'You are not permitted'
+      });
+      return;
+    }
   });
 
-  routes.excute(); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
+  routeTools.scan(app, path); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
 
   // // 面板路由
   // require('../app/routes/manage/panel')(app, passport);

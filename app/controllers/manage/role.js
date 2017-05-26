@@ -17,15 +17,11 @@ const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
 
-exports.PERMISSION = {
-};
-
-
-exports.ROUTER = {
+module.exports = function (app, permission) {
   /**
    * 创建角色
    */
-  '/manage/role/create': function (req, res) {
+  app.all('/manage/role/create', function (req, res) {
 
     async.auto({
       currentMenu: function (cb) {
@@ -61,11 +57,11 @@ exports.ROUTER = {
         menus: result.menus
       });
     });
-  },
+  });
   /**
    * 编辑用户
    */
-  '/manage/role/edit': function (req, res) {
+  app.all('/manage/role/edit', function (req, res) {
     let id = req.query.id;
 
     async.auto({
@@ -134,17 +130,17 @@ exports.ROUTER = {
         roleMenus: result.roleMenus
       });
     });
-  },
+  });
   /**
    *  显示角色详情
    */
-  '/manage/role/show': function (req, res) {
+  app.all('/manage/role/show', function (req, res) {
 
-  },
+  });
   /**
    *  保存一个角色信息
    */
-  '/manage/role/store': function (req, res) {
+  app.all('/manage/role/store', function (req, res) {
     async.auto({
       store: function (cb) {
         let office_id = req.body.office_id;
@@ -178,11 +174,11 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
   /**
    *  删除一个角色信息
    */
-  '/manage/role/delete': function (req, res) {
+  app.all('/manage/role/delete', function (req, res) {
     async.auto({
       delUser: function (cb) {
 
@@ -215,8 +211,8 @@ exports.ROUTER = {
         });
       }
     });
-  },
-  '/manage/role': function (req, res) {
+  });
+  app.all('/manage/role', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
     async.auto({
       roles: function (cb) {
@@ -283,5 +279,5 @@ exports.ROUTER = {
         });
       });
     });
-  }
+  });
 };

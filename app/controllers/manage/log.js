@@ -12,12 +12,9 @@ const util = require('../../utils');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
-exports.PERMISSION = {
-};
+module.exports = function (app, permission) {
 
-exports.ROUTER = {
-
-  '/manage/log' : function (req, res) {
+  app.all('/manage/log', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
     async.auto({
       logs: function (cb) {
@@ -57,5 +54,5 @@ exports.ROUTER = {
         page: result.logsPage
       });
     });
-  }
+  });
 };

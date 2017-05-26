@@ -16,15 +16,12 @@ const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 const co = require('co');
 
-exports.PERMISSION = {
-};
 
-
-exports.ROUTER = {
+module.exports = function (app, permission) {
   /**
    * 创建机构
    */
-  '/manage/office/create': function (req, res) {
+  app.all('/manage/office/create', function (req, res) {
     let pId = req.query.parent_id ? req.query.parent_id : '0';
 
     async.auto({
@@ -73,12 +70,12 @@ exports.ROUTER = {
         rootAreas: JSON.stringify(result.rootAreas)
       });
     });
-  },
+  });
 
   /**
    * 编辑用户
    */
-  '/manage/office/edit': function (req, res) {
+  app.all('/manage/office/edit', function (req, res) {
     let id = req.query.id;
 
     async.auto({
@@ -131,17 +128,17 @@ exports.ROUTER = {
         rootAreas: JSON.stringify(result.rootAreas)
       });
     });
-  },
+  });
   /**
    *  显示用户详情
    */
-  '/manage/office/show': function (req, res) {
+  app.all('/manage/office/show', function (req, res) {
 
-  },
+  });
   /**
    *  保存一个机构信息
    */
-  '/manage/office/store': function (req, res) {
+  app.all('/manage/office/store', function (req, res) {
     async.auto({
       store: function (cb) {
         let parent_id = req.body.parent_id;
@@ -180,11 +177,11 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
   /**
    *  删除一个机构信息
    */
-  '/manage/office/delete': function (req, res) {
+  app.all('/manage/office/delete', function (req, res) {
     async.auto({
       delUser: function (cb) {
 
@@ -208,9 +205,9 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
 
-  '/manage/office': function (req, res) {
+  app.all('/manage/office', function (req, res) {
     async.auto({
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/office', function (err, menu) {
@@ -232,5 +229,5 @@ exports.ROUTER = {
         offices: result.offices
       });
     });
-  }
+  });
 };

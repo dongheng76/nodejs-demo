@@ -10,11 +10,10 @@ const areaDao = require('../../dao/area');
 const dictUtil = require('../../utils/dict_utils');
 
 
-exports.PERMISSION = {};
-
-exports.ROUTER = {
-
-  '/manage/area': function (req, res) {
+module.exports = function (app, permission) {
+  // 设置权限
+  permission('/manage/area', '1234');
+  app.all('/manage/area', function (req, res) {
     async.auto({
       areas: function (cb) {
         areaDao.queryAreasByPId('0', function (err, areas) {
@@ -38,9 +37,9 @@ exports.ROUTER = {
         areas: JSON.stringify(areas)
       });
     });
-  },
+  });
 
-  '/manage/area/findareabypid': function (req, res) {
+  app.all('/manage/area/findareabypid', function (req, res) {
     async.auto({
       areas: function (cb) {
         areaDao.queryAreasByPId(req.body.parent_id, function (err, areas) {
@@ -50,9 +49,9 @@ exports.ROUTER = {
     }, function (error, result) {
       res.json(result.areas);
     });
-  },
+  });
 
-  '/manage/area/create': function (req, res) {
+  app.all('/manage/area/create', function (req, res) {
     async.auto({
       areaTypes: function (cb) {
         dictUtil.getDictList('sys_area_type', function (err, areaTypes) {
@@ -94,12 +93,12 @@ exports.ROUTER = {
         currentSort: parseInt(result.maxSort) + 10
       });
     });
-  },
+  });
 
   /**
    *  保存一个区域信息
    */
-  '/manage/area/store': function (req, res) {
+  app.all('/manage/area/store', function (req, res) {
     async.auto({
       store: function (cb) {
         let parent_id = req.body.parent_id;
@@ -132,12 +131,12 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
 
   /**
    * 编辑区域
    */
-  '/manage/area/edit': function (req, res) {
+  app.all('/manage/area/edit', function (req, res) {
     let id = req.query.id;
 
     async.auto({
@@ -181,12 +180,12 @@ exports.ROUTER = {
         parentAreaInfo: result.parentAreaInfo
       });
     });
-  },
+  });
 
   /**
    *  删除一个用户信息
    */
-  '/manage/area/delete': function (req, res) {
+  app.all('/manage/area/delete', function (req, res) {
     async.auto({
       delArea: function (cb) {
         let id = req.body.id;
@@ -205,5 +204,5 @@ exports.ROUTER = {
         });
       }
     });
-  }
+  });
 };

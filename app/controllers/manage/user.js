@@ -15,14 +15,11 @@ const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
 
-exports.PERMISSION = {};
-
-
-exports.ROUTER = {
+module.exports = function (app, permission) {
   /**
    * 创建用户
    */
-  '/manage/user/create': function (req, res) {
+  app.all('/manage/user/create', function (req, res) {
 
     async.auto({
       currentMenu: function (cb) {
@@ -58,11 +55,11 @@ exports.ROUTER = {
         offices: JSON.stringify(result.offices)
       });
     });
-  },
+  });
   /**
    * 编辑用户
    */
-  '/manage/user/edit': function (req, res) {
+  app.all('/manage/user/edit', function (req, res) {
     let id = req.query.id;
 
     async.auto({
@@ -110,17 +107,17 @@ exports.ROUTER = {
         userRoles: result.userRoles
       });
     });
-  },
+  });
   /**
    *  显示用户详情
    */
-  '/manage/user/show': function (req, res) {
+  app.all('/manage/user/show', function (req, res) {
 
-  },
+  });
   /**
    *  保存一个用户信息
    */
-  '/manage/user/store': function (req, res) {
+  app.all('/manage/user/store', function (req, res) {
     async.auto({
       store: function (cb) {
         let office_id = req.body.office_id;
@@ -166,11 +163,11 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
   /**
    *  删除一个用户信息
    */
-  '/manage/user/delete': function (req, res) {
+  app.all('/manage/user/delete', function (req, res) {
     async.auto({
       delUser: function (cb) {
 
@@ -203,8 +200,8 @@ exports.ROUTER = {
         });
       }
     });
-  },
-  '/manage/user': function (req, res) {
+  });
+  app.all('/manage/user', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
     async.auto({
       users: function (cb) {
@@ -251,5 +248,5 @@ exports.ROUTER = {
         condition: req.query
       });
     });
-  }
+  });
 };
