@@ -1,0 +1,149 @@
+.editor {
+	height: 480px;
+	width:100%;
+	border:1px solid #ccc;
+	overflow:auto;
+}
+
+.editor ol{
+	   list-style-type: decimal;
+}
+.editor ul{
+	   list-style-type: disc;
+}
+
+.editor  li{
+	display: list-item;
+}
+
+.editor img {
+	width: 100%;
+	height: auto;
+}
+
+.editor_tools_bar {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	padding:10px 0 5px;
+	width:100%;
+}
+
+.editor_tools_bar_item {
+	width: 38px;
+	display: inline-block;
+	line-height: 28px;
+	height: 28px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	margin:0 0 5px 5px;
+}
+
+.editor_tools_bar_bold {
+	background: url(../images/icon.png) 10px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_italic {
+	background: url(../images/icon.png) -31px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_underline {
+	background: url(../images/icon.png) -76px -2px no-repeat transparent;
+}
+
+.editor_tools_bar_insertImg {
+	background: url(../images/icon.png) -123px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_makeLink {
+	background: url(../images/icon.png) -169px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_h1 {
+	background: url(../images/icon.png) -215px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_h2 {
+	background: url(../images/icon.png) -261px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_h3 {
+	background: url(../images/icon.png) -306px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_h4 {
+	background: url(../images/icon.png) -354px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_makeUnorderedList {
+	background: url(../images/icon.png) -398px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_makeOrderedList {
+	background: url(../images/icon.png) -445px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_justifyLeft {
+	background: url(../images/icon.png) -490px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_justifyCenter {
+	background: url(../images/icon.png) -537px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_justifyRight {
+	background: url(../images/icon.png) -582px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_removeAllFormatting {
+	background: url(../images/icon.png) -722px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_redo {
+	background: url(../images/icon.png) -675px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_undo {
+	background: url(../images/icon.png) -629px -3px no-repeat transparent;
+}
+
+.editor_tools_bar_clear{
+	background: url(../images/icon.png) -771px -2px no-repeat transparent;
+}
+
+.editor_tools_bar_view{
+	background: url(../images/icon.png) -813px -2px no-repeat transparent;
+}
+
+.editor_tools_bar_button{
+	padding:0 10px;
+	height:28px;
+	line-height: 28px;
+	text-align:center;
+	box-shadow: inset 0 3px 5px 1px rgba(244, 244, 244, 0.2);
+	color:#FFF;
+	display: inline-block;
+	cursor: pointer;
+	margin:5px 0 0 5px;
+}
+
+.editor_tools_bar_text{
+	width:300px;
+	height:28px;
+	line-height: 28px;
+	border:1px solid #CCC;
+	margin:5px 0 0 5px;
+	text-indent: 5px;
+}
+
+.editor_tools_bar_greenButton{
+	background-color: #60B635;
+	border:1px solid #4E952B;
+}
+.editor_tools_bar_grayButton{
+	background-color: #888888;
+	border:1px solid #6E6E6E;
+}
+.editor_tools_bar_blueButton{
+	background-color: #5CAAE6;
+	border:1px solid #2083CC;
+}

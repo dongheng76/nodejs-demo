@@ -1,0 +1,608 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>完整demo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/squire.css" type="text/css" rel="stylesheet">
+<link href="css/color.css" type="text/css" rel="stylesheet">
+<link href="css/stylesheet.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/colorpicker.js"></script>
+<script type="text/javascript" src="js/squire-raw.js"></script>
+</head>
+<div id="prefix" class="edui-container" style="width: 350px; z-index: 1000;">
+    <div class="edui-toolbar">
+        <div class="edui-btn-toolbar">
+            <div class="edui-btn edui-btn- edui-btn-name-paragraph edui-combobox edui-relative" title="段落格式">
+                <span class="edui-button-label">字号</span>
+                <span class="edui-button-spacing"></span>
+                <span class="edui-caret"></span>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+                <ul class="dropdown-menu edui-combobox-menu edui-combobox-paragraph" style="z-index: 1000; top: 24px; left: -2px;">
+                    <li data-action="expandSetTag" data-value="div" class="edui-combobox-item edui-combobox-checked">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="">默认</label>
+                    </li>
+                    <li data-action="expandSetTag" data-value="h1" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="">特小</label>
+                    </li>
+                    <li data-action="expandSetTag" data-value="h2" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="">小号</label>
+                    </li>
+                    <li data-action="expandSetTag" data-value="h3" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="">中号</label>
+                    </li>
+                    <li data-action="expandSetTag" data-value="h4" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="">较大</label>
+                    </li>
+                    <li data-action="expandSetTag" data-value="h5" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="">大号</label>
+                    </li>
+                    <li data-action="expandSetTag" data-value="h6" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="">特大</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="edui-btn edui-btn- edui-btn-name-fontfamily edui-combobox edui-relative" title="字体">
+                <span class="edui-button-label">字体</span>
+                <span class="edui-button-spacing"></span>
+                <span class="edui-caret"></span>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+                <ul class="dropdown-menu edui-combobox-menu edui-combobox-fontfamily" style="z-index: 1000; top: 24px; left: -2px;">
+                    <li data-action="setFontFace" data-value="微软雅黑, Microsoft YaHei" class="edui-combobox-item edui-combobox-checked">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: 微软雅黑, Microsoft YaHei">微软雅黑</label>
+                    </li>
+                    <li class="edui-combobox-item-separator"></li>
+                    <li data-action="setFontFace" data-value="宋体, SimSun" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: 宋体, SimSun">宋体</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="楷体, 楷体_GB2312, SimKai" class="edui-combobox-item ">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: 楷体, 楷体_GB2312, SimKai">楷体</label>
+                    </li>
+                    <li data-action="setFontFace" data-value=" 黑体, SimHei" class="edui-combobox-item ">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: 黑体, SimHei">黑体</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="隶书, SimLi" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: 隶书, SimLi">隶书</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="andale mono" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: andale mono">andale mono</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="arial, helvetica, sans-serif" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: arial, helvetica, sans-serif">arial</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="arial black, avant garde" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: arial black, avant garde">arial black</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="comic sans ms" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: comic sans ms">comic sans ms</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="impact, chicago" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: impact, chicago">impact</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="times new roman" class="edui-combobox-item">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: times new roman">times new roman</label>
+                    </li>
+                    <li data-action="setFontFace" data-value="sans-serif" class="edui-combobox-item edui-combobox-checked">
+                        <span class="edui-combobox-icon"></span>
+                        <label class="edui-combobox-item-label" style="font-family: sans-serif">sans-serif</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div data-action="expandMakeLink" class="edui-btn edui-btn-link edui-box-relative" title="超链接">
+                <div class="edui-icon-link edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+                <div class="edui-dialog-box edui-combobox-paragraph" style="z-index: 1000; top: 24px; left: -2px;">
+                    <div class="edui-dialog-box-row">
+                        <label>链接地址：</label>
+                        <input name="link" type="text" class="deui-link-href" />
+                    </div>
+                    <div class="edui-dialog-box-row">
+                        <label>新窗口打开：</label>
+                        <input name="new" type="checkbox" class="deui-link-taget" value="0">
+                    </div>
+                    <div class="edui-dialog-box-row">
+                        <span class="edui-dialog-box-button" onclick="this.parentNode.parentNode.style.display='none';event.stopPropagation();">取消</span>
+                        <span id="edui-link-button" class="edui-dialog-box-button">确定</span>
+                    </div>
+                </div>
+            </div>
+            <div data-action="removeLink" class="edui-btn edui-btn-unlink" title="取消链接">
+                <div class="edui-icon-unlink edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner">取消链接</div>
+                </div>
+            </div>
+
+            <div data-action="expandSetBold" class="edui-btn edui-btn-bold" title="加粗">
+                <div class="edui-icon-bold edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="expandSetItalic" class="edui-btn edui-btn-italic" title="斜体">
+                <div class="edui-icon-italic edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="expandSetUnderline" class="edui-btn edui-btn-underline" title="下划线">
+                <div class="edui-icon-underline edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="expandStrike" class="edui-btn edui-btn-strikethrough" title="删除线">
+                <div class="edui-icon-strikethrough edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="expandSup" class="edui-btn edui-btn-superscript" title="上标">
+                <div class="edui-icon-superscript edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="expandSub" class="edui-btn edui-btn-subscript" title="下标">
+                <div class="edui-icon-subscript edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div class="edui-splitbutton edui-splitbutton-forecolor edui-box-relative" title="字体颜色" onmousedown="return false;">
+                <div class="edui-btn">
+                    <div class="edui-icon-forecolor edui-icon"></div>
+                    <div class="edui-splitbutton-color-label"></div>
+                </div>
+                <div class="edui-btn edui-dropdown-toggle">
+                    <div class="edui-caret"></div>
+                </div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+                <div id="color-picker-font" class="cp-small"></div>
+            </div>
+            <div class="edui-splitbutton edui-splitbutton-backcolor" title="背景色" onmousedown="return false;">
+                <div class="edui-btn">
+                    <div class="edui-icon-backcolor edui-icon"></div>
+                    <div class="edui-splitbutton-color-label"></div>
+                </div>
+                <div class="edui-btn edui-dropdown-toggle">
+                    <div class="edui-caret"></div>
+                </div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+                <div id="color-picker-bg" class="cp-small"></div>
+            </div>
+            <div data-action="expandMakeOrderedList" class="edui-btn edui-btn-insertorderedlist" title="有序列表">
+                <div class="edui-icon-insertorderedlist edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="expandMakeUnorderedList" class="edui-btn edui-btn-insertunorderedlist" title="无序列表">
+                <div class="edui-icon-insertunorderedlist edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="setHTML" data-value="" class="edui-btn edui-btn-cleardoc" title="清空文档">
+                <div class="edui-icon-cleardoc edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+
+            <div data-action="setTextAlignment" data-value="left" class="edui-btn edui-btn-justifyleft" title="居左对齐">
+                <div class="edui-icon-justifyleft edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="setTextAlignment" data-value="center" class="edui-btn edui-btn-justifycenter" title="居中对齐">
+                <div class="edui-icon-justifycenter edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="setTextAlignment" data-value="right" class="edui-btn edui-btn-justifyright" title="居右对齐">
+                <div class="edui-icon-justifyright edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div class="edui-btn edui-btn-image" title="图片">
+                <div class="edui-icon-image edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="horizontalLine" class="edui-btn edui-btn-horizontal" title="分隔线">
+                <div class="edui-icon-horizontal edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="expandSelectAll" class="edui-btn edui-btn-selectall" title="全选">
+                <div class="edui-icon-selectall edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="removeAllFormatting" class="edui-btn edui-btn-removeformat" title="清除格式">
+                <div class="edui-icon-removeformat edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="undo" class="edui-btn edui-btn-undo" title="撤销">
+                <div class="edui-icon-undo edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+            <div data-action="redo" class="edui-btn edui-btn-redo" title="重做">
+                <div class="edui-icon-redo edui-icon"></div>
+                <div class="edui-tooltip">
+                    <div class="edui-tooltip-arrow"></div>
+                    <div class="edui-tooltip-inner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="edui-editor-body">
+        <div id="prefixEditor" class=" edui-body-container" contenteditable="true" style="min-height: 480px; z-index: 999;">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	var prefixeditor = new Squire(document.querySelector("#prefixEditor"), {
+        blockTag : 'div',
+        blockAttributes : {
+	        'class' : 'editor_row',
+        },
+        tagAttributes : {
+            ul : {
+	            'class' : 'editor_ul'
+            },
+            ol : {
+	            'class' : 'editor_ol'
+            },
+            li : {
+	            'class' : 'editor_listItem'
+            }
+        }
+    });
+    prefixeditor.addEventListener('willPaste', function(event) {
+	    prefixeditor.removeFragmentFormatting(event.fragment);
+    });
+    prefixeditor.expandSelectAll = function() {
+	    prefixeditor.focus();
+	    var range = prefixeditor.getSelection();
+	    var n = document.querySelector("#prefixEditor");
+	    range.selectNodeContents(n);
+	    prefixeditor.setSelection(range);
+    };
+    prefixeditor.horizontalLine = function() {
+	    prefixeditor.insertHTML('<div class="row-line"><hr/></div>');
+    };
+    prefixeditor.expandStrike = function(value) {
+	    if (prefixeditor.hasFormat("strike")) {
+		    prefixeditor.changeFormat(null, {
+			    tag : "strike"
+		    });
+	    } else {
+		    prefixeditor.changeFormat({
+			    tag : "strike"
+		    });
+	    }
+    };
+    prefixeditor.expandSub = function() {
+	    var p1 = {
+		    tag : "sub"
+	    };
+	    var p2 = {
+		    tag : "sub"
+	    }
+	    if (prefixeditor.hasFormat("sub")) {
+		    p1 = null;
+	    }
+	    if (prefixeditor.hasFormat("sup")) {
+		    p1 = null;
+		    p2 = {
+			    tag : "sup"
+		    };
+	    }
+	    prefixeditor.changeFormat(p1, p2);
+    };
+    prefixeditor.expandSup = function() {
+	    var p1 = {
+		    tag : "sup"
+	    };
+	    var p2 = {
+		    tag : "sup"
+	    }
+	    if (prefixeditor.hasFormat("sup")) {
+		    p1 = null;
+	    }
+	    if (prefixeditor.hasFormat("sub")) {
+		    p1 = null;
+		    p2 = {
+			    tag : "sub"
+		    };
+	    }
+	    prefixeditor.changeFormat(p1, p2);
+    };
+    prefixeditor.expandSetBold = function() {
+	    if (prefixeditor.hasFormat("b")) {
+		    prefixeditor.removeBold();
+	    } else {
+		    prefixeditor.bold();
+	    }
+    }
+    prefixeditor.expandSetItalic = function() {
+	    if (prefixeditor.hasFormat("i")) {
+		    prefixeditor.removeItalic();
+	    } else {
+		    prefixeditor.italic();
+	    }
+    }
+    prefixeditor.expandSetUnderline = function() {
+	    if (prefixeditor.hasFormat("u")) {
+		    prefixeditor.removeUnderline();
+	    } else {
+		    prefixeditor.underline();
+	    }
+    }
+    prefixeditor.expandMakeOrderedList = function() {
+	    if (prefixeditor.hasFormat("ol", {
+		    'class' : 'editor_ol'
+	    })) {
+		    prefixeditor.removeList();
+	    } else {
+		    prefixeditor.makeOrderedList();
+	    }
+    }
+    prefixeditor.expandMakeUnorderedList = function() {
+	    if (prefixeditor.hasFormat("ul", {
+		    'class' : 'editor_ol'
+	    })) {
+		    prefixeditor.removeList();
+	    } else {
+		    prefixeditor.makeUnorderedList();
+	    }
+    }
+    prefixeditor.expandSetFontSize = function(value) {
+	    var p1 = {
+	        tag : 'span',
+	        attributes : {
+	            'class' : 'size',
+	            style : 'font-size: ' + value + ';line-height: ' + value.replace(/(\d\.\d)(\w+)/, function($1, $2, $3) {
+		            return Number($2) + 0.3 + $3
+	            })
+	        }
+	    }
+	    var p2 = {
+	        tag : 'span',
+	        attributes : {
+	            'class' : 'size',
+	            style : ''
+	        }
+	    }
+	    prefixeditor.focus();
+	    prefixeditor.changeFormat(p1, p2)
+    }
+    prefixeditor.expandSetTag = function(value) {
+	    var p1 = {
+	        tag : "span",
+	        attributes : {
+		        'class' : value
+	        }
+	    }
+	    if (value == "div") {
+		    p1 = {
+		        tag : "div",
+		        attributes : {
+			        'class' : 'editor_row'
+		        }
+		    }
+	    }
+	    prefixeditor.focus();
+	    prefixeditor.changeFormat(null, {
+	        tag : "span",
+	        attributes : {
+		        'class' : 'h1'
+	        }
+	    });
+	    prefixeditor.changeFormat(null, {
+	        tag : "span",
+	        attributes : {
+		        'class' : 'h2'
+	        }
+	    });
+	    prefixeditor.changeFormat(null, {
+	        tag : "span",
+	        attributes : {
+		        'class' : 'h3'
+	        }
+	    });
+	    prefixeditor.changeFormat(null, {
+	        tag : "span",
+	        attributes : {
+		        'class' : 'h4'
+	        }
+	    });
+	    prefixeditor.changeFormat(p1)
+    }
+
+    prefixeditor.expandMakeLink = function() {
+
+    }
+
+    //绑定按钮 事件
+    var prefixBtn = document.querySelectorAll("#prefix .edui-btn");
+    for (var i = 0; i < prefixBtn.length; i++) {
+	    prefixBtn[i].addEventListener("click", function() {
+		    var action = this.getAttribute("data-action");
+		    var value = this.getAttribute("data-value");
+		    action && prefixeditor[action](value);
+	    }, false);
+    }
+    //隐藏所有弹框
+    var hideAllDialog = function() {
+	    var prefixDialog = document.querySelectorAll("#prefix .edui-combobox-menu");
+	    for (var i = 0; i < prefixDialog.length; i++) {
+		    prefixDialog[i].style.display = "none";
+	    }
+	    var prefixColor = document.querySelectorAll("#prefix .cp-small");
+	    for (var i = 0; i < prefixColor.length; i++) {
+		    prefixColor[i].style.display = "none";
+	    }
+    }
+    //点击隐藏所有弹框
+    document.addEventListener("click", function() {
+	    hideAllDialog();
+    }, false);
+    var prefixDialogBtn = document.querySelectorAll("#prefix .edui-relative");
+    //绑定按钮点击事件
+    for (var i = 0; i < prefixDialogBtn.length; i++) {
+	    prefixDialogBtn[i].addEventListener("click", function(ev) {
+		    var e = this.querySelector(".edui-combobox-menu");
+		    if (e.style.display == 'block') {
+			    hideAllDialog();
+		    } else {
+			    hideAllDialog();
+			    this.querySelector(".edui-combobox-menu").style.display = "block";
+		    }
+		    ev.stopPropagation();
+	    }, false);
+    };
+    var prefixDialogEle = document.querySelectorAll("#prefix .edui-combobox-item");
+    for (var i = 0; i < prefixDialogEle.length; i++) {
+	    prefixDialogEle[i].addEventListener("click", function() {
+		    var action = this.getAttribute("data-action");
+		    var value = this.getAttribute("data-value");
+		    action && prefixeditor[action](value);
+	    }, false);
+    }
+
+    document.querySelector("#prefix .edui-btn-link").addEventListener("click", function(e) {
+	    var ele = this.querySelector(".edui-dialog-box");
+	    ele.style.display = 'block';
+    }, false);
+
+    //链接按钮点击事件
+    var prefixDialogLinkButton = document.querySelector("#prefix #edui-link-button");
+    prefixDialogLinkButton.addEventListener("click", function(e) {
+	    hideAllDialog();
+	    var box = this.parentNode.parentNode;
+	    box.style.display = "none";
+	    var value = box.querySelector(".deui-link-href").value;
+	    var taget = box.querySelector(".deui-link-taget").checked;
+	    var attrs = {
+		    target : '_blank'
+	    }
+	    if (!taget) {
+		    attrs = undefined;
+	    }
+	    prefixeditor.makeLink(value, attrs);
+	    e.stopPropagation();
+    }, false);
+
+    //加载颜色选择器
+    ColorPicker(document.getElementById('color-picker-font'), function(hex, hsv, rgb) {
+	    var e = document.querySelector("#prefix .edui-splitbutton-forecolor .edui-splitbutton-color-label");
+	    e.style.backgroundColor = hex; // #HEX
+	    prefixeditor.setTextColour(hex);
+    });
+    document.querySelector("#prefix .edui-splitbutton-forecolor").addEventListener("click", function(e) {
+	    hideAllDialog();
+	    var el = this.querySelector(".cp-small");
+	    if (el.style.display == 'block') {
+		    el.style.display = "none";
+	    } else {
+		    el.style.display = "block";
+	    }
+	    e.stopPropagation();
+    }, false);
+    //加载颜色选择器
+    ColorPicker(document.getElementById('color-picker-bg'), function(hex, hsv, rgb) {
+	    var e = document.querySelector("#prefix .edui-splitbutton-backcolor .edui-splitbutton-color-label");
+	    e.style.backgroundColor = hex; // #HEX
+	    prefixeditor.setHighlightColour(hex);
+    });
+    document.querySelector("#prefix .edui-splitbutton-backcolor").addEventListener("click", function(e) {
+	    hideAllDialog();
+	    var el = this.querySelector(".cp-small");
+	    if (el.style.display == 'block') {
+		    el.style.display = "none";
+	    } else {
+		    el.style.display = "block";
+	    }
+	    e.stopPropagation();
+    }, false);
+    var colorsbg = document.querySelectorAll("#prefix .cp-small");
+    for (var i = 0; i < colorsbg.length; i++) {
+	    colorsbg[i].addEventListener("click", function(e) {
+		    e.stopPropagation();
+	    }, false);
+    }
+    prefixeditor.addEventListener("input",function(e){
+    	console.log(e);
+    });
+</script>
+</body>
+</html>
