@@ -29,7 +29,7 @@ const envConfig = require('./index');
  * Expose
  */
 
-module.exports = function (app, passport) {
+module.exports = function (app) {
   // default options
   app.use(fileUpload());
 
@@ -96,8 +96,8 @@ module.exports = function (app, passport) {
   }));
 
   // use passport session
-  app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   // 每次在进入路由前看看是否有用户或者菜单信息，有就放入locals中
   app.use(function (req, res, next) {

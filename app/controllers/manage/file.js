@@ -21,15 +21,12 @@ const gm = require('gm').subClass({
     imageMagick: true
 });
 
-
-exports.PERMISSION = {};
-
-exports.ROUTER = {
+module.exports = function (app, permission) {
 
     /**
      * 创建用户
      */
-    '/manage/file/create': function (req, res) {
+    app.all('/manage/file/create', function (req, res) {
 
         async.auto({
             currentMenu: function (cb) {
@@ -53,12 +50,12 @@ exports.ROUTER = {
                 userTypes: result.userTypes
             });
         });
-    },
+    });
 
     /**
      * 取得用户文件夹信息
      */
-    '/manage/file/getfolders': function (req, res) {
+    app.all('/manage/file/getfolders', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 图片类型
         async.auto({
             folders: function (cb) {
@@ -93,12 +90,12 @@ exports.ROUTER = {
                 folders: folders
             });
         });
-    },
+    });
 
     /**
      * 取得指定文件夹的文件信息
      */
-    '/manage/file/getfiles': function (req, res) {
+    app.all('/manage/file/getfiles', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
         let file_cate_id = req.query.file_cate_id ? req.query.file_cate_id : '0';
@@ -151,12 +148,12 @@ exports.ROUTER = {
                 pageHtml: pageHtml
             });
         });
-    },
+    });
 
     /**
      * 创建一个文件夹
      */
-    '/manage/file/mkdir': function (req, res) {
+    app.all('/manage/file/mkdir', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         // let currentPage = req.query.page ? req.query.page : 1; //获取当前页数，如果没有则为1
         let parent_id = req.query.parent_id;
@@ -176,12 +173,12 @@ exports.ROUTER = {
                 files: result.files
             });
         });
-    },
+    });
 
     /**
      * 删除一个文件夹
      */
-    '/manage/file/delfilecate': function (req, res) {
+    app.all('/manage/file/delfilecate', function (req, res) {
         async.auto({
             delFileCate: function (cb) {
                 fileDao.delFileCate(req.body.id, function (err, result) {
@@ -195,12 +192,12 @@ exports.ROUTER = {
                 result: true
             });
         });
-    },
+    });
 
     /**
      *  上传一个图片
      */
-    '/manage/file/upload': function (req, res) {
+    app.all('/manage/file/upload', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let file_cate_id = req.body.file_cate_id ? req.body.file_cate_id : '0';
 
@@ -280,12 +277,12 @@ exports.ROUTER = {
                 });
             });
         }
-    },
+    });
 
     /**
      *  缩放图片异步方法
      */
-    '/manage/file/thumbfile': function (req, res) {
+    app.all('/manage/file/thumbfile', function (req, res) {
         let ids = req.body.ids;
         let format = JSON.parse(req.body.format);
         let idsStr = '';
@@ -370,9 +367,9 @@ exports.ROUTER = {
                 });
             });
         });
-    },
+    });
 
-    '/manage/file': function (req, res) {
+    app.all('/manage/file', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 文件类型
         async.auto({
             currentMenu: function (cb) {
@@ -391,9 +388,9 @@ exports.ROUTER = {
                 type: type
             });
         });
-    },
+    });
 
-    '/manage/file/simple': function (req, res) {
+    app.all('/manage/file/simple', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let func = req.query.func;
         let format = req.query.format;
@@ -419,5 +416,5 @@ exports.ROUTER = {
                 showFormat: typeof (showFormat) != 'undefined' ? showFormat.replace(/\@/g, '"') : showFormat
             });
         });
-    }
+    });
 };

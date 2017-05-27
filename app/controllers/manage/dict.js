@@ -16,14 +16,11 @@ const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
 
-exports.PERMISSION = {};
-
-exports.ROUTER = {
-
+module.exports = function (app, permission) {
   /**
    * 创建字典
    */
-  '/manage/dict/create': function (req, res) {
+  app.all('/manage/dict/create', function (req, res) {
     let type = req.query.type;
 
     async.auto({
@@ -68,12 +65,12 @@ exports.ROUTER = {
         type: type
       });
     });
-  },
+  });
 
   /**
    * 编辑字典
    */
-  '/manage/dict/edit': function (req, res) {
+  app.all('/manage/dict/edit', function (req, res) {
     let id = req.query.id;
 
     async.auto({
@@ -101,12 +98,12 @@ exports.ROUTER = {
         dict: result.dict
       });
     });
-  },
+  });
 
   /**
    *  保存一个用户信息
    */
-  '/manage/dict/store': function (req, res) {
+  app.all('/manage/dict/store', function (req, res) {
     async.auto({
       store: function (cb) {
         let value = req.body.value;
@@ -139,12 +136,12 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
 
   /**
    *  删除一个字典信息
    */
-  '/manage/dict/delete': function (req, res) {
+  app.all('/manage/dict/delete', function (req, res) {
     async.auto({
       delUser: function (cb) {
         if (req.body.id) {
@@ -176,9 +173,9 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
 
-  '/manage/dict': function (req, res) {
+  app.all('/manage/dict', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
     async.auto({
       dicts: function (cb) {
@@ -223,5 +220,5 @@ exports.ROUTER = {
         dictTypes: result.dictTypes
       });
     });
-  }
+  });
 };

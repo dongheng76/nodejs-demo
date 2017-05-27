@@ -205,3 +205,12 @@ exports.updateUser = function (req, callback) {
         });
     });
 };
+
+/**
+ * 修改密码
+ */
+exports.updateUserPwd = function (loginName,password, callback) {
+    mysql.update("update sys_user set update_date=now(), password='" + util.md5(password) + "' where login_name=?", [loginName], function (err, result) {
+       callback(err, result);
+    });
+};
