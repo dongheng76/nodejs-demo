@@ -31,4 +31,14 @@
             "font-styles": false
         });
     });
+
+    $(window).ready(function (){
+        <%if(notice_info != null){%>
+            <%if(notice_info.type == 'success'){%>
+                noticeInfo('success','<%=notice_info.info%>');
+            <%}else{%>
+                noticeInfo('fail','<%=notice_info.info%>');
+            <%}%>
+        <%}%>
+    });
 </script>
