@@ -98,7 +98,7 @@ exports.updateMenu = function (req, callback) {
         sets += ",remarks='" + req.body.remarks + "'";
     }
 
-    mysql.update('update sys_menu set update_date=now() ' + sets + ' where id=?', [req.body.id], function (err, result) { 
+    mysql.update('update sys_menu set update_date=now() ' + sets + ' where id=' + mysql.getMysql().escape(req.body.id), [], function (err, result) { 
         callback(err, result);
     });
 };

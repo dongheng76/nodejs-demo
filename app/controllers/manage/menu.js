@@ -131,11 +131,11 @@ exports.ROUTER = {
         // 有ID就视为修改
         if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
           menuDao.updateMenu(req, function (err, result) {
-            cb(null, result);
+            cb(err, result);
           });
         } else {
           menuDao.saveMenu(parent_id, name, sort, href, icon, permission, remarks, req, function (err, result) {
-            cb(null, result);
+            cb(err, result);
           });
         }
       }
@@ -147,7 +147,7 @@ exports.ROUTER = {
       } else {
         res.json({
           result: false,
-          error: '登录名重复请修改登录名'
+          error: '网络异常请重试！'
         });
       }
     });

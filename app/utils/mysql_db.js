@@ -21,6 +21,14 @@ console.log('init pool end....');
 
 // 封装的基本mysql操作
 /**
+ * 把需要的mysql返回出来使用
+ */
+exports.getMysql = function () {
+    return mysql;
+};
+
+
+/**
  * 查询所有记录
  */
 exports.query = function (sql, data, callback) {
