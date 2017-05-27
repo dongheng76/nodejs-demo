@@ -12,16 +12,13 @@ const logDao = require('../../dao/log');
 const session = require('express-session');
 
 
-exports.PERMISSION = {
-};
-
-exports.ROUTER = {
+module.exports = function (app, permission) {
   /**
    * 登入登录
    * @param req
    * @param res
    */
-  '/manage/signin': function (req, res) {
+  app.all('/manage/signin', function (req, res) {
     // 取出用户名和密码
     let loginName = req.body.login_name;
     let password = req.body.password;
@@ -93,31 +90,31 @@ exports.ROUTER = {
       }
       return;
     });
-  },
+  });
   /**
    * 登录
    */
-  '/manage/login': function (req, res) {
+  app.all('/manage/login', function (req, res) {
     res.render('manage/login', {
       title: 'Login'
     });
-  },
+  });
   /**
    * 注销
    */
-  '/manage/signup': function (req, res) {
+  app.get('/manage/signup', function (req, res) {
     delete req.session.user;
     res.json({
       result: true
     });
-  },
+  });
   /**
    * Logout
    */
-  '/manage/logout': function (req, res) {
+  app.get('/manage/logout', function (req, res) {
     req.logout();
     res.redirect('/login');
-  }
+  });
 };
 
 /**

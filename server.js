@@ -10,10 +10,8 @@
  * Module dependencies
  */
 require('./config'); // 载入基本配置文件
-const fs = require('fs'); // 文件读写工具包
-const join = require('path').join; // 连接字符串方法
 const express = require('express'); // express框架
-const passport = require('passport'); // 登录认证中间件
+// const passport = require('passport'); // 登录认证中间件
 const http = require('http'); // 载入http
 const port = process.env.PORT || 80;
 const app = express();
@@ -25,8 +23,8 @@ const app = express();
 module.exports = app;
 
 // 启动时加入的 routes
-require('./config/express')(app, passport);
-require('./config/routes')(app, passport);
+require('./config/express')(app);
+require('./config/routes')(app);
 
 /**
  * Create HTTP server.
@@ -47,7 +45,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 function normalizePort(val) {
-  //初始化端口号
+  // 初始化端口号
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -66,7 +64,7 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-function onError(error) {
+function onError (error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
