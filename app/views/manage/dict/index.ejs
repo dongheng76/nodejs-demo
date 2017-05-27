@@ -96,9 +96,11 @@
         </table>
       </div>
     </div>
+    <%if(permission('sys:dict:show')){%>
     <div class="pagination">
       <%-include("../include/page")%>
     </div>
+    <%}%>
   </div>
 </div>
 

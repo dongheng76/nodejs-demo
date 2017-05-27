@@ -1,17 +1,4 @@
 'use strict';
-/*
- * Module dependencies.
- */
-const auth = require('./middlewares/authorization');
-/**
- * Route middlewares
- */
-const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
-const commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
-
-const fail = {
-  failureRedirect: '/login'
-};
 
 const join = require('path').join; // 连接字符串方法
 const path = join(__dirname, '../app/controllers');
@@ -122,31 +109,6 @@ module.exports = function (app) {
 
   routeTools.scan(app, path); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
 
-
-  // // 面板路由
-  // require('../app/routes/manage/panel')(app, passport);
-  // // 用户路由
-  // require('../app/routes/manage/user')(app, passport);
-  // // 文件路由
-  // require('../app/routes/manage/file')(app, passport);
-  // // 区域路由
-  // require('../app/routes/manage/area')(app, passport);
-  // // 菜单路由
-  // require('../app/routes/manage/menu')(app, passport);
-  // // 机构路由
-  // require('../app/routes/manage/office')(app, passport);
-  // // 字典路由
-  // require('../app/routes/manage/dict')(app, passport);
-  // // 角色路由
-  // require('../app/routes/manage/role')(app, passport);
-
-  // app.post('/user/session',
-  //   pauth('local', {
-  //     failureRedirect: '/login',
-  //     failureFlash: 'Invalid email or password.'
-  //   }), user.session);
-  // app.get('/user/:userId', user.show);
-  // app.get('/auth/linkedin/callback', pauth('linkedin', fail), user.authCallback);
 
   /**
    * Error handling

@@ -20,6 +20,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建字典
    */
+  routeMethod.session('/manage/dict/create','sys:dict:edit');
   app.all('/manage/dict/create', function (req, res) {
     let type = req.query.type;
 
@@ -86,6 +87,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑字典
    */
+  routeMethod.session('/manage/dict/edit','sys:dict:edit');
   app.all('/manage/dict/edit', function (req, res) {
     let id = req.query.id;
 
@@ -119,6 +121,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个用户信息
    */
+  routeMethod.session('/manage/dict/store','sys:dict:edit');
   app.all('/manage/dict/store', function (req, res) {
     async.auto({
       store: function (cb) {
@@ -165,6 +168,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个字典信息
    */
+  routeMethod.session('/manage/dict/delete','sys:dict:edit');
   app.all('/manage/dict/delete', function (req, res) {
     async.auto({
       delUser: function (cb) {
@@ -202,7 +206,7 @@ module.exports = function (app, routeMethod) {
       }
     });
   });
-
+  routeMethod.session('/manage/dict','sys:dict:show');
   app.all('/manage/dict', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
     async.auto({
