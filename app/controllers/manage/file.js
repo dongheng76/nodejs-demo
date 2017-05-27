@@ -40,7 +40,11 @@ module.exports = function (app, permission) {
             },
             userTypes: function (cb) {
                 dictUtil.getDictList('sys_user_type', function (err, userTypes) {
-                    cb(null, userTypes);
+                    if (err || !userTypes) {
+                        cb(null, {});
+                    } else {
+                        cb(null, userTypes);
+                    }
                 });
             }
         }, function (error, result) {
@@ -61,7 +65,7 @@ module.exports = function (app, permission) {
             folders: function (cb) {
                 fileDao.queryCatalogByUser(req, type == 'images' ? '1' : '2', function (err, folders) {
                     if (err || !folders) {
-                        cb(null, {});
+                        cb(null, false);
                     } else {
                         cb(null, folders);
                     }
@@ -103,8 +107,8 @@ module.exports = function (app, permission) {
         async.auto({
             files: function (cb) {
                 fileDao.queryFileByCateId(req, file_cate_id, type == 'images' ? 1 : 2, currentPage, 20, function (err, files) {
-                    if (err) {
-                        console.log(err);
+                    if (err || !files) {
+                        cb(null, false);
                     } else {
                         cb(null, files);
                     }
@@ -112,8 +116,8 @@ module.exports = function (app, permission) {
             },
             filesPage: function (cb) {
                 fileDao.queryFilePageByCateId(req, file_cate_id, type == 'images' ? 1 : 2, currentPage, 20, function (err, page) {
-                    if (err) {
-                        console.log(err);
+                    if (err || !page) {
+                        cb(null, false);
                     } else {
                         cb(null, page);
                     }
@@ -163,7 +167,11 @@ module.exports = function (app, permission) {
         async.auto({
             files: function (cb) {
                 fileDao.storeFileCate(req, type == 'images' ? 1 : 2, parent_id, parent_ids + parent_id + ',', name, sort, null, null, function (err, result) {
-                    cb(null, result);
+                    if (err || !result) {
+                        cb(null, false);
+                    } else {
+                        cb(null, result);
+                    }
                 });
             }
         }, function (error, result) {
@@ -182,7 +190,11 @@ module.exports = function (app, permission) {
         async.auto({
             delFileCate: function (cb) {
                 fileDao.delFileCate(req.body.id, function (err, result) {
-                    cb(null, result);
+                    if (err || !result) {
+                        cb(null, false);
+                    } else {
+                        cb(null, result);
+                    }
                 });
             }
         }, function (error, result) {

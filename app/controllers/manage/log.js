@@ -32,7 +32,7 @@ module.exports = function (app, permission) {
       logsPage: ['logs', function (params, cb) {
         logDao.queryAllLogPage(req, 20, currentPage, function (err, usersPage) {
           if (err || !usersPage) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, usersPage);
           }
@@ -41,7 +41,7 @@ module.exports = function (app, permission) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/dict', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }

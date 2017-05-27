@@ -192,9 +192,7 @@
 
             $.post('/manage/role/store?menuIds='+menuIds,$('form[name="create"]').serialize(),function(data){
               if(data.result){
-                noticeInfo('success','感谢您的使用，修改成功',function(){
-                  window.location.href = '/manage/role';
-                });
+                window.location.href = '/manage/role';
               }else{
                 noticeInfo('fail',data.error);
               }
@@ -241,9 +239,7 @@
 
             $.post('/manage/role/store?menuIds='+menuIds,$('form[name="create"]').serialize(),function(data){
               if(data.result){
-                noticeInfo('success','感谢您的使用，创建成功',function(){
-                  window.location.href = '/manage/role';
-                });
+                window.location.href = '/manage/role';
               }else{
                 noticeInfo('fail',data.error);
               }

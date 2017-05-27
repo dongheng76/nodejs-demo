@@ -13,6 +13,7 @@ const util = require('../../utils');
 const menuDao = require('../../dao/menu');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
+const log = require('./log.js').logger;
 
 
 module.exports = function (app, permission) {
@@ -33,17 +34,32 @@ module.exports = function (app, permission) {
       },
       userTypes: function (cb) {
         dictUtil.getDictList('sys_user_type', function (err, userTypes) {
-          cb(null, userTypes);
+          if (err || !userTypes){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, userTypes);
+          }
         });
       },
       roles: function (cb) {
         userDao.queryRolesForAuth(req, function (err, roles) {
-          cb(null, roles);
+          if (err || !roles){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, roles);
+          }
         });
       },
       offices: function (cb) {
         officeDao.queryOffice(function (err, offices) {
-          cb(null, offices);
+          if (err || !offices){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, offices);
+          }
         });
       }
     }, function (error, result) {
@@ -65,8 +81,9 @@ module.exports = function (app, permission) {
     async.auto({
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/user', function (err, menu) {
-          if (err || !menu) {
-            cb(null, {});
+          if (err || !menu){
+            log.error(err);
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -74,27 +91,52 @@ module.exports = function (app, permission) {
       },
       userTypes: function (cb) {
         dictUtil.getDictList('sys_user_type', function (err, userTypes) {
-          cb(null, userTypes);
+          if (err || !userTypes){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, userTypes);
+          }
         });
       },
       roles: function (cb) {
         userDao.queryRolesForAuth(req, function (err, roles) {
-          cb(null, roles);
+          if (err || !roles){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, roles);
+          }
         });
       },
       offices: function (cb) {
         officeDao.queryOffice(function (err, offices) {
-          cb(null, offices);
+          if (err || !offices){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, offices);
+          }
         });
       },
       userInfo: function (cb) {
         userDao.queryUserById(id, function (err, user) {
-          cb(null, user);
+          if (err || !user){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, user);
+          }
         });
       },
       userRoles: function (cb) {
         userDao.queryUserRolesById(id, function (err, roles) {
-          cb(null, roles);
+          if (err || !roles){
+            log.error(err);
+            cb(null, false);
+          } else {
+            cb(null, roles);
+          }
         });
       }
     }, function (error, result) {
@@ -142,7 +184,7 @@ module.exports = function (app, permission) {
             if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
               userDao.updateUser(req, function (err, result) {
                 if (err || !result) {
-                  cb(null, {});
+                  cb(null, false);
                 } else {
                   cb(null, result);
                 }
@@ -150,7 +192,7 @@ module.exports = function (app, permission) {
             } else {
               userDao.saveUser(office_id, login_name, password, no, name, email, phone, mobile, user_type, photo, login_flag, remarks, req, function (err, result) {
                 if (err || !result) {
-                  cb(null, {});
+                  cb(null, false);
                 } else {
                   cb(null, result);
                 }
@@ -182,8 +224,11 @@ module.exports = function (app, permission) {
         if (req.body.id) {
           let id = req.body.id;
           userDao.delUserById(id, function (err, result) {
-
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           let ids = req.body.ids;
@@ -216,7 +261,7 @@ module.exports = function (app, permission) {
       users: function (cb) {
         userDao.queryAllUser(req, currentPage, 20, function (err, users) {
           if (err || !users) {
-            cb(null, []);
+            cb(null, false);
           } else {
             async.map(users, function (user, userCallback) {
               user.create_date = moment(user.create_date).format('YYYY-MM-DD HH:mm:ss');
@@ -234,7 +279,7 @@ module.exports = function (app, permission) {
       usersPage: ['users', function (params, cb) {
         userDao.queryAllUserPage(req, 20, currentPage, function (err, usersPage) {
           if (err || !usersPage) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, usersPage);
           }
@@ -243,7 +288,7 @@ module.exports = function (app, permission) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/user', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }

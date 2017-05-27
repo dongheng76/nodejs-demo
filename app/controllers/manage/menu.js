@@ -25,7 +25,7 @@ module.exports = function (app, permission) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/menu', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -33,7 +33,11 @@ module.exports = function (app, permission) {
       },
       menus: function (cb) {
         menuDao.queryMenus(function (err, menus) {
-          cb(null, menus);
+          if (err || !menus) {
+            cb(null, false);
+          } else {
+            cb(null, menus);
+          }
         });
       },
       maxSort: function (cb) {
@@ -47,7 +51,11 @@ module.exports = function (app, permission) {
       },
       menuParent: function (cb) {
         menuDao.queryMenuById(pId, function (err, menuParent) {
-          cb(null, menuParent);
+          if (err || !menuParent) {
+            cb(null, false);
+          } else {
+            cb(null, menuParent);
+          }
         });
       }
     }, function (error, result) {
@@ -79,19 +87,31 @@ module.exports = function (app, permission) {
       },
       menus: function (cb) {
         menuDao.queryMenus(function (err, menus) {
-          cb(null, menus);
+          if (err || !menus) {
+            cb(null, false);
+          } else {
+            cb(null, menus);
+          }
         });
       },
       menuParent: function (cb) {
         menuDao.queryMenuById(id, function (err, menu) {
           menuDao.queryMenuById(menu.parent_id, function (err, menuParent) {
-            cb(null, menuParent);
+            if (err || !menuParent) {
+              cb(null, false);
+            } else {
+              cb(null, menuParent);
+            }
           });
         });
       },
       menu: function (cb) {
         menuDao.queryMenuById(id, function (err, menu) {
-          cb(null, menu);
+          if (err || !menu) {
+            cb(null, false);
+          } else {
+            cb(null, menu);
+          }
         });
       }
     }, function (error, result) {

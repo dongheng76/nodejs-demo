@@ -15,7 +15,7 @@ exports.ROUTER = {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/dict', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -37,15 +37,14 @@ exports.ROUTER = {
        
         let password = req.body.oldpassword;
         let newpassword = req.body.password;
-        let loginName=req.session.user.login_name;
+        let loginName = req.session.user.login_name;
          
         // 验证原始密码是否正确
         userDao.queryUserByUserNameAndPwd(loginName, utils.md5(password), function (err, user) {
           if (typeof (user) != 'undefined' && user.id != null) {
             userDao.updateUserPwd(loginName,newpassword, function (err, result) {
-                cb(null, result);
-              });
-            
+              cb(null, result);
+            });            
           } else {
               cb(null, false);
             }

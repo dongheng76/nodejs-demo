@@ -82,7 +82,7 @@ module.exports = function (app, permission) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/office', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -90,31 +90,51 @@ module.exports = function (app, permission) {
       },
       officeTypes: function (cb) {
         dictUtil.getDictList('sys_office_type', function (err, officeTypes) {
-          cb(null, officeTypes);
+          if (err || !officeTypes) {
+            cb(null, false);
+          } else {
+            cb(null, officeTypes);
+          }
         });
       },
       // 查询第一级区域信息
       rootAreas: function (cb) {
         areaDao.queryAreasByPId('0', function (err, areas) {
-          cb(null, areas);
+          if (err || !areas) {
+            cb(null, false);
+          } else {
+            cb(null, areas);
+          }
         });
       },
       // 根据ID查询父亲机构信息
       office: function (cb) {
         officeDao.queryOfficeById(id, function (err, office) {
-          cb(null, office);
+          if (err || !office) {
+            cb(null, false);
+          } else {
+            cb(null, office);
+          }
         });
       },
       // 查询父级office信息
       parentOffice: ['office', function (param, cb) {
         officeDao.queryOfficeById(param.office.parent_id, function (err, office) {
-          cb(null, office);
+          if (err || !office) {
+            cb(null, false);
+          } else {
+            cb(null, office);
+          }
         });
       }],
       // 查询所属区域ID家谱名称
       areaName: ['office', function (param, cb) {
         areaDao.queryAreaGenealById(param.office.area_id, function (err, area_label) {
-          cb(null, area_label);
+          if (err || !area_label) {
+            cb(null, false);
+          } else {
+            cb(null, area_label);
+          }
         });
       }]
     }, function (error, result) {
@@ -157,11 +177,19 @@ module.exports = function (app, permission) {
         // 有ID就视为修改
         if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
           officeDao.updateOffice(req, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           officeDao.saveOffice(parent_id, name, sort, area_id, code, type, address, master, phone, fax, email, remarks, req, function (err, office) {
-            cb(null, office);
+            if (err || !office) {
+              cb(null, false);
+            } else {
+              cb(null, office);
+            }
           });
         }
       }
@@ -188,7 +216,11 @@ module.exports = function (app, permission) {
         if (req.body.id) {
           let id = req.body.id;
           officeDao.delOfficeById(id, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           cb(null, null);
@@ -220,7 +252,11 @@ module.exports = function (app, permission) {
       },
       offices: function (cb) {
         officeDao.queryOfficeForRecursion(function (err, offices) {
-          cb(null, offices);
+          if (err || !offices) {
+            cb(null, false);
+          } else {
+            cb(null, offices);
+          }
         });
       }
     }, function (error, result) {
