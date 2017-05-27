@@ -105,7 +105,7 @@ module.exports = function (app) {
     let result = routeTools.validate(req, res);
     if (result.session && result.sign) {
       // 为页面添加校验属性权限的方法
-      req.local.permission = function (value) {
+      res.locals.permission = function (value) {
         return pageValidate(req, value);
       };
       next();
