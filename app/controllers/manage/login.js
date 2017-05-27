@@ -102,7 +102,7 @@ module.exports = function (app, permission) {
   /**
    * 注销
    */
-  app.get('/manage/signup', function (req, res) {
+  app.all('/manage/signup', function (req, res) {
     delete req.session.user;
     res.json({
       result: true
@@ -111,7 +111,7 @@ module.exports = function (app, permission) {
   /**
    * Logout
    */
-  app.get('/manage/logout', function (req, res) {
+  app.all('/manage/logout', function (req, res) {
     req.logout();
     res.redirect('/login');
   });
