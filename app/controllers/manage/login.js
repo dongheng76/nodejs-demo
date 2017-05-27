@@ -12,7 +12,7 @@ const logDao = require('../../dao/log');
 const session = require('express-session');
 
 
-module.exports = function (app, permission) {
+module.exports = function (app, routeMethod) {
   /**
    * 登入登录
    * @param req
@@ -94,7 +94,7 @@ module.exports = function (app, permission) {
   /**
    * 登录
    */
-  app.all('/manage/login', function (req, res) {
+  app.get('/manage/login', function (req, res) {
     res.render('manage/login', {
       title: 'Login'
     });

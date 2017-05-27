@@ -14,7 +14,7 @@ const menuDao = require('../../dao/menu');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
-module.exports = function (app, permission) {
+module.exports = function (app, routeMethod) {
   /**
    * 创建菜单
    */

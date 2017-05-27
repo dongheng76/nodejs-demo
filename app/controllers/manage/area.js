@@ -10,9 +10,7 @@ const areaDao = require('../../dao/area');
 const dictUtil = require('../../utils/dict_utils');
 
 
-module.exports = function (app, permission) {
-  // 设置权限
-  permission('/manage/area', '1234');
+module.exports = function (app, routeMethod) {
   app.all('/manage/area', function (req, res) {
     async.auto({
       areas: function (cb) {

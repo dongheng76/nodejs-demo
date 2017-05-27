@@ -6,27 +6,14 @@
 const fs = require('fs');
 
 /**
- * 提供载入路由和权限的功能
+ * 提供载入路由和添加拓展函数的功能
  * @author 大猫猫
+ * 
  */
 let RouteTools = function () {
     let path = null;
     let express = null;
-    let permissions = {}; // 路由地址和权限属性的映射
-    /**
-     * 添加路由允许的权限值
-     * @param {*} url 路由地址
-     * @param {*} values 被允许的权限值
-     */
-    var permission = function (url, ...values) {
-        if (!url) {
-            throw new Error('permission url is empty');
-        }
-        if (!values || values.length === 0) {
-            throw new Error('url: ' + url + ' permission value is empty');
-        }
-        permissions[url] = values.join(',');
-    };
+    let methods = {};
     let scan = function (action) {
         action = action || '';
         action && (path += action);
@@ -42,7 +29,7 @@ let RouteTools = function () {
                 }
                 var controller = require(path + '/' + file);
                 if (Object.prototype.toString.call(controller) === '[object Function]') {
-                    controller(express, permission);
+                    controller(express, methods);
                 }
             });
     };
@@ -55,7 +42,7 @@ let RouteTools = function () {
     this.scan = function (app, ...filePath) {
         express = app;
         if (!filePath || filePath.length === 0) {
-            throw new Error('The filePath cannot be empty'); 
+            throw new Error('The filePath cannot be empty');
         }
         console.log('loadding routes start...');
         for (let i = 0; i < filePath.length; i++) {
@@ -64,18 +51,60 @@ let RouteTools = function () {
         }
         console.log('loadding routes end...');
     };
+
+    /**
+     * 拓展路由处理方法,为controller的routeMethod对象添加方法
+     * @param methodName 方法名称
+     * @param fun 处理函数
+     */
+    this.addRouteMethod = function (methodName, fun) {
+        if (!methodName) {
+            throw new Error('The methodName is empty');
+        }
+        if (!methodName) {
+            throw new Error('The methodName is empty');
+        }
+        methods[methodName] = fun;
+    };
+
+    let validates = {};
+
+    /**
+     * 添加验证url验证方法
+     * @param {string} methodName 调用验证结果的方法名称
+     * @param {function} fun 处理函数
+     */
+    this.addValidateMethod = function (methodName, fun) {
+        if (!methodName) {
+            throw new Error('The methodName is empty');
+        }
+        if (Object.prototype.toString.call(fun) !== '[object Function]') {
+            throw new Error('The fun must be a function');
+        }
+        validates[methodName] = fun;
+    };
+
     /**
      * 校验url权限
-     * @param {string} req request请求
-     * @return {string} success 表示成功, session 表示session校验失败 , sign 表示签名校验失败
+     * @param {string} req request
+     * @param {string} res response
+     * @return {object} result 各种校验类型的结果
+     * 例如:
+     * result = {
+     *  session:function(){
+     *    return false;
+     *  },
+     *  sign : function(){
+     *    return true;
+     *  }
+     * }
      */
-    this.validate = function (req) {
-        if (express === null) {
-            throw new Error('The route has not been loaded. Execute after invoking the scan method');
+    this.validate = function (req, res) {
+        var result = {};
+        for (let n in validates) {
+            result[n] = validates[n](req, res);
         }
-        let url = req.originalUrl;
-        let allow = permission[url];
-        return 'success';
+        return result;
     };
 };
 

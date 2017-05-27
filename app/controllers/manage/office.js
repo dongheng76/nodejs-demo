@@ -17,7 +17,7 @@ const moment = require('moment');
 const co = require('co');
 
 
-module.exports = function (app, permission) {
+module.exports = function (app, routeMethod) {
   /**
    * 创建机构
    */

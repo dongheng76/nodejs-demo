@@ -12,7 +12,7 @@ const util = require('../../utils');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
-module.exports = function (app, permission) {
+module.exports = function (app, routeMethod) {
 
   app.all('/manage/log', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1

@@ -21,7 +21,7 @@ const gm = require('gm').subClass({
     imageMagick: true
 });
 
-module.exports = function (app, permission) {
+module.exports = function (app, routeMethod) {
 
     /**
      * 创建用户

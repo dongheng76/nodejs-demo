@@ -9,7 +9,7 @@ const validator = require('validator');
 const menuDao = require('../../dao/menu');
 
 
-module.exports = function (app, permission) {
+module.exports = function (app, routeMethod) {
   app.all('/manage/panel', function (req, res) {
     menuDao.queryMenuByHref('/manage/panel', function (err, menu) {
       if (err || !menu) {
