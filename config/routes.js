@@ -77,6 +77,25 @@ const urlTools = require('url');
 }();
 
 /**
+ * 校验用户是否具有权限
+ * @param {*} req 
+ * @param {*} value 
+ */
+let pageValidate = function (req, value) {
+  if (!req.session || !req.session.menus) {
+    return false;
+  }
+  let values = value.split(',');
+  let menus = req.session.menus;
+  for (let i = 0; i < menus.length; i++) {
+    if (values.includes(menus[i].permission)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
  * Expose routes
  */
 module.exports = function (app) {
@@ -85,6 +104,10 @@ module.exports = function (app) {
   app.use(function (req, res, next) {
     let result = routeTools.validate(req, res);
     if (result.session && result.sign) {
+      // 为页面添加校验属性权限的方法
+      req.local.permission = function (value) {
+        return pageValidate(req, value);
+      };
       next();
     }
     if (!result.session) {
