@@ -27,7 +27,7 @@ module.exports = function (app, routeMethod) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/user', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -35,23 +35,39 @@ module.exports = function (app, routeMethod) {
       },
       dataScopes: function (cb) {
         dictUtil.getDictList('sys_data_scope', function (err, dataScopes) {
-          cb(null, dataScopes);
+          if (err || !dataScopes) {
+            cb(null, false);
+          } else {
+            cb(null, dataScopes);
+          }
         });
       },
       roles: function (cb) {
         userDao.queryRolesForAuth(req, function (err, roles) {
-          cb(null, roles);
+          if (err || !roles) {
+            cb(null, false);
+          } else {
+            cb(null, roles);
+          }
         });
       },
       offices: function (cb) {
         officeDao.queryOffice(function (err, offices) {
-          cb(null, offices);
+          if (err || !offices) {
+            cb(null, false);
+          } else {
+            cb(null, offices);
+          }
         });
       },
       maxSort: function (cb) {
         if (typeof (type) != 'undefined') {
           dictDao.queryMaxSortByType(type, function (err, maxSort) {
-            cb(null, maxSort);
+            if (err || !maxSort) {
+              cb(null, false);
+            } else {
+              cb(null, maxSort);
+            }
           });
         } else {
           cb(null, 0);
@@ -77,7 +93,7 @@ module.exports = function (app, routeMethod) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/dict', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -86,7 +102,7 @@ module.exports = function (app, routeMethod) {
       dict: function (cb) {
         dictDao.queryDictById(id, function (err, dict) {
           if (err || !dict) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, dict);
           }
@@ -116,11 +132,19 @@ module.exports = function (app, routeMethod) {
         // 有ID就视为修改
         if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
           userDao.updateUser(req, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           dictDao.saveDict(value, label, type, description, sort, remarks, req, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         }
       }
@@ -147,7 +171,11 @@ module.exports = function (app, routeMethod) {
         if (req.body.id) {
           let id = req.body.id;
           dictDao.delDictById(id, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           let ids = req.body.ids;
@@ -181,7 +209,7 @@ module.exports = function (app, routeMethod) {
       dicts: function (cb) {
         dictDao.queryAllDict(req, currentPage, 20, function (err, dicts) {
           if (err || !dicts) {
-            cb(null, dicts);
+            cb(null, false);
           } else {
             cb(null, dicts);
           }
@@ -191,7 +219,7 @@ module.exports = function (app, routeMethod) {
       dictsPage: ['dicts', function (params, cb) {
         dictDao.queryAllDictPage(req, 20, currentPage, function (err, usersPage) {
           if (err || !usersPage) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, usersPage);
           }
@@ -200,7 +228,7 @@ module.exports = function (app, routeMethod) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/dict', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -208,7 +236,11 @@ module.exports = function (app, routeMethod) {
       },
       dictTypes: function (cb) {
         dictDao.queryDictType(function (err, dictTypes) {
-          cb(null, dictTypes);
+          if (err || !dictTypes) {
+            cb(null, false);
+          } else {
+            cb(null, dictTypes);
+          }
         });
       }
     }, function (error, result) {

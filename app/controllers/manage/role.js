@@ -35,17 +35,29 @@ module.exports = function (app, routeMethod) {
       },
       dataScope: function (cb) {
         dictUtil.getDictList('sys_data_scope', function (err, dataScope) {
-          cb(null, dataScope);
+          if (err || !dataScope) {
+            cb(null, false);
+          } else {
+            cb(null, dataScope);
+          }
         });
       },
       offices: function (cb) {
         officeDao.queryOffice(function (err, offices) {
-          cb(null, offices);
+          if (err || !offices) {
+            cb(null, false);
+          } else {
+            cb(null, offices);
+          }
         });
       },
       menus: function (cb) {
         menuDao.queryMenus(function (err, sysmenus) {
-          cb(null, sysmenus);
+          if (err || !sysmenus) {
+            cb(null, false);
+          } else {
+            cb(null, sysmenus);
+          }
         });
       }
     }, function (error, result) {
@@ -68,7 +80,7 @@ module.exports = function (app, routeMethod) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/role', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -76,23 +88,39 @@ module.exports = function (app, routeMethod) {
       },
       dataScope: function (cb) {
         dictUtil.getDictList('sys_data_scope', function (err, dataScope) {
-          cb(null, dataScope);
+          if (err || !dataScope) {
+            cb(null, false);
+          } else {
+            cb(null, dataScope);
+          }
         });
       },
       offices: function (cb) {
         officeDao.queryOffice(function (err, offices) {
-          cb(null, offices);
+          if (err || !offices) {
+            cb(null, false);
+          } else {
+            cb(null, offices);
+          }
         });
       },
       menus: function (cb) {
         menuDao.queryMenus(function (err, sysmenus) {
-          cb(null, sysmenus);
+          if (err || !sysmenus) {
+            cb(null, false);
+          } else {
+            cb(null, sysmenus);
+          }
         });
       },
       role: function (cb) {
         if (typeof (id) != 'undefined') {
           roleDao.queryRoleById(id, function (err, role) {
-            cb(null, role);
+            if (err || !role) {
+              cb(null, false);
+            } else {
+              cb(null, role);
+            }
           });
         } else {
           cb(null, null);
@@ -110,7 +138,6 @@ module.exports = function (app, routeMethod) {
                   menuIds += menus[i].id + ',';
                 }
               }
-              console.log(menuIds);
               cb(null, menuIds);
             } else {
               cb(null, null);
@@ -154,11 +181,19 @@ module.exports = function (app, routeMethod) {
         // 有ID就视为修改
         if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
           roleDao.updateRole(req, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           roleDao.saveRole(office_id, name, enname, data_scope, is_sys, useable, remarks, req, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         }
       }
@@ -185,7 +220,11 @@ module.exports = function (app, routeMethod) {
         if (req.body.id) {
           let id = req.body.id;
           roleDao.delRoleById(id, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           let ids = req.body.ids;
@@ -245,12 +284,20 @@ module.exports = function (app, routeMethod) {
       },
       dictTypes: function (cb) {
         dictDao.queryDictType(function (err, dictTypes) {
-          cb(null, dictTypes);
+          if (err || !dictTypes) {
+            cb(null, false);
+          } else {
+            cb(null, dictTypes);
+          }
         });
       },
       dataScope: function (cb) {
         dictUtil.getDictList('sys_data_scope', function (err, dataScope) {
-          cb(null, dataScope);
+          if (err || !dataScope) {
+            cb(null, false);
+          } else {
+            cb(null, dataScope);
+          }
         });
       },
     }, function (error, result) {
@@ -259,7 +306,11 @@ module.exports = function (app, routeMethod) {
         async.auto({
           dataScopeLabel: function (cb) {
             dictUtil.getDictLabel(role.data_scope, 'sys_data_scope', '未知', function (err, label) {
-              cb(null, label);
+              if (err || !label) {
+                cb(null, false);
+              } else {
+                cb(null, label);
+              }
             });
           }
         }, function (err, result) {

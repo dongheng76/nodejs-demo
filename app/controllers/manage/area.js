@@ -15,13 +15,17 @@ module.exports = function (app, routeMethod) {
     async.auto({
       areas: function (cb) {
         areaDao.queryAreasByPId('0', function (err, areas) {
-          cb(null, areas);
+          if (err || !areas) {
+            cb(null, false);
+          } else {
+            cb(null, areas);
+          }
         });
       },
       currentMenu: function (cb) {
         menuDao.queryMenuByHref("/manage/area", function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -41,7 +45,11 @@ module.exports = function (app, routeMethod) {
     async.auto({
       areas: function (cb) {
         areaDao.queryAreasByPId(req.body.parent_id, function (err, areas) {
-          cb(null, areas);
+          if (err || !areas) {
+            cb(null, false);
+          } else {
+            cb(null, areas);
+          }
         });
       }
     }, function (error, result) {
@@ -59,7 +67,7 @@ module.exports = function (app, routeMethod) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref("/manage/area", function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -68,7 +76,7 @@ module.exports = function (app, routeMethod) {
       parentAreaInfo: function (cb) {
         areaDao.queryAreaById(req.query.parent_id, function (err, area) {
           if (err || !area) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, area);
           }
@@ -106,14 +114,22 @@ module.exports = function (app, routeMethod) {
         let type = req.body.type;
         let remarks = req.body.remarks;
 
-        //有ID就视为修改
+        // 有ID就视为修改
         if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
           areaDao.updateArea(req, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           areaDao.saveArea(parent_id, name, sort, code, type, remarks, req, function (err, result) {
-            cb(null, result);
+            if (err || !result) {
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         }
       }
@@ -146,7 +162,7 @@ module.exports = function (app, routeMethod) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref("/manage/area", function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -155,7 +171,7 @@ module.exports = function (app, routeMethod) {
       area: function (cb) {
         areaDao.queryAreaById(req.query.id, function (err, area) {
           if (err || !area) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, area);
           }
@@ -164,7 +180,7 @@ module.exports = function (app, routeMethod) {
       parentAreaInfo: ['area', function (param, cb) {
         areaDao.queryAreaById(param.area.parent_id, function (err, area) {
           if (err || !area) {
-            cb(null, {});
+            cb(null,false);
           } else {
             cb(null, area);
           }
@@ -188,7 +204,11 @@ module.exports = function (app, routeMethod) {
       delArea: function (cb) {
         let id = req.body.id;
         areaDao.delAreaById(id, function (err, result) {
-          cb(null, result);
+          if (err || !result) {
+            cb(null,false);
+          } else {
+            cb(null, result);
+          }
         });
       }
     }, function (error, result) {

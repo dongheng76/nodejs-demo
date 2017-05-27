@@ -25,7 +25,7 @@ module.exports = function (app, routeMethod) {
       currentMenu: function (cb) {
         menuDao.queryMenuByHref('/manage/menu', function (err, menu) {
           if (err || !menu) {
-            cb(null, {});
+            cb(null, false);
           } else {
             cb(null, menu);
           }
@@ -33,7 +33,11 @@ module.exports = function (app, routeMethod) {
       },
       menus: function (cb) {
         menuDao.queryMenus(function (err, menus) {
-          cb(null, menus);
+          if (err || !menus) {
+            cb(null, false);
+          } else {
+            cb(null, menus);
+          }
         });
       },
       maxSort: function (cb) {
@@ -47,7 +51,11 @@ module.exports = function (app, routeMethod) {
       },
       menuParent: function (cb) {
         menuDao.queryMenuById(pId, function (err, menuParent) {
-          cb(null, menuParent);
+          if (err || !menuParent) {
+            cb(null, false);
+          } else {
+            cb(null, menuParent);
+          }
         });
       }
     }, function (error, result) {
@@ -79,19 +87,31 @@ module.exports = function (app, routeMethod) {
       },
       menus: function (cb) {
         menuDao.queryMenus(function (err, menus) {
-          cb(null, menus);
+          if (err || !menus) {
+            cb(null, false);
+          } else {
+            cb(null, menus);
+          }
         });
       },
       menuParent: function (cb) {
         menuDao.queryMenuById(id, function (err, menu) {
           menuDao.queryMenuById(menu.parent_id, function (err, menuParent) {
-            cb(null, menuParent);
+            if (err || !menuParent) {
+              cb(null, false);
+            } else {
+              cb(null, menuParent);
+            }
           });
         });
       },
       menu: function (cb) {
         menuDao.queryMenuById(id, function (err, menu) {
-          cb(null, menu);
+          if (err || !menu) {
+            cb(null, false);
+          } else {
+            cb(null, menu);
+          }
         });
       }
     }, function (error, result) {
@@ -128,11 +148,35 @@ module.exports = function (app, routeMethod) {
         // 有ID就视为修改
         if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
           menuDao.updateMenu(req, function (err, result) {
-            cb(err, result);
+            if (err || !result) {
+              req.session.notice_info = {
+                info:'修改失败!请重试或检查下您传入的参数是否正确!',
+                type:'fail'
+              };
+              cb(null, false);
+            } else {
+              req.session.notice_info = {
+                info:'修改菜单成功!',
+                type:'success'
+              };
+              cb(err, result);
+            }
           });
         } else {
           menuDao.saveMenu(parent_id, name, sort, href, icon, permission, remarks, req, function (err, result) {
-            cb(err, result);
+            if (err || !result) {
+              req.session.notice_info = {
+                info:'保存失败!请重试或检查下您传入的参数是否正确!',
+                type:'fail'
+              };
+              cb(null, false);
+            } else {
+              req.session.notice_info = {
+                info:'保存菜单成功!',
+                type:'success'
+              };
+              cb(null, result);
+            }
           });
         }
       }
@@ -160,7 +204,11 @@ module.exports = function (app, routeMethod) {
         if (typeof (req.body.id) != 'undefined') {
           let id = req.body.id;
           menuDao.delMenuById(id, function (err, result) {
-            cb(null, result);
+            if (err || !result){
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           cb(null, false);
@@ -168,6 +216,11 @@ module.exports = function (app, routeMethod) {
       }
     }, function (error, result) {
       if (typeof (result.delMenu) != 'undefined') {
+        req.session.notice_info = {
+          info:'删除菜单成功!',
+          type:'success'
+        };
+        
         res.json({
           result: true
         });

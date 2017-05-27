@@ -144,9 +144,7 @@
           submitHandler:function(form){
             $.post('/manage/office/store',$('form[name="create"]').serialize(),function(data){
               if(data.result){
-                noticeInfo('success','感谢您的使用，修改成功',function(){
-                  window.history.back();
-                });
+                window.location.href='/manage/office';
               }else{
                 noticeInfo('fail',data.error);
               }
@@ -188,9 +186,7 @@
           submitHandler:function(form){
             $.post('/manage/office/store',$('form[name="create"]').serialize(),function(data){
               if(data.result){
-                noticeInfo('success','感谢您的使用，创建成功',function(){
-                  window.location.href='/manage/office';
-                });
+                window.location.href='/manage/office';
               }else{
                 noticeInfo('fail',data.error);
               }

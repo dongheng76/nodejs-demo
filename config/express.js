@@ -9,8 +9,8 @@ const fileUpload = require('express-fileupload');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const compression = require('compression');
-const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -18,18 +18,19 @@ const csrf = require('csurf');
 const cors = require('cors');
 
 const flash = require('connect-flash');
-const winston = require('winston');
 const helpers = require('view-helpers');
 const config = require('./');
 const pkg = require('../package.json');
 const env = process.env.NODE_ENV || 'development';
 const envConfig = require('./index');
 
+
 /**
  * Expose
  */
 
 module.exports = function (app) {
+
   // default options
   app.use(fileUpload());
 
@@ -43,19 +44,8 @@ module.exports = function (app) {
   // 设置静态文件夹路径，已达到不被当成控制层的作用
   app.use(express.static(config.root + '/public'));
 
-  // Use winston on production
-  let log = 'dev';
-  if (env !== 'development') {
-    log = {
-      stream: {
-        write: message => winston.info(message)
-      }
-    };
-  }
-
-  // Don't log during tests
-  // Logging middleware
-  if (env !== 'test') app.use(morgan(log));
+  // 输出控制层访问及其读秒库
+  app.use(logger('dev'));
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/app/views');
@@ -101,14 +91,18 @@ module.exports = function (app) {
 
   // 每次在进入路由前看看是否有用户或者菜单信息，有就放入locals中
   app.use(function (req, res, next) {
-    if (req.session.user != undefined) {
+    if (req.session.user != 'undefined') {
       res.locals.user = req.session.user;
     }
-    if (req.session.menus != undefined) {
+    if (req.session.menus != 'undefined') {
       res.locals.menus = req.session.menus;
     }
-    if (req.session.sysmenus != undefined) {
+    if (req.session.sysmenus != 'undefined') {
       res.locals.sysmenus = req.session.sysmenus;
+    }
+    if (req.session.notice_info != 'undefined') {
+      res.locals.notice_info = req.session.notice_info;
+      req.session.notice_info = null;
     }
     next();
   });
