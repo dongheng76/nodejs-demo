@@ -373,7 +373,7 @@
             $.post('/manage/menu/store',$('form[name="create"]').serialize(),function(data){
               if(data.result){
                 noticeInfo('success','感谢您的使用，修改成功',function(){
-                  window.history.back();
+                  window.location.href='/manage/menu';
                 });
               }else{
                 noticeInfo('fail',data.error);

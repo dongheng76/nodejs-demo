@@ -141,11 +141,19 @@ module.exports = function (app, permission) {
             // 有ID就视为修改
             if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
               userDao.updateUser(req, function (err, result) {
-                cb(null, result);
+                if (err || !result) {
+                  cb(null, {});
+                } else {
+                  cb(null, result);
+                }
               });
             } else {
               userDao.saveUser(office_id, login_name, password, no, name, email, phone, mobile, user_type, photo, login_flag, remarks, req, function (err, result) {
-                cb(null, result);
+                if (err || !result) {
+                  cb(null, {});
+                } else {
+                  cb(null, result);
+                }
               });
             }
           }
@@ -174,6 +182,7 @@ module.exports = function (app, permission) {
         if (req.body.id) {
           let id = req.body.id;
           userDao.delUserById(id, function (err, result) {
+
             cb(null, result);
           });
         } else {

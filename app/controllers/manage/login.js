@@ -91,6 +91,7 @@ module.exports = function (app, permission) {
       return;
     });
   });
+  
   /**
    * 登录
    */
@@ -99,11 +100,16 @@ module.exports = function (app, permission) {
       title: 'Login'
     });
   });
+
   /**
    * 注销
    */
   app.all('/manage/signup', function (req, res) {
-    delete req.session.user;
+    req.session.destroy(function (err) {
+      // cannot access session here
+      if (err)console.log(err);
+    });
+
     res.json({
       result: true
     });

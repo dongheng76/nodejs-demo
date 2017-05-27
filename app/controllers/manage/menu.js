@@ -128,11 +128,35 @@ module.exports = function (app, permission) {
         // 有ID就视为修改
         if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
           menuDao.updateMenu(req, function (err, result) {
-            cb(err, result);
+            if (err || !result) {
+              req.session.notice_info = {
+                info:'修改失败!请重试或检查下您传入的参数是否正确!',
+                type:'fail'
+              };
+              cb(null, false);
+            } else {
+              req.session.notice_info = {
+                info:'修改菜单成功!',
+                type:'success'
+              };
+              cb(err, result);
+            }
           });
         } else {
           menuDao.saveMenu(parent_id, name, sort, href, icon, permission, remarks, req, function (err, result) {
-            cb(err, result);
+            if (err || !result) {
+              req.session.notice_info = {
+                info:'保存失败!请重试或检查下您传入的参数是否正确!',
+                type:'fail'
+              };
+              cb(null, false);
+            } else {
+              req.session.notice_info = {
+                info:'保存菜单成功!',
+                type:'success'
+              };
+              cb(null, result);
+            }
           });
         }
       }
@@ -160,7 +184,11 @@ module.exports = function (app, permission) {
         if (typeof (req.body.id) != 'undefined') {
           let id = req.body.id;
           menuDao.delMenuById(id, function (err, result) {
-            cb(null, result);
+            if (err || !result){
+              cb(null, false);
+            } else {
+              cb(null, result);
+            }
           });
         } else {
           cb(null, false);
@@ -168,6 +196,11 @@ module.exports = function (app, permission) {
       }
     }, function (error, result) {
       if (typeof (result.delMenu) != 'undefined') {
+        req.session.notice_info = {
+          info:'删除菜单成功!',
+          type:'success'
+        };
+        
         res.json({
           result: true
         });
