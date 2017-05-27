@@ -14,14 +14,11 @@ const menuDao = require('../../dao/menu');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 
-exports.PERMISSION = {
-};
-
-exports.ROUTER = {
+module.exports = function (app, permission) {
   /**
    * 创建菜单
    */
-  '/manage/menu/create': function (req, res) {
+  app.all('/manage/menu/create', function (req, res) {
     let pId = req.query.parent_id ? req.query.parent_id : '1';
 
     async.auto({
@@ -62,12 +59,12 @@ exports.ROUTER = {
         menuParent: result.menuParent
       });
     });
-  },
+  });
 
   /**
    * 编辑用户
    */
-  '/manage/menu/edit': function (req, res) {
+  app.all('/manage/menu/edit', function (req, res) {
     let id = req.query.id;
 
     async.auto({
@@ -105,19 +102,19 @@ exports.ROUTER = {
         menu: result.menu
       });
     });
-  },
+  });
 
   /**
    *  显示用户详情
    */
-  '/manage/menu/show': function (req, res) {
+  app.all('/manage/menu/show', function (req, res) {
 
-  },
+  });
 
   /**
    *  保存一个菜单信息
    */
-  '/manage/menu/store': function (req, res) {
+  app.all('/manage/menu/store', function (req, res) {
     async.auto({
       store: function (cb) {
         let parent_id = req.body.parent_id;
@@ -151,12 +148,12 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
 
   /**
    *  删除一个菜单信息
    */
-  '/manage/menu/delete': function (req, res) {
+  app.all('/manage/menu/delete', function (req, res) {
     async.auto({
       delMenu: function (cb) {
 
@@ -180,9 +177,9 @@ exports.ROUTER = {
         });
       }
     });
-  },
+  });
 
-  '/manage/menu': function (req, res) {
+  app.all('/manage/menu', function (req, res) {
 
     async.auto({
       currentMenu: function (cb) {
@@ -206,5 +203,5 @@ exports.ROUTER = {
         menus: result.menus
       });
     });
-  }
+  });
 };
