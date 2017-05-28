@@ -92,16 +92,6 @@ const urlTools = require('url');
  * 添加sign路由方法以及添加sign校验方法
  */
 ~ function () {
-  let signPermissions = [];
-  /**
-   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
-   */
-  routeTools.addRouteMethod('sign', function (url) {
-    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-      throw new Error('sign url is empty');
-    }
-    signPermissions.push(url.trim());
-  });
 
   /**
    * 验证sign名具体代码
@@ -119,6 +109,17 @@ const urlTools = require('url');
     */
     return true;
   };
+
+  let signPermissions = [];
+  /**
+   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
+   */
+  routeTools.addRouteMethod('sign', function (url) {
+    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+      throw new Error('sign url is empty');
+    }
+    signPermissions.push(url.trim());
+  });
 
   routeTools.addValidateMethod('sign', function (req, res) {
     let url = urlTools.parse(req.url).pathname;
