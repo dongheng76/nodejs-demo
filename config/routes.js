@@ -103,15 +103,13 @@ const urlTools = require('url');
     signPermissions.push(url.trim());
   });
 
-  routeTools.addValidateMethod('sign', function (req, res) {
-    let url = urlTools.parse(req.url).pathname;
-    if (!signPermissions.includes[url]) {
-      return true;
-    }
-    // 需要sign验证 , 验证sign是不是合法
-    // 验证代码这里写
-
-    /* 
+  /**
+   * 验证sign名具体代码
+   * @param {*} req 
+   * @param {*} res 
+   */
+  let signValidate = function (req, res) {
+    /*
     如果验证失败,返回结果取消此段注释
     res.json({
         result: 403,
@@ -120,6 +118,14 @@ const urlTools = require('url');
     return false;
     */
     return true;
+  };
+
+  routeTools.addValidateMethod('sign', function (req, res) {
+    let url = urlTools.parse(req.url).pathname;
+    if (!signPermissions.includes[url]) {
+      return true;
+    }
+    return signValidate(req,res);
   });
 }();
 
