@@ -139,7 +139,7 @@ module.exports = function (app) {
     let result = routeTools.validate(req, res);
     for (let r in result) {
       if (result.hasOwnProperty(r)) {
-        if (!result) {
+        if (!result[r]) {
           return;
         }
       }
