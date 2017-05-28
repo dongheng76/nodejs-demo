@@ -15,7 +15,7 @@ const urlTools = require('url');
    */
   routeTools.addRouteMethod('session', function (url, ...values) {
     if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-      throw new Error('permission url muse be string');
+      throw new Error('permission url muse be string and not empty');
     }
     url = url.trim();
     if (!values || values.length === 0) {
@@ -39,10 +39,16 @@ const urlTools = require('url');
    * @param {*} value 
    */
   let pageValidate = function (req, value) {
+    if (!value || Object.prototype.toString.call(value) !== '[object String]') {
+      throw new Error('PERMISSION value muse be string and not empty');
+    }
     if (!req.session || !req.session.menus) {
       return false;
     }
     let values = value.split(',');
+    for (let i = 0; i < values.length; i++) {
+      values[i] = values[i].trim();
+    }
     let menus = req.session.menus;
     for (let i = 0; i < menus.length; i++) {
       if (values.includes(menus[i].permission)) {
