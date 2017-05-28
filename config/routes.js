@@ -122,7 +122,7 @@ const urlTools = require('url');
  */
 module.exports = function (app) {
 
-  // 权限校验拦截
+  // routes相关拦截
   app.use(function (req, res, next) {
     let result = routeTools.validate(req, res);
     for (let r in result) {
