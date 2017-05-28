@@ -36,8 +36,10 @@
               <%-include("../include/select",{options:dictTypes,name:'type',width:260})%>
             </div>
             <button type="submit" class="btn-glow"><i class="icon-search"></i> 搜索</button>
+            <%if(PERMISSION('sys:dict:edit')){%>
             <a href="/manage/dict/create" ><div class="btn-glow"><i class="icon-plus"></i> 增加新字典</div></a>
             <a href="javascript:void(0)" id="dels"><div class="btn-glow"><i class="icon-minus"></i> 删除所选</div></a>
+            <%}%>
           </div>
         </form>
       </div>
@@ -46,10 +48,12 @@
         <table class="table table-hover">
           <thead>
           <tr>
+            <%if(PERMISSION('sys:dict:edit')){%>
             <th class="span1">
               <input type="checkbox" name="mainCheckbox">
               字典type
             </th>
+            <%}%>
             <th class="span1">
               <span class="line"></span>字典value
             </th>
@@ -68,10 +72,12 @@
 
           <% dicts.forEach(function(dict){%>
           <tr>
+            <%if(PERMISSION('sys:dict:edit')){%>
             <td>
               <input type="checkbox" name="subCheckbox" dictId="<%=dict.id%>">
               <a href="/manage/dict?type=<%=dict.type%>" class="name"><%=dict.type%></a>
             </td>
+            <%}%>
             <td class="description">
               <%=dict.value%>
             </td>
@@ -84,9 +90,11 @@
             <td>
               <span class="label label-success">有效</span>
               <ul class="actions">
+                <%if(PERMISSION('sys:dict:edit')){%>
                 <li><a href="/manage/dict/create?type=<%=dict.type%>">添加</a></li>
                 <li><a href="/manage/dict/edit?id=<%=dict.id%>">编辑</a></li>
                 <li class="last"><a href="javascript:void(0)" onclick="javascript:delDict('<%=dict.id%>')">删除</a></li>
+                <%}%>
               </ul>
             </td>
           </tr>
@@ -96,11 +104,9 @@
         </table>
       </div>
     </div>
-    <%if(permission('sys:dict:show')){%>
     <div class="pagination">
       <%-include("../include/page")%>
     </div>
-    <%}%>
   </div>
 </div>
 

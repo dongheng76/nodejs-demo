@@ -6,7 +6,7 @@ const routeTools = require('./routeTools');
 const urlTools = require('url');
 
 /**
- * 添加路由方法以及添加校验方法
+ * 添加session路由方法以及添加校验方法
  */
 ~ function () {
   let sessionPermissions = {};
@@ -14,23 +14,32 @@ const urlTools = require('url');
    * 添加验证session的url地址处理方法
    */
   routeTools.addRouteMethod('session', function (url, ...values) {
-    if (!url) {
-      throw new Error('permission url is empty');
+    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+      throw new Error('permission url muse be string');
     }
+    url = url.trim();
     if (!values || values.length === 0) {
       throw new Error('url: ' + url + ' permission value is empty');
     }
-    sessionPermissions[url] = values.join(',');
+    let result = [];
+    values.forEach(function (element) {
+      if (Object.prototype.toString.call(element) === '[object String]') {
+        result.push(element.trim());
+      }
+    }, this);
+    if (result.length === 0) {
+      throw new Error('url: ' + url + ' permission value is empty');
+    }
+    sessionPermissions[url] = result.join(',');
   });
 
-  routeTools.addValidateMethod('session', function (req, res) {
-    let url = urlTools.parse(req.url).pathname;
-    let value = sessionPermissions[url];
-
-    if (!value) {
-      return true;
-    }
-    if (!req.session || !req.session.user || !req.session.menus) {
+  /**
+   * 校验页面配置属性是否存在用户session中
+   * @param {*} req 
+   * @param {*} value 
+   */
+  let pageValidate = function (req, value) {
+    if (!req.session || !req.session.menus) {
       return false;
     }
     let values = value.split(',');
@@ -40,17 +49,52 @@ const urlTools = require('url');
         return true;
       }
     }
+    return false;
+  };
 
+  /**
+   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
+   */
+  routeTools.addValidateMethod('session', function (req, res) {
+    let url = urlTools.parse(req.url).pathname;
+    let value = sessionPermissions[url];
+
+    if (!value) {
+      return true;
+    }
+    if (!req.session || !req.session.user || !req.session.menus) {
+      res.redirect('/manage/login');
+      return false;
+    }
+    let values = value.split(',');
+    let menus = req.session.menus;
+    for (let i = 0; i < menus.length; i++) {
+      if (values.includes(menus[i].permission)) {
+        // session验证成功则为页面添加校验属性权限的方法
+        res.locals.PERMISSION = function (value) {
+          return pageValidate(req, value);
+        };
+        return true;
+      }
+    }
+    res.status(403).render('403');
     return false;
   });
+}();
 
+/**
+ * 添加sign路由方法以及添加sign校验方法
+ */
+~ function () {
   let signPermissions = [];
-
+  /**
+   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
+   */
   routeTools.addRouteMethod('sign', function (url) {
-    if (!url) {
+    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
       throw new Error('sign url is empty');
     }
-    signPermissions.push(url);
+    signPermissions.push(url.trim());
   });
 
   routeTools.addValidateMethod('sign', function (req, res) {
@@ -59,28 +103,19 @@ const urlTools = require('url');
       return true;
     }
     // 需要sign验证 , 验证sign是不是合法
+    // 验证代码这里写
+
+    /* 
+    如果验证失败,返回结果取消此段注释
+    res.json({
+        result: 403,
+        message: "You don't have permission"
+      });
+    return false;
+    */
     return true;
   });
 }();
-
-/**
- * 校验用户是否具有权限
- * @param {*} req 
- * @param {*} value 
- */
-let pageValidate = function (req, value) {
-  if (!req.session || !req.session.menus) {
-    return false;
-  }
-  let values = value.split(',');
-  let menus = req.session.menus;
-  for (let i = 0; i < menus.length; i++) {
-    if (values.includes(menus[i].permission)) {
-      return true;
-    }
-  }
-  return false;
-};
 
 /**
  * Expose routes
@@ -90,21 +125,14 @@ module.exports = function (app) {
   // 权限校验拦截
   app.use(function (req, res, next) {
     let result = routeTools.validate(req, res);
-    if (result.session && result.sign) {
-      // 为页面添加校验属性权限的方法
-      res.locals.permission = function (value) {
-        return pageValidate(req, value);
-      };
-      next();
-    }
-    if (!result.session) {
-      if (!req.session || !req.session.user) {
-        res.redirect('/manage/login');
-      } else {
-        res.status(403).render('403');
+    for (let r in result) {
+      if (result.hasOwnProperty(r)) {
+        if (!result) {
+          return;
+        }
       }
     }
-
+    next();
   });
 
   routeTools.scan(app, path); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
