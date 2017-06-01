@@ -23,10 +23,8 @@ exports.queryMenuById = function (id, callback) {
 /**
  * 根据地址查询菜单信息
  */
-exports.queryMenuByHref = function (href, callback) {
-    mysql.queryOne("select sm.* from sys_menu sm where sm.href = ? and sm.del_flag='0'", [href], function (err, menus) {
-        callback(err, menus);
-    });
+exports.queryMenuByHref = function (href) {
+    return mysql.queryOne("select sm.* from sys_menu sm where sm.href = ? and sm.del_flag='0'", [href]);
 };
 
 /**

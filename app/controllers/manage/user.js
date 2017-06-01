@@ -13,62 +13,25 @@ const util = require('../../utils');
 const menuDao = require('../../dao/menu');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
-const log = require('./log.js').logger;
 
 
 module.exports = function (app, routeMethod) {
+
   /**
    * 创建用户
    */
   app.all('/manage/user/create', function (req, res) {
-
-    async.auto({
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref('/manage/user', function (err, menu) {
-          if (err || !menu) {
-            cb(null, {});
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-      userTypes: function (cb) {
-        dictUtil.getDictList('sys_user_type', function (err, userTypes) {
-          if (err || !userTypes){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, userTypes);
-          }
-        });
-      },
-      roles: function (cb) {
-        userDao.queryRolesForAuth(req, function (err, roles) {
-          if (err || !roles){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, roles);
-          }
-        });
-      },
-      offices: function (cb) {
-        officeDao.queryOffice(function (err, offices) {
-          if (err || !offices){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, offices);
-          }
-        });
-      }
-    }, function (error, result) {
-
+    Promise.all([
+      menuDao.queryMenuByHref('/manage/user'),
+      dictUtil.getDictList('sys_user_type'),
+      userDao.queryRolesForAuth(req),
+      officeDao.queryOffice()
+    ]).then(result => {
       res.render('manage/user/create', {
-        currentMenu: result.currentMenu,
-        userTypes: result.userTypes,
-        roles: result.roles,
-        offices: JSON.stringify(result.offices)
+        currentMenu: result[0],
+        userTypes: result[1],
+        roles: result[2],
+        offices: JSON.stringify(result[3])
       });
     });
   });
@@ -78,75 +41,21 @@ module.exports = function (app, routeMethod) {
   app.all('/manage/user/edit', function (req, res) {
     let id = req.query.id;
 
-    async.auto({
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref('/manage/user', function (err, menu) {
-          if (err || !menu){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-      userTypes: function (cb) {
-        dictUtil.getDictList('sys_user_type', function (err, userTypes) {
-          if (err || !userTypes){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, userTypes);
-          }
-        });
-      },
-      roles: function (cb) {
-        userDao.queryRolesForAuth(req, function (err, roles) {
-          if (err || !roles){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, roles);
-          }
-        });
-      },
-      offices: function (cb) {
-        officeDao.queryOffice(function (err, offices) {
-          if (err || !offices){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, offices);
-          }
-        });
-      },
-      userInfo: function (cb) {
-        userDao.queryUserById(id, function (err, user) {
-          if (err || !user){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, user);
-          }
-        });
-      },
-      userRoles: function (cb) {
-        userDao.queryUserRolesById(id, function (err, roles) {
-          if (err || !roles){
-            log.error(err);
-            cb(null, false);
-          } else {
-            cb(null, roles);
-          }
-        });
-      }
-    }, function (error, result) {
+    Promise.all([
+      menuDao.queryMenuByHref('/manage/user'),
+      dictUtil.getDictList('sys_user_type'),
+      userDao.queryRolesForAuth(req),
+      officeDao.queryOffice(),
+      userDao.queryUserById(id),
+      userDao.queryUserRolesById(id)
+    ]).then(result => {
       res.render('manage/user/create', {
-        currentMenu: result.currentMenu,
-        userTypes: result.userTypes,
-        roles: result.roles,
-        offices: JSON.stringify(result.offices),
-        userInfo: result.userInfo,
-        userRoles: result.userRoles
+        currentMenu: result[0],
+        userTypes: result[1],
+        roles: result[2],
+        offices: JSON.stringify(result[3]),
+        userInfo: result[4],
+        userRoles: result[5]
       });
     });
   });
@@ -159,146 +68,121 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个用户信息
    */
-  app.all('/manage/user/store', function (req, res) {
-    async.auto({
-      store: function (cb) {
-        let office_id = req.body.office_id;
-        let login_name = req.body.login_name;
-        let password = req.body.password;
-        let no = req.body.no;
-        let name = req.body.name;
-        let email = req.body.email;
-        let phone = req.body.phone;
-        let mobile = req.body.mobile;
-        let user_type = req.body.user_type;
-        let photo = req.body.photo;
-        let login_flag = req.body.login_flag;
-        let remarks = req.body.remarks;
+  app.all('/manage/user/store',async function (req, res) {
+    let office_id = req.body.office_id;
+    let login_name = req.body.login_name;
+    let password = req.body.password;
+    let no = req.body.no;
+    let name = req.body.name;
+    let email = req.body.email;
+    let phone = req.body.phone;
+    let mobile = req.body.mobile;
+    let user_type = req.body.user_type;
+    let photo = req.body.photo;
+    let login_flag = req.body.login_flag;
+    let remarks = req.body.remarks;
 
-        // 登录名不能重复
-        userDao.queryUserByLoginId(login_name, function (err, user) {
-          if (typeof (user) != 'undefined' && user.id != null) {
-            cb(null, false);
-          } else {
-            // 有ID就视为修改
-            if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
-              userDao.updateUser(req, function (err, result) {
-                if (err || !result) {
-                  cb(null, false);
-                } else {
-                  cb(null, result);
-                }
-              });
-            } else {
-              userDao.saveUser(office_id, login_name, password, no, name, email, phone, mobile, user_type, photo, login_flag, remarks, req, function (err, result) {
-                if (err || !result) {
-                  cb(null, false);
-                } else {
-                  cb(null, result);
-                }
-              });
-            }
-          }
-        });
+    // 登录名不能重复
+    let user = await userDao.queryUserByLoginId(login_name);
+
+    if (typeof (user) != 'undefined' && user.id != null) {
+      res.json({
+        result: false,
+        error: '登录名重复请修改登录名'
+      });
+    } else {
+      let result = null;
+      // 有ID就视为修改
+      if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
+        result = await userDao.updateUser(req);
+        req.session.notice_info = {
+          info:'修改用户成功!',
+          type:'success'
+        };
+      } else {
+        result = await userDao.saveUser(office_id, login_name, password, no, name, email, phone, mobile, user_type, photo, login_flag, remarks, req);
+        req.session.notice_info = {
+          info:'保存用户成功!',
+          type:'success'
+        };
       }
-    }, function (error, result) {
-      if (result.store) {
+      if (result){
         res.json({
           result: true
         });
       } else {
+        req.session.notice_info = null;
+
         res.json({
           result: false,
-          error: '登录名重复请修改登录名'
+          error: '网络出现问题请重试!'
         });
       }
-    });
+    }
+
+    
   });
   /**
    *  删除一个用户信息
    */
-  app.all('/manage/user/delete', function (req, res) {
-    async.auto({
-      delUser: function (cb) {
+  app.all('/manage/user/delete',async function (req, res) {
+    if (req.body.id) {
+      let id = req.body.id;
+      let result = userDao.delUserById(id);
+      if (result){
+        req.session.notice_info = {
+          info:'删除用户成功!',
+          type:'success'
+        };
 
-        if (req.body.id) {
-          let id = req.body.id;
-          userDao.delUserById(id, function (err, result) {
-            if (err || !result) {
-              cb(null, false);
-            } else {
-              cb(null, result);
-            }
-          });
-        } else {
-          let ids = req.body.ids;
-          let idsAry = ids.split('|');
-
-          async.map(idsAry, function (id, idCallBack) {
-            userDao.delUserById(id, function (err, result) {
-              idCallBack(null, result);
-            });
-          }, function (err, result) {
-            cb(null, result);
-          });
-        }
-      }
-    }, function (error, result) {
-      if (result.delUser) {
         res.json({
           result: true
         });
       } else {
+        req.session.notice_info = {
+          info:'删除用户失败请重试!',
+          type:'fail'
+        };
+
         res.json({
           result: false
         });
       }
-    });
+    } else {
+      let ids = req.body.ids;
+      let idsAry = ids.split('|');
+
+      let promiseIds = idsAry.map(id => {
+        return userDao.delUserById(id);
+      });
+
+      Promise.all(promiseIds).then(() => {
+        res.json({
+          result: true
+        });
+      });
+    }
   });
+
   app.all('/manage/user', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
-    async.auto({
-      users: function (cb) {
-        userDao.queryAllUser(req, currentPage, 20, function (err, users) {
-          if (err || !users) {
-            cb(null, false);
-          } else {
-            async.map(users, function (user, userCallback) {
-              user.create_date = moment(user.create_date).format('YYYY-MM-DD HH:mm:ss');
-              dictUtil.getDictLabel(user.user_type, 'sys_user_type', '未知', function (err, label) {
-                user.user_type_label = label;
-                userCallback(null, user);
-              });
-            }, function (err, result) {
-              cb(null, result);
-            });
-          }
-        });
-      },
+
+    Promise.all([
+      userDao.queryAllUser(req, currentPage, 20),
       // 查询用户数量
-      usersPage: ['users', function (params, cb) {
-        userDao.queryAllUserPage(req, 20, currentPage, function (err, usersPage) {
-          if (err || !usersPage) {
-            cb(null, false);
-          } else {
-            cb(null, usersPage);
-          }
-        });
-      }],
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref('/manage/user', function (err, menu) {
-          if (err || !menu) {
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
+      userDao.queryAllUserPage(req, 20, currentPage),
+      menuDao.queryMenuByHref('/manage/user')
+    ]).then(async result => { 
+      let users = result[0];
+      for (let i = 0; i < users.length;i++){
+        users[i].create_date = moment(users[i].create_date).format('YYYY-MM-DD HH:mm:ss');
+        users[i].user_type_label = await dictUtil.getDictLabel(users[i].user_type, 'sys_user_type', '未知');
       }
-    }, function (error, result) {
+
       res.render('manage/user/index', {
-        currentMenu: result.currentMenu,
-        users: result.users,
-        page: result.usersPage,
+        currentMenu: result[2],
+        users: users,
+        page: result[1],
         condition: req.query
       });
     });

@@ -11,14 +11,10 @@ const menuDao = require('../../dao/menu');
 
 module.exports = function (app, routeMethod) {
   app.all('/manage/panel', function (req, res) {
-    menuDao.queryMenuByHref('/manage/panel', function (err, menu) {
-      if (err || !menu) {
-        return;
-      } else {
-        res.render('manage/panel', {
-          currentMenu: menu
-        });
-      }
+    Promise.all([menuDao.queryMenuByHref('/manage/panel')]).then(result => {
+      res.render('manage/panel', {
+        currentMenu: result[0]
+      });
     });
   });
 };

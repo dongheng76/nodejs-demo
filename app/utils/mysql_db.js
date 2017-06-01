@@ -6,6 +6,7 @@ const util = require('util');
 const mysql = require('mysql');
 const config = require('./../../config/index');
 const log = require('./log.js').logger;
+const async = require('async');
 
 log.info('init pool start..');
 
@@ -27,98 +28,125 @@ exports.getMysql = function () {
     return mysql;
 };
 
+let getConnection = function () {
+    return new Promise((resolve, reject) => {
+        pool.getConnection(function (err, conn) {
+            if (err) {
+                reject(err);
+            }
+            resolve(conn);
+        });
+    });
+};
+
 
 /**
  * 查询所有记录
  */
-exports.query = function (sql, data, callback) {
-    pool.getConnection(function (err, conn) {
-        if (util.isArray(data)) {
+exports.query = async function (sql, data) {
+    let conn = await getConnection();
+    if (util.isArray(data)) {
+        return new Promise(function (resolve, reject) {
             conn.query(sql, data, function (err, rows) {
                 // return object back to pool
                 conn.release();
                 if (err) {
                     log.error(err);
-                    callback(err, null);
-                    return;
+                    reject(err);
                 }
-                callback(err, rows);// 必须有callback
+                resolve(rows);
             });
-        }
-        else {
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    else {
+        return new Promise(function (resolve, reject) {
             conn.query(sql, function (err, rows) {
                 // return object back to pool
                 conn.release();
                 if (err) {
                     log.error(err);
-                    callback(err, null);
-                    return;
+                    reject(err);
                 }
-                callback(err, rows);// 必须有callback
+                resolve(rows);// 必须有callback
             });
-        }
-    });
+        }).catch(function (error) {
+            log.error(error);
+        });
+    }
 };
 
 /**
  * 查询记录，但只返回一条
  */
-exports.queryOne = function (sql, data, callback) {
-    pool.getConnection(function (err, conn) {
-        if (util.isArray(data)) {
+exports.queryOne = async function (sql, data) {
+    let conn = await getConnection();
+    if (util.isArray(data)) {
+        return new Promise(function (resolve, reject) {
             conn.query(sql, data, function (err, rows) {
                 conn.release();
                 if (err) {
                     log.error(err);
-                    callback(err, null);
-                    return;
+                    reject(err);
                 }
-                callback(err, rows[0]);// 必须有callback
+                resolve(rows[0]);// 必须有callback
             });
-        }
-        else {
+        }).catch(function (error) {
+            log.error(error);
+        });
+    }
+    else {
+        return new Promise(function (resolve, reject) {
             conn.query(sql, function (err, rows) {
                 // return object back to pool
                 conn.release();
                 if (err) {
                     log.error(err);
-                    callback(err, null);
-                    return;
+                    reject(err);
                 }
-                callback(err, rows[0]);// 必须有callback
+                resolve(rows[0]);// 必须有callback
             });
-        }
-    });
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 };
 
 /**
  * update或delete数据
  */
-exports.update = function (sql, data, callback) {
-    pool.getConnection(function (err, conn) {
-        if (util.isArray(data)) {
-            conn.query(sql, data, function (err, rows) {
+exports.update = async function (sql, data) {
+    let conn = await getConnection();
+    if (util.isArray(data)) {
+        return new Promise(function (resolve, reject) {
+            conn.query(sql, data, function (err, result) {
                 // return object back to pool
                 conn.release();
                 if (err) {
                     log.error(err);
-                    callback(err, null);
-                    return;
+                    reject(err);
                 }
-                callback(err, rows);// 必须有callback
+                console.log(result);
+                resolve(result);// 必须有callback
             });
-        }
-        else {
-            conn.query(sql, function (err, rows) {
+        }).catch(function (error) {
+            log.error(error);
+        });
+    }
+    else {
+        return new Promise(function (resolve, reject) {
+            conn.query(sql, function (err, result) {
                 // return object back to pool
                 conn.release();
                 if (err) {
                     log.error(err);
-                    callback(err, null);
-                    return;
+                    reject(err);
                 }
-                callback(err, rows);// 必须有callback
+                resolve(result);// 必须有callback
             });
-        }
-    });
+        }).catch(function (error) {
+            log.error(error);
+        });
+    }
 };

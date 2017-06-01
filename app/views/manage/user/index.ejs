@@ -142,9 +142,7 @@
               id:id
             },function(data){
               if(data.result){
-                noticeInfo('success','感谢您的使用，删除成功',function(){
-                  window.location.reload();
-                });
+                window.location.reload();
               }else{
                 noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!')
               }
@@ -217,9 +215,7 @@
               _csrf:'<%= csrf_token %>'
             },function(data){
               if(data.result){
-                noticeInfo('success','感谢您的使用，删除成功',function(){
-                  window.location.reload();
-                });
+                window.location.reload();
               }else{
                 noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!');
               }

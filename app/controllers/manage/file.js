@@ -24,34 +24,16 @@ const gm = require('gm').subClass({
 module.exports = function (app, routeMethod) {
 
     /**
-     * 创建用户
+     * 创建文件
      */
     app.all('/manage/file/create', function (req, res) {
-
-        async.auto({
-            currentMenu: function (cb) {
-                menuDao.queryMenuByHref('/manage/user', function (err, menu) {
-                    if (err || !menu) {
-                        cb(null, {});
-                    } else {
-                        cb(null, menu);
-                    }
-                });
-            },
-            userTypes: function (cb) {
-                dictUtil.getDictList('sys_user_type', function (err, userTypes) {
-                    if (err || !userTypes) {
-                        cb(null, {});
-                    } else {
-                        cb(null, userTypes);
-                    }
-                });
-            }
-        }, function (error, result) {
-
+        Promise.all([
+            menuDao.queryMenuByHref('/manage/user'),
+            dictUtil.getDictList('sys_user_type')
+        ]).then(result => {
             res.render('manage/user/create', {
-                currentMenu: result.currentMenu,
-                userTypes: result.userTypes
+                currentMenu: result[0],
+                userTypes: result[1]
             });
         });
     });
@@ -61,18 +43,10 @@ module.exports = function (app, routeMethod) {
      */
     app.all('/manage/file/getfolders', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 图片类型
-        async.auto({
-            folders: function (cb) {
-                fileDao.queryCatalogByUser(req, type == 'images' ? '1' : '2', function (err, folders) {
-                    if (err || !folders) {
-                        cb(null, false);
-                    } else {
-                        cb(null, folders);
-                    }
-                });
-            }
-        }, function (error, result) {
-            let folders = result.folders;
+        Promise.all([
+            fileDao.queryCatalogByUser(req, type == 'images' ? '1' : '2')
+        ]).then(result => {
+            let folders = result[0];
             if (type == 'images') {
                 folders.push({
                     id: 0,
@@ -104,27 +78,11 @@ module.exports = function (app, routeMethod) {
         let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
         let file_cate_id = req.query.file_cate_id ? req.query.file_cate_id : '0';
 
-        async.auto({
-            files: function (cb) {
-                fileDao.queryFileByCateId(req, file_cate_id, type == 'images' ? 1 : 2, currentPage, 20, function (err, files) {
-                    if (err || !files) {
-                        cb(null, false);
-                    } else {
-                        cb(null, files);
-                    }
-                });
-            },
-            filesPage: function (cb) {
-                fileDao.queryFilePageByCateId(req, file_cate_id, type == 'images' ? 1 : 2, currentPage, 20, function (err, page) {
-                    if (err || !page) {
-                        cb(null, false);
-                    } else {
-                        cb(null, page);
-                    }
-                });
-            }
-        }, function (error, result) {
-            let files = result.files;
+        Promise.all([
+            fileDao.queryFileByCateId(req, file_cate_id, type == 'images' ? 1 : 2, currentPage, 20),
+            fileDao.queryFilePageByCateId(req, file_cate_id, type == 'images' ? 1 : 2, currentPage, 20)
+        ]).then(result => {
+            let files = result[0];
             files.forEach(function (file) {
                 file.title = file.ori_name;
                 if (file.type == 1) {
@@ -133,7 +91,7 @@ module.exports = function (app, routeMethod) {
                     file.type = 'file';
                 }
             });
-            let page = result.filesPage;
+            let page = result[1];
             let pageHtml = '<ul><li><a href=javascript:page(" + page.prev + ")>&laquo;</a></li>';
             for (var i = page.min; i <= page.max; i++) {
                 pageHtml += '<li ';
@@ -164,21 +122,13 @@ module.exports = function (app, routeMethod) {
         let parent_ids = req.query.parent_ids ? req.query.parent_ids : '0,';
         let name = req.query.name;
         let sort = req.query.sort;
-        async.auto({
-            files: function (cb) {
-                fileDao.storeFileCate(req, type == 'images' ? 1 : 2, parent_id, parent_ids + parent_id + ',', name, sort, null, null, function (err, result) {
-                    if (err || !result) {
-                        cb(null, false);
-                    } else {
-                        cb(null, result);
-                    }
-                });
-            }
-        }, function (error, result) {
 
+        Promise.all([
+            fileDao.storeFileCate(req, type == 'images' ? 1 : 2, parent_id, parent_ids + parent_id + ',', name, sort, null, null)
+        ]).then(result => {
             res.json({
                 result: true,
-                files: result.files
+                files: result[0]
             });
         });
     });
@@ -187,19 +137,9 @@ module.exports = function (app, routeMethod) {
      * 删除一个文件夹
      */
     app.all('/manage/file/delfilecate', function (req, res) {
-        async.auto({
-            delFileCate: function (cb) {
-                fileDao.delFileCate(req.body.id, function (err, result) {
-                    if (err || !result) {
-                        cb(null, false);
-                    } else {
-                        cb(null, result);
-                    }
-                });
-            }
-        }, function (error, result) {
-            result.delFileCate;
-
+        Promise.all([
+            fileDao.delFileCate(req.body.id)
+        ]).then(result => {
             res.json({
                 result: true
             });
@@ -243,7 +183,7 @@ module.exports = function (app, routeMethod) {
         if (type == 'images') {
             let dimensions = sizeOf(file.data);
             // Use the mv() method to place the file somewhere on your server
-            file.mv(fileDirPath + fileId + '.' + suffix, function (err) {
+            file.mv(fileDirPath + fileId + '.' + suffix,async function (err) {
                 if (err)
                     return res.status(500).send(err);
 
@@ -264,30 +204,28 @@ module.exports = function (app, routeMethod) {
                         }
 
                         gmImage.write(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix, function (err) {
-
+                            console.error(err);
                         });
                     }
                 }
 
                 // 保存文件成功,为数据库增加一条记录
-                fileDao.storeFile(req, fileId.replace(/\-/g, ''), (type == 'images' ? 1 : 2), file_cate_id, fileId, dimensions.width, dimensions.height, ori_name, file.data.length, filePath, suffix, req.body.format, null, function (err, result) {
-                    res.json({
-                        result: true
-                    });
+                let result = await fileDao.storeFile(req, fileId.replace(/\-/g, ''), (type == 'images' ? 1 : 2), file_cate_id, fileId, dimensions.width, dimensions.height, ori_name, file.data.length, filePath, suffix, req.body.format, null);
+                res.json({
+                    result: true
                 });
-            });
+        });
         } else {
-            file.mv(fileDirPath + fileId + '.' + suffix, function (err) {
+            file.mv(fileDirPath + fileId + '.' + suffix,async function (err) {
                 if (err)
                     return res.status(500).send(err);
 
                 // 保存文件成功,为数据库增加一条记录
-                fileDao.storeFile(req, fileId.replace(/\-/g, ''), (type == 'images' ? 1 : 2), file_cate_id, fileId, null, null, ori_name, file.data.length, filePath, suffix, null, null, function (err, result) {
-                    res.json({
-                        result: true
-                    });
+                let result = await fileDao.storeFile(req, fileId.replace(/\-/g, ''), (type == 'images' ? 1 : 2), file_cate_id, fileId, null, null, ori_name, file.data.length, filePath, suffix, null, null);
+                res.json({
+                    result: true
                 });
-            });
+        });
         }
     });
 
@@ -307,14 +245,10 @@ module.exports = function (app, routeMethod) {
             }
         }
 
-        async.auto({
-            files: function (cb) {
-                fileDao.queryFileByIds(idsStr, function (err, files) {
-                    cb(null, files);
-                });
-            }
-        }, function (error, result) {
-            let files = result.files;
+        Promise.all([
+            fileDao.queryFileByIds(idsStr)
+        ]).then(result => {
+            let files = result[0];
             async.map(files, function (file, fileCallback) {
                 // 文件的缩放格式是否有修改
                 let isFileUpdate = false;
@@ -369,11 +303,9 @@ module.exports = function (app, routeMethod) {
                 });
                 // 判断是否需要修改缩略格式
                 if (isFileUpdate) {
-                    fileDao.updateFileFormatById(JSON.stringify(fileFormatJson), file.id, function (err, result) {
-
-                    });
+                    fileDao.updateFileFormatById(JSON.stringify(fileFormatJson), file.id);
                 }
-            }, function (err, results) {
+            },function (err, results) {
                 res.json({
                     result: true
                 });
@@ -383,20 +315,11 @@ module.exports = function (app, routeMethod) {
 
     app.all('/manage/file', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 文件类型
-        async.auto({
-            currentMenu: function (cb) {
-                menuDao.queryMenuByHref('/manage/file?type=' + type, function (err, menu) {
-                    if (err || !menu) {
-                        cb(null, {});
-                    } else {
-                        cb(null, menu);
-                    }
-                });
-            }
-        }, function (error, result) {
-
+        Promise.all([
+            menuDao.queryMenuByHref('/manage/file?type=' + type)
+        ]).then(result => {
             res.render('manage/file/index', {
-                currentMenu: result.currentMenu,
+                currentMenu: result[0],
                 type: type
             });
         });
@@ -408,19 +331,11 @@ module.exports = function (app, routeMethod) {
         let format = req.query.format;
         let showFormat = req.query.showFormat;
 
-        async.auto({
-            currentMenu: function (cb) {
-                menuDao.queryMenuByHref('/manage/file?type=' + type, function (err, menu) {
-                    if (err || !menu) {
-                        cb(null, {});
-                    } else {
-                        cb(null, menu);
-                    }
-                });
-            }
-        }, function (error, result) {
+        Promise.all([
+            menuDao.queryMenuByHref('/manage/file?type=' + type)
+        ]).then(result => {
             res.render('manage/file/file_manage_template', {
-                currentMenu: result.currentMenu,
+                currentMenu: result[0],
                 type: type,
                 isDialog: true,
                 func: func,

@@ -26,10 +26,8 @@ exports.queryOfficeById = function (id,callback) {
 /**
  * 查询机构信息
  */
-exports.queryOffice = function (callback) {
-    mysql.query("select so.* from sys_office so where so.del_flag='0'", [null], function (err, offices) {
-        callback(err, offices);
-    });
+exports.queryOffice = function () {
+    return mysql.query("select so.* from sys_office so where so.del_flag='0'", [null]);
 };
 
 /**
