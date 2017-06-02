@@ -174,17 +174,20 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuByHref('/manage/user')
     ]).then(async result => { 
       let users = result[0];
-      for (let i = 0; i < users.length;i++){
-        users[i].create_date = moment(users[i].create_date).format('YYYY-MM-DD HH:mm:ss');
-        users[i].user_type_label = await dictUtil.getDictLabel(users[i].user_type, 'sys_user_type', '未知');
-      }
-
-      res.render('manage/user/index', {
-        currentMenu: result[2],
-        users: users,
-        page: result[1],
-        condition: req.query
+      let proUsers = users.map(async user => {
+        user.create_date = moment(user.create_date).format('YYYY-MM-DD HH:mm:ss');
+        user.user_type_label = await dictUtil.getDictLabel(user.user_type, 'sys_user_type', '未知');
+        return user;
       });
+
+      Promise.all(proUsers).then(results => {
+        res.render('manage/user/index', {
+          currentMenu: result[2],
+          users: users,
+          page: result[1],
+          condition: req.query
+        });
+      });      
     });
   });
 };

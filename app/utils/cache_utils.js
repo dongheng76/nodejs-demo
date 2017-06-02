@@ -1,5 +1,5 @@
 const client = require('./redis_utils');
-var SYS_CACHE = "sysCache";
+var SYS_CACHE = 'sysCache';
 
 // 取得系统缓存
 exports.getSysCache = getSysCache;
