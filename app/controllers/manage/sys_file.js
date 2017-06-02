@@ -7,8 +7,8 @@
 const async = require('async');
 // const utils = require('../../utils');
 // const validator = require('validator');
-const menuDao = require('../../dao/menu');
-const fileDao = require('../../dao/file');
+const menuDao = require('../../dao/sys_menu');
+const fileDao = require('../../dao/sys_file');
 const util = require('../../utils');
 const dictUtil = require('../../utils/dict_utils');
 // const moment = require('moment');

@@ -3,10 +3,9 @@
 /**
  * Module dependencies.
  */
-const async = require('async');
 const validator = require('validator');
-const menuDao = require('../../dao/menu');
-const areaDao = require('../../dao/area');
+const menuDao = require('../../dao/sys_menu');
+const areaDao = require('../../dao/sys_area');
 const dictUtil = require('../../utils/dict_utils');
 
 

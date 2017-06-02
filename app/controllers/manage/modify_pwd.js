@@ -5,8 +5,8 @@
  */
 const async = require('async');
 const utils = require('../../utils');
-const menuDao = require('../../dao/menu');
-const userDao = require('../../dao/user');
+const menuDao = require('../../dao/sys_menu');
+const userDao = require('../../dao/sys_user');
 
 exports.ROUTER = {
 

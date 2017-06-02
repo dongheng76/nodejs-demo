@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 const async = require('async');
-const logDao = require('../../dao/log');
-const menuDao = require('../../dao/menu');
+const logDao = require('../../dao/sys_log');
+const menuDao = require('../../dao/sys_menu');
 const utils = require('../../utils');
 const validator = require('validator');
 const util = require('../../utils');

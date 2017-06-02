@@ -3,13 +3,10 @@
 /**
  * Module dependencies.
  */
-
-const async = require('async');
 const utils = require('../../utils');
 const validator = require('validator');
-const userDao = require('../../dao/user');
-const logDao = require('../../dao/log');
-const session = require('express-session');
+const userDao = require('../../dao/sys_user');
+const logDao = require('../../dao/sys_log');
 
 
 module.exports = function (app, routeMethod) {

@@ -2,8 +2,6 @@ const mysql = require('../utils/mysql_db.js');
 const util = require('../utils');
 const moment = require('moment');
 const dictUtil = require('../utils/dict_utils');
-const areaDao = require('./area');
-const async = require('async');
 
 /**
  * 根据角色ID查询角色信息

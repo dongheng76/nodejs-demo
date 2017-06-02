@@ -2,8 +2,7 @@ const mysql = require('../utils/mysql_db.js');
 const util = require('../utils');
 const moment = require('moment');
 const dictUtil = require('../utils/dict_utils');
-const areaDao = require('./area');
-const async = require('async');
+const areaDao = require('./sys_area');
 
 /**
  * 根据父类机构ID查询孩子机构最大sort
@@ -36,10 +35,9 @@ exports.queryOfficeForRecursion = async function () {
     let proTree = treeJson.map(row => {
         return Promise.all([
             dictUtil.getDictLabel(row.type, 'sys_office_type', '未知'),
-            areaDao.queryAreaGenealById(row.area_id)
+            //areaDao.queryAreaGenealById(row.area_id)
         ]).then(async result => {
             row.office_type_label = result[0];
-            row.area_labels = result[1];
             row.create_date = moment(row.create_date).format('YYYY-MM-DD HH:mm:ss');
             await voToBo(row);
             return row;
@@ -78,7 +76,7 @@ function voToBo (treeObj) {
 /**
  * 根据机构ID删除一个机构
  */
-exports.delOfficeById = function (id, callback) {
+exports.delOfficeById = function (id) {
     return mysql.update("update sys_office set del_flag='1' where id=? or parent_ids like '%" + id + "%'", [id]);
 };
 

@@ -3,16 +3,13 @@
 /**
  * Module dependencies.
  */
-
-const async = require('async');
 const utils = require('../../utils');
 const validator = require('validator');
-const userDao = require('../../dao/user');
-const dictDao = require('../../dao/dict');
-const officeDao = require('../../dao/office');
+const dictDao = require('../../dao/sys_dict');
+const officeDao = require('../../dao/sys_office');
 const util = require('../../utils');
-const menuDao = require('../../dao/menu');
-const roleDao = require('../../dao/role');
+const menuDao = require('../../dao/sys_menu');
+const roleDao = require('../../dao/sys_role');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 

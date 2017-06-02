@@ -5,9 +5,9 @@
  */
 const utils = require('../../utils');
 const validator = require('validator');
-const dictDao = require('../../dao/dict');
+const dictDao = require('../../dao/sys_dict');
 const util = require('../../utils');
-const menuDao = require('../../dao/menu');
+const menuDao = require('../../dao/sys_menu');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
 

@@ -3,10 +3,8 @@
 /**
  * Module dependencies.
  */
-const async = require('async');
-const md5 = require('md5');
 const validator = require('validator');
-const menuDao = require('../../dao/menu');
+const menuDao = require('../../dao/sys_menu');
 
 
 module.exports = function (app, routeMethod) {
