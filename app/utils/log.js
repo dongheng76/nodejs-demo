@@ -36,4 +36,4 @@ exports.logger = consoleLog;
 
 exports.use = function (app) {
 	app.use(log4js.connectLogger(consoleLog, { level: 'INFO', format: ':method :url' }));
-}
+};

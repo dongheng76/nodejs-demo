@@ -5,8 +5,8 @@
 const util = require('util');
 const mysql = require('mysql');
 const config = require('./../../config/index');
-
-console.info('init pool start..');
+const console = require('./log').logger;
+console.info('init pool start..'); 
 
 const pool = mysql.createPool({
     connectionLimit: 10,
@@ -97,7 +97,7 @@ exports.rollbackTransaction = function (connection) {
 /**
  * 查询所有记录
  */
-exports.query = async function (sql, data, connection) {
+exports.query = async function (sql, param, connection) {
     let conn = null;
     if (connection) {
         conn = connection;
@@ -105,51 +105,30 @@ exports.query = async function (sql, data, connection) {
     if (!conn) {
         conn = await getConnection();
     }
-    if (util.isArray(data)) {
-        return new Promise(function (resolve, reject) {
-            conn.query(sql, data, function (err, rows) {
-                // return object back to pool
-                try {
-                    if (!connection) {
-                        conn.release();
-                    }
-                } catch (e) {
-                    console.error(e);
-                    reject(e);
+    return new Promise(function (resolve, reject) {
+        conn.query(sql, param || [], function (err, rows) {
+            // return object back to pool
+            try {
+                if (!connection) {
+                    conn.release();
                 }
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-                resolve(rows);
-            });
+            } catch (e) {
+                console.error(e);
+                reject(e);
+            }
+            if (err) {
+                console.error(err);
+                reject(err);
+            }
+            resolve(rows);
         });
-    } else {
-        return new Promise(function (resolve, reject) {
-            conn.query(sql, function (err, rows) {
-                // return object back to pool
-                try {
-                    if (!connection) {
-                        conn.release();
-                    }
-                } catch (e) {
-                    console.error(e);
-                    reject(e);
-                }
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-                resolve(rows); // 必须有callback
-            });
-        });
-    }
+    });
 };
 
 /**
  * 查询记录，但只返回一条
  */
-exports.queryOne = async function (sql, data, connection) {
+exports.queryOne = async function (sql, param, connection) {
     let conn = null;
     if (connection) {
         conn = connection;
@@ -157,49 +136,29 @@ exports.queryOne = async function (sql, data, connection) {
     if (!conn) {
         conn = await getConnection();
     }
-    if (util.isArray(data)) {
-        return new Promise(function (resolve, reject) {
-            conn.query(sql, data, function (err, rows) {
-                try {
-                    if (!connection) {
-                        conn.release();
-                    }
-                } catch (e) {
-                    console.error(e);
-                    reject(e);
+    return new Promise(function (resolve, reject) {
+        conn.query(sql, param || [], function (err, rows) {
+            try {
+                if (!connection) {
+                    conn.release();
                 }
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-                resolve(rows[0]); // 必须有callback
-            });
+            } catch (e) {
+                console.error(e);
+                reject(e);
+            }
+            if (err) {
+                console.error(err);
+                reject(err);
+            }
+            resolve(rows[0]); // 必须有callback
         });
-    } else {
-        return new Promise(function (resolve, reject) {
-            conn.query(sql, function (err, rows) {
-                try {
-                    if (!connection) {
-                        conn.release();
-                    }
-                } catch (e) {
-                    console.error(e);
-                    reject(e);
-                }
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-                resolve(rows[0]); // 必须有callback
-            });
-        });
-    }
+    });
 };
 
 /**
  * update或delete数据
  */
-exports.update = async function (sql, data, connection) {
+exports.update = async function (sql, param, connection) {
     let conn = null;
     if (connection) {
         conn = connection;
@@ -207,42 +166,23 @@ exports.update = async function (sql, data, connection) {
     if (!conn) {
         conn = await getConnection();
     }
-    if (util.isArray(data)) {
-        return new Promise(function (resolve, reject) {
-            conn.query(sql, data, function (err, result) {
-                // return object back to pool
-                try {
-                    if (!connection) {
-                        conn.release();
-                    }
-                } catch (e) {
-                    console.error(e);
-                    reject(e);
+    return new Promise(function (resolve, reject) {
+        conn.query(sql, param || [], function (err, result) {
+            // return object back to pool
+            try {
+                if (!connection) {
+                    conn.release();
                 }
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-                resolve(result); // 必须有callback
-            });
+            } catch (e) {
+                console.error(e);
+                reject(e);
+            }
+            if (err) {
+                console.error(err);
+                reject(err);
+            }
+            resolve(result); // 必须有callback
         });
-    } else {
-        return new Promise(function (resolve, reject) {
-            conn.query(sql, function (err, result) {
-                try {
-                    if (!connection) {
-                        conn.release();
-                    }
-                } catch (e) {
-                    console.error(e);
-                    reject(e);
-                }
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-                resolve(result);
-            });
-        });
-    }
+    });
+
 };

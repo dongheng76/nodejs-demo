@@ -4,6 +4,7 @@
  * 文件读写工具包
  */
 const fs = require('fs');
+const console = require('../app/utils/log').logger;
 
 /**
  * 提供载入路由和添加拓展函数的功能
@@ -44,12 +45,12 @@ let RouteTools = function () {
         if (!filePath || filePath.length === 0) {
             throw new Error('The filePath cannot be empty');
         }
-        console.log('loadding routes start...');
+        console.info('loadding routes start...');
         for (let i = 0; i < filePath.length; i++) {
             path = filePath[i];
             scan();
         }
-        console.log('loadding routes end...');
+        console.info('loadding routes end...');
     };
 
     /**
