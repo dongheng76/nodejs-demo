@@ -8,19 +8,16 @@ const async = require('async');
 /**
  * 根据父类机构ID查询孩子机构最大sort
  */
-exports.queryMaxSortByPId = function (pId,callback) {
-    mysql.queryOne('select max(so.sort) as sort from sys_office so where so.parent_id=?', [pId], function (err, result) {
-        callback(err, result.sort);
-    });
+exports.queryMaxSortByPId = async function (pId) {
+    let result = await mysql.queryOne('select max(so.sort) as sort from sys_office so where so.parent_id=?', [pId]);
+    return result.sort;
 };
 
 /**
  * 根据机构ID查询机构信息
  */
-exports.queryOfficeById = function (id,callback) {
-    mysql.queryOne('select so.* from sys_office so where so.id=?', [id], function (err, office) {
-        callback(err, office);
-    });
+exports.queryOfficeById = function (id) {
+    return mysql.queryOne('select so.* from sys_office so where so.id=?', [id]);
 };
 
 /**
@@ -33,31 +30,23 @@ exports.queryOffice = function () {
 /**
  * 递归查询机构信息
  */
-exports.queryOfficeForRecursion = function (callback) {
-    mysql.query("select * from sys_office where del_flag='0'", [null], function (err, offices) {
-        let treeJson = util.jsonToTreeJson(offices,'0');
-        async.map(treeJson, function (row, rowCallback) {
-            async.auto({
-                officeTypeLabel: function (cb) {
-                    dictUtil.getDictLabel(row.type, 'sys_office_type', '未知', function (err, label) {
-                        cb(null, label);
-                    });
-                },
-                areaLabels: function (cb) {
-                    areaDao.queryAreaGenealById(row.area_id, function (err, area_labels) {
-                        cb(null, area_labels);
-                    });
-                }
-            }, function (err, result) {
-                row.office_type_label = result.officeTypeLabel;
-                row.area_labels = result.areaLabels;
-                row.create_date = moment(row.create_date).format("YYYY-MM-DD HH:mm:ss");
-                voToBo(row, rowCallback);
-            });
-        }, function (err, result) {
-            callback(err, treeJson);
+exports.queryOfficeForRecursion = async function () {
+    let offices = await mysql.query("select * from sys_office where del_flag='0'", [null]);
+    let treeJson = util.jsonToTreeJson(offices,'0');
+    let proTree = treeJson.map(row => {
+        return Promise.all([
+            dictUtil.getDictLabel(row.type, 'sys_office_type', '未知'),
+            areaDao.queryAreaGenealById(row.area_id)
+        ]).then(async result => {
+            row.office_type_label = result[0];
+            row.area_labels = result[1];
+            row.create_date = moment(row.create_date).format('YYYY-MM-DD HH:mm:ss');
+            await voToBo(row);
+            return row;
         });
     });
+
+    return Promise.all(proTree);
 };
 
 /**
@@ -65,31 +54,23 @@ exports.queryOfficeForRecursion = function (callback) {
  * @param treeObj
  * @param callback
  */
-function voToBo (treeObj, callback) {
-    async.auto({
-        officeTypeLabel: function (cb) {
-            dictUtil.getDictLabel(treeObj.type, 'sys_office_type', '未知', function (err, label) {
-                cb(err, label);
-            });
-        },
-        areaLabels: function (cb) {
-            areaDao.queryAreaGenealById(treeObj.area_id, function (err, area_labels) {
-                cb(err, area_labels);
-            });
-        }
-    }, function (err, result) {
-        treeObj.office_type_label = result.officeTypeLabel;
-        treeObj.area_labels = result.areaLabels;
-        treeObj.create_date = moment(treeObj.create_date).format("YYYY-MM-DD HH:mm:ss");
+function voToBo (treeObj) {
+    return Promise.all([
+        dictUtil.getDictLabel(treeObj.type, 'sys_office_type', '未知'),
+        areaDao.queryAreaGenealById(treeObj.area_id)
+    ]).then(async result => {
+        treeObj.office_type_label = result[0];
+        treeObj.area_labels = result[1];
+        treeObj.create_date = moment(treeObj.create_date).format('YYYY-MM-DD HH:mm:ss');
 
         if (typeof (treeObj.children) != 'undefined') {
-            async.map(treeObj.children, function (row, rowCallback) {
-                voToBo(row, rowCallback);
-            }, function (err, result) {
-                callback(err, result);
+            let proTreeObj = treeObj.children.map(async row => {
+                row = await voToBo(row);
+                return row;
             });
+            return Promise.all(proTreeObj);
         } else {
-            callback(err, result);
+            return treeObj;
         }
     });
 }
@@ -98,41 +79,35 @@ function voToBo (treeObj, callback) {
  * 根据机构ID删除一个机构
  */
 exports.delOfficeById = function (id, callback) {
-    mysql.update("update sys_office set del_flag='1' where id=? or parent_ids like '%" + id + "%'", [id], function (err, result) {
-        callback(err, result);
-    });
+    return mysql.update("update sys_office set del_flag='1' where id=? or parent_ids like '%" + id + "%'", [id]);
 };
 
 /**
  * 插入一条机构信息
  */
-exports.saveOffice = function (parent_id, name, sort, area_id,code, type,address,master,phone,fax,email, remarks, req, callback) {
+exports.saveOffice = async function (parent_id, name, sort, area_id,code, type,address,master,phone,fax,email, remarks, req) {
     // 先根据父亲id查询父亲信息
-    mysql.queryOne('select * from sys_office where id=?',[parent_id],function (er,parentOffice){
-        // 如果不存在说明是根目录
-        if (parentOffice == null || typeof(parentOffice) == 'undefined'){
-            parentOffice = {
-                parent_ids:'',
-                id:'0'
-            };
-        }
+    let parentOffice = await mysql.queryOne('select * from sys_office where id=?',[parent_id]);
+    // 如果不存在说明是根目录
+    if (parentOffice == null || typeof(parentOffice) == 'undefined'){
+        parentOffice = {
+            parent_ids:'',
+            id:'0'
+        };
+    }
 
-        // 取得用户信息
-        let user = req.session.user;
-        let officeId = util.uuid();
-        mysql.update('insert into sys_office(id,parent_id,parent_ids,name,sort,area_id,code,type,address,master,phone,fax,email,create_by,create_date,update_by,update_date,remarks,del_flag)'
-            + ' values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,0)',
-            [officeId, parent_id, parentOffice.parent_ids + parentOffice.id + ',', name, sort, area_id, code, type,address,master,phone,fax,email,user.id, user.id, remarks], function (err, result) {
-                console.log(result);
-                callback(err, result);
-            });
-    });
+    // 取得用户信息
+    let user = req.session.user;
+    let officeId = util.uuid();
+    return mysql.update('insert into sys_office(id,parent_id,parent_ids,name,sort,area_id,code,type,address,master,phone,fax,email,create_by,create_date,update_by,update_date,remarks,del_flag)'
+        + ' values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,0)',
+        [officeId, parent_id, parentOffice.parent_ids + parentOffice.id + ',', name, sort, area_id, code, type,address,master,phone,fax,email,user.id, user.id, remarks]);
 };
 
 /**
  * 修改一条机构信息
  */
-exports.updateOffice = function (req, callback) {
+exports.updateOffice = function (req) {
     // 需要修改的字符串集
     let sets = '';
     if (req.body.name) {
@@ -166,7 +141,5 @@ exports.updateOffice = function (req, callback) {
         sets += ",remarks='" + req.body.remarks + "'";
     }
 
-    mysql.update('update sys_office set update_date=now() ' + sets + ' where id=?', [req.body.id], function (err, result) { 
-        callback(err, result);
-    });
+    return mysql.update('update sys_office set update_date=now() ' + sets + ' where id=?', [req.body.id]);
 };

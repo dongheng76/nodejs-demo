@@ -21,50 +21,17 @@ module.exports = function (app, routeMethod) {
   app.all('/manage/menu/create', function (req, res) {
     let pId = req.query.parent_id ? req.query.parent_id : '1';
 
-    async.auto({
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref('/manage/menu', function (err, menu) {
-          if (err || !menu) {
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-      menus: function (cb) {
-        menuDao.queryMenus(function (err, menus) {
-          if (err || !menus) {
-            cb(null, false);
-          } else {
-            cb(null, menus);
-          }
-        });
-      },
-      maxSort: function (cb) {
-        menuDao.querySortMaxByPId(pId, function (err, maxSort) {
-          if (maxSort != null) {
-            cb(null, maxSort);
-          } else {
-            cb(null, 0);
-          }
-        });
-      },
-      menuParent: function (cb) {
-        menuDao.queryMenuById(pId, function (err, menuParent) {
-          if (err || !menuParent) {
-            cb(null, false);
-          } else {
-            cb(null, menuParent);
-          }
-        });
-      }
-    }, function (error, result) {
-
+    Promise.all([
+      menuDao.queryMenuByHref('/manage/menu'),
+      menuDao.queryMenus(),
+      menuDao.querySortMaxByPId(pId),
+      menuDao.queryMenuById(pId)
+    ]).then(result => {
       res.render('manage/menu/create', {
-        currentMenu: result.currentMenu,
-        selectMenus: JSON.stringify(result.menus),
-        maxSort: parseInt(result.maxSort) + 10,
-        menuParent: result.menuParent
+        currentMenu: result[0],
+        selectMenus: JSON.stringify(result[1]),
+        maxSort: parseInt(result[2] ? result[2] : 0) + 10,
+        menuParent: result[3]
       });
     });
   });
@@ -72,54 +39,19 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑用户
    */
-  app.all('/manage/menu/edit', function (req, res) {
+  app.all('/manage/menu/edit',async function (req, res) {
     let id = req.query.id;
+    let menu = await menuDao.queryMenuById(id);
 
-    async.auto({
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref('/manage/menu', function (err, menu) {
-          if (err || !menu) {
-            cb(null, {});
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-      menus: function (cb) {
-        menuDao.queryMenus(function (err, menus) {
-          if (err || !menus) {
-            cb(null, false);
-          } else {
-            cb(null, menus);
-          }
-        });
-      },
-      menuParent: function (cb) {
-        menuDao.queryMenuById(id, function (err, menu) {
-          menuDao.queryMenuById(menu.parent_id, function (err, menuParent) {
-            if (err || !menuParent) {
-              cb(null, false);
-            } else {
-              cb(null, menuParent);
-            }
-          });
-        });
-      },
-      menu: function (cb) {
-        menuDao.queryMenuById(id, function (err, menu) {
-          if (err || !menu) {
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
-      }
-    }, function (error, result) {
+    Promise.all([
+      menuDao.queryMenuByHref('/manage/menu'),
+      menuDao.queryMenuById(menu.parent_id),
+      menuDao.queryMenuById(id)
+    ]).then(result => {
       res.render('manage/menu/create', {
-        currentMenu: result.currentMenu,
-        menuParent: result.menuParent,
-        offices: JSON.stringify(result.offices),
-        menu: result.menu
+        currentMenu: result[0],
+        menuParent: result[1],
+        menu: menu
       });
     });
   });
@@ -134,126 +66,89 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个菜单信息
    */
-  app.all('/manage/menu/store', function (req, res) {
-    async.auto({
-      store: function (cb) {
-        let parent_id = req.body.parent_id;
-        let name = req.body.name;
-        let sort = req.body.sort;
-        let href = req.body.href;
-        let icon = req.body.icon;
-        let permission = req.body.permission;
-        let remarks = req.body.remarks;
+  app.all('/manage/menu/store',async function (req, res) {
+    let parent_id = req.body.parent_id;
+    let name = req.body.name;
+    let sort = req.body.sort;
+    let href = req.body.href;
+    let icon = req.body.icon;
+    let permission = req.body.permission;
+    let remarks = req.body.remarks;
+    let result = null;
 
-        // 有ID就视为修改
-        if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
-          menuDao.updateMenu(req, function (err, result) {
-            if (err || !result) {
-              req.session.notice_info = {
-                info:'修改失败!请重试或检查下您传入的参数是否正确!',
-                type:'fail'
-              };
-              cb(null, false);
-            } else {
-              req.session.notice_info = {
-                info:'修改菜单成功!',
-                type:'success'
-              };
-              cb(err, result);
-            }
-          });
-        } else {
-          menuDao.saveMenu(parent_id, name, sort, href, icon, permission, remarks, req, function (err, result) {
-            if (err || !result) {
-              req.session.notice_info = {
-                info:'保存失败!请重试或检查下您传入的参数是否正确!',
-                type:'fail'
-              };
-              cb(null, false);
-            } else {
-              req.session.notice_info = {
-                info:'保存菜单成功!',
-                type:'success'
-              };
-              cb(null, result);
-            }
-          });
-        }
-      }
-    }, function (error, result) {
-      if (result.store) {
-        res.json({
-          result: true
-        });
-      } else {
-        res.json({
-          result: false,
-          error: '网络异常请重试！'
-        });
-      }
-    });
+    // 有ID就视为修改
+    if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
+      result = await menuDao.updateMenu(req);
+      req.session.notice_info = {
+        info:'修改菜单成功!',
+        type:'success'
+      };
+    } else {
+      result = await menuDao.saveMenu(parent_id, name, sort, href, icon, permission, remarks, req);
+      req.session.notice_info = {
+        info:'保存菜单成功!',
+        type:'success'
+      };
+    }
+
+    if (result) {
+      res.json({
+        result: true
+      });
+    } else {
+      req.session.notice_info = null;
+
+      res.json({
+        result: false,
+        error: '网络异常请重试！'
+      });
+    }
   });
 
   /**
    *  删除一个菜单信息
    */
-  app.all('/manage/menu/delete', function (req, res) {
-    async.auto({
-      delMenu: function (cb) {
+  app.all('/manage/menu/delete',async function (req, res) {
+    let result = null;
 
-        if (typeof (req.body.id) != 'undefined') {
-          let id = req.body.id;
-          menuDao.delMenuById(id, function (err, result) {
-            if (err || !result){
-              cb(null, false);
-            } else {
-              cb(null, result);
-            }
-          });
-        } else {
-          cb(null, false);
-        }
-      }
-    }, function (error, result) {
-      if (typeof (result.delMenu) != 'undefined') {
-        req.session.notice_info = {
-          info:'删除菜单成功!',
-          type:'success'
-        };
-        
-        res.json({
-          result: true
-        });
-      } else {
-        res.json({
-          result: false
-        });
-      }
-    });
+    if (typeof (req.body.id) != 'undefined') {
+      let id = req.body.id;
+      result = await menuDao.delMenuById(id);
+    } else {
+      req.session.notice_info = {
+        info:'请传入正确的参数!',
+        type:'fail'
+      };
+      res.json({
+        result: false
+      });
+      return;
+    }
+
+    if (result) {
+      req.session.notice_info = {
+        info:'删除菜单成功!',
+        type:'success'
+      };
+      
+      res.json({
+        result: true
+      });
+    } else {
+      res.json({
+        result: false
+      });
+    }
   });
 
   app.all('/manage/menu', function (req, res) {
-
-    async.auto({
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref('/manage/menu', function (err, menu) {
-          if (err || !menu) {
-            cb(null, {});
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-      menus: function (cb) {
-        menuDao.queryMenuForRecursion(function (err, menus) {
-          cb(null, menus);
-        });
-      }
-    }, function (error, result) {
-
+    Promise.all([
+      menuDao.queryMenuByHref('/manage/menu'),
+      menuDao.queryMenuForRecursion()
+    ]).then(result => {
       res.render('manage/menu/index', {
-        currentMenu: result.currentMenu,
-        menus: result.menus
+        currentMenu: result[0],
+        menus: result[1]
       });
     });
   });

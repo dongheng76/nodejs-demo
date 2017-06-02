@@ -71,7 +71,5 @@ exports.storeFileCate = function (req, type, parent_id, parent_ids, name, sort, 
  * 删除一个文件夹
  */
 exports.delFileCate = function (cateId) {
-    console.log("update sys_file_cate set del_flag=1 where id=? or parent_ids like '%" + cateId + "%'");
-
     return mysql.update("update sys_file_cate set del_flag=1 where id=? or parent_ids like '%" + cateId + "%'", [cateId]);
 };

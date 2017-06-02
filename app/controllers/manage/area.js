@@ -11,92 +11,37 @@ const dictUtil = require('../../utils/dict_utils');
 
 
 module.exports = function (app, routeMethod) {
-  app.all('/manage/area', function (req, res) {
-    async.auto({
-      areas: function (cb) {
-        areaDao.queryAreasByPId('0', function (err, areas) {
-          if (err || !areas) {
-            cb(null, false);
-          } else {
-            cb(null, areas);
-          }
-        });
-      },
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref("/manage/area", function (err, menu) {
-          if (err || !menu) {
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
-      }
-    }, function (error, result) {
-      let areas = result.areas;
 
+  app.all('/manage/area', function (req, res) {
+    Promise.all([
+      areaDao.queryAreasByPId('0'),
+      menuDao.queryMenuByHref('/manage/area')
+    ]).then(result => {
+      let areas = result[0];
       res.render('manage/area/index', {
-        currentMenu: result.currentMenu,
+        currentMenu: result[1],
         areas: JSON.stringify(areas)
       });
     });
   });
 
-  app.all('/manage/area/findareabypid', function (req, res) {
-    async.auto({
-      areas: function (cb) {
-        areaDao.queryAreasByPId(req.body.parent_id, function (err, areas) {
-          if (err || !areas) {
-            cb(null, false);
-          } else {
-            cb(null, areas);
-          }
-        });
-      }
-    }, function (error, result) {
-      res.json(result.areas);
-    });
+  app.all('/manage/area/findareabypid',async function (req, res) {
+      let areas = await areaDao.queryAreasByPId(req.body.parent_id);
+      res.json(areas);
   });
 
   app.all('/manage/area/create', function (req, res) {
-    async.auto({
-      areaTypes: function (cb) {
-        dictUtil.getDictList('sys_area_type', function (err, areaTypes) {
-          cb(null, areaTypes);
-        });
-      },
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref("/manage/area", function (err, menu) {
-          if (err || !menu) {
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-      parentAreaInfo: function (cb) {
-        areaDao.queryAreaById(req.query.parent_id, function (err, area) {
-          if (err || !area) {
-            cb(null, false);
-          } else {
-            cb(null, area);
-          }
-        });
-      },
-      maxSort: function (cb) {
-        areaDao.queryChildrenMaxSort(req.query.parent_id, function (err, maxSort) {
-          if (err || !maxSort) {
-            cb(null, 0);
-          } else {
-            cb(null, maxSort);
-          }
-        });
-      }
-    }, function (error, result) {
+    Promise.all([
+      menuDao.queryMenuByHref('/manage/area'),
+      dictUtil.getDictList('sys_area_type'),
+      areaDao.queryAreaById(req.query.parent_id),
+      areaDao.queryChildrenMaxSort(req.query.parent_id)
+    ]).then(result => {
       res.render('manage/area/create', {
-        currentMenu: result.currentMenu,
-        areaTypes: result.areaTypes,
-        parentAreaInfo: result.parentAreaInfo,
-        currentSort: parseInt(result.maxSort) + 10
+        currentMenu: result[0],
+        areaTypes: result[1],
+        parentAreaInfo: result[2],
+        currentSort: parseInt(result[3] ? result[3] : 0) + 10
       });
     });
   });
@@ -105,93 +50,60 @@ module.exports = function (app, routeMethod) {
    *  保存一个区域信息
    */
   app.all('/manage/area/store', function (req, res) {
-    async.auto({
-      store: function (cb) {
-        let parent_id = req.body.parent_id;
-        let name = req.body.name;
-        let sort = req.body.sort;
-        let code = req.body.code;
-        let type = req.body.type;
-        let remarks = req.body.remarks;
+    let parent_id = req.body.parent_id;
+    let name = req.body.name;
+    let sort = req.body.sort;
+    let code = req.body.code;
+    let type = req.body.type;
+    let remarks = req.body.remarks;
+    let result = null;
 
-        // 有ID就视为修改
-        if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
-          areaDao.updateArea(req, function (err, result) {
-            if (err || !result) {
-              cb(null, false);
-            } else {
-              cb(null, result);
-            }
-          });
-        } else {
-          areaDao.saveArea(parent_id, name, sort, code, type, remarks, req, function (err, result) {
-            if (err || !result) {
-              cb(null, false);
-            } else {
-              cb(null, result);
-            }
-          });
-        }
-      }
-    }, function (error, result) {
-      if (result.store) {
-        res.json({
-          result: true
-        });
-      } else {
-        res.json({
-          result: false,
-          error: '登录名重复请修改登录名'
-        });
-      }
-    });
+    // 有ID就视为修改
+    if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
+      result = areaDao.updateArea(req);
+      req.session.notice_info = {
+        info:'修改区域成功!',
+        type:'success'
+      };
+    } else {
+      result = areaDao.saveArea(parent_id, name, sort, code, type, remarks, req);
+      req.session.notice_info = {
+        info:'保存区域成功!',
+        type:'success'
+      };
+    }
+
+    if (result) {
+      res.json({
+        result: true
+      });
+    } else {
+      req.session.notice_info = null;
+
+      res.json({
+        result: false,
+        error: '操作失败请重试!'
+      });
+    }
   });
 
   /**
    * 编辑区域
    */
-  app.all('/manage/area/edit', function (req, res) {
+  app.all('/manage/area/edit',async function (req, res) {
     let id = req.query.id;
+    let area = await areaDao.queryAreaById(id);
 
-    async.auto({
-      areaTypes: function (cb) {
-        dictUtil.getDictList('sys_area_type', function (err, areaTypes) {
-          cb(null, areaTypes);
-        });
-      },
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref("/manage/area", function (err, menu) {
-          if (err || !menu) {
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-      area: function (cb) {
-        areaDao.queryAreaById(req.query.id, function (err, area) {
-          if (err || !area) {
-            cb(null, false);
-          } else {
-            cb(null, area);
-          }
-        });
-      },
-      parentAreaInfo: ['area', function (param, cb) {
-        areaDao.queryAreaById(param.area.parent_id, function (err, area) {
-          if (err || !area) {
-            cb(null,false);
-          } else {
-            cb(null, area);
-          }
-        });
-      }]
-    }, function (error, result) {
+    Promise.all([
+      menuDao.queryMenuByHref('/manage/area'),
+      dictUtil.getDictList('sys_area_type'),
+      areaDao.queryAreaById(area.parent_id)
+    ]).then(result => {
       res.render('manage/area/create', {
-        currentMenu: result.currentMenu,
-        areaTypes: result.areaTypes,
-        area: result.area,
-        parentAreaInfo: result.parentAreaInfo
+        currentMenu: result[0],
+        areaTypes: result[1],
+        area: area,
+        parentAreaInfo: result[2]
       });
     });
   });
@@ -199,20 +111,11 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个用户信息
    */
-  app.all('/manage/area/delete', function (req, res) {
-    async.auto({
-      delArea: function (cb) {
-        let id = req.body.id;
-        areaDao.delAreaById(id, function (err, result) {
-          if (err || !result) {
-            cb(null,false);
-          } else {
-            cb(null, result);
-          }
-        });
-      }
-    }, function (error, result) {
-      if (result.delArea) {
+  app.all('/manage/area/delete',async function (req, res) {
+    let id = req.body.id;
+    let result = await areaDao.delAreaById(id);
+
+    if (result) {
         res.json({
           result: true
         });
@@ -221,6 +124,5 @@ module.exports = function (app, routeMethod) {
           result: false
         });
       }
-    });
   });
 };

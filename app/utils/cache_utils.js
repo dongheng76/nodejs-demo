@@ -9,8 +9,8 @@ function getSysCache () {
 }
 
 // 取得某缓存的对象
-exports.get = function (cacheName) {
-    let sysCache = getSysCache();
+exports.get = async function (cacheName) {
+    let sysCache = await getSysCache();
     return sysCache[cacheName];
 };
 
