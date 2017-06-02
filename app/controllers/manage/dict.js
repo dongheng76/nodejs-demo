@@ -5,7 +5,6 @@
  */
 const utils = require('../../utils');
 const validator = require('validator');
-const userDao = require('../../dao/user');
 const dictDao = require('../../dao/dict');
 const util = require('../../utils');
 const menuDao = require('../../dao/menu');
@@ -66,7 +65,7 @@ module.exports = function (app, routeMethod) {
 
     // 有ID就视为修改
     if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
-      result = await userDao.updateUser(req);
+      result = await dictDao.updateDict(req);
       req.session.notice_info = {
         info:'修改字典成功!',
         type:'success'

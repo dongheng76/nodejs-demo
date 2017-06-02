@@ -34,8 +34,8 @@
       <div class="row-fluid">
         <form name="create" id="form" action="/manage/rea/store"  method="post">
           <input type="hidden" name="_csrf" value="<%= csrf_token %>">
-          <% if(typeof(area)!='undefined'){%>
-            <input type="hidden" name="id" value="<%=area.id%>"/>
+          <% if(typeof(dict)!='undefined'){%>
+            <input type="hidden" name="id" value="<%=dict.id%>"/>
           <%}%>
           <div class="row-fluid form-wrapper">
             <!-- left column -->

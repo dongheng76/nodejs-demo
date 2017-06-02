@@ -68,7 +68,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个用户信息
    */
-  app.all('/manage/user/store',async function (req, res) {
+  app.all('/manage/user/store', async function (req, res) {
     let office_id = req.body.office_id;
     let login_name = req.body.login_name;
     let password = req.body.password;
@@ -96,17 +96,17 @@ module.exports = function (app, routeMethod) {
       if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
         result = await userDao.updateUser(req);
         req.session.notice_info = {
-          info:'修改用户成功!',
-          type:'success'
+          info: '修改用户成功!',
+          type: 'success'
         };
       } else {
         result = await userDao.saveUser(office_id, login_name, password, no, name, email, phone, mobile, user_type, photo, login_flag, remarks, req);
         req.session.notice_info = {
-          info:'保存用户成功!',
-          type:'success'
+          info: '保存用户成功!',
+          type: 'success'
         };
       }
-      if (result){
+      if (result) {
         res.json({
           result: true
         });
@@ -120,19 +120,19 @@ module.exports = function (app, routeMethod) {
       }
     }
 
-    
+
   });
   /**
    *  删除一个用户信息
    */
-  app.all('/manage/user/delete',async function (req, res) {
+  app.all('/manage/user/delete', async function (req, res) {
     if (req.body.id) {
       let id = req.body.id;
       let result = userDao.delUserById(id);
-      if (result){
+      if (result) {
         req.session.notice_info = {
-          info:'删除用户成功!',
-          type:'success'
+          info: '删除用户成功!',
+          type: 'success'
         };
 
         res.json({
@@ -140,8 +140,8 @@ module.exports = function (app, routeMethod) {
         });
       } else {
         req.session.notice_info = {
-          info:'删除用户失败请重试!',
-          type:'fail'
+          info: '删除用户失败请重试!',
+          type: 'fail'
         };
 
         res.json({
@@ -172,7 +172,7 @@ module.exports = function (app, routeMethod) {
       // 查询用户数量
       userDao.queryAllUserPage(req, 20, currentPage),
       menuDao.queryMenuByHref('/manage/user')
-    ]).then(async result => { 
+    ]).then(async result => {
       let users = result[0];
       let proUsers = users.map(async user => {
         user.create_date = moment(user.create_date).format('YYYY-MM-DD HH:mm:ss');
@@ -187,7 +187,7 @@ module.exports = function (app, routeMethod) {
           page: result[1],
           condition: req.query
         });
-      });      
+      });
     });
   });
 };

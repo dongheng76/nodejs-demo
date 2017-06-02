@@ -73,19 +73,22 @@ exports.queryAllDictPage = async function (req, pagesize, currentPage) {
 /**
  * 插入一条字典信息
  */
-exports.saveDict = function (value, label, type, description, sort, remarks, req, callback) {
+exports.saveDict = function (value, label, type, description, sort, remarks, req) {
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
-    return mysql.update('insert into sys_dict(id,value,label,type,description,sort,parent_id,create_by,create_date,update_by,update_date,remarks,del_flag)'
-        + "values(?,?,?,?,?,?,'0',?,now(),?,now(),?,'0')",
-        [id, value, label, type, description, sort, user.id,user.id, remarks]);
+    return mysql.update(
+    `insert into sys_dict
+    (id,value,label,type,description,sort,parent_id,create_by,create_date,update_by,update_date,remarks,del_flag)
+    values
+    (?,?,?,?,?,?,'0',?,now(),?,now(),?,'0')`,
+    [id, value, label, type, description, sort, user.id,user.id, remarks]);
 };
 
 /**
  * 修改一条用户信息
  */
-exports.updateDict = function (req, callback) {
+exports.updateDict = function (req) {
     // 需要修改的字符串集
     let sets = '';
     if (req.body.value) {
@@ -107,5 +110,5 @@ exports.updateDict = function (req, callback) {
         sets += ",remarks='" + req.body.remarks + "'";
     }
 
-    return mysql.update('update sys_user set update_date=now() ' + sets + ' where id=?', [req.body.id]);
+    return mysql.update('update sys_dict set update_date=now() ' + sets + ' where id=?', [req.body.id]);
 };
