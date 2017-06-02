@@ -23,7 +23,8 @@ const config = require('./');
 const pkg = require('../package.json');
 const env = process.env.NODE_ENV || 'development';
 const envConfig = require('./index');
-
+const log4js = require('log4js');
+log4js.configure(envConfig.log4js);
 
 /**
  * Expose
@@ -57,6 +58,8 @@ module.exports = function (app) {
     res.locals.env = env;
     next();
   });
+
+  app.use(log4js.connectLogger(log4js.getLogger('http'), { level: 'auto' }));
 
   // bodyParser should be above methodOverride
   app.use(bodyParser.json());

@@ -5,9 +5,8 @@
 const util = require('util');
 const mysql = require('mysql');
 const config = require('./../../config/index');
-const console = require('./log').logger;
+const console = require('log4js').getLogger('mysql');
 console.info('init pool start..'); 
-
 const pool = mysql.createPool({
     connectionLimit: 10,
     host: config.mysql.server,
@@ -15,10 +14,7 @@ const pool = mysql.createPool({
     password: config.mysql.password,
     database: config.mysql.database
 });
-
 console.info('init pool end....');
-
-
 
 // 封装的基本mysql操作
 /**

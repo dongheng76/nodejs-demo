@@ -4,8 +4,7 @@
  * 文件读写工具包
  */
 const fs = require('fs');
-const console = require('../app/utils/log').logger;
-
+const console = require('log4js').getLogger('routeTools');
 /**
  * 提供载入路由和添加拓展函数的功能
  * @author 大猫猫
