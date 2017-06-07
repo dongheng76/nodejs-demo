@@ -1,189 +1,155 @@
 'use strict';
 
-/**
- * 文件读写工具包
- */
-const fs = require('fs');
-const join = require('path').join; // 连接字符串方法__dirname
-/*
- * Module dependencies.
- */
-const auth = require('./middlewares/authorization');
-/**
- * Route middlewares
- */
-const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
-const commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
-
-const fail = {
-  failureRedirect: '/login'
-};
+const join = require('path').join; // 连接字符串方法
+const path = join(__dirname, '../app/controllers');
+const routeTools = require('./routeTools');
+const urlTools = require('url');
 
 /**
- * 提供自动扫描路由和权限以及验证权限的功能
- * @param {express} app 
+ * 添加session路由方法以及添加校验方法
  */
-let Routes = function (app) {
-  let path = join(__dirname, '../app/controllers'); // 全局路径
-  let permissions = {}; // 路由地址和权限属性的映射
-  let routes = {}; // 路由映射
-  let scan = function (action) {
-    action = action || '';
-    action && (path += action);
-    fs.readdirSync(path)
-      .forEach((file) => {
-        if (fs.statSync(path + '/' + file).isDirectory()) {
-          scan(action + '/' + file);
-          return;
-        }
-        // 不是js文件直接跳过
-        if (!file.endsWith('.js')) {
-          return;
-        }
-        let controller = require(path + '/' + file);
-        for (let key in controller) {
-          if (key === 'PERMISSION' &&
-            Object.prototype.toString.call(controller[key]) === '[object Object]') {
-            let p = controller[key];
-            for (let url in p) {
-              permissions[url] = [p][url];
-            }
-          }
-          if (key === 'ROUTER' &&
-            Object.prototype.toString.call(controller[key]) === '[object Object]') {
-            let route = controller[key];
-            for (let url in route) {
-              if (Object.prototype.toString.call(route[url]) === '[object Function]') {
-                console.log('scanning route : ' + url);
-                routes[url] = route[url];
-              }
-            }
-          }
-        }
-
-      });
-  };
-  console.log('scanning routes start...');
-  scan();
-  console.log('scanning routes end...');
-
+~ function () {
+  let sessionPermissions = {};
   /**
-   * 执行添加路由到express
+   * 添加验证session的url地址处理方法
    */
-  this.excute = function () {
-    for (let url in routes) {
-      app.all(url, routes[url]);
+  routeTools.addRouteMethod('session', function (url, ...values) {
+    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+      throw new Error('permission url muse be string and not empty');
     }
-  };
-
-};
-/**
- * 管理后台权限处理
- */
-let Permission = function () {
-  let include = [];
-  let exclude = [];
-  /**
-   * 添加校验权限的路径
-   * @param {*string} path 包含权限校验的路径
-   */
-  this.include = function (...path) {
-    include = include.concat(path);
-  };
-  /**
-   * 排除校验权限的路径
-   * @param {*string} path 包含权限校验的开始路径
-   */
-  this.exclude = function (...path) {
-    exclude = exclude.concat(path);
-  };
-  /**
-   * 验证url是否需要校验
-   * @param {string} url 要验证的访问地址
-   * @returns {boolean} true 需要,false 不需要
-   */
-  this.check = function (url) {
-    for (let i = 0; i < exclude.length; i++) {
-      let patten = new RegExp('^' + exclude[i], 'i');
-      if (patten.test(url)) {
-        return false;
+    url = url.trim();
+    if (!values || values.length === 0) {
+      throw new Error('url: ' + url + ' permission value is empty');
+    }
+    let result = [];
+    values.forEach(function (element) {
+      if (Object.prototype.toString.call(element) === '[object String]') {
+        result.push(element.trim());
       }
+    }, this);
+    if (result.length === 0) {
+      throw new Error('url: ' + url + ' permission value is empty');
     }
-    for (let i = 0; i < include.length; i++) {
-      let patten = new RegExp('^' + include[i], 'i');
-      if (patten.test(url)) {
+    sessionPermissions[url] = result.join(',');
+  });
+
+  /**
+   * 校验页面配置属性是否存在用户session中
+   * @param {*} req 
+   * @param {*} value 
+   */
+  let pageValidate = function (req, value) {
+    if (!value || Object.prototype.toString.call(value) !== '[object String]') {
+      throw new Error('PERMISSION value muse be string and not empty');
+    }
+    if (!req.session || !req.session.menus) {
+      return false;
+    }
+    let values = value.split(',');
+    for (let i = 0; i < values.length; i++) {
+      values[i] = values[i].trim();
+    }
+    let menus = req.session.menus;
+    for (let i = 0; i < menus.length; i++) {
+      if (values.includes(menus[i].permission)) {
         return true;
       }
     }
     return false;
   };
-};
+
+  /**
+   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
+   */
+  routeTools.addValidateMethod('session', function (req, res) {
+    let url = urlTools.parse(req.url).pathname;
+    let value = sessionPermissions[url];
+
+    if (!value) {
+      return true;
+    }
+    if (!req.session || !req.session.user || !req.session.menus) {
+      res.redirect('/manage/login');
+      return false;
+    }
+    let values = value.split(',');
+    let menus = req.session.menus;
+    for (let i = 0; i < menus.length; i++) {
+      if (values.includes(menus[i].permission)) {
+        // session验证成功则为页面添加校验属性权限的方法
+        res.locals.PERMISSION = function (value) {
+          return pageValidate(req, value);
+        };
+        return true;
+      }
+    }
+    res.status(403).render('403');
+    return false;
+  });
+}();
+
+/**
+ * 添加sign路由方法以及添加sign校验方法
+ */
+~ function () {
+
+  /**
+   * 验证sign名具体代码
+   * @param {*} req 
+   * @param {*} res 
+   */
+  let signValidate = function (req, res) {
+    /*
+    如果验证失败,返回结果取消此段注释
+    res.json({
+        result: 403,
+        message: "You don't have permission"
+      });
+    return false;
+    */
+    return true;
+  };
+
+  let signPermissions = [];
+  /**
+   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
+   */
+  routeTools.addRouteMethod('sign', function (url) {
+    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+      throw new Error('sign url is empty');
+    }
+    signPermissions.push(url.trim());
+  });
+
+  routeTools.addValidateMethod('sign', function (req, res) {
+    let url = urlTools.parse(req.url).pathname;
+    if (!signPermissions.includes[url]) {
+      return true;
+    }
+    return signValidate(req,res);
+  });
+}();
 
 /**
  * Expose routes
  */
-module.exports = function (app, passport) {
-  // 权限校验对象
-  let permission = new Permission();
-  permission.include('/manage');
-  permission.exclude('/manage/login', '/manage/signin');
+module.exports = function (app) {
 
-  // 扫描全部路由地址
-  var routes = new Routes(app);
-  // // 添加特殊路由
-  // routes.use('/manage/panel', '/manage/panel/index');
-  // routes.use('/manage/user', '/manage/user/index');
-  // routes.use('/manage/file', '/manage/file/index');
-  // routes.use('/manage/area', '/manage/area/index');
-  // routes.use('/manage/menu', '/manage/menu/index');
-  // routes.use('/manage/office', '/manage/office/index');
-  // routes.use('/manage/dict', '/manage/dict/index');
-  // routes.use('/manage/log', '/manage/log/index');
-  // routes.use('/manage/role', '/manage/role/index');
-  // routes.use('/manage/login', '/manage/login/login');
-  // routes.use('/manage/signin', '/manage/login/signin');
-  // routes.use('/manage/signup', '/manage/login/signup');
-  // routes.use('/manage/logout', '/manage/login/logout');
-
-  // 权限校验拦截
+  // routes相关拦截
   app.use(function (req, res, next) {
-    let user = req.session.user;
-    let url = req.originalUrl;
-    if (permission.check(url)) {
-      if (!user) { // 用户未登录
-        res.redirect('/manage/login');
-        return;
+    let result = routeTools.validate(req, res);
+    for (let r in result) {
+      if (result.hasOwnProperty(r)) {
+        if (!result[r]) {
+          return;
+        }
       }
     }
     next();
   });
 
-  routes.excute(); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
+  routeTools.scan(app, path); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
 
-  // // 面板路由
-  // require('../app/routes/manage/panel')(app, passport);
-  // // 用户路由
-  // require('../app/routes/manage/user')(app, passport);
-  // // 文件路由
-  // require('../app/routes/manage/file')(app, passport);
-  // // 区域路由
-  // require('../app/routes/manage/area')(app, passport);
-  // // 菜单路由
-  // require('../app/routes/manage/menu')(app, passport);
-  // // 机构路由
-  // require('../app/routes/manage/office')(app, passport);
-  // // 字典路由
-  // require('../app/routes/manage/dict')(app, passport);
-  // // 角色路由
-  // require('../app/routes/manage/role')(app, passport);
-
-  // app.post('/user/session',
-  //   pauth('local', {
-  //     failureRedirect: '/login',
-  //     failureFlash: 'Invalid email or password.'
-  //   }), user.session);
-  // app.get('/user/:userId', user.show);
-  // app.get('/auth/linkedin/callback', pauth('linkedin', fail), user.authCallback);
 
   /**
    * Error handling

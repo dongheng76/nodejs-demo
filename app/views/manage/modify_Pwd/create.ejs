@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>修改密码</title>
+  <% include  ../include/head_res.ejs %>
+  <% include  ../include/manage_com_res.ejs %>
+  <!-- jstree -->
+  <link href="/plugin/ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css" rel="stylesheet" type="text/css"/>
+  <script src="/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+
+  <script src="/js/common/jquery.validate.js" type="text/javascript"></script>
+
+  <!-- 编辑器 -->
+  <script type="text/javascript" charset="utf-8" src="/plugin/ueditor/ueditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/plugin/ueditor/ueditor.all.js"> </script>
+  <!-- 手机编辑器 -->
+  <link href="/plugin/squire/css/color.css" type="text/css" rel="stylesheet" />
+  <link href="/plugin/squire/css/squire.css" type="text/css" rel="stylesheet" />
+  <link href="/plugin/squire/css/stylesheet.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" charset="utf-8" src="/plugin/squire/js/colorpicker.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/plugin/squire/js/squire-raw.js"></script>
+
+<body>
+
+<% include  ../include/header.ejs %>
+<!---->
+<!-- sidebar -->
+<div id="sidebar-nav">
+  <ul id="dashboard-menu">
+  </ul>
+</div>
+<!-- end sidebar -->
+
+
+<!-- main container -->
+<div class="content">
+
+  <div class="container-fluid">
+    <div class="table-wrapper products-table section">
+      <div class="row-fluid head">
+        <div class="span12">
+          <h4 style="float:left;display: inline-block">修改密码</h4>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <form name="create" id="form" action=""  method="post">   
+          <input type="hidden" name="_csrf" value="<%= csrf_token %>"> 
+          <div class="row-fluid form-wrapper">
+            <!-- left column -->
+            <div class="span11 column">     
+              <div class="field-box">
+                <label>原始密码:</label>
+                <input style="width:400px" type="password" name="oldpassword" id="oldpassword"/>
+              </div>
+              <div class="field-box">
+                <label>新密码:</label>
+                <input style="width:400px" type="password" name="password" id="password"/>
+              </div>
+              <div class="field-box">
+                <label>确认新密码:</label>
+                <input style="width:400px" type="password" name="confirm_password" id="confirm_password"/>
+              </div>
+            </div>
+          </div>
+            <button type="submit" class="btn-glow inverse" id="addUserBtn">确定</button>
+         
+        </form>
+      </div>
+    </div>
+    <script type="application/javascript">
+      $(window).ready(function(){
+          $("#form").validate({
+          rules: {
+            oldpassword: {
+              required: true,
+              minlength: 6
+            },
+           password: {
+              required: true,
+              minlength: 6
+            },
+            confirm_password: {
+              required: true,
+              minlength: 6,
+              equalTo: "#password"
+            }
+          },
+          messages: {
+            oldpassword: {
+              required: "你必须输入原始密码",
+              minlength: "你的密码长度至少需要6位"
+            },
+            password: {
+              required: "请输入新密码",
+              minlength: "你的密码长度至少需要6位"
+            },
+            confirm_password: {
+              required: "你必须确认一次输入的新密码",
+              minlength: "你的密码至少需要6位",
+              equalTo: "请输入上面相同的密码进行确认"
+            }
+          },
+          submitHandler:function(form){
+            $.post('/manage/user/modifyPwd',$('form[name="create"]').serialize(),function(data){
+              if(data.result){
+                noticeInfo('success','感谢您的使用，修改成功',function(){
+                  window.location.href = '/manage/user';
+                });
+              }else{
+                noticeInfo('fail',data.error);
+              }
+            }).error(function(data) {
+              noticeInfo('fail','网络错误创建失败!请重试.');
+            });
+          }
+        });
+        
+      });
+
+    </script>
+  </div>
+</div>
+
+<% include  ../include/manage_footer_res.ejs %>
+</body>
+</html>

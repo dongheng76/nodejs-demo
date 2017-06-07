@@ -5,9 +5,13 @@
  */
 
 module.exports = {
-  // log files directory
-  logDirectory: '/logs/',
-
+  log4js: {
+    appenders: [{
+        'type': 'console'
+      }
+    ],
+    'replaceConsole': true
+  },
   // mysql config
   mysql: {
     server: '118.89.177.58',

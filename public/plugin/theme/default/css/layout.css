@@ -9,10 +9,10 @@ body {
 }
 
 #main{background-color:#F3F3F3;}
-#openClose {width:6px;margin:0 1px;cursor:pointer;margin-left:200px;float:left;}
-#left{position:absolute;left:0;top:0;width:200px;}
+#openClose {width:6px;margin:0 1px;cursor:pointer;float:left;}
+#left{position:relative;width:160px;float:left;}
 .nav-tabs{margin-left:-1px;background-color:#F3F3F3;}
-#openClose,#openClose.close {background:#efefef url("../images/openclose.png") no-repeat -29px center;}
+#openClose,#openClose.close {background:#efefef url("../img/openclose.png") no-repeat -29px center;}
 #openClose.close {background-position:1px center;opacity:0.5;filter:alpha(opacity=50)}
 .content-ui{padding:0 10px;}
 
@@ -419,7 +419,6 @@ input.search{
 	min-width: 400px;
 	min-height: 620px;
 	margin-bottom: 10px;
-	padding-bottom: 20px;
 	overflow: hidden;
 	position: relative;
 	background: #fff;
@@ -428,6 +427,7 @@ input.search{
 	border-bottom: 1px solid #dae3e9;
 	box-shadow: -3px 3px 3px -2px #f1f1f3;
 	border-radius: 0px 0px 0px 5px;
+	padding-bottom:10px;
 }
 .content.wide-content {
 	margin-left: 0;

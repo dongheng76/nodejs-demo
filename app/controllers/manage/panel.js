@@ -3,29 +3,16 @@
 /**
  * Module dependencies.
  */
-const async = require('async');
-const md5 = require('md5');
 const validator = require('validator');
-const menuDao = require('../../dao/menu');
-
-exports.PERMISSION = {
-};
+const menuDao = require('../../dao/sys_menu');
 
 
-exports.ROUTER = {
-  '/manage/panel': function (req, res) {
-
-    menuDao.queryMenuByHref('/manage/panel', function (err, menu) {
-      if (err || !menu) {
-
-        return;
-      } else {
-
-
-        res.render('manage/panel', {
-          currentMenu: menu
-        });
-      }
+module.exports = function (app, routeMethod) {
+  app.all('/manage/panel', function (req, res) {
+    Promise.all([menuDao.queryMenuByHref('/manage/panel')]).then(result => {
+      res.render('manage/panel', {
+        currentMenu: result[0]
+      });
     });
-  }
+  });
 };

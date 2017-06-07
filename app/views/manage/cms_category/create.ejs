@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>栏目管理 - 创建栏目</title>
+  <% include  ../include/head_res.ejs %>
+  <% include  ../include/manage_com_res.ejs %>
+  <!-- jstree -->
+  <link href="/plugin/ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css" rel="stylesheet" type="text/css"/>
+  <script src="/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+
+  <script src="/js/common/jquery.validate.js" type="text/javascript"></script>
+
+  <!-- 编辑器 -->
+  <script type="text/javascript" charset="utf-8" src="/plugin/ueditor/ueditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/plugin/ueditor/ueditor.all.js"> </script>
+  <!-- 手机编辑器 -->
+  <link href="/plugin/squire/css/color.css" type="text/css" rel="stylesheet" />
+  <link href="/plugin/squire/css/squire.css" type="text/css" rel="stylesheet" />
+  <link href="/plugin/squire/css/stylesheet.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" charset="utf-8" src="/plugin/squire/js/colorpicker.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/plugin/squire/js/squire-raw.js"></script>
+<body>
+
+<% include  ../include/header.ejs %>
+
+<!-- sidebar -->
+<div id="sidebar-nav">
+  <ul id="dashboard-menu">
+  </ul>
+</div>
+<!-- end sidebar -->
+
+<!-- main container -->
+<div class="content">
+
+  <div class="container-fluid">
+    <div class="table-wrapper products-table section">
+      <div class="row-fluid head">
+        <div class="span12">
+          <h4 style="float:left;display: inline-block">新增栏目</h4>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <form name="create" id="form" action="/manage/rea/store"  method="post">
+          <input type="hidden" name="_csrf" value="<%= csrf_token %>">
+          <% if(typeof(cate)!='undefined'){%>
+            <input type="hidden" name="id" value="<%=cate.id%>"/>
+          <%}%>
+          <div class="row-fluid form-wrapper">
+            <!-- left column -->
+            <div class="span11 column">
+              <div class="field-box">
+                <label>所属上级栏目:</label>
+                <input style="width:400px" disabled type="text" name="parent_label" <%if(typeof(parentCate)!='undefined'){%> value="<%=parentCate.name%>" <%}else{%> value="根目录栏目" <%}%>/>
+                <input type="hidden" name="parent_id" value="<%if(typeof(cate)!='undefined'){%><%=cate.parent_id%><%}else{%><%if(typeof(parentCate)!='undefined'){%><%=parentCate.id%><%}else{%>0<%}%><%}%>"/>
+              </div>
+              <div class="field-box">
+                <label>栏目名称:</label>
+                <input style="width:400px" type="text" name="name" <%if(typeof(cate)!='undefined'){%> value="<%=cate.name%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>栏目图片:</label>
+                <input type="hidden" id="image" name="image" <%if(typeof(cate)!='undefined'){%> value="<%=cate.image%>" <%}%>/>
+                <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:'[{@width@:200,@height@:200}]',showFormat:'{@width@:200,@height@:200}'})%>
+              </div>
+              <div class="field-box">
+                <label>栏目href:</label>
+                <input style="width:400px" type="text" name="href" <%if(typeof(cate)!='undefined'){%> value="<%=cate.href%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>模块名称:</label>
+                <input style="width:400px" type="text" name="module" <%if(typeof(cate)!='undefined'){%> value="<%=cate.module%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>target:</label>
+                <input style="width:400px" type="text" name="target" <%if(typeof(cate)!='undefined'){%> value="<%=cate.target%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>排序号:</label>
+                <input style="width:400px" type="text" name="sort" <%if(typeof(maxSort)!='undefined'){%> value="<%=maxSort%>" <%}%> <%if(typeof(cate)!='undefined'){%> value="<%=cate.sort%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>描述:</label>
+                <input style="width:400px" type="text" name="description" <%if(typeof(cate)!='undefined'){%> value="<%=cate.description%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>备注:</label>
+                <textarea style="width:400px" name="remarks" rows="4"><% if(typeof(cate)!='undefined'){ %><%=cate.remarks%><%}%></textarea>
+              </div>
+            </div>
+          </div>
+          <% if(typeof(cate)!='undefined'){%>
+            <button type="submit" class="btn-glow inverse">确定修改</button>
+          <%}else{%>
+            <button type="submit" class="btn-glow inverse">确定添加</button>
+          <%}%>
+          <a class="btn-glow" href="javascript:window.history.back();">返回</a>
+        </form>
+      </div>
+    </div>
+    <script type="application/javascript">
+      $(window).ready(function(){
+        <% if(typeof(cate)!='undefined'){%>
+          $("#form").validate({
+          rules: {
+            name: "required",
+            module: "required",
+            sort:"required"
+          },
+          messages: {
+            name: "栏目名称必须填写",
+            module: "栏目模块名称必须填写",
+            sort: "栏目排序号必须填写"
+          },
+          submitHandler:function(form){
+            $.post('/manage/cms_category/store',$('form[name="create"]').serialize(),function(data){
+              if(data.result){
+                window.location.href='/manage/cms_category';
+              }else{
+                noticeInfo('fail',data.error);
+              }
+            });
+          }
+        });
+        <%}else{%>
+          $("#form").validate({
+          rules: {
+            name: "required",
+            module: "required",
+            sort:"required"
+          },
+          messages: {
+            name: "栏目名称必须填写",
+            module: "栏目模块名称必须填写",
+            sort: "栏目排序号必须填写"
+          },
+          submitHandler:function(form){
+            $.post('/manage/cms_category/store',$('form[name="create"]').serialize(),function(data){
+              if(data.result){
+                window.location.href='/manage/cms_category';
+              }else{
+                noticeInfo('fail',data.error);
+              }
+            }).error(function(data) {
+              noticeInfo('fail','网络错误创建失败!请重试.');
+            });
+          }
+        });
+        <%}%>
+      });
+    </script>
+  </div>
+</div>
+
+<% include  ../include/manage_footer_res.ejs %>
+</body>
+</html>

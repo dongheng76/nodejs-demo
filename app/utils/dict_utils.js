@@ -9,17 +9,15 @@ const mysql = require('./mysql_db.js');
  * @param defaultValue
  * @param callback
  */
-exports.getDictLabel = function(value,type,defaultValue,callback){
-    getDictList(type,function(err,obj){
-        for(var i=0;i<obj.length;i++){
-            if(obj[i].value == value){
-                callback(err,obj[i].label);
-                return;
-            }
+exports.getDictLabel = async function (value, type, defaultValue) {
+    let typeDictList = await getDictList(type);
+    for (var i = 0; i < typeDictList.length; i++) {
+        if (typeDictList[i].value == value) {
+            return typeDictList[i].label;
         }
-        callback(err,defaultValue);
-    });
-}
+    }
+    return defaultValue;
+};
 
 exports.getDictList = getDictList;
 /**
@@ -27,30 +25,27 @@ exports.getDictList = getDictList;
  * @param type
  * @param callback
  */
-function getDictList(type,callback){
+async function getDictList (type) {
 
-    cacheUtils.get(CACHE_DICT_MAP,function(err,obj){
-        if(obj==null || obj.length==0){
-            mysql.query("select * from sys_dict where del_flag='0' order by sort asc",null, function(err, dicts) {
-                cacheUtils.putCache(CACHE_DICT_MAP,dicts);
-                var dictsForType = [];
-                for(var i=0;i<dicts.length;i++){
-                    if(dicts[i].type==type){
-                        dictsForType.push(dicts[i]);
-                    }
-                }
-                callback(err,dictsForType);
-            });
-        }else{
-            var dictsForType = [];
-
-            for(var i=0;i<obj.length;i++){
-                if(obj[i].type==type){
-                    dictsForType.push(obj[i]);
-                }
+    let dictCache = await cacheUtils.get(CACHE_DICT_MAP);
+    let dictsForType = [];
+    if (dictCache == null || dictCache.length == 0) {
+        let dicts = await mysql.query("select * from sys_dict where del_flag='0' order by sort asc", null);
+        cacheUtils.putCache(CACHE_DICT_MAP, dicts);
+        for (var i = 0; i < dicts.length; i++) {
+            if (dicts[i].type == type) {
+                dictsForType.push(dicts[i]);
             }
-
-            callback(null,dictsForType);
         }
-    });
+        return dictsForType;
+    } else {
+
+        for (var j = 0; j < dictCache.length; j++) {
+            if (dictCache[j].type == type) {
+                dictsForType.push(dictCache[j]);
+            }
+        }
+
+        return dictsForType;
+    }
 }

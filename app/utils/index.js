@@ -1,7 +1,8 @@
 const crypto = require('crypto');
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 const uuidV1 = require('uuid/v1');
+const moment = require('moment');
 
 /**
  * 格式化日期
@@ -43,7 +44,7 @@ exports.format_date = function (date, friendly) {
  */
 exports.uuid = function () {
   return uuidV1().replace(/\-/g, '');
-}
+};
 
 /**
  * 加密函数
@@ -88,7 +89,7 @@ exports.md5 = function (str) {
 
 exports.isObject = function (obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
-}
+};
 
 exports.makePage = function (pagePath, total, pagesize, page) {
   page = parseInt(page);
@@ -118,7 +119,7 @@ exports.getSingleUrl = function (req) {
     url += '?';
   }
   return url;
-}
+};
 
 exports.getIPAdress = function () {
   var interfaces = require('os').networkInterfaces();
@@ -173,6 +174,7 @@ exports.jsonToTreeJson = function (json, rootId) {
   // 先找到第一层后开始递归
   for (let i = 0; i < json.length; i++) {
     if (json[i].parent_id == rootId) {
+      json[i].create_date = moment(json[i].create_date).format('YYYY-MM-DD HH:mm:ss');
       findChildrenByPId(json, json[i]);
       treeJson.push(json[i]);
     }
@@ -185,6 +187,7 @@ function findChildrenByPId (json, obj) {
   for (let i = 0; i < json.length; i++) {
     if (json[i].parent_id == obj.id) {
       findChildrenByPId(json, json[i]);
+      json[i].create_date = moment(json[i].create_date).format('YYYY-MM-DD HH:mm:ss');
       children.push(json[i]);
     }
   }
