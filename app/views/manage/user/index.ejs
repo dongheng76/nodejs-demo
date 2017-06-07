@@ -4,6 +4,12 @@
   <title>用户管理 - 首页</title>
   <% include  ../include/head_res.ejs %>
   <% include  ../include/manage_com_res.ejs %>
+
+  
+<script src="/plugin/jqueryFileUpload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/plugin/jqueryFileUpload/js/jquery.iframe-transport.js"></script>
+<script src="/plugin/jqueryFileUpload/js/jquery.fileupload.js"></script>
+
 <body>
 
 <% include  ../include/header.ejs %>
@@ -28,18 +34,21 @@
       </div>
 
       <div class="row-fluid filter-block">
-        <form name="create" action="/manage/user" method="get">
           <div class="pull-right">
-            姓名：<input type="text" class="input-mini" name="name"/>
-            登录名：<input type="text" class="input-small" name="login_name"/>
-            注册日期：<input type="text" value="" class="input-medium datepicker" name="create_date_start"/>-&nbsp;<input type="text" value="" class="input-medium datepicker" name="create_date_end"/>
-            <button type="submit" class="btn-glow"><i class="icon-search"></i> 搜索</button>
+            <form name="create" action="/manage/user" method="get">
+                姓名：<input type="text" class="input-mini" name="name"/>
+                登录名：<input type="text" class="input-small" name="login_name"/>
+                注册日期：<input type="text" value="" class="input-medium datepicker" name="create_date_start"/>-&nbsp;<input type="text" value="" class="input-medium datepicker" name="create_date_end"/>
+                <button type="submit" class="btn-glow"><i class="icon-search"></i> 搜索</button>
+              <a href="javascript:void(0)"> <div class="btn-glow" style="position: relative;"><i class="icon-upload"></i> 导入EXCEL  
+                <input class="fileupload" name="file" value="导入EXCEL"  accept=".xlsx" type="file" style="position: absolute;top:0;cursor: pointer;  left: 0;width: 100px;opacity:0; filter:alpha(opacity=0);"></div>
+              </a>
+            <a href="/manage/user/downloadExcel" ><div class="btn-glow"><i class="icon-download"></i> 导出EXCEL</div></a>
             <a href="/manage/user/create" ><div class="btn-glow"><i class="icon-plus"></i> 增加新用户</div></a>
             <a href="javascript:void(0)" id="dels"><div class="btn-glow"><i class="icon-minus"></i> 删除所选</div></a>
           </div>
-        </form>
+           </form>
       </div>
-
       <div class="row-fluid">
         <table class="table table-hover" >
           <thead>
@@ -236,6 +245,29 @@
       }
     });
   });
+
+   $('.fileupload').fileupload({
+            url: '/manage/user/uploadExcel?_csrf=<%= csrf_token %>' ,
+            dataType: 'json',
+            autoUpload: true,
+            acceptFileTypes: /(\.|\/)(xlsx)$/i,
+            disableImageMetaDataLoad: true,
+            done: function (e, data) {
+              //if(!data.status)top.$.jBox.tip(data.result.Connector.FileUpload.failReason, 'error');
+              alert(1);
+            },
+            progressall: function (e, data) {
+              alert(2);
+            }
+          })
+          .bind('fileuploadsubmit', function (e, data) {
+            // data.formData = {
+            //   file_cate_id: $('#currentFolder').val()
+            //   //format:'[{"width":240,"height":240},{"width":500,"height":500}]'
+            // };
+            //loading('正在上传文件中，请稍等...');
+          }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
+
 
   $(window).load(function(){
     $('.table .sort').click(function(){

@@ -13,6 +13,11 @@ const util = require('../../utils');
 const menuDao = require('../../dao/menu');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
+const excelPort = require('excel-export');
+const xlsx = require('node-xlsx');
+const fs = require('fs.extra');
+const uuidV1 = require('uuid/v1');
+const path = require('path');
 
 
 exports.PERMISSION = {};
@@ -251,5 +256,83 @@ exports.ROUTER = {
         condition: req.query
       });
     });
+  },
+  /**
+  *  导出EXCEL
+  */
+  '/manage/user/downloadExcel': function (req, res) {
+     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
+     // var datas = req.datas;
+      async.auto({
+        users: function (cb) {
+          userDao.queryAllUser(req, currentPage, 100, function (err, users) {
+            if (err || !users) {
+              cb(null, []);
+            } else {
+              async.map(users, function (user, userCallback) {
+                user.create_date = moment(user.create_date).format('YYYY-MM-DD HH:mm:ss');
+                dictUtil.getDictLabel(user.user_type, 'sys_user_type', '未知', function (err, label) {
+                  user.user_type_label = label;
+                  userCallback(null, user);
+                });
+              }, function (err, result) {
+                cb(null, result);
+              });
+            }
+          });
+        }
+      }, function (error, result) {
+          var userList= result.users;
+          var conf ={};
+          conf.cols = [
+              {caption:'用户ID', type:'string'},
+              {caption:'姓名 ', type:'string'},
+              {caption:'登录名', type:'string'},
+              {caption:'用户email', type:'string'},               
+              {caption:'所属机构', type:'string'},               
+              {caption:'注册日期', type:'string'},               
+              {caption:'用户mobile', type:'string'},               
+              {caption:'用户类型 ', type:'string'}            
+          ];
+          conf.rows = [];
+          for(var i=0;i<userList.length;i++){
+            conf.rows[conf.rows.length]=[userList[i].id, userList[i].name,userList[i].login_name,userList[i].email, userList[i].office_name, userList[i].create_date, userList[i].mobile, userList[i].user_type_label];
+         }
+          res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+          res.setHeader("Content-Disposition", "attachment; filename=user" +new Date().getTime()+ ".xlsx");
+          res.end(excelPort.execute(conf), 'binary');
+    });
+  },
+  '/manage/user/uploadExcel': function (req, res) {
+    //先上传临时文件 再读取 然后删除临时文件
+    if (!req.files)
+            return res.status(400).send('No files were uploaded.');
+    let file = req.files.file;
+    // 取得文件的后缀名
+    let fileAry = file.name.split('.');
+    let suffix = fileAry[fileAry.length - 1];
+    var fileName = 'user'+new Date().getTime();
+    let fileDirPath = path.resolve(__dirname, '../../../') + '/public/files/temporaryFile/';
+   
+    if (fs.existsSync(fileDirPath)) {
+        // 不做操作
+    } else {
+        util.mkdirsSync(fileDirPath);
+    }
+    var filePath=(fileDirPath + fileName + '.' + suffix).replace(/\\/g,'/');;
+    file.mv(filePath, function (err) {
+          if (err){
+              return res.status(500).send(err);
+          }
+          var obj = xlsx.parse(filePath);
+          var excelObj=obj[0].data;
+          console.log(excelObj);
+          return true;
+     });
+
+    return false;
+    
+
+    //var obj = xlsx.parse("C:\\Users\\Administrator\\Desktop\\user1496288617654.xlsx");
   }
 };
