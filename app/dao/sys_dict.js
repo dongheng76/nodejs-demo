@@ -42,7 +42,7 @@ exports.queryDictType = function () {
 /**
  * 分页查询字典所有信息
  */
-exports.queryAllDict = function (req, currentPage, pagesize, callback) {
+exports.queryAllDict = function (req, currentPage, pagesize) {
     let where = "where sd.del_flag='0' ";
     let params = [];
     if (req.query.type != null && req.query.type != '') {

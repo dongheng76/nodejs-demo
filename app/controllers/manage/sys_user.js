@@ -23,7 +23,7 @@ module.exports = function (app, routeMethod) {
       userDao.queryRolesForAuth(req),
       officeDao.queryOffice()
     ]).then(result => {
-      res.render('manage/user/create', {
+      res.render('manage/sys_user/create', {
         currentMenu: result[0],
         userTypes: result[1],
         roles: result[2],
@@ -45,7 +45,7 @@ module.exports = function (app, routeMethod) {
       userDao.queryUserById(id),
       userDao.queryUserRolesById(id)
     ]).then(result => {
-      res.render('manage/user/create', {
+      res.render('manage/sys_user/create', {
         currentMenu: result[0],
         userTypes: result[1],
         roles: result[2],
@@ -177,7 +177,7 @@ module.exports = function (app, routeMethod) {
       });
 
       Promise.all(proUsers).then(results => {
-        res.render('manage/user/index', {
+        res.render('manage/sys_user/index', {
           currentMenu: result[2],
           users: users,
           page: result[1],

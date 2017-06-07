@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>内容发布 - 首页</title>
+  <% include  ../include/head_res.ejs %>
+  <% include  ../include/manage_com_res.ejs %>
+  <!-- jstree -->
+  <link href="/plugin/ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css" rel="stylesheet" type="text/css"/>
+  <script src="/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+  <style type="text/css">
+    .ztree {overflow:auto;margin:0;_margin-top:10px;padding:10px 0 0 10px;}
+    .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+  </style>
+
+<body>
+
+<% include  ../include/header.ejs %>
+
+<!-- sidebar -->
+<div id="sidebar-nav">
+  <ul id="dashboard-menu">
+  </ul>
+</div>
+<!-- end sidebar -->
+
+
+<!-- main container -->
+<div class="content">
+  <div id="left" style="position:relative;float:left;">
+    <div class="accordion-heading">
+      <a class="accordion-toggle">栏目列表</a>
+    </div>
+    <div class="ztree" id="cates">
+
+    </div>
+  </div>
+  <div id="openClose" class="close">&nbsp;</div>
+  <div id="right" style="position:relative;float:left;">
+    <div class="container-fluid">
+      <div class="table-wrapper table-products products-table section">
+        <div class="row-fluid head">
+          <div class="span12">
+            <h4 style="float:left;display: inline-block">信息管理</h4>
+          </div>
+        </div>
+
+        <div class="row-fluid filter-block">
+          <form name="create" action="/manage/cms_article" method="get">
+            <div class="pull-right">
+              <input type="hidden" name="cate_id" value="<%=cateId%>"/>
+              标题：<input type="text" class="input-medium" name="title"/>
+              <button type="submit" class="btn-glow"><i class="icon-search"></i> 搜索</button>
+              <a href="/manage/cms_article/create?cate_id=<%=cateId%>" ><div class="btn-glow"><i class="icon-plus"></i> 增加新文章</div></a>
+              <a href="javascript:void(0)" id="dels"><div class="btn-glow"><i class="icon-minus"></i> 删除所选</div></a>
+            </div>
+          </form>
+        </div>
+
+        <div class="row-fluid">
+          <table class="table table-hover" >
+            <thead>
+            <tr>
+              <th class="span2">
+                <input type="checkbox" name="mainCheckbox">
+                标题
+              </th>
+              <th class="span1">
+                <span class="line"></span>图片
+              </th>
+              <th class="span1">
+                <span class="line"></span>link
+              </th>
+              <th class="span1">
+                <span class="line"></span>排序号
+              </th>
+              <th class="span1">
+                <span class="line"></span>target
+              </th>
+              <th class="span1 sort <%if(typeof(condition)!='undefined' && typeof(condition.sortName)!='undefined' && typeof(condition.sortOrder)!='undefined'){%>datagrid-sort-<%=condition.sortOrder%><%}%>" 
+                sort="create_date">
+                <span class="line"></span>创建时间
+                <span class="datagrid-sort-icon"></span>
+              </th>
+              <th class="span1">
+                <span class="line"></span>状态
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <% articles.forEach(function(article){ %>
+            <tr>
+              <td>
+                <input type="checkbox" name="subCheckbox" articleId="<%=article.id%>">
+                <a href="#" class="id"><%=article.title%></a>
+              </td>
+              <td class="description">
+                  <script>
+                    var imgStr = '<%-article.image%>';
+                    if(imgStr!=''){
+                      var img_json = JSON.parse('<%-article.image%>');
+                      window.document.write('<img src="'+img_json[0].path+img_json[0].name+'_200x200.'+img_json[0].suffix+'"/>');
+                    }
+                  </script>
+              </td>
+              <td>
+                <%=article.link%>
+              </td>
+              <td>
+                <%=article.order%>
+              </td>
+              <td>
+                <%=article.target%>
+              </td>
+              <td>
+                <%=article.create_date%>
+              </td>
+              <td>
+                <span class="label label-success">有效</span>
+                <ul class="actions">
+                  <li><a href="/manage/cms_article/edit?id=<%=article.id%>">编辑</a></li>
+                  <li class="last"><a href="javascript:void(0)" onclick="javascript:delArticle('<%=article.id%>')">删除</a></li>
+                </ul>
+              </td>
+            </tr>
+            <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pagination">
+        <%-include("../include/page")%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include  ../include/manage_footer_res.ejs %>
+
+<script type="text/javascript">
+
+  $('input[name="mainCheckbox"]').click(function(){
+    $('input[name="subCheckbox"]').each(function(){
+      if($('input[name="mainCheckbox"]').is(':checked')){
+        $(this).prop('checked',true);
+        $(this).parent().addClass('checked');
+      }else{
+        $(this).prop('checked',false);
+        $(this).parent().removeClass('checked');
+      }
+    });
+  });
+
+  $('input[name="subCheckbox"]').click(function(){
+    //有一个为假总的就为假
+    var checkbox = true;
+    $('input[name="subCheckbox"]').each(function(){
+      if(!$(this).prop('checked')){
+        checkbox = false;
+      }
+    });
+    $('input[name="mainCheckbox"]').prop('checked',checkbox);
+    if(checkbox){
+      $('input[name="mainCheckbox"]').parent().addClass('checked');
+    }else{
+      $('input[name="mainCheckbox"]').parent().removeClass('checked');
+    }
+  });
+
+  function delArticle(id) {
+    $.confirm({
+      title: '友情提示!',
+      content: '请确认是否真的要删除该文章信息，此操作不可逆请谨慎操作!',
+      boxWidth: '300px',
+      useBootstrap: false,
+      buttons: {
+        confirm: {
+          text: '确认',
+          btnClass:'btn-flat default',
+          action: function(){
+            $.post('/manage/cms_article/delete',{
+              _csrf:'<%= csrf_token %>',
+              id:id
+            },function(data){
+              if(data.result){
+                window.location.reload();
+              }else{
+                noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!')
+              }
+            });
+          }
+        },
+        cancel: {
+          text: '取消',
+          btnClass:'btn-flat white',
+          action: function(){
+            return;
+          }
+        }
+      }
+    });
+  }
+
+  $('#dels').click(function(){
+    $.confirm({
+      title: '友情提示!',
+      content: '请确认是否真的要删除该文章信息，此操作不可逆请谨慎操作!',
+      boxWidth: '300px',
+      useBootstrap: false,
+      buttons: {
+        confirm: {
+          text: '确认',
+          btnClass:'btn-flat default',
+          action: function(){
+            var ids = '';
+            $('input[name="subCheckbox"]').each(function(){
+              if($(this).parent().hasClass('checked')){
+                ids += $(this).attr('articleId')+'|';
+              }
+            });
+
+            if(ids==''){
+              noticeInfo('fail','请选择至少一项后才能删除');
+              return true;
+            }
+
+            $.post('/manage/cms_article/delete',{
+              ids:ids,
+              _csrf:'<%= csrf_token %>'
+            },function(data){
+              if(data.result){
+                window.location.reload();
+              }else{
+                noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!');
+              }
+            });
+          }
+        },
+        cancel: {
+          text: '取消',
+          btnClass:'btn-flat white',
+          action: function(){
+            return;
+          }
+        }
+      }
+    });
+  });
+
+  var setting = {
+    view: {
+        dblClickExpand: false,
+        showLine: true,
+        selectedMulti: false
+    },
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: "id",
+            pIdKey: "parent_id",
+            rootPId: "0"
+        }
+    },
+    callback: {
+      onClick: zTreeOnClick
+    }
+  };
+
+  function zTreeOnClick(event, treeId, treeNode) {
+    window.location.href = '?cate_id='+treeNode.id;
+  }
+
+  //递归寻找祖先为止显示家谱
+  function showGenealogy(node,text){
+    if(text){
+        text=node.name+'-'+text;
+    }else{
+        text = '';
+        text+=node.name;
+    }
+
+    //查看是否有上级，如果有就再次递归
+    var parentNode = node.getParentNode();
+    if(parentNode){
+        return showGenealogy(parentNode,text);
+    }else{
+        return text;
+    }
+  }
+
+  var articleTreeObj = $.fn.zTree.init($("#cates"), setting, <%-cates%>);
+  articleTreeObj.expandAll(true);
+  var nodes = articleTreeObj.transformToArray(articleTreeObj.getNodes());
+  for(var i=0;i<nodes.length;i++){
+    if(nodes[i].id == '<%=cateId%>'){
+      articleTreeObj.selectNode(nodes[i]);
+      break;
+    }
+  }
+</script>
+
+<script type="text/javascript"> 
+  var leftWidth = "160"; // 左侧窗口大小
+  function wSize(){
+    var strs=getWindowSize().toString().split(",");
+    $("#left, #openClose").height($('#right').parent().height());
+    $("#right").width($("body").width()-$("#left").width()-$("#openClose").width()-180-20);
+  }
+  // 鼠标移动到边界自动弹出左侧菜单
+  $("#openClose").mouseover(function(){
+    if($(this).hasClass("open")){
+      $(this).click();
+    }
+  });
+  $(window).load(function(){
+    wSize();
+  });
+</script>
+<script src="/js/common/wsize.min.js" type="text/javascript"></script>
+</body>
+</html>

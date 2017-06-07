@@ -1,0 +1,108 @@
+<div id="<%= input %>" style="width:700px;height:350px;position:relative;">
+    <input type="text" id="<%= input %>Search" style="position:absolute;top:10px;right:10px;z-index:999;" />
+</div>
+
+<script type="text/javascript">
+
+    //初始化地图对象，加载地图
+    var toolBar = null;
+    var map = new AMap.Map('<%= input %>', {
+        //resizeEnable: true,
+        //rotateEnable: true,
+        //dragEnable: true,
+        //zoomEnable: true,
+        //设置可缩放的级别
+        //zooms: [3,18],
+        //传入2D视图，设置中心点和缩放级别
+        view: new AMap.View2D({
+            center : new AMap.LngLat($('input[name="<%= input %>Longitude"]').val(), $(
+					'input[name="<%= input %>Latitude"]').val()),
+            zoom: 14
+        })
+    });
+
+    AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function () {
+        var autoOptions = {
+            city: "", //城市，默认全国
+            input: "<%= input %>Search"//使用联想输入的input的id
+        };
+
+        autocomplete = new AMap.Autocomplete(autoOptions);
+        placeSearch = new AMap.PlaceSearch({
+            map: map
+        });
+
+        AMap.event.addListener(autocomplete, "complete", function (e) {
+            window.setTimeout(function () {
+                $('.amap-sug-result').css('top', $('#<%= input %>Search').offset().top - $(window).scrollTop() + $('#<%= input %>Search').height() + 4);
+            }, 100);
+
+        });
+        AMap.event.addListener(autocomplete, "select", function (e) {
+            //TODO 针对选中的poi实现自己的功能
+            placeSearch.search(e.poi.name)
+        });
+
+        //直接搜索
+        $('#<%= input %>Search').keyup(function (e) {
+            if (e.which == 13 && $('#<%= input %>Search').val() != '' && $('#<%= input %>Search').val() != null) {
+                placeSearch.search($('#<%= input %>Search').val());
+            }
+        });
+
+        if ($('input[name="<%= input %>Longitude"]').val() && $('input[name="<%= input %>Latitude"]').val()) {
+            //var point = new BMap.Point($('input[name="shopLongitude"]').val(),$('input[name="shopLatitude"]').val());
+            //如果存在经纬度的话就直接设定经纬度
+            if ($('input[name="<%= input %>Longitude"]').val() && $('input[name="<%= input %>Latitude"]').val()) {
+                var new_point = new AMap.LngLat($('input[name="<%= input %>Longitude"]').val(), $('input[name="<%= input %>Latitude"]').val());
+
+                var marker = new AMap.Marker(
+                        {
+                            icon : "/images/map_sign.png",
+                            position : new_point
+                        });
+                map.clearMap();
+                marker.setMap(map); //在地图上添加点           // 将标注添加到地图中
+            }
+        }
+    });
+
+    //在地图中添加ToolBar插件
+    map.plugin(["AMap.ToolBar"], function () {
+        toolBar = new AMap.ToolBar();
+        map.addControl(toolBar);
+    });
+
+    //为地图注册click事件获取鼠标点击出的经纬度坐标
+    AMap.event.addListener(map, 'click', function (e) {
+        var marker = new AMap.Marker({
+            icon: "/images/map_sign.png",
+            position: new AMap.LngLat(e.lnglat.getLng(), e.lnglat.getLat())
+        });
+        map.clearMap();
+        marker.setMap(map);  //在地图上添加点
+        $('input[name="<%= input %>Longitude"]').val(e.lnglat.getLng());
+        $('input[name="<%= input %>Latitude"]').val(e.lnglat.getLat());
+    });
+
+    //获取用户所在城市信息
+    function showCityInfo() {
+        //加载城市查询插件
+        AMap.service(["AMap.CitySearch"], function () {
+            //实例化城市查询类
+            var citysearch = new AMap.CitySearch();
+            //自动获取用户IP，返回当前城市
+            citysearch.getLocalCity(function (status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    if (result && result.city && result.bounds) {
+                        var cityinfo = result.city;
+                        var citybounds = result.bounds;
+                        //地图显示当前城市
+                        map.setBounds(citybounds);
+                    }
+                }
+            });
+        });
+    }
+    showCityInfo();
+</script>

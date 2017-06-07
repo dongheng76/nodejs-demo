@@ -460,5 +460,11 @@
       <%}%>
     }
   <%}%>
+
+  function wSize(){
+    var strs=getWindowSize().toString().split(",");
+    $("#left, #openClose").height(strs[0]-46);
+  }
 </script>
+<script src="/js/common/wsize.min.js" type="text/javascript"></script>
 <% include  ../include/manage_footer_res.ejs %>

@@ -17,7 +17,7 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuByHref('/manage/area')
     ]).then(result => {
       let areas = result[0];
-      res.render('manage/area/index', {
+      res.render('manage/sys_area/index', {
         currentMenu: result[1],
         areas: JSON.stringify(areas)
       });
@@ -36,7 +36,7 @@ module.exports = function (app, routeMethod) {
       areaDao.queryAreaById(req.query.parent_id),
       areaDao.queryChildrenMaxSort(req.query.parent_id)
     ]).then(result => {
-      res.render('manage/area/create', {
+      res.render('manage/sys_area/create', {
         currentMenu: result[0],
         areaTypes: result[1],
         parentAreaInfo: result[2],
@@ -98,7 +98,7 @@ module.exports = function (app, routeMethod) {
       dictUtil.getDictList('sys_area_type'),
       areaDao.queryAreaById(area.parent_id)
     ]).then(result => {
-      res.render('manage/area/create', {
+      res.render('manage/sys_area/create', {
         currentMenu: result[0],
         areaTypes: result[1],
         area: area,

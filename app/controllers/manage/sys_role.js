@@ -25,7 +25,7 @@ module.exports = function (app, routeMethod) {
       officeDao.queryOffice(),
       menuDao.queryMenus()
     ]).then(result => {
-      res.render('manage/role/create', {
+      res.render('manage/sys_role/create', {
         currentMenu: result[0],
         dataScope: result[1],
         offices: JSON.stringify(result[2]),
@@ -60,7 +60,7 @@ module.exports = function (app, routeMethod) {
         }
       }
 
-      res.render('manage/role/create', {
+      res.render('manage/sys_role/create', {
         currentMenu: result[0],
         dataScope: result[1],
         offices: JSON.stringify(result[2]),
@@ -181,7 +181,7 @@ module.exports = function (app, routeMethod) {
       });
 
       Promise.all(proRoles).then(roles => {
-        res.render('manage/role/index', {
+        res.render('manage/sys_role/index', {
           currentMenu: result[0],
           roles: roles,
           page: result[2],

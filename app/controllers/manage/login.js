@@ -32,6 +32,10 @@ module.exports = function (app, routeMethod) {
         password: '密码不能为空！'
       });
     }
+    if (paramsRrror.length > 0) {
+      res.json(paramsRrror);
+      return;
+    }
 
     userDao.queryUserByUserNameAndPwd(loginName, utils.md5(password)).then((user) => {
       req.session.user = user;

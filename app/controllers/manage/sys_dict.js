@@ -24,7 +24,7 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuByHref('/manage/dict'),
       dictDao.queryMaxSortByType(type)
     ]).then(result => {
-      res.render('manage/dict/create', {
+      res.render('manage/sys_dict/create', {
         currentMenu: result[0],
         maxSort: parseInt(result[1] ? result[1] : 0) + 10,
         type: type
@@ -43,7 +43,7 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuByHref('/manage/dict'),
       dictDao.queryDictById(id),
     ]).then(result => {
-      res.render('manage/dict/create', {
+      res.render('manage/sys_dict/create', {
         currentMenu: result[0],
         dict: result[1]
       });
@@ -144,7 +144,7 @@ module.exports = function (app, routeMethod) {
       dictDao.queryAllDictPage(req, 20, currentPage),
       dictDao.queryDictType()
     ]).then(result => {
-      res.render('manage/dict/index', {
+      res.render('manage/sys_dict/index', {
         currentMenu: result[0],
         dicts: result[1],
         page: result[2],
