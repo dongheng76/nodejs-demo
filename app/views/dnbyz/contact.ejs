@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>联系我们——懂你半永妆工作室——让您更懂你</title>
+	<link href="/dnbyz/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="/dnbyz/js/jquery.min.js"></script>
+	<!-- Custom Theme files -->
+	<!--theme-style-->
+	<style type="text/css">
+		@import url("/dnbyz/css/style.css");
+	</style>
+	<link href="/dnbyz/css/black.css" rel="stylesheet" type="text/css" media="all" />
+	<!--//theme-style-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Elegant Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<script type="application/x-javascript">
+		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+	</script>
+	<!--fonts-->
+	<script type="text/javascript" src="/dnbyz/js/move-top.js"></script>
+	<script type="text/javascript" src="/dnbyz/js/easing.js"></script>
+	<!-- slide -->
+	<script src="/dnbyz/js/responsiveslides.min.js"></script>
+	<script>
+		$(function () {
+			$("#slider").responsiveSlides({
+				auto: true,
+				speed: 500,
+				namespace: "callbacks",
+				pager: true,
+			});
+		});
+	</script>
+	<!---css-style-switecher----->
+	<script type="text/javascript" src="js/jsapi.js"></script>
+	<script>
+		google.setOnLoadCallback(function () {
+			// Color changer
+			$(".colorred").click(function () {
+				$("link").attr("href", "css/red.css");
+				return false;
+			});
+
+			$(".colorblack").click(function () {
+				$("link").attr("href", "css/black.css");
+				return false;
+			});
+
+		});
+	</script>
+  	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=bfbe0451f502b76d75ce5e5ef0c2928f"></script>
+	<!---//End-css-style-switecher----->
+
+</head>
+
+<body>
+	<!--header-->
+	<div class="header">
+		<% include  ./include/head.ejs %>
+	</div>
+	<!---->
+	<!---start-color-changer----->
+	<div id="colorchanger">
+		<a class="colorbox colorred" href="?theme=red" title="Red Theme"> </a>
+		<a class="colorbox colorblack" href="?theme=black" title="Black Theme"> </a>
+	</div>
+	<!---//End-color-changer----->
+	<!---->
+	<div class="container">
+		<div class="contact">
+			<h2>联系方式</h2>
+			<div class="col-md-5 contact-map">
+				<h5>我的地址地图</h5>
+				<div class="map" id="map" style="height:550px;">
+				</div>
+			</div>
+			<div class="col-md-7 contact-para">
+				<p class="class-para">我们的联系地址是重庆市沙坪坝土湾街道金沙时代南苑14栋2-4。<br/> 亲，你也可以通过添加微信好友lsl-520112或者直接扫描微信 您也可以通过加QQ:1039916038 或者发送email到1039916038.qq.com我们在此等候您的光临
+				</p>
+				<h5>您也可以留下您的联系方式</h5>
+				<form>
+					<div class="grid-contact">
+						<div class="col-md-6 contact-grid">
+							<p>姓名</p>
+							<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+						</div>
+						<div class="col-md-6 contact-grid">
+							<p>电话</p>
+							<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="grid-contact">
+						<div class="col-md-6 contact-grid">
+							<p>E-MAIL</p>
+							<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<p class="your-para">留言</p>
+					<textarea cols="77" rows="6" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+					<div class="send">
+						<input type="submit" value="发送信息">
+					</div>
+				</form>
+			</div>
+
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+
+	<!---->
+	<% include  ./include/footer.ejs %>
+	<script type="text/javascript">
+			//初始化地图对象，加载地图
+			var toolBar = null;
+			var map = new AMap.Map('map', {
+				//resizeEnable: true,
+				//rotateEnable: true,
+				//dragEnable: true,
+				//zoomEnable: true,
+				//设置可缩放的级别
+				//zooms: [3,18],
+				//传入2D视图，设置中心点和缩放级别
+				view: new AMap.View2D({
+					center : new AMap.LngLat(106.444184, 29.578802),
+					zoom: 14
+				})
+			});
+		
+			AMap.plugin(['AMap.Autocomplete'], function () {
+				var autoOptions = {
+					city: "", //城市，默认全国
+				};
+		
+				autocomplete = new AMap.Autocomplete(autoOptions);
+		
+				var new_point = new AMap.LngLat(106.444184, 29.578802);
+
+				var marker = new AMap.Marker(
+						{
+							icon : "images/map_sign.png",
+							position : new_point
+						});
+				map.clearMap();
+				marker.setMap(map); //在地图上添加点           // 将标注添加到地图中
+				
+			});
+		
+			//在地图中添加ToolBar插件
+			map.plugin(["AMap.ToolBar"], function () {
+				toolBar = new AMap.ToolBar();
+				map.addControl(toolBar);
+			});
+		</script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>404</title>
+<link href="/dnbyz/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/dnbyz/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<style type="text/css">@import url("css/style.css");</style>
+<link href="/dnbyz/css/black.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Elegant Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<script type="text/javascript" src="/dnbyz/js/move-top.js"></script>
+<script type="text/javascript" src="/dnbyz/js/easing.js"></script>
+<!-- slide -->
+<script src="/dnbyz/js/responsiveslides.min.js"></script>
+   <script>
+    $(function () {
+      $("#slider").responsiveSlides({
+      	auto: true,
+      	speed: 500,
+        namespace: "callbacks",
+        pager: true,
+      });
+    });
+  </script>
+<!---css-style-switecher----->
+		<script type="text/javascript" src="js/jsapi.js"></script>
+		<script>
+		google.setOnLoadCallback(function()
+			{
+			    // Color changer
+			    $(".colorred").click(function(){
+			        $("link").attr("href", "css/red.css");
+			        return false;
+			    });
+			    
+			    $(".colorblack").click(function(){
+			        $("link").attr("href", "css/black.css");
+			        return false;
+			    });
+			
+			});
+		</script>
+		<!---//End-css-style-switecher----->
+
+</head>
+<body>
+<!--header-->
+	<div class="header">
+		<% include  ./include/head.ejs %>
+<!---->
+<!---start-color-changer----->
+			 <div id="colorchanger">
+                    <a class="colorbox colorred" href="?theme=red" title="Red Theme"> </a>
+                    <a class="colorbox colorblack" href="?theme=black" title="Black Theme"> </a>
+             </div>
+	      <!---//End-color-changer----->
+	<div class="container">
+		<div class="four">		
+		<p>PAGE NOT FOUND</p>
+		  <h2>404</h2>	  
+		   <a href="index.html" class="go">Go Back </a>
+		 </div>
+	</div>
+			<!---->
+<% include  ./include/footer.ejs %>
+</body>
+</html>
