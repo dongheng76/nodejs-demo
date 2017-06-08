@@ -16,7 +16,7 @@
 
         $('#login').click(function () {
             $.post('/manage/signin', $('form[name="login"]').serialize(), function (data) {
-                if (data.result) {
+                if (data.result == true) {
                     window.location.href = '/manage/panel';
                 }
             });

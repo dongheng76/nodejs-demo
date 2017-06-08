@@ -14,6 +14,45 @@ let RouteTools = function () {
     let path = null;
     let express = null;
     let methods = {};
+    let routes = {}; // 所有路由列表
+
+    /**
+     * express对象代理,用于延时加载路由地址
+     */
+    let ExpressProxy = function () {
+        this.all = function (path, ...requestHandler) {
+            routes[path] = {};
+            routes[path].method = 'all';
+            routes[path].requestHandler = requestHandler;
+        };
+        this.use = function (path, ...requestHandler) {
+            routes[path] = {};
+            routes[path].method = 'use';
+            routes[path].requestHandler = requestHandler;
+        };
+        this.get = function (path, ...requestHandler) {
+            routes[path] = {};
+            routes[path].method = 'get';
+            routes[path].requestHandler = requestHandler;
+        };
+        this.post = function (path, ...requestHandler) {
+            routes[path] = {};
+            routes[path].method = 'post';
+            routes[path].requestHandler = requestHandler;
+        };
+        this.delete = function (path, ...requestHandler) {
+            routes[path] = {};
+            routes[path].method = 'delete';
+            routes[path].requestHandler = requestHandler;
+        };
+        this.put = function (path, ...requestHandler) {
+            routes[path] = {};
+            routes[path].method = 'put';
+            routes[path].requestHandler = requestHandler;
+        };
+    };
+    ExpressProxy.prototype = express;
+    let expressProxy = new ExpressProxy();
     let scan = function (action) {
         action = action || '';
         action && (path += action);
@@ -29,14 +68,18 @@ let RouteTools = function () {
                 }
                 var controller = require(path + '/' + file);
                 if (Object.prototype.toString.call(controller) === '[object Function]') {
-                    controller(express, methods);
+                    controller(expressProxy, methods);
                 }
             });
     };
 
     /**
-     * 扫描并载入路由
+     * 扫描路由
      * @param{express} app
+     * @param{function} before 加入路由前的回调函数,this指向express,
+     * before 参数列表:routePath,content
+     * content 结构:{method:get,requestHandler:function(req,res,next){}})
+     * return true:不载入路由,return false 或者不返回,则载入路由
      * @param{string} filePath 要扫描文件路径
      */
     this.scan = function (app, ...filePath) {
@@ -50,6 +93,23 @@ let RouteTools = function () {
             scan();
         }
         console.info('loadding routes end...');
+    };
+
+    /**
+     * 得到所有载入的路由
+     * @param{function} filter 过滤回调,参数routeList,return routeList
+     */
+    this.getRoutes = function () {
+       return routes;
+    };
+    /**
+     * 执行载入路由
+     * @param{object} routes要载入的路由,可以从方法getRoutes得到并改变
+     */
+    this.excute = function (routes) {
+        for (let n in routes) {
+            express[routes[n].method](n, routes[n].requestHandler);
+        }
     };
 
     /**

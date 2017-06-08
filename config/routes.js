@@ -4,6 +4,8 @@ const join = require('path').join; // 连接字符串方法
 const path = join(__dirname, '../app/controllers');
 const routeTools = require('./routeTools');
 const urlTools = require('url');
+const env = process.env.NODE_ENV || 'development';
+const csrf = require('csurf');
 
 /**
  * 添加session路由方法以及添加校验方法
@@ -126,9 +128,35 @@ const urlTools = require('url');
     if (!signPermissions.includes[url]) {
       return true;
     }
-    return signValidate(req,res);
+    return signValidate(req, res);
   });
 }();
+
+
+/**
+ * 添加防重复提交验证令牌url
+ */
+let Csurf = function () {
+
+
+  let csrfs = [];
+  /**
+   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
+   */
+  routeTools.addRouteMethod('csurf', function (path) {
+    if (!path || Object.prototype.toString.call(path) !== '[object String]') {
+      throw new Error('path url is empty');
+    }
+    csrfs.push(path.trim());
+  });
+
+  this.getPath = function () {
+    return csrfs;
+  };
+
+};
+
+let csurf = new Csurf();
 
 /**
  * Expose routes
@@ -148,8 +176,42 @@ module.exports = function (app) {
     next();
   });
 
-  routeTools.scan(app, path); // 执行添加路由(这里是个坑,必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
+  routeTools.scan(app, path); // 扫描路由到工具
+  let routes = routeTools.getRoutes(); // 得到扫描到的路由
+  let routesGroup = {};
+  let csurfGroup = {};
+  let csurfPath = csurf.getPath();
+  for (let i in routes) {
+    if (csurfPath.includes(i)) {
+      csurfGroup[i] = routes[i];
+    } else {
+      routesGroup[i] = routes[i];
+    }
+  }
+  routeTools.excute(routesGroup); // 执行添加路由(必须先声明权限拦截在执行添加路由,否则无法拦截路由地址)
 
+  if (env !== 'test') {
+    app.use(csrf());
+
+    // This could be moved to view-helpers :-)
+    app.use(function (req, res, next) {
+      let t = req.csrfToken();
+      res.locals.csrf_token = t;
+      next();
+    });
+
+    // error handler
+    app.use(function (err, req, res, next) {
+      if (err.code !== 'EBADCSRFTOKEN') return next(err);
+      res.status(403).json({
+        result: 403,
+        message: "You don't have permission"
+      });
+      return false;
+    });
+  }
+
+  routeTools.excute(csurfGroup);
 
   /**
    * Error handling

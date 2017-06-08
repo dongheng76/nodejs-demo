@@ -15,7 +15,8 @@ module.exports = function (app, routeMethod) {
    * @param req
    * @param res
    */
-  app.all('/manage/signin', function (req, res) {
+  routeMethod.csurf('/manage/signin');
+  app.post('/manage/signin', function (req, res) {
     // 取出用户名和密码
     let loginName = req.body.login_name;
     let password = req.body.password;
@@ -33,18 +34,24 @@ module.exports = function (app, routeMethod) {
       });
     }
 
+    if (paramsRrror.length > 0) {
+      res.json(paramsRrror);
+      return;
+    }
+
     userDao.queryUserByUserNameAndPwd(loginName, utils.md5(password)).then((user) => {
+      if (!user) {
+        res.json({
+          message: '账号密码错误'
+        });
+        return;
+      }
       req.session.user = user;
 
       Promise.all([
         userDao.queryUserMenuAuthority(user.id),
         logDao.saveLog('1', '登录', req)
       ]).then(result => {
-        if (paramsRrror.length > 0) {
-          res.json(paramsRrror);
-          return;
-        }
-
         if (user) {
           req.session.user = user;
           req.session.menus = result[0];
@@ -65,6 +72,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 登录
    */
+  routeMethod.csurf('/manage/login');
   app.get('/manage/login', function (req, res) {
     res.render('manage/login', {
       title: 'Login'
