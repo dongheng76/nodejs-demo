@@ -35,8 +35,9 @@ exports.queryUserByLoginId = async function (login_name, callback) {
 /**
  * 根据用户的用户名和密码查询用户信息
  */
-exports.queryUserByUserNameAndPwd = async function (loginName, password) {
+exports.queryUserByUserNameAndPwd = function (loginName, password) {
     return mysql.queryOne('select * from sys_user where login_name=? and password=?', [loginName, password]);
+   
 };
 
 /**
@@ -189,6 +190,7 @@ exports.updateUser = async function (req) {
 /**
  * 修改密码
  */
-exports.updateUserPwd = function (loginName, password) {
+exports.updateUserPwd = async function (loginName, password) {
+   
     return mysql.update("update sys_user set update_date=now(), password='" + util.md5(password) + "' where login_name=?", [loginName]);
 };
