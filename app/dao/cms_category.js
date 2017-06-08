@@ -26,17 +26,27 @@ exports.delCateById = function (id) {
 };
 
 /**
- * 递归查询菜单信息
+ * 递归查询分类信息
  */
 exports.queryCmsCateForRecursion = async function (siteId) {
-   let cates = await mysql.query("select * from cms_category where del_flag='0' and site_id=?", [siteId]);
+   let cates = await mysql.query("select * from cms_category where del_flag='0' and site_id=? order by sort asc", [siteId]);
    return util.jsonToTreeJson(cates,'0');
+};
+
+/**
+ * 根据站点ID和所属分类module，递归查询该
+ */
+exports.queryCmsCateForRecursionByModuleAndSiteId = async function (siteId,module) {
+   let cates = await mysql.query("select * from cms_category where del_flag='0' and site_id=? order by sort asc", [siteId]);
+   let cate = await mysql.queryOne("select * from cms_category where del_flag='0' and site_id=? and module=? order by sort asc", [siteId,module]);
+   cate.children = util.jsonToTreeJson(cates,cate.id);
+   return cate;
 };
 
 /**
  * 插入一条栏目分类信息
  */
-exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,remarks, req) {
+exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks, req) {
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
@@ -50,10 +60,10 @@ exports.saveCate = async function (parent_id, site_id,module,name,image,href,tar
         };
     }
 
-    return mysql.update(
-    `insert into cms_category(id,parent_id,parent_ids,site_id,office_id,module,name,image,href,target,description,sort,create_by,create_date,update_by,update_date,remarks,del_flag)
-    values (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0')`,
-    [id, parent_id, parentCate.parent_ids + parentCate.id + ',', site_id, user.office_id, module,name,image,href,target,description,sort,user.id,user.id, remarks]);
+    return mysql.update(`insert into cms_category(id,parent_id,parent_ids,site_id,office_id,module,name,image,href,target,description,sort,in_menu,
+    in_list,create_by,create_date,update_by,update_date,remarks,del_flag)
+    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0')`,
+    [id, parent_id, parentCate.parent_ids + parentCate.id + ',', site_id, user.office_id, module,name,image,href,target,description,sort,in_menu,in_list,user.id,user.id, remarks]);
 };
 
 /**
@@ -91,6 +101,12 @@ exports.updateCate = function (req) {
     }
     if (req.body.sort) {
         sets += ',sort=' + req.body.sort;
+    }
+    if (req.body.in_menu) {
+        sets += ",in_menu='" + req.body.in_menu + "'";
+    }
+    if (req.body.in_list) {
+        sets += ',in_list=' + req.body.in_list;
     }
     if (req.body.remarks) {
         sets += ",remarks='" + req.body.remarks + "'";

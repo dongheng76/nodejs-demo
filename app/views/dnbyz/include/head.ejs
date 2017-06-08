@@ -1,0 +1,27 @@
+<div class="container">	
+    <div class="logo">
+    </div>
+        <div class="top-nav">
+            <span class="menu"><img src="/dnbyz/images/menu.png" alt=""> </span>
+            <ul>
+                <!--<li class="active" ><a href="index.html" >首页</a></li>
+                <li><a href="404.html"> 服务项目  </a></li>
+                <li><a href="portfolio.html" >案例分享</a></li>
+                <li><a href="about.html" > 关于我们</a></li>-->
+                <%cates.forEach(function(cate){%>
+                    <%if(cate.in_menu=='1'){%>
+                        <li <% if(curCate.id == cate.id){ %> class="active" <%}%> ><a href="<%=cate.href%>"><%=cate.name%></a></li>
+                    <%}%>
+                <%});%>
+            </ul>
+            <!--script-->
+        <script>
+            $("span.menu").click(function(){
+                $(".top-nav ul").slideToggle(500, function(){
+                });
+            });
+    </script>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
