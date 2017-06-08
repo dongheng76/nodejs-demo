@@ -10,8 +10,8 @@ const dictUtil = require('../../utils/dict_utils');
 
 
 module.exports = function (app, routeMethod) {
-
-  app.all('/manage/area', function (req, res) {
+  routeMethod.csurf('/manage/area');
+  app.get('/manage/area', function (req, res) {
     Promise.all([
       areaDao.queryAreasByPId('0'),
       menuDao.queryMenuByHref('/manage/area')
@@ -23,13 +23,13 @@ module.exports = function (app, routeMethod) {
       });
     });
   });
-
-  app.all('/manage/area/findareabypid',async function (req, res) {
+  routeMethod.csurf('/manage/area/findareabypid');
+  app.post('/manage/area/findareabypid',async function (req, res) {
       let areas = await areaDao.queryAreasByPId(req.body.parent_id);
       res.json(areas);
   });
-
-  app.all('/manage/area/create', function (req, res) {
+  routeMethod.csurf('/manage/area/create');
+  app.get('/manage/area/create', function (req, res) {
     Promise.all([
       menuDao.queryMenuByHref('/manage/area'),
       dictUtil.getDictList('sys_area_type'),
@@ -48,7 +48,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个区域信息
    */
-  app.all('/manage/area/store', function (req, res) {
+  routeMethod.csurf('/manage/area/store');
+  app.post('/manage/area/store', function (req, res) {
     let parent_id = req.body.parent_id;
     let name = req.body.name;
     let sort = req.body.sort;
@@ -89,7 +90,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑区域
    */
-  app.all('/manage/area/edit',async function (req, res) {
+  routeMethod.csurf('/manage/area/edit');
+  app.get('/manage/area/edit',async function (req, res) {
     let id = req.query.id;
     let area = await areaDao.queryAreaById(id);
 
@@ -110,7 +112,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个用户信息
    */
-  app.all('/manage/area/delete',async function (req, res) {
+  routeMethod.csurf('/manage/area/delete');
+  app.post('/manage/area/delete',async function (req, res) {
     let id = req.body.id;
     let result = await areaDao.delAreaById(id);
 

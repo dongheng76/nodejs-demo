@@ -86,7 +86,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 注销
    */
-  app.all('/manage/signup', function (req, res) {
+  routeMethod.csurf('/manage/signup');
+  app.post('/manage/signup', function (req, res) {
     req.session.destroy(function (err) {
       // cannot access session here
       if (err) console.log(err);
@@ -99,7 +100,8 @@ module.exports = function (app, routeMethod) {
   /**
    * Logout
    */
-  app.all('/manage/logout', function (req, res) {
+  routeMethod.csurf('/manage/logout');
+  app.get('/manage/logout', function (req, res) {
     req.logout();
     res.redirect('/login');
   });

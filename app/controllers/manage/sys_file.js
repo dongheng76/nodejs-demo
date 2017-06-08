@@ -26,7 +26,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 创建文件
      */
-    app.all('/manage/file/create', function (req, res) {
+    app.get('/manage/file/create', function (req, res) {
         Promise.all([
             menuDao.queryMenuByHref('/manage/user'),
             dictUtil.getDictList('sys_user_type')
@@ -41,7 +41,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 取得用户文件夹信息
      */
-    app.all('/manage/file/getfolders', function (req, res) {
+    app.get('/manage/file/getfolders', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 图片类型
         Promise.all([
             fileDao.queryCatalogByUser(req, type == 'images' ? '1' : '2')
@@ -73,7 +73,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 取得指定文件夹的文件信息
      */
-    app.all('/manage/file/getfiles', function (req, res) {
+    app.get('/manage/file/getfiles', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
         let file_cate_id = req.query.file_cate_id ? req.query.file_cate_id : '0';
@@ -115,7 +115,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 创建一个文件夹
      */
-    app.all('/manage/file/mkdir', function (req, res) {
+    app.get('/manage/file/mkdir', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         // let currentPage = req.query.page ? req.query.page : 1; //获取当前页数，如果没有则为1
         let parent_id = req.query.parent_id;
@@ -136,7 +136,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 删除一个文件夹
      */
-    app.all('/manage/file/delfilecate', function (req, res) {
+    app.post('/manage/file/delfilecate', function (req, res) {
         Promise.all([
             fileDao.delFileCate(req.body.id)
         ]).then(result => {
@@ -149,7 +149,7 @@ module.exports = function (app, routeMethod) {
     /**
      *  上传一个图片
      */
-    app.all('/manage/file/upload', function (req, res) {
+    app.post('/manage/file/upload', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let file_cate_id = req.body.file_cate_id ? req.body.file_cate_id : '0';
 
@@ -232,7 +232,7 @@ module.exports = function (app, routeMethod) {
     /**
      *  缩放图片异步方法
      */
-    app.all('/manage/file/thumbfile', function (req, res) {
+    app.post('/manage/file/thumbfile', function (req, res) {
         let ids = req.body.ids;
         let format = JSON.parse(req.body.format);
         let idsStr = '';
@@ -313,7 +313,7 @@ module.exports = function (app, routeMethod) {
         });
     });
 
-    app.all('/manage/file', function (req, res) {
+    app.get('/manage/file', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 文件类型
         Promise.all([
             menuDao.queryMenuByHref('/manage/file?type=' + type)
@@ -325,7 +325,7 @@ module.exports = function (app, routeMethod) {
         });
     });
 
-    app.all('/manage/file/simple', function (req, res) {
+    app.get('/manage/file/simple', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let func = req.query.func;
         let format = req.query.format;

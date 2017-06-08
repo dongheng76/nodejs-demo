@@ -18,7 +18,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建角色
    */
-  app.all('/manage/role/create', function (req, res) {
+  routeMethod.csurf('/manage/role/create');
+  app.get('/manage/role/create', function (req, res) {
     Promise.all([
       menuDao.queryMenuByHref('/manage/role'),
       dictUtil.getDictList('sys_data_scope'),
@@ -37,7 +38,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑角色
    */
-  app.all('/manage/role/edit', function (req, res) {
+  routeMethod.csurf('/manage/role/edit');
+  app.get('/manage/role/edit', function (req, res) {
     let id = req.query.id;
 
     Promise.all([
@@ -79,7 +81,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个角色信息
    */
-  app.all('/manage/role/store',async function (req, res) {
+  routeMethod.csurf('/manage/role/store');
+  app.post('/manage/role/store',async function (req, res) {
     let office_id = req.body.office_id;
     let name = req.body.name;
     let enname = req.body.enname;
@@ -121,7 +124,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个角色信息
    */
-  app.all('/manage/role/delete',async function (req, res) {
+  routeMethod.csurf('/manage/role/delete');
+  app.post('/manage/role/delete',async function (req, res) {
     let result = null;
     if (req.body.id) {
       let id = req.body.id;
@@ -161,7 +165,8 @@ module.exports = function (app, routeMethod) {
     }    
   });
 
-  app.all('/manage/role', function (req, res) {
+  routeMethod.csurf('/manage/role');
+  app.get('/manage/role', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
 
     Promise.all([

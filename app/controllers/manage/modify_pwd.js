@@ -8,7 +8,8 @@ const menuDao = require('../../dao/sys_menu');
 const userDao = require('../../dao/sys_user');
 
 module.exports = function (app, routeMethod) {
-  app.all('/sys/user/modifyPwd', function (req, res) {
+  routeMethod.csurf('/sys/user/modifyPwd');
+  app.get('/sys/user/modifyPwd', function (req, res) {
     Promise.all([menuDao.queryMenuByHref('/manage/panel')]).then(result => {
       res.render('manage/modify_Pwd/create', {
         currentMenu: result[0]
@@ -19,7 +20,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  修改密码
    */
-app.all('/manage/user/modifyPwd',async function (req, res) {
+routeMethod.csurf('/manage/user/modifyPwd');
+app.post('/manage/user/modifyPwd',async function (req, res) {
  
     let password = req.body.oldpassword;
     let newpassword = req.body.password;

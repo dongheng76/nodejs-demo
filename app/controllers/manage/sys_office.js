@@ -18,7 +18,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建机构
    */
-  app.all('/manage/office/create', function (req, res) {
+  routeMethod.csurf('/manage/office/create');
+  app.get('/manage/office/create', function (req, res) {
     let pId = req.query.parent_id ? req.query.parent_id : '0';
 
     Promise.all([
@@ -42,7 +43,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑用户
    */
-  app.all('/manage/office/edit',async function (req, res) {
+  routeMethod.csurf('/manage/office/edit');
+  app.get('/manage/office/edit',async function (req, res) {
     let id = req.query.id;
     let office = await officeDao.queryOfficeById(id);
 
@@ -72,7 +74,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个机构信息
    */
-  app.all('/manage/office/store',async function (req, res) {
+  routeMethod.csurf('/manage/office/store');
+  app.post('/manage/office/store',async function (req, res) {
     let parent_id = req.body.parent_id;
     let name = req.body.name;
     let area_id = req.body.area_id;
@@ -118,7 +121,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个机构信息
    */
-  app.all('/manage/office/delete',async function (req, res) {
+  routeMethod.csurf('/manage/office/delete');
+  app.post('/manage/office/delete',async function (req, res) {
     let result = null;
     if (req.body.id) {
       let id = req.body.id;
@@ -154,8 +158,8 @@ module.exports = function (app, routeMethod) {
       });
     }
   });
-
-  app.all('/manage/office', function (req, res) {
+  routeMethod.csurf('/manage/office');
+  app.get('/manage/office', function (req, res) {
     Promise.all([
       menuDao.queryMenuByHref('/manage/office'),
       officeDao.queryOfficeForRecursion()
