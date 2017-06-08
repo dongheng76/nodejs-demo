@@ -104,7 +104,7 @@
             $.post('/manage/user/modifyPwd',$('form[name="create"]').serialize(),function(data){
               if(data.result){
                 noticeInfo('success','感谢您的使用，修改成功',function(){
-                  window.location.href = '/manage/user';
+                  window.location.href = '/manage/login';
                 });
               }else{
                 noticeInfo('fail',data.error);

@@ -33,6 +33,10 @@ module.exports = function (app, routeMethod) {
         password: '密码不能为空！'
       });
     }
+    if (paramsRrror.length > 0) {
+      res.json(paramsRrror);
+      return;
+    }
 
     if (paramsRrror.length > 0) {
       res.json(paramsRrror);

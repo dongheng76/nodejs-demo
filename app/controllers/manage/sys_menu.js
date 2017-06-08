@@ -23,7 +23,7 @@ module.exports = function (app, routeMethod) {
       menuDao.querySortMaxByPId(pId),
       menuDao.queryMenuById(pId)
     ]).then(result => {
-      res.render('manage/menu/create', {
+      res.render('manage/sys_menu/create', {
         currentMenu: result[0],
         selectMenus: JSON.stringify(result[1]),
         maxSort: parseInt(result[2] ? result[2] : 0) + 10,
@@ -44,7 +44,7 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuById(menu.parent_id),
       menuDao.queryMenuById(id)
     ]).then(result => {
-      res.render('manage/menu/create', {
+      res.render('manage/sys_menu/create', {
         currentMenu: result[0],
         menuParent: result[1],
         menu: menu
@@ -142,7 +142,7 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuByHref('/manage/menu'),
       menuDao.queryMenuForRecursion()
     ]).then(result => {
-      res.render('manage/menu/index', {
+      res.render('manage/sys_menu/index', {
         currentMenu: result[0],
         menus: result[1]
       });

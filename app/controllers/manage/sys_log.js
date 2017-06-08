@@ -48,7 +48,7 @@ module.exports = function (app, routeMethod) {
         });
       },
     }, function (error, result) {
-      res.render('manage/log/index', {
+      res.render('manage/sys_log/index', {
         currentMenu: result.currentMenu,
         logs: result.logs,
         page: result.logsPage

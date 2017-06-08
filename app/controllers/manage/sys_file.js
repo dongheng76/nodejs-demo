@@ -31,7 +31,7 @@ module.exports = function (app, routeMethod) {
             menuDao.queryMenuByHref('/manage/user'),
             dictUtil.getDictList('sys_user_type')
         ]).then(result => {
-            res.render('manage/user/create', {
+            res.render('manage/sys_user/create', {
                 currentMenu: result[0],
                 userTypes: result[1]
             });
@@ -318,7 +318,7 @@ module.exports = function (app, routeMethod) {
         Promise.all([
             menuDao.queryMenuByHref('/manage/file?type=' + type)
         ]).then(result => {
-            res.render('manage/file/index', {
+            res.render('manage/sys_file/index', {
                 currentMenu: result[0],
                 type: type
             });
@@ -334,7 +334,7 @@ module.exports = function (app, routeMethod) {
         Promise.all([
             menuDao.queryMenuByHref('/manage/file?type=' + type)
         ]).then(result => {
-            res.render('manage/file/file_manage_template', {
+            res.render('manage/sys_file/file_manage_template', {
                 currentMenu: result[0],
                 type: type,
                 isDialog: true,

@@ -29,7 +29,7 @@ module.exports = function (app, routeMethod) {
       areaDao.queryAreasByPId('0')
     ]).then(result => {
 
-      res.render('manage/office/create', {
+      res.render('manage/sys_office/create', {
         currentMenu: result[0],
         officeTypes: result[1],
         parentOffice: result[2],
@@ -53,7 +53,7 @@ module.exports = function (app, routeMethod) {
       areaDao.queryAreaGenealById(office.area_id),
       areaDao.queryAreasByPId('0')
     ]).then(result => {
-      res.render('manage/office/create', {
+      res.render('manage/sys_office/create', {
         currentMenu: result[0],
         officeTypes: result[1],
         office: office,
@@ -161,7 +161,7 @@ module.exports = function (app, routeMethod) {
       officeDao.queryOfficeForRecursion()
     ]).then(result => {
 
-      res.render('manage/office/index', {
+      res.render('manage/sys_office/index', {
         currentMenu: result[0],
         offices: result[1]
       });

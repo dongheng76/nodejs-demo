@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>用户管理 - 首页</title>
+  <title>站点管理 - 首页</title>
   <% include  ../include/head_res.ejs %>
   <% include  ../include/manage_com_res.ejs %>
 <body>
@@ -23,53 +23,41 @@
     <div class="table-wrapper table-products products-table section">
       <div class="row-fluid head">
         <div class="span12">
-          <h4 style="float:left;display: inline-block">用户管理</h4>
+          <h4 style="float:left;display: inline-block">站点管理</h4>
         </div>
       </div>
 
       <div class="row-fluid filter-block">
-        <form name="create" action="/manage/user" method="get">
+        <form name="create" action="/manage/site" method="get">
+          <input type="hidden" name="_token" value="<%= csrf_token %>"/>
           <div class="pull-right">
-            姓名：<input type="text" class="input-mini" name="name"/>
-            登录名：<input type="text" class="input-small" name="login_name"/>
-            注册日期：<input type="text" value="" class="input-medium datepicker" name="create_date_start"/>-&nbsp;<input type="text" value="" class="input-medium datepicker" name="create_date_end"/>
             <button type="submit" class="btn-glow"><i class="icon-search"></i> 搜索</button>
-            <a href="/manage/user/create" ><div class="btn-glow"><i class="icon-plus"></i> 增加新用户</div></a>
+            <%if(PERMISSION('cms:site:edit')){%>
+            <a href="/manage/site/create" ><div class="btn-glow"><i class="icon-plus"></i> 增加新站点</div></a>
             <a href="javascript:void(0)" id="dels"><div class="btn-glow"><i class="icon-minus"></i> 删除所选</div></a>
+            <%}%>
           </div>
         </form>
       </div>
 
       <div class="row-fluid">
-        <table class="table table-hover" >
+        <table class="table table-hover">
           <thead>
           <tr>
-            <th class="span2">
+            <%if(PERMISSION('cms:site:edit')){%>
+            <th class="span1">
               <input type="checkbox" name="mainCheckbox">
-              用户ID
+              站点id
+            </th>
+            <%}%>
+            <th class="span1">
+              <span class="line"></span>站点名称
             </th>
             <th class="span1">
-              <span class="line"></span>姓名
+              <span class="line"></span>站点标题
             </th>
             <th class="span1">
-              <span class="line"></span>登录名
-            </th>
-            <th class="span1">
-              <span class="line"></span>用户email
-            </th>
-            <th class="span1">
-              <span class="line"></span>所属机构
-            </th>
-            <th class="span1 sort <%if(typeof(condition)!='undefined' && typeof(condition.sortName)!='undefined' && typeof(condition.sortOrder)!='undefined'){%>datagrid-sort-<%=condition.sortOrder%><%}%>" 
-              sort="create_date">
-              <span class="line"></span>注册日期
-              <span class="datagrid-sort-icon"></span>
-            </th>
-            <th class="span1">
-              <span class="line"></span>用户mobile
-            </th>
-            <th class="span1">
-              <span class="line"></span>用户类型
+              <span class="line"></span>站点域名
             </th>
             <th class="span1">
               <span class="line"></span>状态
@@ -77,42 +65,41 @@
           </tr>
           </thead>
           <tbody>
-          <% users.forEach(function(user){ %>
+
+          <% sites.forEach(function(site){%>
           <tr>
+            <%if(PERMISSION('cms:site:edit')){%>
             <td>
-              <input type="checkbox" name="subCheckbox" userId="<%=user.id%>">
-              <a href="#" class="id"><%=user.id%></a>
+              <input type="checkbox" name="subCheckbox" siteId="<%=site.id%>">
+              <a href="/manage/dict?type=<%=site.id%>" class="name"><%=site.id%></a>
+              <%if(site.id ==currentSiteId){%>
+                <font color="#FF5300">当前站点</font>
+              <%}%>
             </td>
+            <%}%>
             <td class="description">
-              <%=user.name%>
+              <%=site.name%>
             </td>
             <td>
-              <%=user.login_name%>
+              <%=site.title%>
             </td>
             <td>
-              <%=user.email%>
-            </td>
-            <td>
-              <%=user.office_name%>
-            </td>
-            <td>
-              <%=user.create_date%>
-            </td>
-            <td>
-              <%=user.mobile%>
-            </td>
-            <td>
-              <%=user.user_type_label%>
+              <%=site.domain%>
             </td>
             <td>
               <span class="label label-success">有效</span>
               <ul class="actions">
-                <li><a href="/manage/user/edit?id=<%=user.id%>">编辑</a></li>
-                <li class="last"><a href="javascript:void(0)" onclick="javascript:delUser('<%=user.id%>')">删除</a></li>
+                <%if(PERMISSION('cms:site:edit')){%>
+                <li><a href="javascript:void(0)" onclick="javascript:switchSite('<%=site.id%>')">切换此站点</a></li>
+                <li><a href="/manage/site/create%>">添加</a></li>
+                <li><a href="/manage/site/edit?id=<%=site.id%>">编辑</a></li>
+                <li class="last"><a href="javascript:void(0)" onclick="javascript:delSite('<%=site.id%>')">删除</a></li>
+                <%}%>
               </ul>
             </td>
           </tr>
-          <% }) %>
+          <%})%>
+          <!-- row -->
           </tbody>
         </table>
       </div>
@@ -126,10 +113,10 @@
 <% include  ../include/manage_footer_res.ejs %>
 
 <script type="text/javascript">
-  function delUser(id) {
+  function switchSite(id) {
     $.confirm({
       title: '友情提示!',
-      content: '请确认是否真的要删除该用户，此操作不可逆请谨慎操作!',
+      content: '请确认是否要切换到此站点!',
       boxWidth: '300px',
       useBootstrap: false,
       buttons: {
@@ -137,7 +124,41 @@
           text: '确认',
           btnClass:'btn-flat default',
           action: function(){
-            $.post('/manage/user/delete',{
+            $.post('/manage/site/changesite',{
+              _csrf:'<%= csrf_token %>',
+              site_id:id
+            },function(data){
+              if(data.result){
+                window.location.reload();
+              }else{
+                noticeInfo('fail','非常抱歉，系统或网络发生异常，请重试!')
+              }
+            });
+          }
+        },
+        cancel: {
+          text: '取消',
+          btnClass:'btn-flat white',
+          action: function(){
+            return;
+          }
+        }
+      }
+    });
+  }
+
+  function delSite(id) {
+    $.confirm({
+      title: '友情提示!',
+      content: '请确认是否真的要删除该站点信息，此操作不可逆请谨慎操作!',
+      boxWidth: '300px',
+      useBootstrap: false,
+      buttons: {
+        confirm: {
+          text: '确认',
+          btnClass:'btn-flat default',
+          action: function(){
+            $.post('/manage/site/delete',{
               _csrf:'<%= csrf_token %>',
               id:id
             },function(data){
@@ -191,7 +212,7 @@
   $('#dels').click(function(){
     $.confirm({
       title: '友情提示!',
-      content: '请确认是否真的要删除该用户，此操作不可逆请谨慎操作!',
+      content: '请确认是否真的要删除该站点信息，此操作不可逆请谨慎操作!',
       boxWidth: '300px',
       useBootstrap: false,
       buttons: {
@@ -202,7 +223,7 @@
             var ids = '';
             $('input[name="subCheckbox"]').each(function(){
               if($(this).parent().hasClass('checked')){
-                ids += $(this).attr('userId')+'|';
+                ids += $(this).attr('siteId')+'|';
               }
             });
             if(ids==''){
@@ -210,7 +231,7 @@
               return true;
             }
 
-            $.post('/manage/user/delete',{
+            $.post('/manage/site/delete',{
               ids:ids,
               _csrf:'<%= csrf_token %>'
             },function(data){
@@ -251,12 +272,9 @@
         order = 'desc';
       }
 
-      var url = changeParam('sortName',name,window.location.href);
-      url = changeParam('sortOrder',order,url);
-      window.location.href = url;
+      window.location.href = '?sortName='+name+'&sortOrder='+order;
     });
   });
 </script>
-
 </body>
 </html>

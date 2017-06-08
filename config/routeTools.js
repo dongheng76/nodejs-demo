@@ -54,11 +54,10 @@ let RouteTools = function () {
     ExpressProxy.prototype = express;
     let expressProxy = new ExpressProxy();
     let scan = function (action) {
-        action = action || '';
-        action && (path += action);
-        fs.readdirSync(path)
+        action = action || path;
+        fs.readdirSync(action)
             .forEach((file) => {
-                if (fs.statSync(path + '/' + file).isDirectory()) {
+                if (fs.statSync(action + '/' + file).isDirectory()) {
                     scan(action + '/' + file);
                     return;
                 }
@@ -66,7 +65,7 @@ let RouteTools = function () {
                 if (!file.endsWith('.js')) {
                     return;
                 }
-                var controller = require(path + '/' + file);
+                var controller = require(action + '/' + file);
                 if (Object.prototype.toString.call(controller) === '[object Function]') {
                     controller(expressProxy, methods);
                 }

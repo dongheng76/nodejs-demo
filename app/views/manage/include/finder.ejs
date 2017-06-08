@@ -19,6 +19,8 @@
                             break;
                         }
                     <%}%>
+                    //清除所有不需要的format数据
+                    files[i].format = null;
                     filesJson.push(files[i]);
                 }
                 $("#<%=input%>").val(JSON.stringify(filesJson));
@@ -31,7 +33,9 @@
                 <%}%>
                 $("#<%=input%>").val(JSON.stringify(files));
             }
-        <%}else{%>
+        <%}else{%>            
+            //清除所有不需要的format数据
+            files[0].format = null;
             $("#<%=input%>").val(JSON.stringify(files));
         <%}%>
         <%=input%>Preview(files);
