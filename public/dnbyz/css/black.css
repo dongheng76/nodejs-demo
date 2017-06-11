@@ -1,7 +1,6 @@
 
 @import url("../css/bootstrap.css");
 @import url("../css/magnific-popup.css");
-@import url(http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800);
 body{
 	background:#2f3234;
 	font-family: 'Open Sans', sans-serif;
@@ -192,4 +191,8 @@ p.class-para {
 .in-profile {
 	padding: 0;
 }
+}
+
+.channel-list .channel-list-des dt {
+	color: #FFFFFF
 }

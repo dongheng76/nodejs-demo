@@ -5,6 +5,7 @@
  */
 const utils = require('../../utils');
 const cateDao = require('../../dao/cms_category.js');
+const articleDao = require('../../dao/cms_article.js');
 
 
 module.exports = function (app, routeMethod) {
@@ -16,11 +17,23 @@ module.exports = function (app, routeMethod) {
 
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),
-      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'index')
+      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'index'),
+      articleDao.queryArticleInfoByCateId('f72e27704bf411e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('0a6485004bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('22fbfda04bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('52bb32404bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('720377704bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e')      
     ]).then(result => {
       res.render('dnbyz/index', {
         cates: result[0],
-        curCate: result[1]
+        curCate: result[1],
+        dundongguanggao: result[2],
+        shuoming: result[3],
+        anli: result[4],
+        xinwen: result[5],
+        qaf: result[6],
+        jinpaiwenxiu: result[7]
       });
     });
   });
@@ -35,7 +48,7 @@ module.exports = function (app, routeMethod) {
       cateDao.queryCmsCateForRecursion(siteId),      
       cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'project')
     ]).then(result => {
-      res.render('dnbyz/404', {
+      res.render('dnbyz/project', {
         cates: result[0],
         curCate: result[1]
       });

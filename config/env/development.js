@@ -14,17 +14,16 @@ module.exports = {
   },
   // mysql config
   mysql: {
-    server: '118.89.177.58',
+    server: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'dh07019459',
+    password: '',
     database: 'nodejs_demo',
     maxSockets: 80, // pool使用
     timeout: 1, // pool使用
   },
   redis: {
-    server: '118.89.177.58',
-    password: 'adminmima',
+    server: 'localhost',
     port: 6379
   }
 };
