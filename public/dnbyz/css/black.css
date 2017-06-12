@@ -112,6 +112,10 @@ a.more:hover{
 .contact-para h5,.contact-map h5,.in-about h4,.possible-about h4 {
 	color: #fff;
 }
+.contact-para p{
+	color:#FFFFFF;
+	line-height:30px;
+}
 p.class-para {
 	color: #585858;
 }

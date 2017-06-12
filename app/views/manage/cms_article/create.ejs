@@ -90,11 +90,11 @@
               </div>
               <div class="field-box">
                 <label>描述:</label>
-                <input style="width:400px" type="text" name="description" <%if(typeof(article)!='undefined'){%> value="<%=article.description%>" <%}%>/>
+                <textarea style="width:700px" name="description" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.description%><%}%></textarea>
               </div>
               <div class="field-box">
                 <label>备注:</label>
-                <textarea style="width:400px" name="remarks" rows="4"><% if(typeof(article)!='undefined'){ %><%=article.remarks%><%}%></textarea>
+                <textarea style="width:700px" name="remarks" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.remarks%><%}%></textarea>
               </div>
             </div>
           </div>

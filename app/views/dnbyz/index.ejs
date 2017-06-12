@@ -16,6 +16,7 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script type="text/javascript" src="/dnbyz/js/move-top.js"></script>
 <script type="text/javascript" src="/dnbyz/js/easing.js"></script>
+<script src="/js/common/common.js"></script>
 <!-- slide -->
 <script src="/dnbyz/js/responsiveslides.min.js"></script>
    <script>
@@ -107,46 +108,37 @@
 		<div class="content-bottom">
 		<div class="container">
 			<div class="col-md-9 bottom-content">
-				<div class="grid-top">
-					<div class="col-md-4 grid">
-						<div id="nivo-lightbox-demo"> <p> <a href="/dnbyz/images/se.jpg"data-lightbox-gallery="gallery1" id="nivo-lightbox-demo"> <span class="rollover1"> </span></a> </p></div>     
-							<img class="img-responsive" src="/dnbyz/images/se.jpg" alt="">
-						
+				<%anli.forEach(function(al){%>
+					<div class="grid-top">
+						<div class="col-md-4 grid" style="overflow:hidden;">
+							<div id="nivo-lightbox-demo"> <p> <a data-lightbox-gallery="gallery1" id="nivo-lightbox-demo"> <span class="rollover1"> </span></a> </p></div>     
+							<script>
+								var imgStr = '<%-al.image%>';
+								jsonImgPrint(imgStr,'_295x262');
+							</script>
+						</div>
+						<div class="col-md-8 grid-bottom">
+							<h4><%=al.title%></h4>
+							<h6><%=al.description%></h6>
+							<p><%=al.remarks%></p>
+							<a href="#" class="in-more ">查看详情 <i> </i></a>
+						</div>
+						<div class="clearfix"> </div>
 					</div>
-					<div class="col-md-8 grid-bottom">
-						<h4>孕睫术经典案例分享</h4>
-						<h6>Classic cases of pregnancy sharing</h6>
-						<p>独家专利技术将双向控调的毛发促生因子直接送入毛囊内部，促进微循环，促进毛发生长。孕睫五部曲1.激活唤醒毛囊组织2.7-15天优化毛囊生长环境3.3-4周睫毛根部幼小毛发生长4.35-50天睫毛根部变粗，色泽乌黑5.60-90天睫毛长度最佳，浓密纤长.</p>
-						<a href="#" class="in-more ">查看详情 <i> </i></a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="grid-top">
-					<div class="col-md-4 grid">
-						<div id="nivo-lightbox-demo"> <p> <a href="/dnbyz/images/se1.jpg"data-lightbox-gallery="gallery1" id="nivo-lightbox-demo"> <span class="rollover1"> </span></a> </p></div>     
-									  	<img class="img-responsive" src="/dnbyz/images/se1.jpg" alt="">
-					</div>
-					<div class="col-md-8 grid-bottom amet">
-						<h4>韩式水雾眉经典案例分享</h4>
-						<h6>Korean water mist classic case to share</h6>
-						<p>手工雾眉，也叫作粉黛眉，好像眉笔眉粉画出来的效果，柔柔和和，自自然然的。纯手工操作，基本不结痂，避免尴尬期。</p>
-						<a href="#" class="in-more">查看详情 <i> </i></a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
+				<%})%>
 			</div>
 			<div class="col-md-3 quick">
 				<h4>立即给我们留言</h4>
 				<div class="grid-enter">
-					<input type="text" value="输入您的姓名 ..." onFocus="this.value='';" onBlur="if (this.value == '') {this.value = 'Enter your name ...';}">
+					<input type="text" value="输入您的姓名 ..." onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的姓名 ...';}">
 					<i> </i>
 				</div>
 				<div class="grid-enter">
-					<input type="text" value="输入您的邮箱..." onFocus="this.value='';" onBlur="if (this.value == '') {this.value = 'Enter email id...';}">
+					<input type="text" value="输入您的邮箱..." onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的邮箱 ...';}">
 					<i class="mail"> </i>
 				</div>
 				<div class="grid-enter">
-					<textarea value="John simth" onFocus="this.value='';" onBlur="if (this.value == '') {this.value = 'Message';}">输入您的留言</textarea>
+					<textarea value="John simth" onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的留言';}">输入您的留言</textarea>
 					<i class="message"> </i>
 				</div>
 				<input type="submit" value="提交">
