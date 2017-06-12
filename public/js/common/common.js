@@ -81,7 +81,7 @@ function noticeInfo(type, title, callback) {
     }
 }
 
-function changeParam(name, value ,url) {
+function changeParam (name, value, url) {
     var newUrl = "";
     var reg = new RegExp("(^|)" + name + "=([^&]*)(|$)");
     var tmp = name + "=" + value;
@@ -97,4 +97,32 @@ function changeParam(name, value ,url) {
         }
     }
     return newUrl;
+}
+
+// 把json图片数组输出图片到html上
+function jsonImgPrint (imgStr, imgFormat, className) {
+    if (imgStr && imgStr != '') {
+        var img_json = JSON.parse(imgStr);
+        var id = genNonDuplicateID();
+        window.document.write('<img id="' + id + '" src="' + img_json[0].path + img_json[0].name + imgFormat + '.' + img_json[0].suffix + '" class="' + (className ? className : '') + '"/>');
+        return {
+            src:img_json[0].path + img_json[0].name + '.' + img_json[0].suffix,
+            id:id
+        };
+    }
+}
+
+// 把json图片数组输出图片到html上(只需要src)
+function jsonImgPrintOnlySrc (imgStr, imgFormat) {
+    if (imgStr && imgStr != '') {
+        var img_json = JSON.parse(imgStr);
+        window.document.write(img_json[0].path + img_json[0].name + imgFormat + '.' + img_json[0].suffix);
+    }
+}
+
+/**
+ * 生成一个用不重复的ID
+ */
+function genNonDuplicateID (randomLength) {
+    return Number(Math.random().toString().substr(3, randomLength) + Date.now()).toString(36);
 }

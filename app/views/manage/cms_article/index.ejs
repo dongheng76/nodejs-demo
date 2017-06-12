@@ -96,10 +96,7 @@
               <td class="description">
                   <script>
                     var imgStr = '<%-article.image%>';
-                    if(imgStr!=''){
-                      var img_json = JSON.parse('<%-article.image%>');
-                      window.document.write('<img src="'+img_json[0].path+img_json[0].name+'_200x200.'+img_json[0].suffix+'"/>');
-                    }
+                    jsonImgPrint(imgStr,'_200x200');
                   </script>
               </td>
               <td>

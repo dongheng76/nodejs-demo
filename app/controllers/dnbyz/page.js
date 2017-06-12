@@ -46,11 +46,16 @@ module.exports = function (app, routeMethod) {
 
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),      
-      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'project')
+      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'project'),
+      articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('72273e004bf311e780309d6de1be898e')
+      
     ]).then(result => {
       res.render('dnbyz/project', {
         cates: result[0],
-        curCate: result[1]
+        curCate: result[1],
+        jinpaiwenxiu: result[2],
+        projects: result[3]
       });
     });
   });
@@ -63,11 +68,15 @@ module.exports = function (app, routeMethod) {
 
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),
-      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'share')
+      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'share'),
+      articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('da849e704bf311e780309d6de1be898e')
     ]).then(result => {
       res.render('dnbyz/share', {
         cates: result[0],
-        curCate: result[1]
+        curCate: result[1],
+        jinpaiwenxiu: result[2],
+        anlis: result[3]
       });
     });
   });
@@ -80,11 +89,19 @@ module.exports = function (app, routeMethod) {
 
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),
-      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'about')
+      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'about'),
+      articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('0ffde3904bf411e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('52bb32404bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('720377704bf511e780309d6de1be898e')
     ]).then(result => {
       res.render('dnbyz/about', {
         cates: result[0],
-        curCate: result[1]
+        curCate: result[1],
+        jinpaiwenxiu: result[2],
+        abouts: result[3],
+        xinwen: result[4],
+        qaf: result[5]
       });
     });
   });
@@ -97,11 +114,18 @@ module.exports = function (app, routeMethod) {
 
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),      
-      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'contact')
+      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'contact'),
+      articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('c30c4a104bf611e7987a797906eb157d'),
+      articleDao.queryArticleInfoByCateId('e30ff0004bf611e7987a797906eb157d')
+      
     ]).then(result => {
       res.render('dnbyz/contact', {
         cates: result[0],
-        curCate: result[1]
+        curCate: result[1],
+        jinpaiwenxiu: result[2],
+        maps: result[3],
+        contacts: result[4]
       });
     });
   });

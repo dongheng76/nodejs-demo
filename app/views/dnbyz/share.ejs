@@ -17,6 +17,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script type="text/javascript" src="/dnbyz/js/move-top.js"></script>
 <script type="text/javascript" src="/dnbyz/js/easing.js"></script>
+	<script src="/js/common/common.js"></script>
 <!-- slide -->
 <script src="/dnbyz/js/responsiveslides.min.js"></script>
    <script>
@@ -65,96 +66,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="portfolio">
 		<h2>经典案例分享</h2>
 		<div class="products-bottom">
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
+			<%anlis.forEach(function(al){%>
+				<div class="col-md-4 work-grid">
+					<div id="nivo-lightbox-demo">			
+						<a  href="images/pi.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
+							<script>
+								var imgStr = '<%-al.image%>';
+								var obj = jsonImgPrint(imgStr,'_400x300','img-responsive');
+								$('#'+obj.id).parent().attr('href',obj.src);
+							</script>
+							<div class="rotate">
+								<i> </i>	
+							</div>				
+						</a> 
+					</div>
 				</div>
-			</div>			
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi1.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi1.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>
-			</div>
-			<div class="col-md-4 work-grid">	
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi2.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi2.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>	
-			</div>	
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi3.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi3.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>
-			</div>	
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi4.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi4.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>
-			</div>	
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi1.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi1.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>
-			</div>	
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi6.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi6.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>
-			</div>	
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi7.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi7.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>
-			</div>	
-			<div class="col-md-4 work-grid">
-				<div id="nivo-lightbox-demo">			
-					<a  href="images/pi.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-						<img src="images/pi.jpg" class="img-responsive " alt=""/>
-						<div class="rotate">
-							<i> </i>	
-						</div>				
-					 </a> 
-				</div>
-			</div>				
+			<%});%>
 			<div class="clearfix"> </div>	
 		</div>
 	</div>
