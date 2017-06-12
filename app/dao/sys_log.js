@@ -33,9 +33,9 @@ function getClientIp(req) {
         req.connection.socket.remoteAddress;
 };
 /**
- * 分页查询字典所有信息
+ * 分页查询所有信息
  */
-exports.queryAllLogs = function (req, currentPage, pagesize, callback) {
+exports.queryAllLogs = function (req, currentPage, pagesize) {
     let where = 'where 1=1 ';
     let params = [];
     //if (req.query.type != null && req.query.type != '') {
@@ -43,39 +43,36 @@ exports.queryAllLogs = function (req, currentPage, pagesize, callback) {
     //    params.push(req.query.type);
    // }
     if (req.query.create_date_start != null && req.query.create_date_start != "") {
-        where += " and sl.create_date>=?";
+        where += ' and sl.create_date>=?';
         params.push(req.query.create_date_start);
     }
     if (req.query.create_date_end != null && req.query.create_date_end != "") {
-        where += " and sl.create_date<=?";
+        where += ' and sl.create_date<=?';
         params.push(req.query.create_date_end);
     }
-    mysql.query('select sl.*,su.name,su.login_name from sys_log sl left join sys_user su on sl.create_by=su.id ' + where
+    return mysql.query('select sl.*,su.name,su.login_name from sys_log sl left join sys_user su on sl.create_by=su.id ' + where
         + ' order by sl.create_date desc limit ' + (parseInt(currentPage) - 1) * pagesize + ',' + pagesize,
-        params, function (err, users) {
-            callback(err, users);
-        });
+        params);
 };
 
 /**
- * 查询用户所有信息的记录数
+ * 查询记录数
  */
-exports.queryAllLogPage = function (req, pagesize, currentPage, callback) {
+exports.queryAllLogPage =  async function (req, pagesize, currentPage) {
     let where = 'where 1=1 ';
     let params = [];
     //if (req.query.type != null && req.query.type != '') {
     //   where += ' and sd.type=?';
 //    params.push(req.query.type);
    // }
-   if (req.query.create_date_start != null && req.query.create_date_start != "") {
-        where += " and sl.create_date>=?";
+   if (req.query.create_date_start != null && req.query.create_date_start != '') {
+        where += ' and sl.create_date>=?';
         params.push(req.query.create_date_start);
     }
-    if (req.query.create_date_end != null && req.query.create_date_end != "") {
-        where += " and sl.create_date<=?";
+    if (req.query.create_date_end != null && req.query.create_date_end != '') {
+        where += ' and sl.create_date<=?';
         params.push(req.query.create_date_end);
     }
-    mysql.queryOne('select count(*) as total from sys_log sl ' + where, params, function (err, val) {
-        callback(err, util.makePage(util.getSingleUrl(req), val.total, pagesize, currentPage));
-    });
+    let val = await mysql.queryOne('select count(*) as total from sys_log sl ' + where, params);
+    return util.makePage(util.getSingleUrl(req), val.total, pagesize, currentPage);
 };

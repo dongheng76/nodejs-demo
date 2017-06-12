@@ -2,8 +2,9 @@
 <html>
 <head>
   <title>日志管理 - 首页</title>
-  <% include  ../include/head_res.ejs %>
-  <% include  ../include/manage_com_res.ejs %>
+    <% include  ../include/head_res.ejs %>
+    <% include  ../include/manage_com_res.ejs %>
+
 <body>
 
 <% include  ../include/header.ejs %>
@@ -200,8 +201,10 @@
         $(this).addClass('datagrid-sort-desc').removeClass('datagrid-sort-asc');
         order = 'desc';
       }
-
-      window.location.href = '?sortName='+name+'&sortOrder='+order;
+      var url = changeParam('sortName',name,window.location.href);
+      url = changeParam('sortOrder',order,url);
+      window.location.href = url;
+     // window.location.href = '?sortName='+name+'&sortOrder='+order;
     });
   });
 </script>
