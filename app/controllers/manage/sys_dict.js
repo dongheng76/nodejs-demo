@@ -17,7 +17,8 @@ module.exports = function (app, routeMethod) {
    * 创建字典
    */
   routeMethod.session('/manage/dict/create','sys:dict:edit');
-  app.all('/manage/dict/create', function (req, res) {
+  routeMethod.csurf('/manage/dict/create');
+  app.get('/manage/dict/create', function (req, res) {
     let type = req.query.type;
 
     Promise.all([
@@ -36,7 +37,8 @@ module.exports = function (app, routeMethod) {
    * 编辑字典
    */
   routeMethod.session('/manage/dict/edit','sys:dict:edit');
-  app.all('/manage/dict/edit', function (req, res) {
+  routeMethod.csurf('/manage/dict/edit');
+  app.get('/manage/dict/edit', function (req, res) {
     let id = req.query.id;
 
     Promise.all([
@@ -54,7 +56,8 @@ module.exports = function (app, routeMethod) {
    *  保存一个用户信息
    */
   routeMethod.session('/manage/dict/store','sys:dict:edit');
-  app.all('/manage/dict/store',async function (req, res) {
+  routeMethod.csurf('/manage/dict/store');
+  app.post('/manage/dict/store',async function (req, res) {
     let value = req.body.value;
     let label = req.body.label;
     let type = req.body.type;
@@ -96,7 +99,8 @@ module.exports = function (app, routeMethod) {
    *  删除一个字典信息
    */
   routeMethod.session('/manage/dict/delete','sys:dict:edit');
-  app.all('/manage/dict/delete',async function (req, res) {
+  routeMethod.csurf('/manage/dict/delete');
+  app.post('/manage/dict/delete',async function (req, res) {
     let result = null;
     if (req.body.id) {
       let id = req.body.id;
@@ -136,7 +140,8 @@ module.exports = function (app, routeMethod) {
   });
 
   routeMethod.session('/manage/dict','sys:dict:show');
-  app.all('/manage/dict', function (req, res) {
+  routeMethod.csurf('/manage/dict');
+  app.get('/manage/dict', function (req, res) {
     let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
     Promise.all([
       menuDao.queryMenuByHref('/manage/dict'),

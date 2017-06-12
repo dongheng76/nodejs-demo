@@ -26,7 +26,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 创建文件
      */
-    app.all('/manage/file/create', function (req, res) {
+    app.get('/manage/file/create', function (req, res) {
         Promise.all([
             menuDao.queryMenuByHref('/manage/user'),
             dictUtil.getDictList('sys_user_type')
@@ -41,7 +41,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 取得用户文件夹信息
      */
-    app.all('/manage/file/getfolders', function (req, res) {
+    app.get('/manage/file/getfolders', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 图片类型
         Promise.all([
             fileDao.queryCatalogByUser(req, type == 'images' ? '1' : '2')
@@ -73,7 +73,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 取得指定文件夹的文件信息
      */
-    app.all('/manage/file/getfiles', function (req, res) {
+    app.get('/manage/file/getfiles', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
         let file_cate_id = req.query.file_cate_id ? req.query.file_cate_id : '0';
@@ -115,7 +115,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 创建一个文件夹
      */
-    app.all('/manage/file/mkdir', function (req, res) {
+    app.get('/manage/file/mkdir', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         // let currentPage = req.query.page ? req.query.page : 1; //获取当前页数，如果没有则为1
         let parent_id = req.query.parent_id;
@@ -136,7 +136,7 @@ module.exports = function (app, routeMethod) {
     /**
      * 删除一个文件夹
      */
-    app.all('/manage/file/delfilecate', function (req, res) {
+    app.post('/manage/file/delfilecate', function (req, res) {
         Promise.all([
             fileDao.delFileCate(req.body.id)
         ]).then(result => {
@@ -149,7 +149,7 @@ module.exports = function (app, routeMethod) {
     /**
      *  上传一个图片
      */
-    app.all('/manage/file/upload', function (req, res) {
+    app.post('/manage/file/upload', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let file_cate_id = req.body.file_cate_id ? req.body.file_cate_id : '0';
 
@@ -192,6 +192,7 @@ module.exports = function (app, routeMethod) {
                     let format = JSON.parse(req.body.format);
                     let gmImage = gm(fileDirPath + fileId + '.' + suffix);
                     for (let j = 0; j < format.length; j++) {
+                        console.log('已经缩放完成！！！');
                         // 先判断是否需要缩放
                         if (!(format[j].width >= dimensions.width && format[j].height >= dimensions.height)) {
                             if (dimensions.width > dimensions.height) {
@@ -203,8 +204,14 @@ module.exports = function (app, routeMethod) {
                             }
                         }
 
-                        gmImage.write(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix, function (err) {
-                            console.error(err);
+                        await new Promise((resolve,reject) => {
+                            gmImage.write(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix, function (err) {
+                                if (err){
+                                    reject(err);
+                                }
+
+                                resolve(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix);
+                            });
                         });
                     }
                 }
@@ -214,7 +221,7 @@ module.exports = function (app, routeMethod) {
                 res.json({
                     result: true
                 });
-        });
+            });
         } else {
             file.mv(fileDirPath + fileId + '.' + suffix,async function (err) {
                 if (err)
@@ -232,7 +239,7 @@ module.exports = function (app, routeMethod) {
     /**
      *  缩放图片异步方法
      */
-    app.all('/manage/file/thumbfile', function (req, res) {
+    app.post('/manage/file/thumbfile', function (req, res) {
         let ids = req.body.ids;
         let format = JSON.parse(req.body.format);
         let idsStr = '';
@@ -247,9 +254,9 @@ module.exports = function (app, routeMethod) {
 
         Promise.all([
             fileDao.queryFileByIds(idsStr)
-        ]).then(result => {
+        ]).then(async result => {
             let files = result[0];
-            async.map(files, function (file, fileCallback) {
+            let filesPro = files.map(async file => {
                 // 文件的缩放格式是否有修改
                 let isFileUpdate = false;
                 // 在一个文件开始的时候抓取这个文件的物理地址
@@ -262,7 +269,7 @@ module.exports = function (app, routeMethod) {
                 }
                 // 如果有在循环目前需要循环的缩放图轨迹时判断是否已存在该种缩略图
                 // 开始缩放
-                async.map(format, function (imgFormat, formatCallback) {
+                let formatPro = await format.map(async imgFormat => {
                     let isExist = false;
                     for (let n = 0; n < fileFormatJson.length; n++) {
                         if (imgFormat.width == fileFormatJson[n].width && imgFormat.height == fileFormatJson[n].height) {
@@ -283,29 +290,37 @@ module.exports = function (app, routeMethod) {
                                 gmImage.resize(imgFormat.width, imgFormat.height);
                             }
                         }
+                        
+                        await new Promise((resolve,reject) => {
+                            gmImage.write(path.resolve(__dirname, '../../../') + '/public' + file.path + file.name + '_' + imgFormat.width + 'x' + imgFormat.height + '.' + file.suffix, function (err) {
+                                 console.log('成功进行缩放');
+                                if (err){
+                                    reject(err);
+                                }
 
-                        gmImage.write(path.resolve(__dirname, '../../../') + '/public' + file.path + file.name + '_' + imgFormat.width + 'x' + imgFormat.height + '.' + file.suffix, function (err) {
-                            // console.log('成功进行缩放');
-                            formatCallback(null, '_' + imgFormat.width + 'x' + imgFormat.height);
+                                resolve('_' + imgFormat.width + 'x' + imgFormat.height);
+                            });
                         });
+                        
 
                         // 不存在的情况下要在操作完成后为老缩放尺寸添加新的尺寸
                         fileFormatJson.push({
                             width: imgFormat.width,
                             height: imgFormat.height
                         });
-                    } else {
-                        // console.log('我不需要缩放，已经有图了');
-                        formatCallback(null, null);
                     }
-                }, function (err, results) {
-                    fileCallback(null, file.name);
                 });
-                // 判断是否需要修改缩略格式
-                if (isFileUpdate) {
-                    fileDao.updateFileFormatById(JSON.stringify(fileFormatJson), file.id);
-                }
-            },function (err, results) {
+
+                await Promise.all(formatPro).then(async results => {
+                    // 判断是否需要修改缩略格式
+                    if (isFileUpdate) {
+                        await fileDao.updateFileFormatById(JSON.stringify(fileFormatJson), file.id);
+                    }
+                });
+                
+            });
+
+            Promise.all(filesPro).then(result => {
                 res.json({
                     result: true
                 });
@@ -313,7 +328,7 @@ module.exports = function (app, routeMethod) {
         });
     });
 
-    app.all('/manage/file', function (req, res) {
+    app.get('/manage/file', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 文件类型
         Promise.all([
             menuDao.queryMenuByHref('/manage/file?type=' + type)
@@ -325,7 +340,7 @@ module.exports = function (app, routeMethod) {
         });
     });
 
-    app.all('/manage/file/simple', function (req, res) {
+    app.get('/manage/file/simple', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let func = req.query.func;
         let format = req.query.format;

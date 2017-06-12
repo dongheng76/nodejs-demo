@@ -19,7 +19,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建用户
    */
-  app.all('/manage/user/create', function (req, res) {
+  routeMethod.csurf('/manage/user/create');
+  app.get('/manage/user/create', function (req, res) {
     Promise.all([
       menuDao.queryMenuByHref('/manage/user'),
       dictUtil.getDictList('sys_user_type'),
@@ -37,7 +38,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑用户
    */
-  app.all('/manage/user/edit', function (req, res) {
+  routeMethod.csurf('/manage/user/edit');
+  app.get('/manage/user/edit', function (req, res) {
     let id = req.query.id;
 
     Promise.all([
@@ -67,7 +69,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个用户信息
    */
-  app.all('/manage/user/store', async function (req, res) {
+  routeMethod.csurf('/manage/user/store');
+  app.post('/manage/user/store', async function (req, res) {
     let office_id = req.body.office_id;
     let login_name = req.body.login_name;
     let password = req.body.password;
@@ -124,7 +127,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个用户信息
    */
-  app.all('/manage/user/delete', async function (req, res) {
+  routeMethod.csurf('/manage/user/delete');
+  app.post('/manage/user/delete', async function (req, res) {
     if (req.body.id) {
       let id = req.body.id;
       let result = userDao.delUserById(id);
@@ -165,9 +169,7 @@ module.exports = function (app, routeMethod) {
  /**
    *  导出EXCEL
    */
-  app.all('/manage/user/downloadExcel', function (req, res) {
-    console.log('*******************************************');
-    console.log('*******************************************');
+  app.get('/manage/user/downloadExcel', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
 
     Promise.all([
@@ -241,7 +243,8 @@ module.exports = function (app, routeMethod) {
      
   });
   
-  app.all('/manage/user', function (req, res) {
+  routeMethod.csurf('/manage/user');
+  app.get('/manage/user', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
 
     Promise.all([

@@ -3,67 +3,58 @@
 /**
  * Module dependencies.
  */
-const async = require('async');
 const utils = require('../../utils');
 const menuDao = require('../../dao/sys_menu');
 const userDao = require('../../dao/sys_user');
 
-exports.ROUTER = {
-
-  '/sys/user/modifyPwd' : function (req, res) {
-    async.auto({
-      currentMenu: function (cb) {
-        menuDao.queryMenuByHref('/manage/dict', function (err, menu) {
-          if (err || !menu) {
-            cb(null, false);
-          } else {
-            cb(null, menu);
-          }
-        });
-      },
-    }, function (error, result) {
-      res.render('manage/modifyPwd/create', {
-        currentMenu: result.currentMenu
-       
+module.exports = function (app, routeMethod) {
+  routeMethod.csurf('/sys/user/modifyPwd');
+  app.get('/sys/user/modifyPwd', function (req, res) {
+    Promise.all([menuDao.queryMenuByHref('/manage/panel')]).then(result => {
+      res.render('manage/modify_Pwd/create', {
+        currentMenu: result[0]
       });
     });
-  },
+  });
+  
   /**
    *  修改密码
    */
-  '/manage/user/modifyPwd': function (req, res) {
-    async.auto({
-      store: function (cb) {
-       
-        let password = req.body.oldpassword;
-        let newpassword = req.body.password;
-        let loginName = req.session.user.login_name;
-         
-        // 验证原始密码是否正确
-        userDao.queryUserByUserNameAndPwd(loginName, utils.md5(password), function (err, user) {
-          if (typeof (user) != 'undefined' && user.id != null) {
-            userDao.updateUserPwd(loginName,newpassword, function (err, result) {
-              cb(null, result);
-            });            
-          } else {
-              cb(null, false);
-            }
-        });
-      }
-    }, function (error, result) {
-      if (result.store) {
+routeMethod.csurf('/manage/user/modifyPwd');
+app.post('/manage/user/modifyPwd',async function (req, res) {
+ 
+    let password = req.body.oldpassword;
+    let newpassword = req.body.password;
+    let loginName = req.session.user.login_name;
+    let result = null;
+    // 验证原始密码是否正确
+    let user = await userDao.queryUserByUserNameAndPwd(loginName, utils.md5(password),req);
+     if (typeof (user) == 'undefined') {
+       res.json({
+        result: false,
+        error: '原始密码错误，修改失败'
+      });
+     } else {
+        result = userDao.updateUserPwd(loginName,newpassword, req);
+        req.session.notice_info = {
+          info: '修改用户成功!',
+          type: 'success'
+        };
+     }
+
+    if (result) {
         res.json({
           result: true
         });
       } else {
+        req.session.notice_info = null;
         res.json({
           result: false,
-          error: '原始密码错误，修改失败'
+          error: '网络出现问题请重试!'
         });
       }
-    });
-  }
 
+  });
 
 };
 

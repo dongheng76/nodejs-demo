@@ -14,7 +14,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建菜单
    */
-  app.all('/manage/menu/create', function (req, res) {
+  routeMethod.csurf('/manage/menu/create');
+  app.get('/manage/menu/create', function (req, res) {
     let pId = req.query.parent_id ? req.query.parent_id : '1';
 
     Promise.all([
@@ -35,7 +36,8 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑用户
    */
-  app.all('/manage/menu/edit',async function (req, res) {
+  routeMethod.csurf('/manage/menu/edit');
+  app.get('/manage/menu/edit',async function (req, res) {
     let id = req.query.id;
     let menu = await menuDao.queryMenuById(id);
 
@@ -62,7 +64,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个菜单信息
    */
-  app.all('/manage/menu/store',async function (req, res) {
+  routeMethod.csurf('/manage/menu/store');
+  app.post('/manage/menu/store',async function (req, res) {
     let parent_id = req.body.parent_id;
     let name = req.body.name;
     let sort = req.body.sort;
@@ -104,7 +107,8 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个菜单信息
    */
-  app.all('/manage/menu/delete',async function (req, res) {
+  routeMethod.csurf('/manage/menu/delete');
+  app.post('/manage/menu/delete',async function (req, res) {
     let result = null;
 
     if (typeof (req.body.id) != 'undefined') {
@@ -136,8 +140,8 @@ module.exports = function (app, routeMethod) {
       });
     }
   });
-
-  app.all('/manage/menu', function (req, res) {
+  routeMethod.csurf('/manage/menu');
+  app.get('/manage/menu', function (req, res) {
     Promise.all([
       menuDao.queryMenuByHref('/manage/menu'),
       menuDao.queryMenuForRecursion()

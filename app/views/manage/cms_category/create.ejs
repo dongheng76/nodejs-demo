@@ -68,6 +68,14 @@
                 <input style="width:400px" type="text" name="href" <%if(typeof(cate)!='undefined'){%> value="<%=cate.href%>" <%}%>/>
               </div>
               <div class="field-box">
+                <label>限制规格:</label>
+                <input style="width:400px" type="text" name="image_format" <%if(typeof(cate)!='undefined'){%> value="<%=cate.image_format%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>显示规格:</label>
+                <input style="width:400px" type="text" name="image_show_format" <%if(typeof(cate)!='undefined'){%> value="<%=cate.image_show_format%>" <%}%>/>
+              </div>
+              <div class="field-box">
                 <label>模块名称:</label>
                 <input style="width:400px" type="text" name="module" <%if(typeof(cate)!='undefined'){%> value="<%=cate.module%>" <%}%>/>
               </div>
@@ -78,6 +86,36 @@
               <div class="field-box">
                 <label>排序号:</label>
                 <input style="width:400px" type="text" name="sort" <%if(typeof(maxSort)!='undefined'){%> value="<%=maxSort%>" <%}%> <%if(typeof(cate)!='undefined'){%> value="<%=cate.sort%>" <%}%>/>
+              </div>
+              <div class="field-box">
+                <label>是否在导航中显示:</label>
+                <div>
+                  <fieldset>
+                    <label class="radio">
+                      <input type="radio" name="in_menu" value="1" <% if(typeof(cate)=='undefined'){ %> checked="checked" <%}%> <% if(typeof(cate)!='undefined' && cate.in_menu==1){ %> checked="checked" <%}%>  />是
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="in_menu" value="0" <% if(typeof(cate)!='undefined' && cate.in_menu==0){ %> checked="checked" <%}%>/>否
+                    </label>
+                    <label for="in_menu" class="error" style="display:none;margin-left:20px;">请选择一个导航是否显示</label>
+                  </fieldset>
+                </div>
+                <div class="auto-height"></div>
+              </div>
+              <div class="field-box">
+                <label>是否在分页列表中显示:</label>
+                <div>
+                  <fieldset>
+                    <label class="radio">
+                      <input type="radio" name="in_list" value="1" <% if(typeof(cate)=='undefined'){ %> checked="checked" <%}%> <% if(typeof(cate)!='undefined' && cate.in_list==1){ %> checked="checked" <%}%>  />是
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="in_list" value="0" <% if(typeof(cate)!='undefined' && cate.in_list==0){ %> checked="checked" <%}%>/>否
+                    </label>
+                    <label for="in_list" class="error" style="display:none;margin-left:20px;">请选择一个分页列表中是否显示</label>
+                  </fieldset>
+                </div>
+                <div class="auto-height"></div>
               </div>
               <div class="field-box">
                 <label>描述:</label>
@@ -105,11 +143,15 @@
           rules: {
             name: "required",
             module: "required",
+            in_menu: "required",
+            in_list: "required",
             sort:"required"
           },
           messages: {
             name: "栏目名称必须填写",
             module: "栏目模块名称必须填写",
+            in_menu: "是否在菜单中显示必须选择",
+            in_list: "是否在列表中显示必须选择",
             sort: "栏目排序号必须填写"
           },
           submitHandler:function(form){
@@ -123,29 +165,33 @@
           }
         });
         <%}else{%>
-          $("#form").validate({
-          rules: {
-            name: "required",
-            module: "required",
-            sort:"required"
-          },
-          messages: {
-            name: "栏目名称必须填写",
-            module: "栏目模块名称必须填写",
-            sort: "栏目排序号必须填写"
-          },
-          submitHandler:function(form){
-            $.post('/manage/cms_category/store',$('form[name="create"]').serialize(),function(data){
-              if(data.result){
-                window.location.href='/manage/cms_category';
-              }else{
-                noticeInfo('fail',data.error);
-              }
-            }).error(function(data) {
-              noticeInfo('fail','网络错误创建失败!请重试.');
-            });
-          }
-        });
+            $("#form").validate({
+              rules: {
+              name: "required",
+              module: "required",
+              in_menu: "required",
+              in_list: "required",
+              sort:"required"
+            },
+            messages: {
+              name: "栏目名称必须填写",
+              module: "栏目模块名称必须填写",
+              in_menu: "是否在菜单中显示必须选择",
+              in_list: "是否在列表中显示必须选择",
+              sort: "栏目排序号必须填写"
+            },
+            submitHandler:function(form){
+              $.post('/manage/cms_category/store',$('form[name="create"]').serialize(),function(data){
+                if(data.result){
+                  window.location.href='/manage/cms_category';
+                }else{
+                  noticeInfo('fail',data.error);
+                }
+              }).error(function(data) {
+                noticeInfo('fail','网络错误创建失败!请重试.');
+              });
+            }
+          });
         <%}%>
       });
     </script>
