@@ -183,7 +183,7 @@ module.exports = function (app, routeMethod) {
         if (type == 'images') {
             let dimensions = sizeOf(file.data);
             // Use the mv() method to place the file somewhere on your server
-            file.mv(fileDirPath + fileId + '.' + suffix,async function (err) {
+            file.mv(fileDirPath + fileId + '.' + suffix, async function (err) {
                 if (err)
                     return res.status(500).send(err);
 
@@ -214,9 +214,9 @@ module.exports = function (app, routeMethod) {
                 res.json({
                     result: true
                 });
-        });
+            });
         } else {
-            file.mv(fileDirPath + fileId + '.' + suffix,async function (err) {
+            file.mv(fileDirPath + fileId + '.' + suffix, async function (err) {
                 if (err)
                     return res.status(500).send(err);
 
@@ -225,7 +225,7 @@ module.exports = function (app, routeMethod) {
                 res.json({
                     result: true
                 });
-        });
+            });
         }
     });
 
@@ -305,7 +305,7 @@ module.exports = function (app, routeMethod) {
                 if (isFileUpdate) {
                     fileDao.updateFileFormatById(JSON.stringify(fileFormatJson), file.id);
                 }
-            },function (err, results) {
+            }, function (err, results) {
                 res.json({
                     result: true
                 });

@@ -91,8 +91,7 @@
       $.getJSON('/manage/file/mkdir?type=image',{
         parent_id:$('#currentParentFolder').val(),
         name:$('#NewFolderName').val(),
-        parent_ids:$('#parentIds').val(),
-        _csrf:'<%= csrf_token %>'
+        parent_ids:$('#parentIds').val()
       },function(data){
         if(data.result)
           refreshTree();
@@ -163,8 +162,7 @@
           btnClass:'btn-flat default',
           action: function(){
             $.post('/manage/file/delfilecate',{
-              id:treeNode.id,
-              _csrf:'<%= csrf_token %>'
+              id:treeNode.id
             },function(data){
               new jBox('Notice', {
                 theme: 'NoticeFancy',
@@ -284,7 +282,7 @@
   }
 
   $('#fileupload').fileupload({
-            url: '/manage/file/upload?type=<%=type%>&_csrf=<%= csrf_token %>' ,
+            url: '/manage/file/upload?type=<%=type%>' ,
             dataType: 'json',
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
@@ -445,9 +443,8 @@
 
         $.post('/manage/file/thumbfile',
         {
-          _csrf:'<%= csrf_token %>',
           ids:ids,
-          format:'<%-format%>'
+          format:'<%-format%>' 
         },function(data){
           if(data.result){
             opener.<%=func%>(imagesManage.getSelectedData());

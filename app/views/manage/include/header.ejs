@@ -222,9 +222,7 @@
                                 text: '确认',
                                 btnClass:'btn-flat default',
                                 action: function(){
-                                    $.post('/manage/signup',{
-                                        _csrf:'<%= csrf_token %>'
-                                    },function(data){
+                                    $.post('/manage/signup',function(data){
                                         if(data.result){
                                             window.location.reload();
                                         }
