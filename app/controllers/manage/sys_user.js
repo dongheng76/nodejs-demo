@@ -173,7 +173,7 @@ module.exports = function (app, routeMethod) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
 
     Promise.all([
-      userDao.queryAllUser(req, currentPage, 20),
+      userDao.queryAllUser(req, currentPage, 2000),
       // 查询用户数量
       userDao.queryAllUserPage(req, 1000, currentPage),
       menuDao.queryMenuByHref('/manage/user')
@@ -259,7 +259,6 @@ module.exports = function (app, routeMethod) {
         user.user_type_label = await dictUtil.getDictLabel(user.user_type, 'sys_user_type', '未知');
         return user;
       });
-
       Promise.all(proUsers).then(results => {
         res.render('manage/sys_user/index', {
           currentMenu: result[2],

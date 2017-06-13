@@ -5,16 +5,14 @@ const uuidV1 = require('uuid/v1');
 /**
  * 根据文件ID查询文件信息
  */
-exports.queryFileByIds = function (ids, callback) {
-    mysql.query('select sf.* from sys_file sf where sf.id in (' + ids + ')', null, function (err, files) {
-        callback(err, files);
-    });
+exports.queryFileByIds = function (ids) {
+    return mysql.query('select sf.* from sys_file sf where sf.id in (' + ids + ')');
 };
 
 /**
  * 根据文件ID修改文件缩略图格式
  */
-exports.updateFileFormatById = function (format, id, callback) {
+exports.updateFileFormatById = function (format, id) {
     return mysql.update('update sys_file set format=? , update_date=now() where id=?', [format, id]);
 };
 

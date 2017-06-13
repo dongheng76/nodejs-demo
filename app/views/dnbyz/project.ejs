@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>我们的项目——懂你半永妆工作室——让您更懂你</title>
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="js/jquery.min.js"></script>
+	<!-- Custom Theme files -->
+	<!--theme-style-->
+	<style type="text/css">
+		@import url("css/style.css");
+	</style>
+	<link href="css/black.css" rel="stylesheet" type="text/css" media="all" />
+	<!--//theme-style-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Elegant Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<script type="application/x-javascript">
+		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+	</script>
+	<!--fonts-->
+	<script type="text/javascript" src="js/move-top.js"></script>
+	<script type="text/javascript" src="js/easing.js"></script>
+	<script src="/js/common/common.js"></script>
+	<!-- slide -->
+	<script src="js/responsiveslides.min.js"></script>
+	<script>
+		$(function () {
+			$("#slider").responsiveSlides({
+				auto: true,
+				speed: 500,
+				namespace: "callbacks",
+				pager: true,
+			});
+		});
+	</script>
+	<!---css-style-switecher----->
+	<script type="text/javascript" src="js/jsapi.js"></script>
+	<script>
+		google.setOnLoadCallback(function () {
+			// Color changer
+			$(".colorred").click(function () {
+				$("link").attr("href", "css/red.css");
+				return false;
+			});
+
+			$(".colorblack").click(function () {
+				$("link").attr("href", "css/black.css");
+				return false;
+			});
+
+		});
+	</script>
+	<!---//End-css-style-switecher----->
+
+</head>
+
+<body>
+	<!--header-->
+	<div class="header">
+		<% include  ./include/head.ejs %>
+	</div>
+	<!---->
+	<!---start-color-changer----->
+	<div id="colorchanger">
+		<a class="colorbox colorred" href="?theme=red" title="Red Theme"> </a>
+		<a class="colorbox colorblack" href="?theme=black" title="Black Theme"> </a>
+	</div>
+	<!---//End-color-changer----->
+	<div class="container channel-list">
+		<ul class="row clearfix">
+			<%projects.forEach(function(project){%>
+			<li class="col-md-6">
+				<div class="channel-list-img">
+					<a href="javascript:void(0)" target="_blank" data-stat-id="def8cfe8112d6808" onclick="">
+						<script>
+							var imgStr = '<%-project.image%>';
+							var obj = jsonImgPrint(imgStr,'_555x308','img-responsive');
+						</script>
+					</a>
+				</div>
+				<div class="channel-list-con clearfix">
+					<dl class="channel-list-des">
+						<dt>
+							<%=project.title%> <b><%=project.remarks%></b><span>元起</span>
+						</dt>
+						<dd>
+							<%=project.description%>
+						</dd>
+					</dl>
+					<p class="channel-list-btn">
+						<a href="javascript:void(0)" class="btn btn-line-primary" data-stat-id="122a46aa13815b80" onclick="">立即预约</a>
+					</p>
+				</div>
+			</li>
+			<%})%>
+		</ul>
+	</div>
+	<!---->
+	<% include  ./include/footer.ejs %>
+</body>
+
+</html>

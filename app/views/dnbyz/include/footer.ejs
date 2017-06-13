@@ -1,30 +1,23 @@
 <div class="footer">
 	<div class="footer-top">
 		<div class="container">
-			<div class="col-md-6 footer-grid">
-				<h4>金牌纹绣师1号</h4>
-				<div class="grid-footer">
-					<div class="col-md-4 footer-left">
-							<img class="img-responsive" src="images/f1.jpg" alt="">
+			<%jinpaiwenxiu.forEach(function(wxs){%>
+				<div class="col-md-6 footer-grid">
+					<h4><%=wxs.title%></h4>
+					<div class="grid-footer">
+						<div class="col-md-4 footer-left">
+							<script>
+								var imgStr = '<%-wxs.image%>';
+								jsonImgPrint(imgStr,'_180x144','img-responsive');
+							</script>
+						</div>
+						<div class="col-md-8 footer-left-in">
+							<p><%=wxs.remarks%></p>
+						</div>
+						<div class="clearfix"> </div>
 					</div>
-					<div class="col-md-8 footer-left-in">
-						<p>拥有多年的纹绣技术，对韩式半永久水雾眉、韩式半永久美瞳线、去痣点痣、脱毛、小纹身都有无数操作案例。我郑重的向我的每位顾客承诺100%做到:做事认真负责，耐心对待每位顾客。不厌其烦的为每个顾客解答任何问题。特长项目:韩式半永久水雾眉、韩式半永久美瞳线、去痣点痣。我的口号是:让您更懂你——做最美丽的自己</p>
-					</div>
-					<div class="clearfix"> </div>
 				</div>
-			</div>
-			<div class="col-md-6 footer-grid">
-			<h4>金牌纹绣师2号</h4>
-				<div class="grid-footer">
-					<div class="col-md-4 footer-left">
-							<img class="img-responsive" src="images/f2.jpg" alt="">
-					</div>
-					<div class="col-md-8 footer-left-in">
-						<p>拥有多年的纹绣技术，对韩式半永久水雾眉、韩式半永久美瞳线、去痣点痣、脱毛、小纹身都有无数操作案例。我郑重的向我的每位顾客承诺100%做到:做事认真负责，耐心对待每位顾客。不厌其烦的为每个顾客解答任何问题。特长项目:韩式半永久水雾眉、韩式半永久美瞳线、去痣点痣。我的口号是:让您更懂你——做最美丽的自己</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
+			<%});%>
 			<div class="clearfix"> </div>
 		</div>
 	</div>

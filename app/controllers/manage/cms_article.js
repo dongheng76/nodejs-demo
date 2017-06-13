@@ -19,16 +19,20 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建文章信息
    */
+  routeMethod.csurf('/manage/cms_article/create');
   routeMethod.session('/manage/cms_article/create','cms:cms_article:edit');
   app.all('/manage/cms_article/create', function (req, res) {
     let cate_id = req.query.cate_id;
 
     Promise.all([
-      menuDao.queryMenuByHref('/manage/cms_article')
+      menuDao.queryMenuByHref('/manage/cms_article'),
+      cateDao.queryCateById(cate_id)
     ]).then(result => {
+
       res.render('manage/cms_article/create', {
         currentMenu: result[0],
-        cate_id: cate_id
+        cate_id: cate_id,
+        cate: result[1]
       });
     });
   });
@@ -36,6 +40,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑栏目分类
    */
+  routeMethod.csurf('/manage/cms_article/edit');
   routeMethod.session('/manage/cms_article/edit','cms:cms_article:edit');
   app.all('/manage/cms_article/edit',async function (req, res) {
     let id = req.query.id;
@@ -43,12 +48,14 @@ module.exports = function (app, routeMethod) {
     Promise.all([
       menuDao.queryMenuByHref('/manage/cms_article'),
       articleDao.queryArtcleById(id)
-    ]).then(result => {
-      console.log(result[1]);
+    ]).then(async result => {
+      let cate = await cateDao.queryCateById(result[1].category_id);
+
       res.render('manage/cms_article/create', {
         currentMenu: result[0],
         article: result[1],
-        cate_id: result[1].category_id
+        cate_id: result[1].category_id,
+        cate: cate
       });
     });
   });
@@ -56,11 +63,12 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个网站记录信息
    */
+  routeMethod.csurf('/manage/cms_article/store');
   routeMethod.session('/manage/cms_article/store','cms:cms_article:edit');
   app.all('/manage/cms_article/store',async function (req, res) {
     let category_id = req.body.category_id;
     let title = req.body.title;
-    let link = req.body.link;
+    let link = req.body.my_link;
     let color = req.body.color;
     let image = req.body.image;
     let description = req.body.description;
@@ -105,6 +113,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个文章类信息
    */
+  routeMethod.csurf('/manage/cms_article/delete');
   routeMethod.session('/manage/cms_article/delete','cms:cms_article:edit');
   app.all('/manage/cms_article/delete',async function (req, res) {
     let result = null;
@@ -145,6 +154,7 @@ module.exports = function (app, routeMethod) {
     }
   });
 
+  routeMethod.csurf('/manage/cms_article');
   routeMethod.session('/manage/cms_article','cms:cms_article:view');
   app.all('/manage/cms_article',async function (req, res) {
     let site = await siteDao.queryMyOfficeCurSite(req.session.user.office_id);

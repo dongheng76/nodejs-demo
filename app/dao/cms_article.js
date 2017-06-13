@@ -18,6 +18,15 @@ exports.delArticleById = async function (id) {
 };
 
 /**
+ * 根据文章ID查询文章信息
+ */
+exports.queryArticleInfoByCateId = async function (cateId) {
+    return mysql.query(`
+        select * from cms_article ca left join cms_article_data cad on ca.id=cad.id where ca.category_id=${mysql.getMysql().escape(cateId)} and ca.del_flag='0'
+    `);
+};
+
+/**
  * 分页查询文章所有信息
  */
 exports.queryAllArticle = function (cateId,req, currentPage, pagesize) {
@@ -83,12 +92,11 @@ exports.saveArticle = function (category_id,title,link,color,image,description, 
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
-
     return Promise.all([
         mysql.update(`
-            insert into cms_article(id,category_id,title,link,color,image,description,create_by,create_date,update_by,update_date,remarks,longitude,latitude,del_flag)
-            values(?,?,?,?,?,?,?,?,now(),?,now(),?,?,?,0)
-        `,[id,category_id,title,link,color,image,description, user.id, user.id, remarks,longitude,latitude]),
+        insert into cms_article(id,category_id,title,link,color,image,description,create_by,create_date,update_by,update_date,remarks,longitude,latitude,del_flag)
+            values('${id}','${category_id}','${title}','${link}','${color}','${image}','${description}', '${user.id}',now(),'${user.id}',now(),'${remarks}',${longitude},${latitude},'0')
+    `),
         mysql.update(`
             insert into cms_article_data(id,content,phone_content)
             values(?,?,?)
@@ -105,8 +113,8 @@ exports.updateArticle = async function (req) {
     if (req.body.title) {
         sets += ",title='" + req.body.title + "'";
     }
-    if (req.body.link) {
-        sets += ",link='" + req.body.link + "'";
+    if (req.body.my_link) {
+        sets += ",link='" + req.body.my_link + "'";
     }
     if (req.body.color) {
         sets += ",color='" + req.body.color + "'";

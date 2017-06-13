@@ -18,6 +18,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建栏目分类
    */
+  routeMethod.csurf('/manage/cms_category/create');
   routeMethod.session('/manage/cms_category/create','cms:cms_category:edit');
   app.all('/manage/cms_category/create',async function (req, res) {
     let pId = req.query.parent_id ? req.query.parent_id : '0';
@@ -40,6 +41,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑栏目分类
    */
+  routeMethod.csurf('/manage/cms_category/edit');
   routeMethod.session('/manage/cms_category/edit','cms:cms_category:edit');
   app.all('/manage/cms_category/edit',async function (req, res) {
     let id = req.query.id;
@@ -60,6 +62,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个栏目分类信息
    */
+  routeMethod.csurf('/manage/cms_category/store');
   routeMethod.session('/manage/cms_category/store','cms:cms_category:edit');
   app.all('/manage/cms_category/store',async function (req, res) {
     let parent_id = req.body.parent_id;
@@ -75,6 +78,8 @@ module.exports = function (app, routeMethod) {
     let site_id = site ? site.site_id : '1';
     let in_menu = req.body.in_menu;
     let in_list = req.body.in_list;
+    let image_format = req.body.image_format;
+    let image_show_format = req.body.image_show_format;
     let result = null;
 
     // 有ID就视为修改
@@ -85,7 +90,7 @@ module.exports = function (app, routeMethod) {
         type:'success'
       };
     } else {
-      result = await cateDao.saveCate(parent_id,site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks, req);
+      result = await cateDao.saveCate(parent_id,site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format, req);
       req.session.notice_info = {
         info:'保存栏目分类成功!',
         type:'success'
@@ -109,6 +114,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个栏目分类信息
    */
+  routeMethod.csurf('/manage/cms_category/delete');
   routeMethod.session('/manage/cms_category/delete','cms:cms_category:edit');
   app.all('/manage/cms_category/delete',async function (req, res) {
     let result = null;
@@ -140,6 +146,7 @@ module.exports = function (app, routeMethod) {
     }
   });
 
+  routeMethod.csurf('/manage/cms_category');
   routeMethod.session('/manage/cms_category','cms:cms_category:view');
   app.all('/manage/cms_category',async function (req, res) {
     let site = await siteDao.queryMyOfficeCurSite(req.session.user.office_id);
@@ -149,6 +156,7 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuByHref('/manage/cms_category'),
       cateDao.queryCmsCateForRecursion(site_id)
     ]).then(result => {
+
       res.render('manage/cms_category/index', {
         currentMenu: result[0],
         cates: result[1]

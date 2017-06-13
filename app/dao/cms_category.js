@@ -46,7 +46,7 @@ exports.queryCmsCateForRecursionByModuleAndSiteId = async function (siteId,modul
 /**
  * 插入一条栏目分类信息
  */
-exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks, req) {
+exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,req) {
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
@@ -61,9 +61,9 @@ exports.saveCate = async function (parent_id, site_id,module,name,image,href,tar
     }
 
     return mysql.update(`insert into cms_category(id,parent_id,parent_ids,site_id,office_id,module,name,image,href,target,description,sort,in_menu,
-    in_list,create_by,create_date,update_by,update_date,remarks,del_flag)
-    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0')`,
-    [id, parent_id, parentCate.parent_ids + parentCate.id + ',', site_id, user.office_id, module,name,image,href,target,description,sort,in_menu,in_list,user.id,user.id, remarks]);
+    in_list,create_by,create_date,update_by,update_date,remarks,del_flag,image_format,image_show_format)
+    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0',?,?)`,
+    [id, parent_id, parentCate.parent_ids + parentCate.id + ',', site_id, user.office_id, module,name,image,href,target,description,sort,in_menu,in_list,user.id,user.id, remarks,image_format,image_show_format]);
 };
 
 /**
@@ -111,6 +111,12 @@ exports.updateCate = function (req) {
     if (req.body.remarks) {
         sets += ",remarks='" + req.body.remarks + "'";
     }
+    if (req.body.image_format) {
+        sets += ",image_format='" + req.body.image_format + "'";
+    }
+    if (req.body.image_show_format) {
+        sets += ",image_show_format='" + req.body.image_show_format + "'";
+    }
 
     return mysql.update('update cms_category set update_date=now() ' + sets + ' where id=' + mysql.getMysql().escape(req.body.id));
 };
@@ -120,6 +126,6 @@ exports.updateCate = function (req) {
  */
 exports.queryCateBySiteId = function (siteId) {
     return mysql.query(`
-        select * from cms_category where site_id=? and del_flag='0' order by create_date desc
+        select * from cms_category where site_id=? and del_flag='0' order by sort asc
     `,siteId);
 };

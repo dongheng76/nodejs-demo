@@ -58,11 +58,15 @@
               <div class="field-box">
                 <label>信息图片:</label>
                 <input type="hidden" id="image" name="image" <%if(typeof(article)!='undefined'){%> value="<%=article.image%>" <%}%>/>
-                <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:'[{@width@:200,@height@:200}]',showFormat:'{@width@:200,@height@:200}'})%>
+                <%if(typeof(cate)!='undefined' && cate.image_format){%>
+                  <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:cate.image_format,showFormat:cate.image_show_format})%>
+                <%}else{%>
+                  <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:'[{@width@:200,@height@:200}]',showFormat:'{@width@:200,@height@:200}'})%>
+                <%}%>
               </div>
               <div class="field-box">
                 <label>link:</label>
-                <input style="width:400px" type="text" name="link" <%if(typeof(article)!='undefined'){%> value="<%=article.link%>" <%}%>/>
+                <input style="width:400px" type="text" name="my_link" <%if(typeof(article)!='undefined'){%> value="<%=article.link%>" <%}%>/>
               </div>
               <div class="field-box">
                 <label>颜色:</label>
@@ -86,11 +90,11 @@
               </div>
               <div class="field-box">
                 <label>描述:</label>
-                <input style="width:400px" type="text" name="description" <%if(typeof(article)!='undefined'){%> value="<%=article.description%>" <%}%>/>
+                <textarea style="width:700px" name="description" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.description%><%}%></textarea>
               </div>
               <div class="field-box">
                 <label>备注:</label>
-                <textarea style="width:400px" name="remarks" rows="4"><% if(typeof(article)!='undefined'){ %><%=article.remarks%><%}%></textarea>
+                <textarea style="width:700px" name="remarks" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.remarks%><%}%></textarea>
               </div>
             </div>
           </div>
@@ -116,7 +120,7 @@
           submitHandler:function(form){
             $.post('/manage/cms_article/store',$('form[name="create"]').serialize(),function(data){
               if(data.result){
-                window.location.href='/manage/cms_article';
+                window.location.href='/manage/cms_article?cate_id=<%=cate_id%>';
               }else{
                 noticeInfo('fail',data.error);
               }
@@ -134,7 +138,7 @@
           submitHandler:function(form){
             $.post('/manage/cms_article/store',$('form[name="create"]').serialize(),function(data){
               if(data.result){
-                window.location.href='/manage/cms_article';
+                window.location.href='/manage/cms_article?cate_id=<%=cate_id%>';
               }else{
                 noticeInfo('fail',data.error);
               }

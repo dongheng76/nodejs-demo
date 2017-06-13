@@ -192,6 +192,7 @@ module.exports = function (app, routeMethod) {
                     let format = JSON.parse(req.body.format);
                     let gmImage = gm(fileDirPath + fileId + '.' + suffix);
                     for (let j = 0; j < format.length; j++) {
+                        console.log('已经缩放完成！！！');
                         // 先判断是否需要缩放
                         if (!(format[j].width >= dimensions.width && format[j].height >= dimensions.height)) {
                             if (dimensions.width > dimensions.height) {
@@ -203,8 +204,14 @@ module.exports = function (app, routeMethod) {
                             }
                         }
 
-                        gmImage.write(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix, function (err) {
-                            console.error(err);
+                        await new Promise((resolve,reject) => {
+                            gmImage.write(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix, function (err) {
+                                if (err){
+                                    reject(err);
+                                }
+
+                                resolve(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix);
+                            });
                         });
                     }
                 }
@@ -247,9 +254,9 @@ module.exports = function (app, routeMethod) {
 
         Promise.all([
             fileDao.queryFileByIds(idsStr)
-        ]).then(result => {
+        ]).then(async result => {
             let files = result[0];
-            async.map(files, function (file, fileCallback) {
+            let filesPro = files.map(async file => {
                 // 文件的缩放格式是否有修改
                 let isFileUpdate = false;
                 // 在一个文件开始的时候抓取这个文件的物理地址
@@ -262,7 +269,7 @@ module.exports = function (app, routeMethod) {
                 }
                 // 如果有在循环目前需要循环的缩放图轨迹时判断是否已存在该种缩略图
                 // 开始缩放
-                async.map(format, function (imgFormat, formatCallback) {
+                let formatPro = await format.map(async imgFormat => {
                     let isExist = false;
                     for (let n = 0; n < fileFormatJson.length; n++) {
                         if (imgFormat.width == fileFormatJson[n].width && imgFormat.height == fileFormatJson[n].height) {
@@ -283,29 +290,37 @@ module.exports = function (app, routeMethod) {
                                 gmImage.resize(imgFormat.width, imgFormat.height);
                             }
                         }
+                        
+                        await new Promise((resolve,reject) => {
+                            gmImage.write(path.resolve(__dirname, '../../../') + '/public' + file.path + file.name + '_' + imgFormat.width + 'x' + imgFormat.height + '.' + file.suffix, function (err) {
+                                 console.log('成功进行缩放');
+                                if (err){
+                                    reject(err);
+                                }
 
-                        gmImage.write(path.resolve(__dirname, '../../../') + '/public' + file.path + file.name + '_' + imgFormat.width + 'x' + imgFormat.height + '.' + file.suffix, function (err) {
-                            // console.log('成功进行缩放');
-                            formatCallback(null, '_' + imgFormat.width + 'x' + imgFormat.height);
+                                resolve('_' + imgFormat.width + 'x' + imgFormat.height);
+                            });
                         });
+                        
 
                         // 不存在的情况下要在操作完成后为老缩放尺寸添加新的尺寸
                         fileFormatJson.push({
                             width: imgFormat.width,
                             height: imgFormat.height
                         });
-                    } else {
-                        // console.log('我不需要缩放，已经有图了');
-                        formatCallback(null, null);
                     }
-                }, function (err, results) {
-                    fileCallback(null, file.name);
                 });
-                // 判断是否需要修改缩略格式
-                if (isFileUpdate) {
-                    fileDao.updateFileFormatById(JSON.stringify(fileFormatJson), file.id);
-                }
-            }, function (err, results) {
+
+                await Promise.all(formatPro).then(async results => {
+                    // 判断是否需要修改缩略格式
+                    if (isFileUpdate) {
+                        await fileDao.updateFileFormatById(JSON.stringify(fileFormatJson), file.id);
+                    }
+                });
+                
+            });
+
+            Promise.all(filesPro).then(result => {
                 res.json({
                     result: true
                 });
