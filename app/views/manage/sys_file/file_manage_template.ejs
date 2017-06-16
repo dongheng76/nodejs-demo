@@ -647,7 +647,7 @@
         $.post('/manage/file/thumbfile',
         {
           ids:ids,
-          format:'<%-format%>'
+          format:'<%-format%>' 
         },function(data){
           if(data.result){
             opener.<%=func%>(imagesManage.getSelectedData());
