@@ -139,7 +139,7 @@ module.exports = function (app, routeMethod) {
     }
   });
 
-  routeMethod.session('/manage/dict','sys:dict:show');
+  routeMethod.session('/manage/dict','sys:dict:view');
   routeMethod.csurf('/manage/dict');
   app.get('/manage/dict', function (req, res) {
     let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
