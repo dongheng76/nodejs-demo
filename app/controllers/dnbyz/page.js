@@ -129,4 +129,26 @@ module.exports = function (app, routeMethod) {
       });
     });
   });
+
+  /**
+   * 新闻列表详细页
+   */
+  app.all('/dnbyz/list', function (req, res) {
+    let siteId = '319c0130477611e78e8069f129225150';
+
+    Promise.all([
+      cateDao.queryCmsCateForRecursion(siteId),      
+      cateDao.queryCmsCateForRecursionByModuleAndSiteId(siteId,'contact'),
+      articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e'),
+      articleDao.queryArticleInfoByCateId('52bb32404bf511e780309d6de1be898e')
+      
+    ]).then(result => {
+      res.render('dnbyz/list', {
+        cates: result[0],
+        curCate: result[1],
+        jinpaiwenxiu: result[2],
+        news: result[3]
+      });
+    });
+  });
 };

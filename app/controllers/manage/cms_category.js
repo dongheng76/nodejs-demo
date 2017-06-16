@@ -80,6 +80,7 @@ module.exports = function (app, routeMethod) {
     let in_list = req.body.in_list;
     let image_format = req.body.image_format;
     let image_show_format = req.body.image_show_format;
+    let field_json = req.body.field_json;
     let result = null;
 
     // 有ID就视为修改
@@ -90,7 +91,7 @@ module.exports = function (app, routeMethod) {
         type:'success'
       };
     } else {
-      result = await cateDao.saveCate(parent_id,site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format, req);
+      result = await cateDao.saveCate(parent_id,site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,field_json, req);
       req.session.notice_info = {
         info:'保存栏目分类成功!',
         type:'success'

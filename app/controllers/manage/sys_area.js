@@ -10,6 +10,7 @@ const dictUtil = require('../../utils/dict_utils');
 
 
 module.exports = function (app, routeMethod) {
+  routeMethod.session('/manage/area','sys:area:view');
   routeMethod.csurf('/manage/area');
   app.get('/manage/area', function (req, res) {
     Promise.all([
@@ -23,11 +24,15 @@ module.exports = function (app, routeMethod) {
       });
     });
   });
+  
+  routeMethod.session('/manage/area/findareabypid','sys:area:view');
   routeMethod.csurf('/manage/area/findareabypid');
   app.post('/manage/area/findareabypid',async function (req, res) {
       let areas = await areaDao.queryAreasByPId(req.body.parent_id);
       res.json(areas);
   });
+  
+  routeMethod.session('/manage/area/create','sys:area:edit');
   routeMethod.csurf('/manage/area/create');
   app.get('/manage/area/create', function (req, res) {
     Promise.all([
@@ -48,6 +53,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个区域信息
    */
+  routeMethod.session('/manage/area/store','sys:area:edit');
   routeMethod.csurf('/manage/area/store');
   app.post('/manage/area/store', function (req, res) {
     let parent_id = req.body.parent_id;
@@ -91,6 +97,7 @@ module.exports = function (app, routeMethod) {
    * 编辑区域
    */
   routeMethod.csurf('/manage/area/edit');
+  routeMethod.session('/manage/area/edit','sys:area:edit');
   app.get('/manage/area/edit',async function (req, res) {
     let id = req.query.id;
     let area = await areaDao.queryAreaById(id);
@@ -113,6 +120,7 @@ module.exports = function (app, routeMethod) {
    *  删除一个用户信息
    */
   routeMethod.csurf('/manage/area/delete');
+  routeMethod.session('/manage/area/delete','sys:area:edit');
   app.post('/manage/area/delete',async function (req, res) {
     let id = req.body.id;
     let result = await areaDao.delAreaById(id);

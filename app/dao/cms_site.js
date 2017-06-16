@@ -54,6 +54,14 @@ exports.delSiteById = function (id) {
 exports.queryAllSite = function (req, currentPage, pagesize) {
     let where = "where cs.del_flag='0' ";
     let params = [];
+    let user = req.session.user;
+
+    // 如果是管理员可以查询所有
+    // 如果是普通用户只能查询自己的网站
+    if (user.id != '1'){
+        where += ' and cs.create_by=?';
+        params.push(user.id);
+    }
     if (req.query.name != null && req.query.name != '') {
         where += ' and cs.name=?';
         params.push(req.query.name);
@@ -68,6 +76,15 @@ exports.queryAllSite = function (req, currentPage, pagesize) {
 exports.queryAllSitePage = async function (req, pagesize, currentPage) {
     let where = "where cs.del_flag='0' ";
     let params = [];
+    let user = req.session.user;
+
+    // 如果是管理员可以查询所有
+    // 如果是普通用户只能查询自己的网站
+    if (user.id != '1'){
+        where += ' and cs.create_by=?';
+        params.push(user.id);
+    }
+
     if (req.query.name != null && req.query.name != '') {
         where += ' and cs.name=?';
         params.push(req.query.name);

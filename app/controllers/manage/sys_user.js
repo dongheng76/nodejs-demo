@@ -20,6 +20,7 @@ module.exports = function (app, routeMethod) {
    * 创建用户
    */
   routeMethod.csurf('/manage/user/create');
+  routeMethod.session('/manage/user/create', 'sys:user:edit');
   app.get('/manage/user/create', function (req, res) {
     Promise.all([
       menuDao.queryMenuByHref('/manage/user'),
@@ -39,6 +40,7 @@ module.exports = function (app, routeMethod) {
    * 编辑用户
    */
   routeMethod.csurf('/manage/user/edit');
+  routeMethod.session('/manage/user/edit', 'sys:user:edit');
   app.get('/manage/user/edit', function (req, res) {
     let id = req.query.id;
 
@@ -70,6 +72,7 @@ module.exports = function (app, routeMethod) {
    *  保存一个用户信息
    */
   routeMethod.csurf('/manage/user/store');
+  routeMethod.session('/manage/user/store', 'sys:user:edit');
   app.post('/manage/user/store', async function (req, res) {
     let office_id = req.body.office_id;
     let login_name = req.body.login_name;
@@ -128,6 +131,7 @@ module.exports = function (app, routeMethod) {
    *  删除一个用户信息
    */
   routeMethod.csurf('/manage/user/delete');
+  routeMethod.session('/manage/user/delete', 'sys:user:edit');
   app.post('/manage/user/delete', async function (req, res) {
     if (req.body.id) {
       let id = req.body.id;
@@ -166,9 +170,10 @@ module.exports = function (app, routeMethod) {
       });
     }
   });
- /**
-   *  导出EXCEL
-   */
+
+  /**
+    *  导出EXCEL
+    */
   app.get('/manage/user/downloadExcel', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
 
@@ -186,64 +191,65 @@ module.exports = function (app, routeMethod) {
       });
 
       Promise.all(proUsers).then(results => {
-           var userList= users;
-            var conf ={};
-            conf.cols = [
-                {caption:'用户ID', type:'string'},
-                {caption:'姓名 ', type:'string'},
-                {caption:'登录名', type:'string'},
-                {caption:'用户email', type:'string'},               
-                {caption:'所属机构', type:'string'},               
-                {caption:'注册日期', type:'string'},               
-                {caption:'用户mobile', type:'string'},               
-                {caption:'用户类型 ', type:'string'}            
-            ];
-            conf.rows = [];
-            for(var i=0;i<userList.length;i++){
-              conf.rows[conf.rows.length]=[userList[i].id, userList[i].name,userList[i].login_name,userList[i].email, userList[i].office_name, userList[i].create_date, userList[i].mobile, userList[i].user_type_label];
-          }
-            res.setHeader('Content-Type', 'application/vnd.openxmlformats');
-            res.setHeader("Content-Disposition", "attachment; filename=user" +new Date().getTime()+ ".xlsx");
-            res.end(excelPort.execute(conf), 'binary');
+        var userList = users;
+        var conf = {};
+        conf.cols = [
+          { caption: '用户ID', type: 'string' },
+          { caption: '姓名 ', type: 'string' },
+          { caption: '登录名', type: 'string' },
+          { caption: '用户email', type: 'string' },
+          { caption: '所属机构', type: 'string' },
+          { caption: '注册日期', type: 'string' },
+          { caption: '用户mobile', type: 'string' },
+          { caption: '用户类型 ', type: 'string' }
+        ];
+        conf.rows = [];
+        for (var i = 0; i < userList.length; i++) {
+          conf.rows[conf.rows.length] = [userList[i].id, userList[i].name, userList[i].login_name, userList[i].email, userList[i].office_name, userList[i].create_date, userList[i].mobile, userList[i].user_type_label];
+        }
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+        res.setHeader('Content-Disposition', 'attachment; filename=user' + new Date().getTime() + '.xlsx');
+        res.end(excelPort.execute(conf), 'binary');
       });
     });
   });
-   /**
-   *  导入Excel
-   */
-  app.all('/manage/user/uploadExcel', function (req, res) {
-    console.log('*******************************************');
-        //先上传临时文件 再读取 然后删除临时文件
-        if (!req.files)
-                return res.status(400).send('No files were uploaded.');
-        let file = req.files.file;
-        // 取得文件的后缀名
-        let fileAry = file.name.split('.');
-        let suffix = fileAry[fileAry.length - 1];
-        let fileName = 'user'+new Date().getTime();
-        let fileDirPath = path.resolve(__dirname, '../../../') + '/public/files/temporaryFile/';
-      
-        if (fs.existsSync(fileDirPath)) {
-            // 不做操作
-        } else {
-            dictUtil.mkdirsSync(fileDirPath);
-        }
-        let filePath=(fileDirPath + fileName + '.' + suffix).replace(/\\/g,'/');;
-        file.mv(filePath, function (err) {
-              if (err){
-                  return res.status(500).send(err);
-              }
-              let obj = xlsx.parse(filePath);
-              let excelObj=obj[0].data;
-              console.log(excelObj);
-              return true;
-        });
 
-        return false;
-     
+  /**
+  *  导入Excel
+  */
+  app.all('/manage/user/uploadExcel', function (req, res) {
+    // 先上传临时文件 再读取 然后删除临时文件
+    if (!req.files)
+      return res.status(400).send('No files were uploaded.');
+    let file = req.files.file;
+    // 取得文件的后缀名
+    let fileAry = file.name.split('.');
+    let suffix = fileAry[fileAry.length - 1];
+    let fileName = 'user' + new Date().getTime();
+    let fileDirPath = path.resolve(__dirname, '../../../') + '/public/files/temporaryFile/';
+
+    if (fs.existsSync(fileDirPath)) {
+      // 不做操作
+    } else {
+      dictUtil.mkdirsSync(fileDirPath);
+    }
+    let filePath = (fileDirPath + fileName + '.' + suffix).replace(/\\/g, '/');
+    file.mv(filePath, function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      let obj = xlsx.parse(filePath);
+      let excelObj = obj[0].data;
+      console.log(excelObj);
+      return true;
+    });
+
+    return false;
+
   });
-  
+
   routeMethod.csurf('/manage/user');
+  routeMethod.session('/manage/user', 'sys:user:view');
   app.get('/manage/user', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
 

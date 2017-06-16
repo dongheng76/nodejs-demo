@@ -3,6 +3,15 @@ const util = require('../utils');
 const uuidV1 = require('uuid/v1');
 
 /**
+ * 取得一个文件信息id
+ */
+exports.queryFileById = function (id) {
+    return mysql.queryOne(`
+        select sf.* from sys_file sf where sf.id = ?
+    `,id);
+};
+
+/**
  * 根据文件ID查询文件信息
  */
 exports.queryFileByIds = function (ids) {
@@ -70,4 +79,11 @@ exports.storeFileCate = function (req, type, parent_id, parent_ids, name, sort, 
  */
 exports.delFileCate = function (cateId) {
     return mysql.update("update sys_file_cate set del_flag=1 where id=? or parent_ids like '%" + cateId + "%'", [cateId]);
+};
+
+/**
+ * 根据文件ID删除一个文件信息
+ */
+exports.delFileById = function (id) {
+    return mysql.update("update sys_file set del_flag='1' where id=?", [id]);
 };

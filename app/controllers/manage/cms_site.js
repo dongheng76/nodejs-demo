@@ -15,6 +15,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 切换当前站点信息
    */
+  routeMethod.csurf('/manage/site/changesite');
   routeMethod.session('/manage/site/changesite','cms:site:edit');
   app.all('/manage/site/changesite',async function (req, res) {
     let site_id = req.body.site_id;
@@ -40,6 +41,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 创建站点
    */
+  routeMethod.csurf('/manage/site/create');
   routeMethod.session('/manage/site/create','cms:site:edit');
   app.all('/manage/site/create', function (req, res) {
 
@@ -55,6 +57,7 @@ module.exports = function (app, routeMethod) {
   /**
    * 编辑站点
    */
+  routeMethod.csurf('/manage/site/edit');
   routeMethod.session('/manage/site/edit','cms:site:edit');
   app.all('/manage/site/edit', function (req, res) {
     let id = req.query.id;
@@ -73,6 +76,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  保存一个站点信息
    */
+  routeMethod.csurf('/manage/site/store');
   routeMethod.session('/manage/site/store','cms:site:edit');
   app.all('/manage/site/store',async function (req, res) {
     let name = req.body.name;
@@ -117,6 +121,7 @@ module.exports = function (app, routeMethod) {
   /**
    *  删除一个站点信息
    */
+  routeMethod.csurf('/manage/site/delete');
   routeMethod.session('/manage/site/delete','cms:site:edit');
   app.all('/manage/site/delete',async function (req, res) {
     let result = null;
@@ -157,6 +162,7 @@ module.exports = function (app, routeMethod) {
     }
   });
 
+  routeMethod.csurf('/manage/site');
   routeMethod.session('/manage/site','cms:site:view');
   app.all('/manage/site', function (req, res) {
     let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1

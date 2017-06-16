@@ -76,6 +76,10 @@
                 <input style="width:400px" type="text" name="image_show_format" <%if(typeof(cate)!='undefined'){%> value="<%=cate.image_show_format%>" <%}%>/>
               </div>
               <div class="field-box">
+                <label>字段说明json:</label>
+                <textarea style="width:720px" name="field_json" rows="6"><% if(typeof(cate)!='undefined'){ %><%=cate.field_json%><%}%></textarea>
+              </div>
+              <div class="field-box">
                 <label>模块名称:</label>
                 <input style="width:400px" type="text" name="module" <%if(typeof(cate)!='undefined'){%> value="<%=cate.module%>" <%}%>/>
               </div>

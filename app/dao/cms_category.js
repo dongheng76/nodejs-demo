@@ -46,7 +46,7 @@ exports.queryCmsCateForRecursionByModuleAndSiteId = async function (siteId,modul
 /**
  * 插入一条栏目分类信息
  */
-exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,req) {
+exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,field_json,req) {
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
@@ -61,9 +61,10 @@ exports.saveCate = async function (parent_id, site_id,module,name,image,href,tar
     }
 
     return mysql.update(`insert into cms_category(id,parent_id,parent_ids,site_id,office_id,module,name,image,href,target,description,sort,in_menu,
-    in_list,create_by,create_date,update_by,update_date,remarks,del_flag,image_format,image_show_format)
-    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0',?,?)`,
-    [id, parent_id, parentCate.parent_ids + parentCate.id + ',', site_id, user.office_id, module,name,image,href,target,description,sort,in_menu,in_list,user.id,user.id, remarks,image_format,image_show_format]);
+    in_list,create_by,create_date,update_by,update_date,remarks,del_flag,image_format,image_show_format,field_json)
+    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0',?,?,?)`,
+    [id, parent_id, parentCate.parent_ids + parentCate.id + ',', site_id, user.office_id, module,name,image,href,target,
+    description,sort,in_menu,in_list,user.id,user.id, remarks,image_format,image_show_format,field_json]);
 };
 
 /**
@@ -116,6 +117,9 @@ exports.updateCate = function (req) {
     }
     if (req.body.image_show_format) {
         sets += ",image_show_format='" + req.body.image_show_format + "'";
+    }
+    if (req.body.field_json) {
+        sets += ",field_json='" + req.body.field_json + "'";
     }
 
     return mysql.update('update cms_category set update_date=now() ' + sets + ' where id=' + mysql.getMysql().escape(req.body.id));

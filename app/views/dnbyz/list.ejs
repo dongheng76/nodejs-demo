@@ -3,58 +3,7 @@
 
 <head>
 	<title>新闻信息——懂你半永妆工作室——让您更懂你</title>
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="js/jquery.min.js"></script>
-	<!-- Custom Theme files -->
-	<!--theme-style-->
-	<style type="text/css">
-		@import url("css/style.css");
-	</style>
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<!--//theme-style-->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Elegant Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-	<script type="application/x-javascript">
-		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-	</script>
-	<!--fonts-->
-	<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="js/move-top.js"></script>
-	<script type="text/javascript" src="js/easing.js"></script>
-	<!-- slide -->
-	<script src="js/responsiveslides.min.js"></script>
-	<script>
-		$(function () {
-			$("#slider").responsiveSlides({
-				auto: true,
-				speed: 500,
-				namespace: "callbacks",
-				pager: true,
-			});
-		});
-	</script>
-	<!---css-style-switecher----->
-	<script type="text/javascript" src="js/jsapi.js"></script>
-	<script>
-		google.setOnLoadCallback(function () {
-			// Color changer
-			$(".colorred").click(function () {
-				$("link").attr("href", "css/red.css");
-				return false;
-			});
-
-			$(".colorblack").click(function () {
-				$("link").attr("href", "css/black.css");
-				return false;
-			});
-
-		});
-	</script>
-	<!---//End-css-style-switecher----->
-
+	<% include  ./include/resou.ejs %>
 </head>
 
 <body>
@@ -70,78 +19,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!---//End-color-changer----->
 	<div class="container list">
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
+		<%news.forEach(function(news){%>
+			<div class="news">
+				<div class="title">
+					<font>■</font><%=news.title%>[2017-06-08]
+				</div>
+				<div class="content"><%=news.description%></div>
 			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
-			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
-			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
-			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
-			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
-			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
-			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
-		<div class="news">
-			<div class="title">
-				<font>■</font>热烈庆祝懂你半永妆工作室顺利开业，我们得存在只为让您更懂你[2017-06-08]
-			</div>
-			<div class="content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, 
-				mattis vel, nisi. Sed pretium, ligula</div>
-		</div>
+		<%})%>
 	</div>
 	<!---->
 	<% include  ./include/footer.ejs %>

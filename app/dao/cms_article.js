@@ -23,6 +23,7 @@ exports.delArticleById = async function (id) {
 exports.queryArticleInfoByCateId = async function (cateId) {
     return mysql.query(`
         select * from cms_article ca left join cms_article_data cad on ca.id=cad.id where ca.category_id=${mysql.getMysql().escape(cateId)} and ca.del_flag='0'
+        order by ca.create_date asc
     `);
 };
 

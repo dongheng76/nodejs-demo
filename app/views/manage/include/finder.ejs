@@ -5,7 +5,7 @@
 <script type="text/javascript">
     function <%=input%>FinderOpen(){
         var url = "/manage/file/simple?type=<%=type%>&isDialog=true&func=<%=input%>SelectAction&sm=<%if(typeof(selectMultiple)!='undefined'){%>1<%}else{%>0<%}%>&format=<%if(typeof(format)!='undefined'){%><%-format%><%}%>&showFormat=<%if(typeof(showFormat)!='undefined'){%><%-showFormat%><%}%>";
-        windowOpen(url,"${type=='images'?'图片':'文件'}管理",1000,700);
+        windowOpen(url,"${type=='images'?'图片':'文件'}管理",1280,800);
     }
 
     function <%=input%>SelectAction(files){

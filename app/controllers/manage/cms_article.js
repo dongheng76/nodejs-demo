@@ -28,11 +28,15 @@ module.exports = function (app, routeMethod) {
       menuDao.queryMenuByHref('/manage/cms_article'),
       cateDao.queryCateById(cate_id)
     ]).then(result => {
+      let cate = result[1];
+      if (cate.field_json){
+        cate.fields = JSON.parse(cate.field_json);
+      }
 
       res.render('manage/cms_article/create', {
         currentMenu: result[0],
         cate_id: cate_id,
-        cate: result[1]
+        cate: cate
       });
     });
   });
@@ -50,6 +54,9 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArtcleById(id)
     ]).then(async result => {
       let cate = await cateDao.queryCateById(result[1].category_id);
+      if (cate.field_json){
+        cate.fields = JSON.parse(cate.field_json);
+      }
 
       res.render('manage/cms_article/create', {
         currentMenu: result[0],
@@ -66,19 +73,19 @@ module.exports = function (app, routeMethod) {
   routeMethod.csurf('/manage/cms_article/store');
   routeMethod.session('/manage/cms_article/store','cms:cms_article:edit');
   app.all('/manage/cms_article/store',async function (req, res) {
-    let category_id = req.body.category_id;
-    let title = req.body.title;
-    let link = req.body.my_link;
-    let color = req.body.color;
-    let image = req.body.image;
-    let description = req.body.description;
-    let remarks = req.body.remarks;
-    let content = req.body.content;
-    let phone_content = req.body.phone_content;
+    let category_id = req.body.category_id ? req.body.category_id : '';
+    let title = req.body.title ? req.body.title : '';
+    let link = req.body.my_link ? req.body.my_link : '';
+    let color = req.body.color ? req.body.color : '';
+    let image = req.body.image ? req.body.image : '';
+    let description = req.body.description ? req.body.description : '';
+    let remarks = req.body.remarks ? req.body.remarks : '';
+    let content = req.body.content ? req.body.content : '';
+    let phone_content = req.body.phone_content ? req.body.phone_content : '';
     // 保存经度
-    let longitude = req.body.mapLongitude;
+    let longitude = req.body.mapLongitude ? req.body.mapLongitude : 0;
     // 保存纬度
-    let latitude = req.body.mapLatitude;
+    let latitude = req.body.mapLatitude ? req.body.mapLatitude : 0;
     let result = null;
 
     // 有ID就视为修改
@@ -165,7 +172,6 @@ module.exports = function (app, routeMethod) {
     if (typeof(req.query.cate_id) != 'undefined'){
       cateId = req.query.cate_id;
     } else {
-      console.log(cates.length);
       // 当前的cateId为第一个parent_id等于0的
       for (var i = 0;i < cates.length;i++){
         if (cates[i].parent_id == '0'){

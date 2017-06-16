@@ -11,7 +11,7 @@ module.exports = function (app, routeMethod) {
   routeMethod.csurf('/sys/user/modifyPwd');
   app.get('/sys/user/modifyPwd', function (req, res) {
     Promise.all([menuDao.queryMenuByHref('/manage/panel')]).then(result => {
-      res.render('manage/modify_Pwd/create', {
+      res.render('manage/modify_pwd/create', {
         currentMenu: result[0]
       });
     });

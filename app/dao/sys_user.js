@@ -26,10 +26,8 @@ exports.delUserById = async function (id) {
 /**
  * 根据用户登录名查询用户信息
  */
-exports.queryUserByLoginId = async function (login_name, callback) {
-    return mysql.queryOne('select * from sys_user where login_name=?', [login_name], function (err, sysuser) {
-        callback(err, sysuser);
-    });
+exports.queryUserByLoginId = async function (login_name) {
+    return mysql.queryOne('select * from sys_user where login_name=?', [login_name]);
 };
 
 /**
@@ -44,7 +42,10 @@ exports.queryUserByUserNameAndPwd = function (loginName, password) {
  * 根据用户ID查询菜单信息
  */
 exports.queryUserMenuAuthority = function (userId) {
-    return mysql.query("SELECT DISTINCT sm.* FROM sys_user su LEFT JOIN sys_user_role sur ON su.id = sur.user_id left join sys_role_menu srm on sur.role_id = srm.role_id left join sys_menu sm on srm.menu_id=sm.id where su.id=? and sm.del_flag='0' order by sm.sort asc",
+    return mysql.query(`
+        SELECT DISTINCT sm.* FROM sys_user su LEFT JOIN sys_user_role sur ON su.id = sur.user_id left join sys_role_menu srm on sur.role_id = srm.role_id 
+        left join sys_menu sm on srm.menu_id=sm.id where su.id=? and sm.del_flag='0' order by sm.sort asc
+    `,
         [userId]);
 };
 
@@ -113,7 +114,7 @@ exports.queryAllUserPage = async function (req, pagesize, currentPage) {
 exports.queryRolesForAuth = function (req) {
     let user = req.session.user;
 
-    return mysql.query('select sr.* from sys_role sr where sr.is_sys = 1 or sr.office_id = ?',
+    return mysql.query("select sr.* from sys_role sr where (sr.is_sys = 1 or sr.office_id = ?) and sr.del_flag='0'",
         [user.office_id]);
 };
 
@@ -129,8 +130,10 @@ exports.saveUser = function (office_id, login_name, password, no, name, email, p
     });
 
     return Promise.all([
-        mysql.update('insert into sys_user(id,office_id,login_name,password,no,name,email,phone,mobile,user_type,photo,login_ip,login_date,'
-            + 'login_flag,create_by,create_date,update_by,update_date,remarks,del_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,now(),?,now(),?,0)',
+        mysql.update(`
+            insert into sys_user(id,office_id,login_name,password,no,name,email,phone,mobile,user_type,photo,login_ip,login_date,
+            login_flag,create_by,create_date,update_by,update_date,remarks,del_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,now(),?,now(),?,'0')
+        `,
             [userId, office_id, login_name, util.md5(password), no, name, email, phone, mobile, user_type, photo, util.getIPAdress(), login_flag, user.id, user.id, remarks])
     ].concat(p));
 };

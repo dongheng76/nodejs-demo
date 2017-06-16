@@ -10200,7 +10200,7 @@ UE.commands['imagemanage'] = {
 	execCommand: function() {
 		var me = this;
 		var url = "/manage/file/simple?type=images&isDialog=true&func="+me.options.input+"SelectAction&sm=1";
-		windowOpen(url,"图片管理",1000,700);
+		windowOpen(url,"图片管理",1280,800);
 	}, 
 	queryCommandState: function() { }
 };

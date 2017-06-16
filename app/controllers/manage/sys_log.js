@@ -10,6 +10,7 @@ const moment = require('moment');
 module.exports = function (app, routeMethod) {
 
   routeMethod.csurf('/manage/log');
+  routeMethod.session('/manage/log','sys:log:view');
   app.get('/manage/log', function (req, res) {
     var currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
       Promise.all([

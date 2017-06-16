@@ -26,6 +26,8 @@ module.exports = function (app, routeMethod) {
     /**
      * 创建文件
      */
+    routeMethod.csurf('/manage/file/create');
+    routeMethod.session('/manage/file/create','sys:file:edit');
     app.get('/manage/file/create', function (req, res) {
         Promise.all([
             menuDao.queryMenuByHref('/manage/user'),
@@ -41,6 +43,8 @@ module.exports = function (app, routeMethod) {
     /**
      * 取得用户文件夹信息
      */
+    routeMethod.csurf('/manage/file/getfolders');
+    routeMethod.session('/manage/file/getfolders','sys:file:view');
     app.get('/manage/file/getfolders', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 图片类型
         Promise.all([
@@ -73,6 +77,8 @@ module.exports = function (app, routeMethod) {
     /**
      * 取得指定文件夹的文件信息
      */
+    routeMethod.csurf('/manage/file/getfiles');
+    routeMethod.session('/manage/file/getfiles','sys:file:view');
     app.get('/manage/file/getfiles', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
@@ -115,6 +121,8 @@ module.exports = function (app, routeMethod) {
     /**
      * 创建一个文件夹
      */
+    routeMethod.csurf('/manage/file/mkdir');
+    routeMethod.session('/manage/file/mkdir','sys:file:edit');
     app.get('/manage/file/mkdir', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 图片类型
         // let currentPage = req.query.page ? req.query.page : 1; //获取当前页数，如果没有则为1
@@ -134,8 +142,54 @@ module.exports = function (app, routeMethod) {
     });
 
     /**
+   *  删除一个文件信息
+   */
+  routeMethod.csurf('/manage/file/delete');
+  routeMethod.session('/manage/file/delete','sys:file:edit');
+  app.post('/manage/file/delete',async function (req, res) {
+    let result = null;
+    if (req.body.id && req.body.id != null && req.body.id != 'null') {
+      let id = req.body.id;
+      result = await fileDao.delFileById(id);
+
+      if (result) {
+        req.session.notice_info = {
+          info:'删除文件成功!',
+          type:'success'
+        };
+        res.json({
+          result: true
+        });
+      } else {
+        res.json({
+          result: false
+        });
+      }
+    } else {
+      let ids = req.body.ids;
+      let idsAry = ids.split('|');
+
+      let proIdsAry = idsAry.map(id => {
+        return fileDao.delFileById(id);
+      });
+      Promise.all(proIdsAry).then(results => {
+        req.session.notice_info = {
+          info:'删除文件成功!',
+          type:'success'
+        };
+
+        res.json({
+          result: true
+        });
+      });
+    }
+  });
+
+    /**
      * 删除一个文件夹
      */
+    routeMethod.csurf('/manage/file/delfilecate');
+    routeMethod.session('/manage/file/delfilecate','sys:file:edit');
     app.post('/manage/file/delfilecate', function (req, res) {
         Promise.all([
             fileDao.delFileCate(req.body.id)
@@ -147,12 +201,35 @@ module.exports = function (app, routeMethod) {
     });
 
     /**
-     *  上传一个图片
+     * 取得一个文件的下载地址
      */
+    routeMethod.session('/manage/file/donwfile','sys:file:view');
+    app.get('/manage/file/donwfile', function (req, res) {
+        Promise.all([
+            fileDao.queryFileById(req.query.id)
+        ]).then(result => {
+            let filePath = path.resolve(__dirname, '../../../') + '/public' + result[0].path + result[0].name + '.' + result[0].suffix;
+            
+            var stats = fs.statSync(filePath); 
+            if (stats.isFile()){
+                res.set({
+                'Content-Type': 'application/octet-stream',
+                'Content-Disposition': 'attachment; filename=' + result[0].ori_name + '.' + result[0].suffix,
+                'Content-Length': stats.size
+                });
+                fs.createReadStream(filePath).pipe(res);
+            } else {
+                res.end(404);
+            }
+        });
+    });
+
+    /**
+     *  上传一个图片
+     */    
     app.post('/manage/file/upload', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let file_cate_id = req.body.file_cate_id ? req.body.file_cate_id : '0';
-
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
 
@@ -328,6 +405,8 @@ module.exports = function (app, routeMethod) {
         });
     });
 
+    routeMethod.csurf('/manage/file');
+    routeMethod.session('/manage/file','sys:file:view');
     app.get('/manage/file', function (req, res) {
         var type = req.query.type ? req.query.type : 'images'; // 文件类型
         Promise.all([
@@ -340,6 +419,8 @@ module.exports = function (app, routeMethod) {
         });
     });
 
+    routeMethod.csurf('/manage/file/simple');
+    routeMethod.session('/manage/file/simple','sys:file:view');
     app.get('/manage/file/simple', function (req, res) {
         let type = req.query.type ? req.query.type : 'images'; // 文件类型
         let func = req.query.func;

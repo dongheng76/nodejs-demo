@@ -38,7 +38,7 @@
     <div class="table-wrapper products-table section">
       <div class="row-fluid head">
         <div class="span12">
-          <h4 style="float:left;display: inline-block">新增信息</h4>
+          <h4 style="float:left;display: inline-block">新增<%=cate.name%>信息</h4>
         </div>
       </div>
       <div class="row-fluid">
@@ -51,51 +51,69 @@
             <!-- left column -->
             <div class="span11 column">
               <input type="hidden" name="category_id" value="<%=cate_id%>"/>
-              <div class="field-box">
-                <label>信息标题:</label>
-                <input style="width:400px" type="text" name="title" <%if(typeof(article)!='undefined'){%> value="<%=article.title%>" <%}%>/>
-              </div>
-              <div class="field-box">
-                <label>信息图片:</label>
-                <input type="hidden" id="image" name="image" <%if(typeof(article)!='undefined'){%> value="<%=article.image%>" <%}%>/>
-                <%if(typeof(cate)!='undefined' && cate.image_format){%>
-                  <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:cate.image_format,showFormat:cate.image_show_format})%>
-                <%}else{%>
-                  <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:'[{@width@:200,@height@:200}]',showFormat:'{@width@:200,@height@:200}'})%>
-                <%}%>
-              </div>
-              <div class="field-box">
-                <label>link:</label>
-                <input style="width:400px" type="text" name="my_link" <%if(typeof(article)!='undefined'){%> value="<%=article.link%>" <%}%>/>
-              </div>
-              <div class="field-box">
-                <label>颜色:</label>
-                <input style="width:400px" type="text" name="color" <%if(typeof(article)!='undefined'){%> value="<%=article.color%>" <%}%>/>
-              </div>
-              <div class="field-box">
-                <label>地图经纬度:</label>
-                <input type="hidden" name="mapLongitude" <%if(typeof(article)!='undefined'){%> value="<%=article.longitude%>" <%}else{%> value="0" <%}%>/>
-                <input type="hidden" name="mapLatitude" <%if(typeof(article)!='undefined'){%> value="<%=article.latitude%>" <%}else{%> value="0" <%}%>/>
-                <%-include("../include/map",{input:'map'})%>
-              </div>
-              <div class="field-box">
-                <label>电脑内容:</label>
-                <textarea id="content" name="content" style="width:99%;height:300px;"><%if(typeof(article)!='undefined'){%><%=article.content%><%}%></textarea>
-                <%-include("../include/editor",{input:'content'})%>
-              </div>
-              <div class="field-box">
-                <label>手机内容:</label>
-                <textarea id="phone_content" name="phone_content" style="display:none;"><%if(typeof(article)!='undefined'){%><%=article.phone_content%><%}%></textarea>
-                <%-include("../include/squire",{input:'phone_content'})%>
-              </div>
-              <div class="field-box">
-                <label>描述:</label>
-                <textarea style="width:700px" name="description" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.description%><%}%></textarea>
-              </div>
-              <div class="field-box">
-                <label>备注:</label>
-                <textarea style="width:700px" name="remarks" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.remarks%><%}%></textarea>
-              </div>
+              <%if(cate.fields && cate.fields.title){%>
+                <div class="field-box">
+                  <label><%=cate.fields.title%>:</label>
+                  <input style="width:400px" type="text" name="title" <%if(typeof(article)!='undefined'){%> value="<%=article.title%>" <%}%>/>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.image){%>
+                <div class="field-box">
+                  <label><%=cate.fields.image%>:</label>
+                  <input type="hidden" id="image" name="image" <%if(typeof(article)!='undefined'){%> value="<%=article.image%>" <%}%>/>
+                  <%if(typeof(cate)!='undefined' && cate.image_format){%>
+                    <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:cate.image_format,showFormat:cate.image_show_format})%>
+                  <%}else{%>
+                    <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:'[{@width@:200,@height@:200}]',showFormat:'{@width@:200,@height@:200}'})%>
+                  <%}%>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.link){%>
+                <div class="field-box">
+                  <label><%=cate.fields.link%>:</label>
+                  <input style="width:400px" type="text" name="my_link" <%if(typeof(article)!='undefined'){%> value="<%=article.link%>" <%}%>/>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.color){%>
+                <div class="field-box">
+                  <label><%=cate.fields.color%>:</label>
+                  <input style="width:400px" type="text" name="color" <%if(typeof(article)!='undefined'){%> value="<%=article.color%>" <%}%>/>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.map){%>
+                <div class="field-box">
+                  <label><%=cate.fields.map%>:</label>
+                  <input type="hidden" name="mapLongitude" <%if(typeof(article)!='undefined'){%> value="<%=article.longitude%>" <%}else{%> value="0" <%}%>/>
+                  <input type="hidden" name="mapLatitude" <%if(typeof(article)!='undefined'){%> value="<%=article.latitude%>" <%}else{%> value="0" <%}%>/>
+                  <%-include("../include/map",{input:'map'})%>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.content){%>
+                <div class="field-box">
+                  <label><%=cate.fields.content%>:</label>
+                  <textarea id="content" name="content" style="width:99%;height:300px;"><%if(typeof(article)!='undefined'){%><%=article.content%><%}%></textarea>
+                  <%-include("../include/editor",{input:'content'})%>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.phone_content){%>
+                <div class="field-box">
+                  <label><%=cate.fields.phone_content%>:</label>
+                  <textarea id="phone_content" name="phone_content" style="display:none;"><%if(typeof(article)!='undefined'){%><%=article.phone_content%><%}%></textarea>
+                  <%-include("../include/squire",{input:'phone_content'})%>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.description){%>
+                <div class="field-box">
+                  <label><%=cate.fields.description%>:</label>
+                  <textarea style="width:700px" name="description" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.description%><%}%></textarea>
+                </div>
+              <%}%>
+              <%if(cate.fields && cate.fields.remarks){%>
+                <div class="field-box">
+                  <label><%=cate.fields.remarks%>:</label>
+                  <textarea style="width:700px" name="remarks" rows="8"><% if(typeof(article)!='undefined'){ %><%=article.remarks%><%}%></textarea>
+                </div>
+              <%}%>
             </div>
           </div>
           <% if(typeof(article)!='undefined'){%>
