@@ -71,7 +71,7 @@ exports.saveGuestbook = function (req) {
     return mysql.update(
     `insert into cms_guestbook(id,category_id,content,name,email,phone,workunit,ip,create_date,del_flag)
     values (?,?,?,?,?,?,?,?,now(),'0')`,
-    [id, req.body.category_id, req.body.content, req.body.name, req.body.email, req.body.phone ? req.body.phone : '',req.body.workunit ? req.body.workunit : '',ip]);
+    [id, req.body.category_id, req.body.content, req.body.name, req.body.email ? req.body.email : '', req.body.phone ? req.body.phone : '',req.body.workunit ? req.body.workunit : '',ip]);
 };
 
 /**

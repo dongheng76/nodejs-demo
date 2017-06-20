@@ -6,6 +6,7 @@
 const utils = require('../../utils');
 const cateDao = require('../../dao/cms_category.js');
 const articleDao = require('../../dao/cms_article.js');
+const guestbookDao = require('../../dao/cms_guestbook.js');
 
 
 module.exports = function (app, routeMethod) {
@@ -45,7 +46,14 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArticleInfoByCateId('342b66a050e211e7875527e3b303b0fb'),
       // todowork
       articleDao.queryArticleInfoByCateId('caec153050e211e7875527e3b303b0fb'),
-      
+      // 友情连接LOGO
+      articleDao.queryArticleInfoByCateId('4559c290510b11e793fd39b7741cea1f'),
+      // services
+      articleDao.queryArticleInfoByCateId('0919260050e711e7875527e3b303b0fb'),
+      // 服务
+      articleDao.queryArticleInfoByCateId('bf2f078050e611e7875527e3b303b0fb'),
+      // 我们的联系方式
+      articleDao.queryArticleInfoByCateId('ade10740510d11e793fd39b7741cea1f'),
     ]).then(result => {
       res.render('ufeel/index', {
         cates: result[0],
@@ -62,7 +70,11 @@ module.exports = function (app, routeMethod) {
         says: result[11],
         tese: result[12],
         workPattern: result[13],
-        todoWorks: result[14]
+        todoWorks: result[14],
+        logos: result[15],
+        services: result[16],
+        fuwu: result[17],
+        contact: result[18]
       });
     });
   });
@@ -119,5 +131,21 @@ module.exports = function (app, routeMethod) {
         cate_id: req.query.cate_id ? req.query.cate_id : '0'
       });
     });
+  });
+
+  /**
+   * 根据板块进行留言
+   */
+  app.all('/ufeel/msgboard',async function (req, res) {
+    let result = guestbookDao.saveGuestbook(req);
+    if (result){
+      res.json({
+        result:true
+      });
+    } else {
+      res.json({
+        result:false
+      });
+    }
   });
 };

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>雨霏科技 - 欢迎您的光临</title>
+    <title>雨霏科技官方网站 - 欢迎您的光临</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Responsive Minimal Bootstrap Theme">
     <meta name="keywords" content="onepage,responsive,minimal,bootstrap,theme">
@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="/ufeel/fonts/font-awesome/css/font-awesome.css" type="text/css">
     <link rel="stylesheet" href="/ufeel/fonts/elegant_font/HTML_CSS/style.css" type="text/css">
     <link rel="stylesheet" href="/ufeel/fonts/et-line-font/style.css" type="text/css">
+    <script src="/ufeel/js/jquery.min.js"></script>
+    <script src="/ufeel/js/jquery.validate.js"></script>
 
     <script src="/js/common/common.js"></script>
 </head>
@@ -338,11 +340,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
-                            <h1 class="animated" data-animation="fadeInUp">我们的 <span class="id-color">服务</span>
+                            <h1 class="animated" data-animation="fadeInUp"><%=fuwu[0].title%> <span class="id-color"><%=fuwu[0].remarks%></span>
                                 <span class="small-border animated" data-animation="fadeInUp"></span>
                             </h1>
                             <p class="lead animated" data-animation="fadeInUp">
-                                我们的业务范围广阔，开发的实际项目也非常的丰富。无论是小中大型网站或安卓IOS移动客服端甚至智能硬件我们均有开发经验
+                                <%=fuwu[0].description%>
                             </p>
                             <div class="spacer-single"></div>
                         </div>
@@ -354,8 +356,8 @@
                             <div class="inner">
                                 <i class="icon-tools"></i>
                                 <div class="text">
-                                    <h3>企业及其门户网站设计</h3>
-                                    对于需要快速开发获得经典网站的用户，或者个性定制化的用户我们都能快速相应，大到大型门户网站，视频，交易，音乐均可为您设计
+                                    <h3><%=services[0].title%></h3>
+                                    <%=services[0].description%>
                                 </div>
                             </div>
                         </div>
@@ -366,8 +368,8 @@
                             <div class="inner">
                                 <i class="icon-global"></i>
                                 <div class="text">
-                                    <h3>web程序开发</h3>
-                                    我们能够设计的技术广阔，无论是支持高并发的nodejs,或者高安全性的java,甚至流行的php我们都可以开发
+                                    <h3><%=services[1].title%></h3>
+                                    <%=services[1].description%>
                                 </div>
                             </div>
                         </div>
@@ -378,8 +380,8 @@
                             <div class="inner">
                                 <i class="icon-megaphone"></i>
                                 <div class="text">
-                                    <h3>技术支持服务</h3>
-                                    无论您由于高并发头痛，还是程序架构凌乱导致成本大幅度上涨，我们都可以为了提供各种行之有效的解决方案
+                                    <h3><%=services[2].title%></h3>
+                                    <%=services[2].description%>
                                 </div>
                             </div>
                         </div>
@@ -390,8 +392,8 @@
                             <div class="inner">
                                 <i class="icon-phone"></i>
                                 <div class="text">
-                                    <h3>移动应用开发</h3>
-                                    无论是IOS应用开发，还是安卓应用开发我们都有丰富的开发经验和实际案例，相信能解决您的大部分问题
+                                    <h3><%=services[3].title%></h3>
+                                    <%=services[3].description%>
                                 </div>
                             </div>
                         </div>
@@ -403,8 +405,8 @@
                             <div class="inner">
                                 <i class="icon-magnifying-glass"></i>
                                 <div class="text">
-                                    <h3>SEO服务</h3>
-                                    我们还能够为您提供网站的关键字推广及其优化，搜索引擎抓取度的服务
+                                    <h3><%=services[4].title%></h3>
+                                    <%=services[4].description%>
                                 </div>
                             </div>
                         </div>
@@ -415,8 +417,8 @@
                             <div class="inner">
                                 <i class="icon-pencil"></i>
                                 <div class="text">
-                                    <h3>技术员支持</h3>
-                                    也许您有了自己的团队和公司，但遇到了一些无法解决的头痛问题，我们还可以为您提供经验丰富的技术员为您们提供技术支持
+                                    <h3><%=services[5].title%></h3>
+                                    <%=services[5].description%>
                                 </div>
                             </div>
                         </div>
@@ -740,46 +742,18 @@
                     <div class="row">
                         <div class="logo-carousel">
                             <ul id="logo-carousel" class="slides">
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/1.png" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/2.png" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/3.png" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/4.png" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/5.png" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/6.png" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/7.png" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-2">
-                                        <img src="/ufeel/images/logo/8.png" alt="">
-                                    </div>
-                                </li>
+                                <%logos.forEach(function(logo){%>
+                                    <li>
+                                        <div class="col-md-2">
+                                            <img id="<%-logo.id%>"/>
+                                            <script>
+                                                var imgStr = '<%-logo.image%>';
+                                                var src = jsonImgPrintOnlySrc(imgStr,'_180x60');
+                                                $('#<%-logo.id%>').attr('src',src);
+                                            </script>
+                                        </div>
+                                    </li>
+                                <%})%>
                             </ul>
                         </div>
                         <!-- logo carousel close -->
@@ -806,44 +780,59 @@
 
                         <div class="col-md-8 animated" data-animation="fadeInUp" data-delay="200" data-speed="5">
 
-                            <form name="contactForm" id='contact_form' method="post" action='email.php'>
+                            <form name="contactForm" id='contact_form' method="post" action=''>
+                                <input type="hidden" name="category_id" value="89b81710510c11e793fd39b7741cea1f"/>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div id='name_error' class='error'>请填写您的称呼。</div>
-                                        <div>
-                                            <input type='text' name='name' id='name' class="form-control" placeholder="您的称呼">
-                                        </div>
+                                        <input type='text' name='name' id='name' class="form-control" placeholder="您的称呼">
                                     </div>
                                     <div class="col-md-6">
-                                        <div id='email_error' class='error'>请填写您的电话号码。</div>
-                                        <div>
-                                            <input type='text' name='email' id='email' class="form-control" placeholder="您的电话">
-                                        </div>
+                                        <input type='text' name='phone' id='phone' class="form-control" placeholder="您的电话">
                                     </div>
                                     <div class="col-md-12">
-                                        <div id='message_error' class='error'>请填写您的留言信息。</div>
-                                        <div>
-                                            <textarea name='message' id='message' class="form-control" placeholder="您的留言"></textarea>
-                                        </div>
+                                        <textarea name='content' id='content' style="position:relative" class="form-control" placeholder="您的留言"></textarea>
                                     </div>
-                                    <div id='mail_success' class='success'>Your message has been sent successfully.</div>
-                                    <div id='mail_fail' class='error'>Sorry, error occured this time sending your message.</div>
                                     <div class="col-md-12">
                                         <p id='submit'>
-                                            <input type='submit' id='send_message' value='确认提交' class="btn btn-border">
+                                            <input type='submit' id='send' value='确认提交' style="background-color:transparent;color:#FFFFFF;" class="btn btn-border">
                                         </p>
                                     </div>
                                 </div>
                             </form>
-
+                            <script>
+                                $("form[name='contactForm']").validate({
+                                    rules: {
+                                        name: "required",
+                                        phone: "required",
+                                        content: "required"
+                                    },
+                                    messages: {
+                                        name: "称呼必须填写后提交",
+                                        phone: "手机号码必须填写后提交",
+                                        content: "内容必须填写后提交"
+                                    },
+                                    submitHandler:function(form){
+                                        alert(123);
+                                        $.post('/ufeel/msgboard',$('form[name="contactForm"]').serialize(),function(data){
+                                            if(data.result){
+                                                alert('您的信息发送成功，我们会地址时间与您沟通联系的。');
+                                            }else{
+                                                alert('对不起，网络错误您提交的信息发送失败。');
+                                            }
+                                        }).error(function(data) {
+                                            alert('网络错误创建失败!请重试。');
+                                        });
+                                    }
+                                });
+                            </script>
                         </div>
 
                         <div class="col-md-4">
                             <address>
-                                <span><i class="fa fa-map-marker fa-lg"></i>重庆市沙坪坝区大公村52-7-1号</span>
-                                <span><i class="fa fa-phone fa-lg"></i>(86) 185 8087 1178</span>
-                                <span><i class="fa fa-envelope-o fa-lg"></i><a href="mailto:contact@example.com">6347536@qq.com</a></span>
-                                <span><i class="fa fa-globe fa-lg"></i><a href="#">support.cubic.com</a></span>
+                                <span><i class="fa fa-map-marker fa-lg"></i><%=contact[0].title%></span>
+                                <span><i class="fa fa-phone fa-lg"></i><%=contact[0].description%></span>
+                                <span><i class="fa fa-envelope-o fa-lg"></i><a href="mailto:contact@example.com"><%=contact[0].remarks%></a></span>
+                                <span><i class="fa fa-globe fa-lg"></i><a href="#"><%=contact[0].link%></a></span>
                             </address>
                         </div>
                     </div>
@@ -876,7 +865,6 @@
 
     <!-- Javascript Files
     ================================================== -->
-    <script src="/ufeel/js/jquery.min.js"></script>
     <script src="/ufeel/js/jpreLoader.js"></script>
     <script src="/ufeel/js/bootstrap.min.js"></script>
     <script src="/ufeel/js/jquery.isotope.min.js"></script>
@@ -889,11 +877,9 @@
     <script src="/ufeel/js/jquery.countTo.js"></script>
     <script src="/ufeel/js/classie.js"></script>
     <script src="/ufeel/js/designesia.js"></script>
-    <script src="/ufeel/js/validation.js"></script>
 
     <!-- SLIDER REVOLUTION SCRIPTS  -->
     <script type="text/javascript" src="/ufeel/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
     <script type="text/javascript" src="/ufeel/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-
 </body>
 </html>

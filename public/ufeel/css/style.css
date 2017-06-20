@@ -659,12 +659,6 @@ footer {
 /* ================================================== */
 /* contact form */
 /* ================================================== */
-	.error {
-	border:none;
-	display: none;
-	color: #C03;
-	font-size: 12px;
-	}
 	.success {
 	display: none;
 	color: #093;
@@ -807,7 +801,7 @@ footer {
 	
 	.dark .btn-border:hover, .dark a.btn-border:hover{
 	background:#fff;
-	color:#111 !important;
+	color:#FFFFFF !important;
 	border-color:#fff;
 	}
 	
