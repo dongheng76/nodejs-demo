@@ -116,7 +116,7 @@ function jsonImgPrint (imgStr, imgFormat, className) {
 function jsonImgPrintOnlySrc (imgStr, imgFormat) {
     if (imgStr && imgStr != '') {
         var img_json = JSON.parse(imgStr);
-        window.document.write(img_json[0].path + img_json[0].name + imgFormat + '.' + img_json[0].suffix);
+        return img_json[0].path + img_json[0].name + imgFormat + '.' + img_json[0].suffix;
     }
 }
 

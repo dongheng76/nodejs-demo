@@ -666,6 +666,13 @@
     $("#left, #openClose").height(strs[0]-46);
   }
 
+  <%if(typeof(isDialog)!='undefined' && typeof(showFormat)!='undefined'){%>
+    var showFormat = <%-showFormat%>;
+    var aspectRatioWidth = showFormat.width;
+    var aspectRatioHeight = showFormat.height;
+    var aspectRatio = aspectRatioWidth/aspectRatioHeight;
+  <%}%>
+
   var cutUploadJbox = new jBox('Modal', {
     attach: '#cutUpload',
     title: '切割上传',

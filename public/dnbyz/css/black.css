@@ -12,6 +12,9 @@ body a{
 	-moz-transition: 0.5s all;
 	-ms-transition: 0.5s all;
 }
+input,textarea{
+	color:#FFFFFF;
+}
 ul{
 	padding: 0;
 	margin: 0;	

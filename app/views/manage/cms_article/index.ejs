@@ -62,19 +62,39 @@
             <tr>
               <th class="span2">
                 <input type="checkbox" name="mainCheckbox">
-                标题
+                <%if(cate.fields && cate.fields.title){%>
+                  <%=cate.fields.title%>
+                <%}else{%>
+                  标题
+                <%}%>
               </th>
               <th class="span1">
-                <span class="line"></span>图片
+                <span class="line"></span>
+                <%if(cate.fields && cate.fields.image){%>
+                  <%=cate.fields.image%>
+                <%}else{%>
+                  图片
+                <%}%>
               </th>
               <th class="span1">
-                <span class="line"></span>link
+                <span class="line"></span>
+                <%if(cate.fields && cate.fields.description){%>
+                  <%=cate.fields.description%>
+                <%}else{%>
+                  描述
+                <%}%>
               </th>
               <th class="span1">
-                <span class="line"></span>排序号
+                <span class="line"></span>
+                <%if(cate.fields && cate.fields.remarks){%>
+                  <%=cate.fields.remarks%>
+                <%}else{%>
+                  备注
+                <%}%>
               </th>
               <th class="span1">
-                <span class="line"></span>target
+                <span class="line"></span>
+                排序号
               </th>
               <th class="span1 sort <%if(typeof(condition)!='undefined' && typeof(condition.sortName)!='undefined' && typeof(condition.sortOrder)!='undefined'){%>datagrid-sort-<%=condition.sortOrder%><%}%>" 
                 sort="create_date">
@@ -100,13 +120,13 @@
                   </script>
               </td>
               <td>
-                <%=article.link%>
+                <%=article.description%>
               </td>
               <td>
-                <%=article.order%>
+                <%=article.remarks%>
               </td>
               <td>
-                <%=article.target%>
+                <%=article.sort%>
               </td>
               <td>
                 <%=article.create_date%>
