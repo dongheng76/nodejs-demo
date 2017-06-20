@@ -31,31 +31,48 @@
 			<div class="col-md-7 contact-para">
 				<%-contacts[0].content%>
 				<h5>您也可以留下您的联系方式</h5>
-				<form>
+				<form name="msgboard">
 					<div class="grid-contact">
 						<div class="col-md-6 contact-grid">
 							<p>姓名</p>
-							<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+							<input type="text" value="" name="name" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
 						</div>
 						<div class="col-md-6 contact-grid">
 							<p>电话</p>
-							<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+							<input type="text" value="" name="phone" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
 						</div>
 						<div class="clearfix"> </div>
 					</div>
 					<div class="grid-contact">
 						<div class="col-md-6 contact-grid">
 							<p>E-MAIL</p>
-							<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+							<input type="text" value="" name="email" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
 						</div>
 						<div class="clearfix"> </div>
 					</div>
 					<p class="your-para">留言</p>
-					<textarea cols="77" rows="6" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+					<textarea cols="77" rows="6" value=" " name="content" onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
 					<div class="send">
-						<input type="submit" value="发送信息">
+						<input type="button" id="submitMsg" value="发送信息" class="btn btn-success">
 					</div>
+					<input type="hidden" name="category_id" value="cf9e44e04bfb11e7bed95719a339fe64"/>
 				</form>
+				<script>
+					$('#submitMsg').click(function(){
+						$.post('/dnbyz/msgboard',$('form[name="msgboard"]').serialize(),function (data){
+							if(data.result){
+								var msgboardForm = $('form[name="create"]');
+								msgboardForm.find('input[name="name"]').val('');
+								msgboardForm.find('input[name="phone"]').val('');
+								msgboardForm.find('input[name="email"]').val('');
+								msgboardForm.find('input[name="content"]').val('');
+								alert('亲，您的信息我们已经收到，我们会尽快跟您回复。');
+							}else{
+								alert('亲，您的网络有些问题请稍后重试！');
+							}
+						});
+					});
+				</script>
 			</div>
 
 			<div class="clearfix"> </div>

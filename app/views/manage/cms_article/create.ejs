@@ -68,6 +68,10 @@
                   <%}%>
                 </div>
               <%}%>
+              <div class="field-box">
+                  <label>排序号:</label>
+                  <input style="width:400px" type="text" name="sort" <%if(typeof(article)!='undefined'){%> value="<%=article.sort%>" <%}%>/>
+                </div>
               <%if(cate.fields && cate.fields.link){%>
                 <div class="field-box">
                   <label><%=cate.fields.link%>:</label>

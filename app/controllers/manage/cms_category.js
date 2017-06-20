@@ -82,6 +82,7 @@ module.exports = function (app, routeMethod) {
     let image_show_format = req.body.image_show_format;
     let field_json = req.body.field_json;
     let result = null;
+    let is_msg = req.body.is_msg;
 
     // 有ID就视为修改
     if (typeof (req.body.id) != 'undefined' && req.body.id != '') {
@@ -91,7 +92,7 @@ module.exports = function (app, routeMethod) {
         type:'success'
       };
     } else {
-      result = await cateDao.saveCate(parent_id,site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,field_json, req);
+      result = await cateDao.saveCate(parent_id,site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,field_json,is_msg,req);
       req.session.notice_info = {
         info:'保存栏目分类成功!',
         type:'success'

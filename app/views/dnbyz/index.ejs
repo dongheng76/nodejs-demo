@@ -27,6 +27,10 @@
 	      <ul class="rslides" id="slider">
 			 <%dundongguanggao.forEach(function(adv){%>
 			 	<li>
+					<script>
+						var imgStr = '<%-adv.image%>';
+						jsonImgPrint(imgStr,'_922x499');
+					</script>
 					<%-adv.remarks%>
 				</li>
 			 <%})%>
@@ -82,21 +86,39 @@
 				<%})%>
 			</div>
 			<div class="col-md-3 quick">
-				<h4>立即给我们留言</h4>
-				<div class="grid-enter">
-					<input type="text" value="输入您的姓名 ..." onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的姓名 ...';}">
-					<i> </i>
-				</div>
-				<div class="grid-enter">
-					<input type="text" value="输入您的邮箱..." onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的邮箱 ...';}">
-					<i class="mail"> </i>
-				</div>
-				<div class="grid-enter">
-					<textarea value="John simth" onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的留言';}">输入您的留言</textarea>
-					<i class="message"> </i>
-				</div>
-				<input type="submit" value="提交">
-				<label> </label>
+				<form name="msgboard">
+					<h4>立即给我们留言</h4>
+					<div class="grid-enter">
+						<input type="text" value="输入您的姓名 ..." name="name" onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的姓名 ...';}">
+						<i> </i>
+					</div>
+					<div class="grid-enter">
+						<input type="text" value="输入您的邮箱..." name="email" onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的邮箱 ...';}">
+						<i class="mail"> </i>
+					</div>
+					<div class="grid-enter">
+						<textarea value="John simth" name="content" onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '输入您的留言';}">输入您的留言</textarea>
+						<i class="message"> </i>
+					</div>
+					<input type="hidden" name="category_id" value="41f33ca04bf511e780309d6de1be898e"/>
+					<input type="button" value="提交" id="submitMsg">
+					<label> </label>
+				</form>
+				<script>
+					$('#submitMsg').click(function(){
+						$.post('/dnbyz/msgboard',$('form[name="msgboard"]').serialize(),function (data){
+							if(data.result){
+								var msgboardForm = $('form[name="create"]');
+								msgboardForm.find('input[name="name"]').val('');
+								msgboardForm.find('input[name="email"]').val('');
+								msgboardForm.find('input[name="content"]').val('');
+								alert('亲，您的信息我们已经收到，我们会尽快跟您回复。');
+							}else{
+								alert('亲，您的网络有些问题请稍后重试！');
+							}
+						});
+					});
+				</script>
 			</div>
 			<div class="clearfix"> </div>
 		</div>

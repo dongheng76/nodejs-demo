@@ -3,16 +3,13 @@
 /**
  * Module dependencies.
  */
-const utils = require('../../utils');
-const validator = require('validator');
-const dictDao = require('../../dao/sys_dict');
 const siteDao = require('../../dao/cms_site');
 const articleDao = require('../../dao/cms_article');
 const cateDao = require('../../dao/cms_category');
 const util = require('../../utils');
 const menuDao = require('../../dao/sys_menu');
-const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
+const guestbookDao = require('../../dao/cms_guestbook');
 
 
 module.exports = function (app, routeMethod) {
@@ -82,6 +79,7 @@ module.exports = function (app, routeMethod) {
     let remarks = req.body.remarks ? req.body.remarks : '';
     let content = req.body.content ? req.body.content : '';
     let phone_content = req.body.phone_content ? req.body.phone_content : '';
+    let sort = req.body.sort ? req.body.sort : null;
     // 保存经度
     let longitude = req.body.mapLongitude ? req.body.mapLongitude : 0;
     // 保存纬度
@@ -96,7 +94,7 @@ module.exports = function (app, routeMethod) {
         type:'success'
       };
     } else {
-      result = await articleDao.saveArticle(category_id,title,link,color,image,description, remarks,content,phone_content,longitude,latitude, req);
+      result = await articleDao.saveArticle(category_id,title,link,color,image,description, remarks,content,phone_content,longitude,latitude,sort,req);
       req.session.notice_info = {
         info:'保存栏目文章成功!',
         type:'success'
@@ -180,23 +178,52 @@ module.exports = function (app, routeMethod) {
         }
       }
     }
+    let cate = await cateDao.queryCateById(cateId);
 
-    Promise.all([
-      menuDao.queryMenuByHref('/manage/cms_article'),
-      articleDao.queryAllArticle(cateId,req,currentPage,20),
-      articleDao.queryAllArticlePage(cateId,req,20,currentPage),
-    ]).then(result => {
-      result[1].map(article => {
-        article.create_date = moment(article.create_date).format('YYYY-MM-DD HH:mm:ss');
-      });      
+    // 首先查询出栏目信息
+    // 通过栏目信息判断是否是留言信息
+    // 留言信息需要另外指向模板
+    if (cate && cate.is_msg == '1'){
+      Promise.all([
+        menuDao.queryMenuByHref('/manage/cms_guestbook'),
+        guestbookDao.queryAllGuestbook(cateId,req,currentPage,20),
+        guestbookDao.queryAllGuestbookPage(cateId,req,20,currentPage)
+      ]).then(result => {
+        result[1].map(guestbook => {
+          guestbook.create_date = moment(guestbook.create_date).format('YYYY-MM-DD HH:mm:ss');
+        });      
 
-      res.render('manage/cms_article/index', {
-        currentMenu: result[0],
-        cates: JSON.stringify(cates),
-        articles: result[1],
-        page: result[2],
-        cateId: cateId
+        res.render('manage/cms_guestbook/index', {
+          currentMenu: result[0],
+          cates: JSON.stringify(cates),
+          guestbooks: result[1],
+          page: result[2],
+          cateId: cateId
+        });
       });
-    });
+    } else {
+      Promise.all([
+        menuDao.queryMenuByHref('/manage/cms_article'),
+        articleDao.queryAllArticle(cateId,req,currentPage,20),
+        articleDao.queryAllArticlePage(cateId,req,20,currentPage),
+      ]).then(result => {
+        result[1].map(article => {
+          article.create_date = moment(article.create_date).format('YYYY-MM-DD HH:mm:ss');
+        });      
+
+        if (cate.field_json){
+          cate.fields = JSON.parse(cate.field_json);
+        }
+
+        res.render('manage/cms_article/index', {
+          currentMenu: result[0],
+          cates: JSON.stringify(cates),
+          articles: result[1],
+          page: result[2],
+          cateId: cateId,
+          cate: cate
+        });
+      });
+    }
   });
 };

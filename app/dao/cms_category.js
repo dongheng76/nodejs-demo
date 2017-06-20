@@ -9,6 +9,13 @@ exports.queryCateById = function (id) {
 };
 
 /**
+ * 根据栏目分类ID查询子栏目分类信息
+ */
+exports.queryChildrenCateById = function (id) {
+    return mysql.query('select * from cms_category where parent_id=?', [id]);
+};
+
+/**
  * 根据栏目分类ID和站点ID查询
  */
 exports.queryMaxSortByCateIdAndSiteId = async function (pId,siteId) {
@@ -46,7 +53,7 @@ exports.queryCmsCateForRecursionByModuleAndSiteId = async function (siteId,modul
 /**
  * 插入一条栏目分类信息
  */
-exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,field_json,req) {
+exports.saveCate = async function (parent_id, site_id,module,name,image,href,target,description,sort,in_menu,in_list,remarks,image_format,image_show_format,field_json,is_msg,req) {
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
@@ -61,10 +68,10 @@ exports.saveCate = async function (parent_id, site_id,module,name,image,href,tar
     }
 
     return mysql.update(`insert into cms_category(id,parent_id,parent_ids,site_id,office_id,module,name,image,href,target,description,sort,in_menu,
-    in_list,create_by,create_date,update_by,update_date,remarks,del_flag,image_format,image_show_format,field_json)
-    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0',?,?,?)`,
+    in_list,create_by,create_date,update_by,update_date,remarks,del_flag,image_format,image_show_format,field_json,is_msg)
+    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0',?,?,?,?)`,
     [id, parent_id, parentCate.parent_ids + parentCate.id + ',', site_id, user.office_id, module,name,image,href,target,
-    description,sort,in_menu,in_list,user.id,user.id, remarks,image_format,image_show_format,field_json]);
+    description,sort,in_menu,in_list,user.id,user.id, remarks,image_format,image_show_format,field_json,is_msg]);
 };
 
 /**
@@ -120,6 +127,9 @@ exports.updateCate = function (req) {
     }
     if (req.body.field_json) {
         sets += ",field_json='" + req.body.field_json + "'";
+    }
+    if (req.body.is_msg) {
+        sets += ",is_msg='" + req.body.is_msg + "'";
     }
 
     return mysql.update('update cms_category set update_date=now() ' + sets + ' where id=' + mysql.getMysql().escape(req.body.id));

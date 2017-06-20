@@ -65,47 +65,7 @@
         <div class="page-overlay">
         </div>
 
-
-        <!-- header begin -->
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- logo begin -->
-                        <h1 id="logo">
-                            <a href="index.html">
-                                <img class="logo-1" src="/ufeel/images/logo.png" alt="">
-                                <img class="logo-2" src="/ufeel/images/logo-2.png" alt="">
-                            </a>
-                        </h1>
-                        <!-- logo close -->
-
-                        <!-- small button begin -->
-                        <span id="menu-btn"></span>
-                        <!-- small button close -->
-
-                        <!-- mainmenu begin -->
-                        <nav>
-                            <ul id="mainmenu">
-                                <li><a class="active" href="#wrapper">首页</a></li>
-                                <li><a href="#section-about">我们做什么</a></li>
-                                <li><a href="#section-team">团队</a></li>
-                                <li><a href="#section-services">服务与支持</a></li>
-                                <li><a href="#section-portfolio">经典案例</a></li>
-                                <li><a href="#section-testimonial">顾客说</a></li>
-                                <li><a href="#section-blog">新闻</a></li>
-                                <li><a href="#section-contact">联系我们</a></li>
-                            </ul>
-                        </nav>
-
-                    </div>
-                    <!-- mainmenu close -->
-
-                </div>
-            </div>
-        </header>
-        <!-- header close -->
-
+        <% include  ./include/header.ejs %>
 
         <!-- content begin -->
         <div id="content" class="no-bottom no-top">
@@ -123,7 +83,7 @@
                         <div class="text-item"><span class="id-color"><i class="icon-bike"></i></span>您准备好进入我们的家园了吗?</div>
                     </div>
                     <div class="spacer-single"></div>
-                    <a href="#" class="btn btn-border btn-big">我们的案例</a>
+                    <a href="/ufeel/template" target="_blank" class="btn btn-border btn-big">我们的模板库</a>
                 </div>
             </section>
             <!-- section close -->
@@ -135,11 +95,11 @@
                     <div class="row">
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3 text-center">
-                                <h1 class="animated" data-animation="fadeInUp">我们能够做 <span class="id-color">什么?</span>
+                                <h1 class="animated" data-animation="fadeInUp"><%=workPattern[0].title%><span class="id-color"><%=workPattern[0].remarks%></span>
                                     <span class="small-border animated" data-animation="fadeInUp"></span>
                                 </h1>
                                 <p class="lead animated" data-animation="fadeInUp">
-                                    从小型企业网站到大中型门户网站我们均有开发经验，不单单如此我们对移动端应用也有丰富的开发经验
+                                    <%=workPattern[0].description%>
                                 </p>
                                 <div class="spacer-single"></div>
                             </div>
@@ -149,13 +109,12 @@
                             <div class="inner">
                                 <div class="front">
                                     <i class="icon-genius"></i>
-                                    <h3>Our Portfolio</h3>
-                                    <span>Our Recent Works</span>
+                                    <h3><%=todoWorks[0].title%></h3>
+                                    <span><%=todoWorks[0].description%></span>
                                 </div>
                                 <div class="info">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-                                	<br>
-                                    <a href="#" class="btn btn-border">Read More</a>
+                                    <%=todoWorks[0].remarks%>
+                                    <!--<a href="#" class="btn btn-border">Read More</a>-->
                                 </div>
                             </div>
                         </div>
@@ -166,13 +125,11 @@
                             <div class="inner">
                                 <div class="front">
                                     <i class="icon-linegraph"></i>
-                                    <h3>Experiences</h3>
-                                    <span>What We Have Done</span>
+                                    <h3><%=todoWorks[1].title%></h3>
+                                    <span><%=todoWorks[1].description%></span>
                                 </div>
                                 <div class="info">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-                                	<br>
-                                    <a href="#" class="btn btn-border">Read More</a>
+                                    <%=todoWorks[1].remarks%>
                                 </div>
                             </div>
                         </div>
@@ -183,13 +140,11 @@
                             <div class="inner">
                                 <div class="front">
                                     <i class="icon-layers"></i>
-                                    <h3>Our Vision</h3>
-                                    <span>View Our Story</span>
+                                    <h3><%=todoWorks[2].title%></h3>
+                                    <span><%=todoWorks[2].description%></span>
                                 </div>
                                 <div class="info">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-                                	<br>
-                                    <a href="#" class="btn btn-border">Read More</a>
+                                    <%=todoWorks[2].remarks%>
                                 </div>
                             </div>
                         </div>
@@ -200,15 +155,12 @@
                             <div class="inner">
                                 <div class="front">
                                     <i class="icon-heart"></i>
-                                    <h3>Happy Clients</h3>
-                                    <span>What They Says</span>
+                                    <h3><%=todoWorks[3].title%></h3>
+                                    <span><%=todoWorks[3].description%></span>
                                 </div>
                                 <div class="info">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-                                	<br>
-                                    <a href="#" class="btn btn-border">Read More</a>
+                                    <%=todoWorks[3].remarks%>
                                 </div>
-                            </div>
                         </div>
                         <!-- featured box close -->
 
@@ -229,18 +181,18 @@
                     <div class="row">
                         <div class="inner-padding">
                             <div class="col-md-6 col-md-offset-6 animated" data-animation="fadeInRight" data-delay="200">
-                                <h2>We are group of professionals focused on making creative and innovative works</h2>
+                                <h2><%=tese[0].title%></h2>
 
-                                <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <p class="intro"><%=tese[0].description%></p>
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3>Our Vision</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        <h3><%=tese[1].title%></h3>
+                                        <p><%=tese[1].description%></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Our Mission</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        <h3><%=tese[2].title%></h3>
+                                        <p><%=tese[2].description%></p>
                                     </div>
                                 </div>
                             </div>
@@ -251,19 +203,19 @@
             </section>
             <!-- section close -->
             <!-- section begin -->
-            <section class="no-padding dark" data-speed="5" data-type="background">
+            <section class="no-padding dark" data-speed="5" data-type="background" style="z-index:1000;">
                 <div class="de-video-container">
                     <div class="de-video-content">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3 text-center">
-                                    <h1 class="animated" data-animation="fadeInUp">Ready To <span class="id-color">Rock?</span>
+                                    <h1 class="animated" data-animation="fadeInUp"><%=readyUs[0].title%> <span class="id-color"><%=readyUs[0].description%></span>
                                         <span class="small-border animated" data-animation="fadeInUp"></span>
                                     </h1>
                                     <div class="animated" data-animation="fadeInUp">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        <%=readyUs[0].remarks%>
                                     	<div class="spacer-single"></div>
-                                        <a href="#" class="btn btn-border" data-animation="fadeIn">Click Here</a>
+                                        <!--<a href="#" class="btn btn-border" data-animation="fadeIn">Click Here</a>-->
                                     </div>
                                 </div>
                             </div>
@@ -290,11 +242,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
-                            <h1 class="animated" data-animation="fadeInUp">Meet The <span class="id-color">Team</span>
+                            <h1 class="animated" data-animation="fadeInUp"><%=teamInfo[0].title%> <span class="id-color"><%=teamInfo[0].remarks%></span>
                                 <span class="small-border animated" data-animation="fadeInUp"></span>
                             </h1>
                             <p class="lead animated" data-animation="fadeInUp">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                <%=teamInfo[0].description%>
                             </p>
                             <div class="spacer-single"></div>
                         </div>
@@ -581,6 +533,7 @@
                 <div id="gallery" class="gallery full-gallery de-gallery pf_full_width animated" data-animation="fadeInUp" data-delay="200">
 
                     <!-- gallery item -->
+                    <%qiyezuopin.forEach(function(qiye){%>
                     <div class="item illustration">
                         <div class="picframe">
                             <span class="overlay">
@@ -591,113 +544,89 @@
                                     <i class="fa fa-align-justify fa-external-link icon-info"></i>
                                 </span>
                                 <span class="pf_text">
-                                    <span class="project-name">Project Name #1</span>
-                                    <span>illustration</span>
+                                    <span class="project-name"><%=qiye.title%></span>
+                                    <span><%=qiye.description%></span>
                                 </span>
                             </span>
-
-                            <img src="/ufeel/images/portfolio/pf%20(1).jpg" alt="" />
+                            <script>
+                                var imgStr = '<%-qiye.image%>';
+                                jsonImgPrint(imgStr,'_700x466');
+                            </script>
                         </div>
                     </div>
+                    <%})%>
                     <!-- close gallery item -->
 
-                    <!-- gallery item -->
-                    <div class="item mobile website">
+                    
+                    <%gerenzuopin.forEach(function(geren){%>
+                    <div class="item mobile">
                         <div class="picframe">
                             <span class="overlay">
                                 <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(2).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span><span class="icon">
+                                    <a href="/ufeel/images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                </span>
+                                <span class="icon">
                                     <i class="fa fa-align-justify fa-external-link icon-info"></i>
                                 </span>
                                 <span class="pf_text">
-                                    <span class="project-name">Project Name #2</span>
-                                    <span>mobile, website</span>
+                                    <span class="project-name"><%=geren.title%></span>
+                                    <span><%=geren.description%></span>
                                 </span>
                             </span>
-
-                            <img src="/ufeel/images/portfolio/pf%20(2).jpg" alt="" />
+                            <script>
+                                var imgStr = '<%-geren.image%>';
+                                jsonImgPrint(imgStr,'_700x466');
+                            </script>
                         </div>
                     </div>
-                    <!-- close gallery item -->
+                    <%})%>
 
-                    <!-- gallery item -->
-                    <div class="item website mobile">
+                    
+                    <%yidongzuopin.forEach(function(yidong){%>
+                    <div class="item mobile">
                         <div class="picframe">
                             <span class="overlay">
                                 <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(3).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span><span class="icon">
+                                    <a href="/ufeel/images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                </span>
+                                <span class="icon">
                                     <i class="fa fa-align-justify fa-external-link icon-info"></i>
                                 </span>
                                 <span class="pf_text">
-                                    <span class="project-name">Project Name #3</span>
-                                    <span>mobile, website</span>
+                                    <span class="project-name"><%=yidong.title%></span>
+                                    <span><%=yidong.description%></span>
                                 </span>
                             </span>
-
-                            <img src="/ufeel/images/portfolio/pf%20(3).jpg" alt="" />
+                            <script>
+                                var imgStr = '<%-yidong.image%>';
+                                jsonImgPrint(imgStr,'_700x466');
+                            </script>
                         </div>
                     </div>
-                    <!-- close gallery item -->
+                    <%})%>
 
-                    <!-- gallery item -->
-                    <div class="item illustration photography">
+                    <%yingjianzuopin.forEach(function(yingjian){%>
+                    <div class="item mobile">
                         <div class="picframe">
                             <span class="overlay">
                                 <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(4).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span><span class="icon">
-                                    <i class="fa fa-align-justify fa-external-link icon-info"></i>
+                                    <a href="/ufeel/images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
                                 </span>
-                                <span class="pf_text">
-                                    <span class="project-name">Project Name #4</span>
-                                    <span>illustration, photography</span>
-                                </span>
-                            </span>
-                            <img src="/ufeel/images/portfolio/pf%20(4).jpg" alt="" />
-                        </div>
-                    </div>
-                    <!-- close gallery item -->
-
-                    <!-- gallery item -->
-                    <div class="item website photography mobile">
-                        <div class="picframe">
-                            <span class="overlay">
                                 <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(5).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span><span class="icon">
                                     <i class="fa fa-align-justify fa-external-link icon-info"></i>
                                 </span>
                                 <span class="pf_text">
-                                    <span class="project-name">Project Name #5</span>
-                                    <span>mobile, website</span>
+                                    <span class="project-name"><%=yingjian.title%></span>
+                                    <span><%=yingjian.description%></span>
                                 </span>
                             </span>
-                            <img src="/ufeel/images/portfolio/pf%20(5).jpg" alt="" />
+                            <script>
+                                var imgStr = '<%-yingjian.image%>';
+                                jsonImgPrint(imgStr,'_700x466');
+                            </script>
                         </div>
                     </div>
-                    <!-- close gallery item -->
-
-                    <!-- gallery item -->
-                    <div class="item illustration website">
-                        <div class="picframe">
-                            <span class="overlay">
-                                <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(6).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span><span class="icon">
-                                    <i class="fa fa-align-justify fa-external-link icon-info"></i>
-                                </span>
-                                <span class="pf_text">
-                                    <span class="project-name">Project Name #6</span>
-                                    <span>illustration, website</span>
-                                </span>
-                            </span>
-                            <img src="/ufeel/images/portfolio/pf%20(6).jpg" alt="" />
-                        </div>
-                    </div>
-                    <!-- close gallery item -->
-
+                    <%})%>
 
                 </div>
 
@@ -710,7 +639,7 @@
 
             <!-- section begin -->
             <section id="view-all-projects" class="call-to-action bg-color dark text-center" data-speed="5" data-type="background">
-                <a href="#" class="btn btn-border btn-big">查看所有项目</a>
+                <a href="/ufeel/cases" target="_blank" class="btn btn-border btn-big">查看所有项目</a>
             </section>
             <!-- logo carousel section close -->
 
@@ -727,104 +656,29 @@
                         </div>
                     </div>
                     <div id="testimonial-carousel" class="de_carousel row animated" data-animation="fadeInUp" data-delay="200">
-
+                        <%says.forEach(function(say){%>
                         <div class="col-md-4 item">
                             <div class="de_testi">
                                 <blockquote>
-                                    <p>这是一家技术非常优秀的技术公司。他们不仅仅价格比市场普遍优惠，而且能够为我提供优势的服务。他们实实在在的把顾客的费用投入到他们需要的地方。而且响应速度非常快，让我使用的使用到我们需要的产品</p>
+                                    <p><%=say.description%></p>
                                 </blockquote>
                                 <div class="de_testi_by">
                                     <div class="de_testi_pic">
-                                        <img src="/ufeel/images/testi_pic%20(1).jpg" alt="" class="img-circle">
+                                        <img id="<%-say.id%>" class="img-circle"/>
+                                        <script>
+                                            var imgStr = '<%-say.image%>';
+                                            var src = jsonImgPrintOnlySrc(imgStr,'_100x100');
+                                            $('#<%-say.id%>').attr('src',src);
+                                        </script>
                                     </div>
                                     <div class="de_testi_company">
-                                        <strong>Feldhouse</strong>, Customer
+                                        <%=say.title%>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-4 item">
-                            <div class="de_testi">
-                                <blockquote>
-                                    <p>我们团队这次遇到的负载问题，交易安全问题一直都一筹莫展。万万没想到还有公司能够提供技术支持，让我们免去了花高薪招聘老司机的烦恼。而且我们团队也没有这么条件长年累月招一个月薪几万的大牛，但他们做到了，也提升了我们整个团队的技术水平</p>
-                                </blockquote>
-                                <div class="de_testi_by">
-                                    <span class="de_testi_pic">
-                                        <img src="/ufeel/images/testi_pic%20(2).jpg" alt="" class="img-circle"></span>
-                                    <div class="de_testi_company">
-                                        <strong>Mores</strong>, Customer
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 item">
-                            <div class="de_testi">
-                                <blockquote>
-                                    <p>There are some themes I have bought and are just 'eh' about. This one hands down does so much more than you could think. Perfect theme - and thanks for continually updating and improving it!</p>
-                                </blockquote>
-                                <div class="de_testi_by">
-                                    <div class="de_testi_pic">
-                                        <img src="/ufeel/images/testi-default.jpg" alt="" class="img-circle">
-                                    </div>
-                                    <div class="de_testi_company">
-                                        <strong>Feldhouse</strong>, Customer
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 item">
-                            <div class="de_testi">
-                                <blockquote>
-                                    <p>Again, great template and I love that it works on the computer, iPad, phone, etc. Very clean design, keep up the great work!</p>
-                                </blockquote>
-                                <div class="de_testi_by">
-                                    <div class="de_testi_pic">
-                                        <img src="/ufeel/images/testi_pic%20(1).jpg" alt="" class="img-circle">
-                                    </div>
-                                    <div class="de_testi_company">
-                                        <strong>Barbara</strong>, Customer
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 item">
-                            <div class="de_testi">
-                                <blockquote>
-                                    <p>Everything is nicely accessible inside the theme customization screen. It is easily comprehensible, the way things work is very natural and intuitive.</p>
-                                </blockquote>
-                                <div class="de_testi_by">
-                                    <span class="de_testi_pic">
-                                        <img src="/ufeel/images/testi_pic%20(2).jpg" alt="" class="img-circle"></span>
-                                    <div class="de_testi_company">
-                                        <strong>Mores</strong>, Customer
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 item">
-                            <div class="de_testi">
-                                <blockquote>
-                                    <p>Fit our needs like a glove. 1 hour to setup. I am currently implementing the language support Thanks for the awesome.</p>
-                                </blockquote>
-                                <div class="de_testi_by">
-                                    <div class="de_testi_pic">
-                                        <img src="/ufeel/images/testi-default.jpg" alt="" class="img-circle">
-                                    </div>
-                                    <div class="de_testi_company">
-                                        <strong>Itweb</strong>, Customer
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
+                        <%})%>
                     </div>
-
                 </div>
             </section>
             <!-- section close -->
@@ -835,17 +689,18 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
-                            <h1 class="animated" data-animation="fadeInUp">最近一次 <span class="id-color">新闻</span>
+                            <h1 class="animated" data-animation="fadeInUp"><%=newsTitle[0].title%> <span class="id-color"><%=newsTitle[0].remarks%></span>
                                 <span class="small-border animated" data-animation="fadeInUp"></span>
                             </h1>
                             <p class="lead animated" data-animation="fadeInUp">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                <%=newsTitle[0].description%>
                             </p>
                             <div class="spacer-single"></div>
                         </div>
                     </div>
 
                     <div class="animated" data-animation="fadeInUp" data-delay="200">
+                        <%news.forEach(function(news){%>
                         <div class="col-md-4 bloglist">
                             <div class="post-content">
                                 <div class="post-image">
@@ -854,81 +709,25 @@
                                         </div>
                                         <ul class="slides">
                                             <li>
-                                                <img src="/ufeel/images/blog/pic-blog-1.jpg" alt="" />
-                                            </li>
-                                            <li>
-                                                <img src="/ufeel/images/blog/pic-blog-2.jpg" alt="" />
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                                <div class="date-box"><span class="day">20</span> <span class="month">SEP</span> </div>
-                                <div class="post-text">
-                                    <h3><a href="css/#">Best DSLR Camera</a></h3>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        <br>
-                                    <a href="#" class="btn-text">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 bloglist">
-                            <div class="post-content">
-                                <div class="post-image">
-                                    <div class="flexslider blog-slider">
-                                        <div class="overlay">
-                                        </div>
-                                        <ul class="slides">
-                                            <li>
-                                                <img src="/ufeel/images/blog/pic-blog-3.jpg" alt="" />
-                                            </li>
-                                            <li>
-                                                <img src="/ufeel/images/blog/pic-blog-4.jpg" alt="" />
+                                                <img id="<%-news.id%>"/>
+                                                <script>
+                                                    var imgStr = '<%-news.image%>';
+                                                    var src = jsonImgPrintOnlySrc(imgStr,'_800x400');
+                                                    $('#<%-news.id%>').attr('src',src);
+                                                </script>
                                             </li>
                                         </ul>
                                     </div>
-
                                 </div>
 
-                                <div class="date-box"><span class="day">18</span> <span class="month">SEP</span> </div>
+                                <div class="date-box"><span class="day"><%=news.remarks%></span> <span class="month"><%=news.color%></span> </div>
                                 <div class="post-text">
-                                    <h3><a href="css/#">Playstation 4</a></h3>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        <br>
-                                    <a href="#" class="btn-text">Read More</a>
+                                    <h3><a href="css/#"><%=news.title%></a></h3>
+                                    <%=news.description%>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-4 bloglist">
-                            <div class="post-content">
-                                <div class="post-image">
-                                    <div class="flexslider blog-slider">
-                                        <div class="overlay">
-                                        </div>
-                                        <ul class="slides">
-                                            <li>
-                                                <img src="/ufeel/images/blog/pic-blog-5.jpg" alt="" />
-                                            </li>
-                                            <li>
-                                                <img src="/ufeel/images/blog/pic-blog-6.jpg" alt="" />
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                                <div class="date-box"><span class="day">10</span> <span class="month">SEP</span> </div>
-                                <div class="post-text">
-                                    <h3><a href="css/#">Photography Tips</a></h3>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        <br>
-                                    <a href="#" class="btn-text">Read More</a>
-                                </div>
-                            </div>
-                        </div>
+                        <%})%>
                     </div>
                 </div>
             </section>

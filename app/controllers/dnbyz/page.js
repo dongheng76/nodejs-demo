@@ -6,7 +6,7 @@
 const utils = require('../../utils');
 const cateDao = require('../../dao/cms_category.js');
 const articleDao = require('../../dao/cms_article.js');
-
+const guestbookDao = require('../../dao/cms_guestbook.js');
 
 module.exports = function (app, routeMethod) {
   /**
@@ -150,5 +150,21 @@ module.exports = function (app, routeMethod) {
         news: result[3]
       });
     });
+  });
+
+  /**
+   * 根据板块进行留言
+   */
+  app.all('/dnbyz/msgboard',async function (req, res) {
+    let result = guestbookDao.saveGuestbook(req);
+    if (result){
+      res.json({
+        result:true
+      });
+    } else {
+      res.json({
+        result:false
+      });
+    }
   });
 };

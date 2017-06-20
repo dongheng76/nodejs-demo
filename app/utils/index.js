@@ -134,6 +134,17 @@ exports.getIPAdress = function () {
   }
 };
 
+exports.getClientIP = function (req){
+  var ipAddress;
+  var headers = req.headers;
+  var forwardedIpsStr = headers['x-real-ip'] || headers['x-forwarded-for'];
+  forwardedIpsStr ? ipAddress = forwardedIpsStr : ipAddress = null;
+  if (!ipAddress) {
+    ipAddress = req.connection.remoteAddress;
+  }
+  return ipAddress;
+};
+
 // 递归创建目录 异步方法
 function mkdirs (dirname, callback) {
   fs.exists(dirname, function (exists) {

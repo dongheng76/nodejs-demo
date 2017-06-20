@@ -18,13 +18,100 @@ exports.delArticleById = async function (id) {
 };
 
 /**
- * 根据文章ID查询文章信息
+ * 根据栏目ID查询文章信息
  */
 exports.queryArticleInfoByCateId = async function (cateId) {
     return mysql.query(`
         select * from cms_article ca left join cms_article_data cad on ca.id=cad.id where ca.category_id=${mysql.getMysql().escape(cateId)} and ca.del_flag='0'
-        order by ca.create_date asc
+        order by ca.sort asc,ca.create_date desc
     `);
+};
+
+/**
+ * 多分类ID分页查询文章所有信息
+ */
+exports.queryAllArticleByCateIds = function (cateIds,req, currentPage, pagesize) {
+    let order = ' order by ';
+    let inContent = '';
+    let params = [];
+    let where = '';
+
+    if (req.query.cate_id){
+        inContent += `${mysql.getMysql().escape(req.query.cate_id)}`;
+        where = ` where ca.del_flag='0' and ca.category_id = ${inContent}`;
+    } else {
+        cateIds.forEach(function (cateId,index){
+            if (index != 0){
+                inContent += ',' + mysql.getMysql().escape(cateId);
+            } else {
+                inContent += mysql.getMysql().escape(cateId);
+            }
+        });
+        where = ` where ca.del_flag='0' and ca.category_id in (${inContent}) `;
+    }    
+
+    if (req.query.title != null && req.query.title != '') {
+        where += " and ca.title like '%" + req.query.title + "%'";
+    }
+    if (req.query.create_date_start != null && req.query.create_date_start != '') {
+        where += ' and ca.create_date>=?';
+        params.push(req.query.create_date_start);
+    }
+    if (req.query.create_date_end != null && req.query.create_date_end != '') {
+        where += ' and ca.create_date<=?';
+        params.push(req.query.create_date_end);
+    }
+    if (typeof (req.query.sortName) != 'undefined' && typeof (req.query.sortOrder) != 'undefined') {
+        order += ' ca.' + req.query.sortName + ' ' + req.query.sortOrder;
+    } else {
+        order += ' ca.sort asc, ca.create_date desc';
+    }
+
+
+    return mysql.query(`
+        select * from cms_article ca left join cms_article_data cad on ca.id=cad.id
+    ` + where
+        + order + ' limit ' + (parseInt(currentPage) - 1) * pagesize + ',' + pagesize,
+        params);
+};
+
+/**
+ * 多分类ID查询文章所有信息的记录数
+ */
+exports.queryAllArticlePageByCateIds = async function (cateIds,req, pagesize, currentPage) {
+    let inContent = '';
+    let params = [];
+    let where = '';
+
+    if (req.query.cate_id){
+        inContent += `${mysql.getMysql().escape(req.query.cate_id)}`;
+        where = ` where ca.del_flag='0' and ca.category_id = ${inContent}`;
+    } else {
+        cateIds.forEach(function (cateId,index){
+            if (index != 0){
+                inContent += ',' + mysql.getMysql().escape(cateId);
+            } else {
+                inContent += mysql.getMysql().escape(cateId);
+            }
+        });
+        where = ` where ca.del_flag='0' and ca.category_id in (${inContent}) `;
+    }
+
+    if (req.query.title != null && req.query.title != '') {
+        where += " and ca.title like '%" + req.query.title + "%'";
+    }
+    if (req.query.create_date_start != null && req.query.create_date_start != '') {
+        where += ' and ca.create_date>=?';
+        params.push(req.query.create_date_start);
+    }
+    if (req.query.create_date_end != null && req.query.create_date_end != '') {
+        where += ' and ca.create_date<=?';
+        params.push(req.query.create_date_end);
+    }
+
+    let val = await mysql.queryOne('select count(*) as total from cms_article ca ' + where, params);
+
+    return util.makePage(util.getSingleUrl(req), val.total, pagesize, currentPage);
 };
 
 /**
@@ -50,7 +137,7 @@ exports.queryAllArticle = function (cateId,req, currentPage, pagesize) {
     if (typeof (req.query.sortName) != 'undefined' && typeof (req.query.sortOrder) != 'undefined') {
         order += ' ca.' + req.query.sortName + ' ' + req.query.sortOrder;
     } else {
-        order += ' ca.update_date desc';
+        order += ' ca.sort asc, ca.create_date desc';
     }
 
 
@@ -89,14 +176,18 @@ exports.queryAllArticlePage = async function (cateId,req, pagesize, currentPage)
 /**
  * 插入一条栏目文章信息
  */
-exports.saveArticle = function (category_id,title,link,color,image,description, remarks,content,phone_content,longitude,latitude, req) {
+exports.saveArticle = function (category_id,title,link,color,image,description, remarks,content,phone_content,longitude,latitude,sort,req) {
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
+    console.log(`
+        insert into cms_article(id,category_id,title,link,color,image,description,create_by,create_date,update_by,update_date,remarks,longitude,latitude,sort,del_flag)
+            values('${id}','${category_id}','${title}','${link}','${color}','${image}','${description}', '${user.id}',now(),'${user.id}',now(),'${remarks}',${longitude},${latitude},${sort},'0')
+    `);
     return Promise.all([
         mysql.update(`
-        insert into cms_article(id,category_id,title,link,color,image,description,create_by,create_date,update_by,update_date,remarks,longitude,latitude,del_flag)
-            values('${id}','${category_id}','${title}','${link}','${color}','${image}','${description}', '${user.id}',now(),'${user.id}',now(),'${remarks}',${longitude},${latitude},'0')
+        insert into cms_article(id,category_id,title,link,color,image,description,create_by,create_date,update_by,update_date,remarks,longitude,latitude,sort,del_flag)
+            values('${id}','${category_id}','${title}','${link}','${color}','${image}','${description}', '${user.id}',now(),'${user.id}',now(),'${remarks}',${longitude},${latitude},${sort},'0')
     `),
         mysql.update(`
             insert into cms_article_data(id,content,phone_content)
@@ -130,10 +221,13 @@ exports.updateArticle = async function (req) {
         sets += ",remarks='" + req.body.remarks + "'";
     }
     if (req.body.mapLongitude) {
-        sets += ",longitude='" + req.body.mapLongitude + "'";
+        sets += ',longitude=' + req.body.mapLongitude;
     }
     if (req.body.mapLatitude) {
-        sets += ",latitude='" + req.body.mapLatitude + "'";
+        sets += ',latitude=' + req.body.mapLatitude;
+    }
+    if (req.body.sort) {
+        sets += ',sort=' + req.body.sort ;
     }
 
     let article_data_sets = '';

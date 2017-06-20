@@ -92,6 +92,21 @@
                 <input style="width:400px" type="text" name="sort" <%if(typeof(maxSort)!='undefined'){%> value="<%=maxSort%>" <%}%> <%if(typeof(cate)!='undefined'){%> value="<%=cate.sort%>" <%}%>/>
               </div>
               <div class="field-box">
+                <label>是否留言栏目:</label>
+                <div>
+                  <fieldset>
+                    <label class="radio">
+                      <input type="radio" name="is_msg" value="1" <% if(typeof(cate)=='undefined'){ %> checked="checked" <%}%> <% if(typeof(cate)!='undefined' && cate.is_msg==1){ %> checked="checked" <%}%>  />是
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="is_msg" value="0" <% if(typeof(cate)!='undefined' && cate.is_msg==0){ %> checked="checked" <%}%>/>否
+                    </label>
+                    <label for="is_msg" class="error" style="display:none;margin-left:20px;">请选择一个是否留言栏目</label>
+                  </fieldset>
+                </div>
+                <div class="auto-height"></div>
+              </div>
+              <div class="field-box">
                 <label>是否在导航中显示:</label>
                 <div>
                   <fieldset>

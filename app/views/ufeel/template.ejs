@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cubic - One Page Responsive HTML 5 Website Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Minimal Bootstrap Theme">
+    <meta name="keywords" content="onepage,responsive,minimal,bootstrap,theme">
+    <meta name="author" content="">
+
+
+    <!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/jpreloader.css" type="text/css">
+    <link rel="stylesheet" href="css/animate.css" type="text/css">
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css">
+    <link rel="stylesheet" href="css/plugin.css" type="text/css">
+    <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.theme.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    
+    <!-- custom style css -->
+    <link rel="stylesheet" href="css/custom-style.css" type="text/css">
+    
+    <!-- color scheme -->
+    <link rel="stylesheet" href="css/color.css" type="text/css">
+    
+    <!-- revolution slider -->
+    <link rel="stylesheet" href="rs-plugin/css/settings.css" type="text/css">
+    <link rel="stylesheet" href="css/rev-settings.css" type="text/css">
+    
+    <!-- load fonts -->
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="fonts/elegant_font/HTML_CSS/style.css" type="text/css">
+    <link rel="stylesheet" href="fonts/elegant_font/HTML_CSS/lte-ie7.js" type="text/css">
+    <script src="/ufeel/js/jquery.min.js"></script>
+    <script src="/js/common/common.js"></script>
+</head>
+<body>
+
+	<div id="wrapper">
+    <% include  ./include/header.ejs %>
+
+    <!-- subheader -->
+    <section id="subheader" data-speed="8" data-type="background">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>我们的案例</h1>
+                    <span>吹得好不如做得好，案例在手一切都有</span>
+                    <ul class="crumb">
+                        <li><a href="/ufeel">首页</a></li>
+                        <li class="sep">/</li>
+                        <li>我们的案例</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- subheader close -->
+
+    <!-- content begin -->
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div id="sidebar" class="col-md-4">
+                    <div class="widget widget-text">
+                        <h4>模板库说明</h4>
+                        我们再次展示的模块库均是我们能够实现快速开发的网站或系统，可以比市场平均开发时间节省50%的时间，节省60%的开发成本。不单单如此您还可以用普通网站的价格享受到
+                        高端豪华定制网站的体验。真诚感谢您的来访。
+                    </div>
+
+                    <div class="widget widget_category">
+                        <h4>模板分类</h4>
+                        <ul>
+                            <li><a href="/ufeel/template" <%if(cate_id=='0'){%>style="color:#FF5300;"<%}%>>所有作品</a></li>
+                            <%cate_children.forEach(function(cate){%>
+                                <li><a href="/ufeel/template?cate_id=<%=cate.id%>" <%if(cate_id==cate.id){%>style="color:#FF5300;"<%}%> ><%=cate.name%></a></li>
+                            <%})%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <ul class="blog-list">
+                        <%cases.forEach(function(cases){%>
+                        <li>
+                            <div class="post-content">
+                                <div class="post-image">
+                                    <img id="<%-cases.id%>"/>
+                                    <script>
+                                        var imgStr = '<%-cases.image%>';
+                                        var src = jsonImgPrintOnlySrc(imgStr,'_700x466');
+                                        $('#<%-cases.id%>').attr('src',src);
+                                    </script>
+                                </div>
+                                <div class="post-text">
+                                    <h3><a href="#"><%=cases.title%></a></h3>
+                                    <%=cases.description%>
+                                </div>
+                            </div>
+                        </li>
+                        <%})%>
+                    </ul>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <%if(casesPage.pagenum>1){%>
+                                <li><a href="/ufeel/template?cate_id=<%=cate_id%>&page=<%=casesPage.pagenum-1%>">上一页</a></li>
+                            <%}%>
+                            <%if(casesPage.pagenum-2>0){%>
+                                <li><a href="/ufeel/template?cate_id=<%=cate_id%>&page=<%=casesPage.pagenum-2%>"><%=casesPage.pagenum-2%></a></li>
+                            <%}%>
+                            <%if(casesPage.pagenum-1>0){%>
+                                <li><a href="/ufeel/template?cate_id=<%=cate_id%>&page=<%=casesPage.pagenum-1%>"><%=casesPage.pagenum-1%></a></li>
+                            <%}%>
+                            <li class="active"><a href="/ufeel/template?cate_id=<%=cate_id%>&page=<%=casesPage.pagenum%>"><%=casesPage.pagenum%></a></li>
+                            <%if(casesPage.pagenum+1<=casesPage.page){%>
+                                <li><a href="/ufeel/template?cate_id=<%=cate_id%>&page=<%=casesPage.pagenum+1%>"><%=casesPage.pagenum+1%></a></li>
+                            <%}%>
+                            <%if(casesPage.pagenum+2<=casesPage.page){%>
+                                <li><a href="/ufeel/template?cate_id=<%=cate_id%>&page=<%=casesPage.pagenum+2%>"><%=casesPage.pagenum+2%></a></li>
+                            <%}%>
+                            <%if(casesPage.pagenum<casesPage.page){%>
+                                <li><a href="/ufeel/template?cate_id=<%=cate_id%>&page=<%=casesPage.pagenum+1%>">下一页</a></li>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+            <!-- footer begin -->
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="social-icons">
+                                <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+                                <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+                                <a href="#"><i class="fa fa-envelope-o fa-lg"></i></a>
+                                <a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
+                                <a href="#"><i class="fa fa-skype fa-lg"></i></a>
+                            </div>
+                            <div class="spacer-single"></div>
+                            © Copyright 2014 - Cubic by Designesia
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- footer close -->
+	
+    </div>
+	
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="/ufeel/js/jpreLoader.js"></script>
+    <script src="/ufeel/js/bootstrap.min.js"></script>
+    <script src="/ufeel/js/jquery.isotope.min.js"></script>
+    <script src="/ufeel/js/jquery.prettyPhoto.js"></script>
+    <script src="/ufeel/js/easing.js"></script>
+    <script src="/ufeel/js/jquery.ui.totop.js"></script>
+    <script src="/ufeel/js/jquery.flexslider-min.js"></script>
+    <script src="/ufeel/js/jquery.scrollto.js"></script>
+    <script src="/ufeel/js/owl.carousel.js"></script>
+    <script src="/ufeel/js/jquery.countTo.js"></script>
+    <script src="/ufeel/js/classie.js"></script>
+    <script src="/ufeel/js/designesia.js"></script>
+    <script src="/ufeel/js/validation.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyASm3CwaK9qtcZEWYa-iQwHaGi3gcosAJc"></script>
+    <script src="/ufeel/js/map.js"></script>
+
+    <!-- SLIDER REVOLUTION SCRIPTS  -->
+    <script type="text/javascript" src="/ufeel/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="/ufeel/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+</body>
+</html>

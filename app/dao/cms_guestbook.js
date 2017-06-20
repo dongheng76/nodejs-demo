@@ -61,3 +61,40 @@ exports.queryAllGuestbookPage = async function (cateId,req, pagesize, currentPag
     return util.makePage(util.getSingleUrl(req), val.total, pagesize, currentPage);
 };
 
+/**
+ * 插入一条留言信息
+ */
+exports.saveGuestbook = function (req) {
+    let id = util.uuid();
+    let ip = util.getClientIP(req);
+
+    return mysql.update(
+    `insert into cms_guestbook(id,category_id,content,name,email,phone,workunit,ip,create_date,del_flag)
+    values (?,?,?,?,?,?,?,?,now(),'0')`,
+    [id, req.body.category_id, req.body.content, req.body.name, req.body.email, req.body.phone ? req.body.phone : '',req.body.workunit ? req.body.workunit : '',ip]);
+};
+
+/**
+ * 修改一条留言信息
+ */
+exports.updateGuestbook = function (req) {
+    // 需要修改的字符串集
+    let sets = '';
+    if (req.body.content) {
+        sets += ",content='" + req.body.content + "'";
+    }
+    if (req.body.name) {
+        sets += ",name='" + req.body.name + "'";
+    }
+    if (req.body.email) {
+        sets += ",email='" + req.body.email + "'";
+    }
+    if (req.body.phone) {
+        sets += ",phone='" + req.body.phone + "'";
+    }
+    if (req.body.workunit) {
+        sets += ",workunit='" + req.body.workunit + "'";
+    }
+
+    return mysql.update('update cms_site set update_date=now() ' + sets + ' where id=?', [req.body.id]);
+};
