@@ -75,10 +75,6 @@ let RouteTools = function () {
     /**
      * 扫描路由
      * @param{express} app
-     * @param{function} before 加入路由前的回调函数,this指向express,
-     * before 参数列表:routePath,content
-     * content 结构:{method:get,requestHandler:function(req,res,next){}})
-     * return true:不载入路由,return false 或者不返回,则载入路由
      * @param{string} filePath 要扫描文件路径
      */
     this.scan = function (app, ...filePath) {
