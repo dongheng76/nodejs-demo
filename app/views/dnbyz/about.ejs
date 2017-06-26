@@ -21,14 +21,6 @@
 						<h2>关于我们</h2>
 						<div class="in-about">
 							<div class="our-grid">
-								<!--<div class=" our-para">
-								<a href="#">
-								<script>
-									var imgStr = '<%-abouts[0].image%>';
-									var obj = jsonImgPrint(imgStr,'_400x250','img-responsive');
-								</script>
-								</a>						
-							</div>-->
 							<div class="our-head">
 								<%-abouts[0].phone_content%></a>
 							</div>
@@ -46,8 +38,8 @@
 					<%xinwen.forEach(function(news){%>
 						<div class="col-in-about">
 							<div class="in-sed">
-								<b>2017</b>
-								<span>6月6日</span>
+								<b><%=moment(news.create_date).format("YYYY")%></b>
+								<span><%=moment(news.create_date).format("MM月DD日")%></span>
 							</div>
 							<div class="left-sit">
 								<p><%=news.title%></p>

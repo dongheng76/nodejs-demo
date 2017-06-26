@@ -68,6 +68,10 @@
                 <input style="width:400px" type="text" name="domain" <%if(typeof(site)!='undefined'){%> value="<%=site.domain%>" <%}%>/>
               </div>
               <div class="field-box">
+                <label>站点名称:</label>
+                <input style="width:400px" type="text" name="domain_name" <%if(typeof(site)!='undefined'){%> value="<%=site.domain_name%>" <%}%>/>
+              </div>
+              <div class="field-box">
                 <label>关键字:</label>
                 <input style="width:400px" type="text" name="keywords" <%if(typeof(site)!='undefined'){%> value="<%=site.keywords%>" <%}%>/>
               </div>
@@ -91,7 +95,7 @@
           <%}else{%>
             <button type="submit" class="btn-glow inverse">确定添加</button>
           <%}%>
-          <a class="btn-glow" href="javascript:window.history.back();">返回</a>
+          <a class="btn-glow" href="javascript:window.location.href='/manage/site';">返回</a>
         </form>
       </div>
     </div>
@@ -102,12 +106,14 @@
           rules: {
             name: "required",
             title: "required",
-            domain:"required"
+            domain:"required",
+            domain_name:"required"
           },
           messages: {
             name: "站点名称必须填写",
             title: "站点标题必须填写",
-            domain: "站点域名必须填写"
+            domain: "站点域名必须填写",
+            domain_name:"站点名称必须填写"
           },
           submitHandler:function(form){
             $.post('/manage/site/store',$('form[name="create"]').serialize(),function(data){
@@ -124,12 +130,14 @@
           rules: {
             name: "required",
             title: "required",
-            domain:"required"
+            domain:"required",
+            domain_name:"required"
           },
           messages: {
             name: "站点名称必须填写",
             title: "站点标题必须填写",
-            domain: "站点域名必须填写"
+            domain: "站点域名必须填写",
+            domain_name:"站点名称必须填写"
           },
           submitHandler:function(form){
             $.post('/manage/site/store',$('form[name="create"]').serialize(),function(data){

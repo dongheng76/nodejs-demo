@@ -197,3 +197,13 @@ exports.updateUserPwd = async function (loginName, password) {
    
     return mysql.update("update sys_user set update_date=now(), password='" + util.md5(password) + "' where login_name=?", [loginName]);
 };
+
+/**
+ * 修改用户头像
+ */
+exports.updateUserAvater = async function (req) {
+    let user = req.session.user;
+    let photo = req.body.photo;
+   
+    return mysql.update("update sys_user set update_date=now(), photo='" + photo + "' where id=?", [user.id]);
+};

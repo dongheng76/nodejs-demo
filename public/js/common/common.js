@@ -15,7 +15,7 @@ function windowOpen(url, name, width, height) {
     window.open(url, name, options);
 }
 
-//打开操作成功通知
+// 打开操作成功通知
 function noticeInfo(type, title, callback) {
     switch (type) {
         case 'notice':
@@ -97,27 +97,6 @@ function changeParam (name, value, url) {
         }
     }
     return newUrl;
-}
-
-// 把json图片数组输出图片到html上
-function jsonImgPrint (imgStr, imgFormat, className) {
-    if (imgStr && imgStr != '') {
-        var img_json = JSON.parse(imgStr);
-        var id = genNonDuplicateID();
-        window.document.write('<img id="' + id + '" src="' + img_json[0].path + img_json[0].name + imgFormat + '.' + img_json[0].suffix + '" class="' + (className ? className : '') + '"/>');
-        return {
-            src:img_json[0].path + img_json[0].name + '.' + img_json[0].suffix,
-            id:id
-        };
-    }
-}
-
-// 把json图片数组输出图片到html上(只需要src)
-function jsonImgPrintOnlySrc (imgStr, imgFormat) {
-    if (imgStr && imgStr != '') {
-        var img_json = JSON.parse(imgStr);
-        return img_json[0].path + img_json[0].name + imgFormat + '.' + img_json[0].suffix;
-    }
 }
 
 /**

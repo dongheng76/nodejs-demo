@@ -24,10 +24,11 @@
 			<li class="col-md-6">
 				<div class="channel-list-img">
 					<a href="javascript:void(0)" target="_blank" data-stat-id="def8cfe8112d6808" onclick="">
-						<script>
-							var imgStr = '<%-project.image%>';
-							var obj = jsonImgPrint(imgStr,'_555x308','img-responsive');
-						</script>
+						<%if(project.image_json){%>					
+							<%project.image_json.forEach(function(img){%>
+								<img src="/getfile?id=<%=img.id%>&format=555x308" class="img-responsive" alt=""/>
+							<%})%>
+						<%}%>
 					</a>
 				</div>
 				<div class="channel-list-con clearfix">

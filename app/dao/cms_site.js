@@ -12,7 +12,7 @@ exports.querySiteById = function (id) {
  * 查询我自己机构的当前站点ID
  */
 exports.queryMyOfficeCurSite = function (id) {
-    return mysql.queryOne("select * from cms_office_site where office_id=? and is_current='1'", [id]);
+    return mysql.queryOne("select co.*,cs.* from cms_office_site co left join cms_site cs on co.site_id=cs.id  where co.office_id=? and co.is_current='1'", [id]);
 };
 
 /**
@@ -97,14 +97,14 @@ exports.queryAllSitePage = async function (req, pagesize, currentPage) {
 /**
  * 插入一条字典信息
  */
-exports.saveSite = function (name, title, logo,domain,description,keywords,copyright, remarks, req) {
+exports.saveSite = function (name, title, logo,domain,description,keywords,copyright, remarks,domain_name, req) {
     // 取得用户信息
     let user = req.session.user;
     let id = util.uuid();
     return mysql.update(
-    `insert into cms_site(id,name,title,logo,domain,description,keywords,copyright,create_by,create_date,update_by,update_date,remarks,del_flag)
-    values (?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0')`,
-    [id, name, title, logo, domain, description,keywords,copyright, user.id,user.id, remarks]);
+    `insert into cms_site(id,name,title,logo,domain,description,keywords,copyright,create_by,create_date,update_by,update_date,remarks,del_flag,domain_name)
+    values (?,?,?,?,?,?,?,?,?,now(),?,now(),?,'0',?)`,
+    [id, name, title, logo, domain, description,keywords,copyright, user.id,user.id, remarks,domain_name]);
 };
 
 /**
@@ -136,6 +136,9 @@ exports.updateSite = function (req) {
     }
     if (req.body.remarks) {
         sets += ",remarks='" + req.body.remarks + "'";
+    }
+    if (req.body.domain_name) {
+        sets += ",domain_name='" + req.body.domain_name + "'";
     }
 
     return mysql.update('update cms_site set update_date=now() ' + sets + ' where id=?', [req.body.id]);

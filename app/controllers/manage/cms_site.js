@@ -83,6 +83,7 @@ module.exports = function (app, routeMethod) {
     let title = req.body.title;
     let logo = req.body.logo;
     let domain = req.body.domain;
+    let domain_name = req.body.domain_name;
     let keywords = req.body.keywords;
     let description = req.body.description;
     let copyright = req.body.copyright;
@@ -97,7 +98,7 @@ module.exports = function (app, routeMethod) {
         type:'success'
       };
     } else {
-      result = await siteDao.saveSite(name, title, logo,domain,description,keywords,copyright, remarks, req);
+      result = await siteDao.saveSite(name, title, logo,domain,description,keywords,copyright, remarks,domain_name,req);
       req.session.notice_info = {
         info:'保存站点成功!',
         type:'success'

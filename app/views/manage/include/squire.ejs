@@ -306,7 +306,7 @@
 	//选择相册后回调
     function <%=input%>SelectAction(files){
     	for(var i = 0 ; i < files.length; i++){
-    		<%=input%>editor.insertImage(files[i].path + files[i].name + '.' + files[i].suffix);
+    		<%=input%>editor.insertImage('/getfile?id='+files[i].id);
     	}
     }
 	var <%=input%>editor = new Squire(document.querySelector("#<%=input%>Editor"), {

@@ -800,7 +800,6 @@ footer {
 	}
 	
 	.dark .btn-border:hover, .dark a.btn-border:hover{
-	background:#fff;
 	color:#FFFFFF !important;
 	border-color:#fff;
 	}

@@ -361,7 +361,7 @@ jQuery(document).ready(function() {
 // --------------------------------------------------
 // blog list hover
 // --------------------------------------------------
-	jQuery(".blog-list").hover(
+	jQuery(".blog-list .post-content").hover(
 	function() {	 
 	 v_height = jQuery(this).find(".blog-slide").css("height");
 	 v_width = jQuery(this).find(".blog-slide").css("width");

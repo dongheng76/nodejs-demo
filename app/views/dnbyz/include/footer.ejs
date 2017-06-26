@@ -6,10 +6,11 @@
 					<h4><%=wxs.title%></h4>
 					<div class="grid-footer">
 						<div class="col-md-4 footer-left">
-							<script>
-								var imgStr = '<%-wxs.image%>';
-								jsonImgPrint(imgStr,'_180x144','img-responsive');
-							</script>
+							<%if(wxs.image_json){%>					
+								<%wxs.image_json.forEach(function(img){%>
+									<img src="/getfile?id=<%=img.id%>&format=180x144" class="img-responsive" alt=""/>
+								<%})%>
+							<%}%>
 						</div>
 						<div class="col-md-8 footer-left-in">
 							<p><%=wxs.remarks%></p>

@@ -634,30 +634,8 @@
         return false;
       }
 
-      <% if(typeof(format)!='undefined'){%>
-        var files = imagesManage.getSelectedData();
-        var ids = "";
-        for(var i=0; i<files.length; i++){
-          ids += files[i].id;
-          if (i<files.length-1){
-            ids+="|";
-          }
-        }
-
-        $.post('/manage/file/thumbfile',
-        {
-          ids:ids,
-          format:'<%-format%>' 
-        },function(data){
-          if(data.result){
-            opener.<%=func%>(imagesManage.getSelectedData());
-            window.close();
-          }
-        });
-      <%}else{%>
-        opener.<%=func%>(imagesManage.getSelectedData());
-        window.close();
-      <%}%>
+      opener.<%=func%>(imagesManage.getSelectedData());
+      window.close();
     }
   <%}%>
 

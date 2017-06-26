@@ -173,10 +173,11 @@
             <!-- section begin -->
             <section id="section-about-us-2" class="side-bg no-padding">
                 <div class="image-container col-md-5 pull-left animated" data-animation="fadeInLeft" data-delay="0">
-                    <script>
-                        var imgStr = '<%-ourTodoImg[0].image%>';
-                        jsonImgPrint(imgStr,'_800x989','img-responsive');
-                    </script>
+                    <%if(ourTodoImg[0].image_json){%>
+                        <%ourTodoImg[0].image_json.forEach(function(img){%>
+                            <img src="/getfile?id=<%=img.id%>&format=800x989" class="img-responsive"/>
+                        <%})%>
+                    <%}%>
                 </div>
 
                 <div class="container">
@@ -260,10 +261,11 @@
                         <!-- team member -->
                         <div class="de-team-list col-md-3 animated" data-animation="fadeInUp" data-delay="0">
                             <div class="team-pic">
-                                <script>
-                                    var imgStr = '<%-mem.image%>';
-                                    jsonImgPrint(imgStr,'_400x400','img-responsive');
-                                </script>
+                                <%if(mem.image_json){%>
+                                    <%mem.image_json.forEach(function(img){%>
+                                        <img src="/getfile?id=<%=img.id%>&format=400x400" class="img-responsive"/>
+                                    <%})%>
+                                <%}%>
                             </div>
                             <div class="team-desc col-md-12">
                                 <h3><%=mem.title%></h3>
@@ -538,22 +540,23 @@
                     <%qiyezuopin.forEach(function(qiye){%>
                     <div class="item illustration">
                         <div class="picframe">
-                            <span class="overlay">
-                                <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span>
-                                <span class="icon">
-                                    <i class="fa fa-align-justify fa-external-link icon-info"></i>
-                                </span>
-                                <span class="pf_text">
-                                    <span class="project-name"><%=qiye.title%></span>
-                                    <span><%=qiye.description%></span>
-                                </span>
-                            </span>
-                            <script>
-                                var imgStr = '<%-qiye.image%>';
-                                jsonImgPrint(imgStr,'_700x466');
-                            </script>
+                            <%if(qiye.image_json){%>
+                                <%qiye.image_json.forEach(function(img){%>
+                                    <span class="overlay">
+                                        <span class="icon">
+                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                        </span>
+                                        <span class="icon">
+                                            <i class="fa fa-align-justify fa-external-link icon-info"></i>
+                                        </span>
+                                        <span class="pf_text">
+                                            <span class="project-name"><%=qiye.title%></span>
+                                            <span><%=qiye.description%></span>
+                                        </span>
+                                    </span>
+                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                <%})%>
+                            <%}%>
                         </div>
                     </div>
                     <%})%>
@@ -563,22 +566,23 @@
                     <%gerenzuopin.forEach(function(geren){%>
                     <div class="item mobile">
                         <div class="picframe">
-                            <span class="overlay">
-                                <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span>
-                                <span class="icon">
-                                    <i class="fa fa-align-justify fa-external-link icon-info"></i>
-                                </span>
-                                <span class="pf_text">
-                                    <span class="project-name"><%=geren.title%></span>
-                                    <span><%=geren.description%></span>
-                                </span>
-                            </span>
-                            <script>
-                                var imgStr = '<%-geren.image%>';
-                                jsonImgPrint(imgStr,'_700x466');
-                            </script>
+                            <%if(geren.image_json){%>
+                                <%geren.image_json.forEach(function(img){%>
+                                    <span class="overlay">
+                                        <span class="icon">
+                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                        </span>
+                                        <span class="icon">
+                                            <i class="fa fa-align-justify fa-external-link icon-info"></i>
+                                        </span>
+                                        <span class="pf_text">
+                                            <span class="project-name"><%=geren.title%></span>
+                                            <span><%=geren.description%></span>
+                                        </span>
+                                    </span>
+                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                <%})%>
+                            <%}%>
                         </div>
                     </div>
                     <%})%>
@@ -587,22 +591,23 @@
                     <%yidongzuopin.forEach(function(yidong){%>
                     <div class="item mobile">
                         <div class="picframe">
-                            <span class="overlay">
-                                <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span>
-                                <span class="icon">
-                                    <i class="fa fa-align-justify fa-external-link icon-info"></i>
-                                </span>
-                                <span class="pf_text">
-                                    <span class="project-name"><%=yidong.title%></span>
-                                    <span><%=yidong.description%></span>
-                                </span>
-                            </span>
-                            <script>
-                                var imgStr = '<%-yidong.image%>';
-                                jsonImgPrint(imgStr,'_700x466');
-                            </script>
+                            <%if(yidong.image_json){%>
+                                <%yidong.image_json.forEach(function(img){%>
+                                    <span class="overlay">
+                                        <span class="icon">
+                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                        </span>
+                                        <span class="icon">
+                                            <i class="fa fa-align-justify fa-external-link icon-info"></i>
+                                        </span>
+                                        <span class="pf_text">
+                                            <span class="project-name"><%=yidong.title%></span>
+                                            <span><%=yidong.description%></span>
+                                        </span>
+                                    </span>
+                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                <%})%>
+                            <%}%>
                         </div>
                     </div>
                     <%})%>
@@ -610,22 +615,23 @@
                     <%yingjianzuopin.forEach(function(yingjian){%>
                     <div class="item mobile">
                         <div class="picframe">
-                            <span class="overlay">
-                                <span class="icon">
-                                    <a href="/ufeel/images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
-                                </span>
-                                <span class="icon">
-                                    <i class="fa fa-align-justify fa-external-link icon-info"></i>
-                                </span>
-                                <span class="pf_text">
-                                    <span class="project-name"><%=yingjian.title%></span>
-                                    <span><%=yingjian.description%></span>
-                                </span>
-                            </span>
-                            <script>
-                                var imgStr = '<%-yingjian.image%>';
-                                jsonImgPrint(imgStr,'_700x466');
-                            </script>
+                            <%if(yingjian.image_json){%>
+                                <%yingjian.image_json.forEach(function(img){%>
+                                    <span class="overlay">
+                                        <span class="icon">
+                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                        </span>
+                                        <span class="icon">
+                                            <i class="fa fa-align-justify fa-external-link icon-info"></i>
+                                        </span>
+                                        <span class="pf_text">
+                                            <span class="project-name"><%=yingjian.title%></span>
+                                            <span><%=yingjian.description%></span>
+                                        </span>
+                                    </span>
+                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                <%})%>
+                            <%}%>
                         </div>
                     </div>
                     <%})%>
@@ -666,12 +672,11 @@
                                 </blockquote>
                                 <div class="de_testi_by">
                                     <div class="de_testi_pic">
-                                        <img id="<%-say.id%>" class="img-circle"/>
-                                        <script>
-                                            var imgStr = '<%-say.image%>';
-                                            var src = jsonImgPrintOnlySrc(imgStr,'_100x100');
-                                            $('#<%-say.id%>').attr('src',src);
-                                        </script>
+                                        <%if(say.image_json){%>
+                                            <%say.image_json.forEach(function(img){%>
+                                                <img src="/getfile?id=<%=img.id%>&format=100x100" class="img-circle"/>
+                                            <%})%>
+                                        <%}%>
                                     </div>
                                     <div class="de_testi_company">
                                         <%=say.title%>
@@ -711,12 +716,11 @@
                                         </div>
                                         <ul class="slides">
                                             <li>
-                                                <img id="<%-news.id%>"/>
-                                                <script>
-                                                    var imgStr = '<%-news.image%>';
-                                                    var src = jsonImgPrintOnlySrc(imgStr,'_800x400');
-                                                    $('#<%-news.id%>').attr('src',src);
-                                                </script>
+                                                <%if(news.image_json){%>
+                                                    <%news.image_json.forEach(function(img){%>
+                                                        <img src="/getfile?id=<%=img.id%>&format=800x400"/>
+                                                    <%})%>
+                                                <%}%>
                                             </li>
                                         </ul>
                                     </div>
@@ -745,12 +749,11 @@
                                 <%logos.forEach(function(logo){%>
                                     <li>
                                         <div class="col-md-2">
-                                            <img id="<%-logo.id%>"/>
-                                            <script>
-                                                var imgStr = '<%-logo.image%>';
-                                                var src = jsonImgPrintOnlySrc(imgStr,'_180x60');
-                                                $('#<%-logo.id%>').attr('src',src);
-                                            </script>
+                                            <%if(logo.image_json){%>
+                                                <%logo.image_json.forEach(function(img){%>
+                                                    <img src="/getfile?id=<%=img.id%>&format=180x60"/>
+                                                <%})%>
+                                            <%}%>
                                         </div>
                                     </li>
                                 <%})%>

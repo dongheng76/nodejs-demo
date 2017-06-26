@@ -40,7 +40,7 @@
       <div class="table-wrapper table-products products-table section">
         <div class="row-fluid head">
           <div class="span12">
-            <h4 style="float:left;display: inline-block">信息管理</h4>
+            <h4 style="float:left;display: inline-block"><%=cate.name%>信息管理</h4>
           </div>
         </div>
 
@@ -114,10 +114,9 @@
                 <a href="#" class="id"><%=article.title%></a>
               </td>
               <td class="description">
-                  <script>
-                    var imgStr = '<%-article.image%>';
-                    jsonImgPrint(imgStr,'_200x200');
-                  </script>
+                  <%if(article.image_json){%>
+                    <img src="/getfile?id=<%=article.image_json[0].id%>&format=200x200"/>
+                  <%}%>
               </td>
               <td>
                 <%=article.description%>

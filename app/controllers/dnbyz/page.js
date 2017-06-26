@@ -25,15 +25,35 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArticleInfoByCateId('720377704bf511e780309d6de1be898e'),
       articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e')      
     ]).then(result => {
+      let anli = result[4];
+      anli.forEach(function (al){
+        if (al.image)
+          al.image_json = JSON.parse(al.image);
+      });
+
+      let jinpaiwenxiu = result[7];
+      jinpaiwenxiu.forEach(function (wxs){
+        if (wxs.image)
+          wxs.image_json = JSON.parse(wxs.image);
+      });
+
+      let dundongguanggao = result[2];
+      dundongguanggao.forEach(function (adv){
+        if (adv.image)
+          adv.image_json = JSON.parse(adv.image);
+      });
+      
+
       res.render('dnbyz/index', {
         cates: result[0],
         curCate: result[1],
-        dundongguanggao: result[2],
+        dundongguanggao: dundongguanggao,
         shuoming: result[3],
-        anli: result[4],
+        anli: anli,
         xinwen: result[5],
         qaf: result[6],
-        jinpaiwenxiu: result[7]
+        jinpaiwenxiu: jinpaiwenxiu,
+        moment: require('moment')
       });
     });
   });
@@ -51,11 +71,23 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArticleInfoByCateId('72273e004bf311e780309d6de1be898e')
       
     ]).then(result => {
+      let jinpaiwenxiu = result[2];
+      jinpaiwenxiu.forEach(function (wxs){
+        if (wxs.image)
+          wxs.image_json = JSON.parse(wxs.image);
+      });
+
+      let projects = result[3];
+      projects.forEach(function (project){
+        if (project.image)
+          project.image_json = JSON.parse(project.image);
+      });
+
       res.render('dnbyz/project', {
         cates: result[0],
         curCate: result[1],
         jinpaiwenxiu: result[2],
-        projects: result[3]
+        projects: projects
       });
     });
   });
@@ -72,11 +104,23 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArticleInfoByCateId('922888104bf511e780309d6de1be898e'),
       articleDao.queryArticleInfoByCateId('da849e704bf311e780309d6de1be898e')
     ]).then(result => {
+      let jinpaiwenxiu = result[2];
+      jinpaiwenxiu.forEach(function (wxs){
+        if (wxs.image)
+          wxs.image_json = JSON.parse(wxs.image);
+      });
+
+      let anlis = result[3];
+      anlis.forEach(function (anli){
+        if (anli.image)
+          anli.image_json = JSON.parse(anli.image);
+      });
+
       res.render('dnbyz/share', {
         cates: result[0],
         curCate: result[1],
-        jinpaiwenxiu: result[2],
-        anlis: result[3]
+        jinpaiwenxiu: jinpaiwenxiu,
+        anlis: anlis
       });
     });
   });
@@ -95,13 +139,20 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArticleInfoByCateId('52bb32404bf511e780309d6de1be898e'),
       articleDao.queryArticleInfoByCateId('720377704bf511e780309d6de1be898e')
     ]).then(result => {
+      let jinpaiwenxiu = result[2];
+      jinpaiwenxiu.forEach(function (wxs){
+        if (wxs.image)
+          wxs.image_json = JSON.parse(wxs.image);
+      });
+
       res.render('dnbyz/about', {
         cates: result[0],
         curCate: result[1],
-        jinpaiwenxiu: result[2],
+        jinpaiwenxiu: jinpaiwenxiu,
         abouts: result[3],
         xinwen: result[4],
-        qaf: result[5]
+        qaf: result[5],        
+        moment: require('moment')
       });
     });
   });
@@ -120,10 +171,16 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArticleInfoByCateId('e30ff0004bf611e7987a797906eb157d')
       
     ]).then(result => {
+      let jinpaiwenxiu = result[2];
+      jinpaiwenxiu.forEach(function (wxs){
+        if (wxs.image)
+          wxs.image_json = JSON.parse(wxs.image);
+      });
+
       res.render('dnbyz/contact', {
         cates: result[0],
         curCate: result[1],
-        jinpaiwenxiu: result[2],
+        jinpaiwenxiu: jinpaiwenxiu,
         maps: result[3],
         contacts: result[4]
       });

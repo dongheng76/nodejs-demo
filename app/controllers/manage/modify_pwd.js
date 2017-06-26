@@ -8,8 +8,9 @@ const menuDao = require('../../dao/sys_menu');
 const userDao = require('../../dao/sys_user');
 
 module.exports = function (app, routeMethod) {
-  routeMethod.csurf('/sys/user/modifyPwd');
-  app.get('/sys/user/modifyPwd', function (req, res) {
+  routeMethod.csurf('/manage/user/modify_pwd');
+  routeMethod.session('/manage/user/modify_pwd','sys:menu:view');
+  app.get('/manage/user/modify_pwd', function (req, res) {
     Promise.all([menuDao.queryMenuByHref('/manage/panel')]).then(result => {
       res.render('manage/modify_pwd/create', {
         currentMenu: result[0]
@@ -20,9 +21,9 @@ module.exports = function (app, routeMethod) {
   /**
    *  修改密码
    */
-routeMethod.csurf('/manage/user/modifyPwd');
-app.post('/manage/user/modifyPwd',async function (req, res) {
- 
+  routeMethod.csurf('/manage/modify_pwd');
+  routeMethod.session('/manage/modify_pwd','sys:menu:edit');
+  app.post('/manage/modify_pwd',async function (req, res) { 
     let password = req.body.oldpassword;
     let newpassword = req.body.password;
     let loginName = req.session.user.login_name;
@@ -34,13 +35,13 @@ app.post('/manage/user/modifyPwd',async function (req, res) {
         result: false,
         error: '原始密码错误，修改失败'
       });
-     } else {
+    } else {
         result = userDao.updateUserPwd(loginName,newpassword, req);
         req.session.notice_info = {
           info: '修改用户成功!',
           type: 'success'
         };
-     }
+    }
 
     if (result) {
         res.json({
@@ -53,9 +54,7 @@ app.post('/manage/user/modifyPwd',async function (req, res) {
           error: '网络出现问题请重试!'
         });
       }
-
   });
-
 };
 
 

@@ -27,10 +27,11 @@
 	      <ul class="rslides" id="slider">
 			 <%dundongguanggao.forEach(function(adv){%>
 			 	<li>
-					<script>
-						var imgStr = '<%-adv.image%>';
-						jsonImgPrint(imgStr,'_922x499');
-					</script>
+					<%if(adv.image_json){%>					
+						<%adv.image_json.forEach(function(img){%>
+							<img src="/getfile?id=<%=img.id%>&format=922x499" alt=""/>
+						<%})%>
+					<%}%>
 					<%-adv.remarks%>
 				</li>
 			 <%})%>
@@ -68,12 +69,13 @@
 			<div class="col-md-9 bottom-content">
 				<%anli.forEach(function(al){%>
 					<div class="grid-top">
-						<div class="col-md-4 grid" style="overflow:hidden;">
-							<div id="nivo-lightbox-demo"> <p> <a data-lightbox-gallery="gallery1" id="nivo-lightbox-demo"> <span class="rollover1"> </span></a> </p></div>     
-							<script>
-								var imgStr = '<%-al.image%>';
-								jsonImgPrint(imgStr,'_295x262','img-responsive');
-							</script>
+						<div class="col-md-4 grid" style="overflow:hidden;">		
+							<%if(al.image_json){%>					
+								<%al.image_json.forEach(function(img){%>
+									<div id="nivo-lightbox-demo"> <p> <a href="<%=img.path + img.name + '.' + img.suffix%>" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo"> <span class="rollover1"> </span></a> </p></div>
+									<img src="/getfile?id=<%=img.id%>&format=295x262" class="img-responsive" alt=""/>
+								<%})%>
+							<%}%>
 						</div>
 						<div class="col-md-8 grid-bottom">
 							<h4><%=al.title%></h4>
@@ -101,7 +103,7 @@
 						<i class="message"> </i>
 					</div>
 					<input type="hidden" name="category_id" value="41f33ca04bf511e780309d6de1be898e"/>
-					<input type="button" value="提交" id="submitMsg">
+					<input type="submit" value="提交" id="submitMsg">
 					<label> </label>
 				</form>
 				<script>
@@ -140,8 +142,8 @@
 					<%xinwen.forEach(function(news){%>
 						<div class="col-in-about">
 							<div class="in-sed">
-								<b>2017</b>
-								<span>6月6日</span>
+								<b><%=moment(news.create_date).format("YYYY")%></b>
+								<span><%=moment(news.create_date).format("MM月DD日")%></span>
 							</div>
 							<div class="left-sit">
 								<p><%=news.title%></p>

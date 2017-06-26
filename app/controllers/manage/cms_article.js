@@ -215,6 +215,13 @@ module.exports = function (app, routeMethod) {
           cate.fields = JSON.parse(cate.field_json);
         }
 
+        let articles = result[1];
+        articles.forEach(article => {
+          if (article.image){
+            article.image_json = JSON.parse(article.image);
+          }
+        });
+
         res.render('manage/cms_article/index', {
           currentMenu: result[0],
           cates: JSON.stringify(cates),

@@ -95,12 +95,11 @@
                             <div class="date-box"><span class="day"><%=cases.color%></span> <span class="month"><%=cases.remarks%></span> </div>
                             <div class="post-content">
                                 <div class="post-image">
-                                    <img id="<%-cases.id%>"/>
-                                    <script>
-                                        var imgStr = '<%-cases.image%>';
-                                        var src = jsonImgPrintOnlySrc(imgStr,'_700x466');
-                                        $('#<%-cases.id%>').attr('src',src);
-                                    </script>
+                                    <%if(cases.image_json){%>
+                                        <%cases.image_json.forEach(function(img){%>
+                                            <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                        <%})%>
+                                    <%}%>
                                 </div>
                                 <div class="post-text">
                                     <h3><a href="#"><%=cases.title%></a></h3>
@@ -112,24 +111,24 @@
                     </ul>
                     <div class="text-center">
                         <ul class="pagination">
-                            <%if(casesPage.pagenum>1){%>
-                                <li><a href="<%=casesPage.pagenum-1%>">上一页</a></li>
+                            <%if(casesPage.page>1){%>
+                                <li><a href="/ufeel/cases?<%if(cate_id!=0){%>cate_id=<%=cate_id%>&<%}%>page=<%=casesPage.page-1%>">上一页</a></li>
                             <%}%>
-                            <%if(casesPage.pagenum-2>0){%>
-                                <li><a href="<%=casesPage.pagenum-2%>"><%=casesPage.pagenum-2%></a></li>
+                            <%if(casesPage.page-2>0){%>
+                                <li><a href="/ufeel/cases?<%if(cate_id!=0){%>cate_id=<%=cate_id%>&<%}%>page=<%=casesPage.page-2%>"><%=casesPage.page-2%></a></li>
                             <%}%>
-                            <%if(casesPage.pagenum-1>0){%>
-                                <li><a href="<%=casesPage.pagenum-1%>"><%=casesPage.pagenum-1%></a></li>
+                            <%if(casesPage.page-1>0){%>
+                                <li><a href="/ufeel/cases?<%if(cate_id!=0){%>cate_id=<%=cate_id%>&<%}%>page=<%=casesPage.page-1%>"><%=casesPage.page-1%></a></li>
                             <%}%>
-                            <li class="active"><a href="<%=casesPage.pagenum%>"><%=casesPage.pagenum%></a></li>
-                            <%if(casesPage.pagenum+1<=casesPage.page){%>
-                                <li><a href="<%=casesPage.pagenum+1%>"><%=casesPage.pagenum+1%></a></li>
+                            <li class="active"><a href="/ufeel/cases?<%if(cate_id!=0){%>cate_id=<%=cate_id%>&<%}%>page=<%=casesPage.page%>"><%=casesPage.page%></a></li>
+                            <%if(casesPage.page+1<=casesPage.pagenum){%>
+                                <li><a href="/ufeel/cases?<%if(cate_id!=0){%>cate_id=<%=cate_id%>&<%}%>page=<%=casesPage.page+1%>"><%=casesPage.page+1%></a></li>
                             <%}%>
-                            <%if(casesPage.pagenum+2<=casesPage.page){%>
-                                <li><a href="<%=casesPage.pagenum+2%>"><%=casesPage.pagenum+2%></a></li>
+                            <%if(casesPage.page+2<=casesPage.pagenum){%>
+                                <li><a href="/ufeel/cases?<%if(cate_id!=0){%>cate_id=<%=cate_id%>&<%}%>page=<%=casesPage.page+2%>"><%=casesPage.page+2%></a></li>
                             <%}%>
-                            <%if(casesPage.pagenum<casesPage.page){%>
-                                <li><a href="<%=casesPage.pagenum+1%>">下一页</a></li>
+                            <%if(casesPage.page<casesPage.pagenum){%>
+                                <li><a href="/ufeel/cases?<%if(cate_id!=0){%>cate_id=<%=cate_id%>&<%}%>page=<%=casesPage.page+1%>">下一页</a></li>
                             <%}%>
                         </ul>
                     </div>

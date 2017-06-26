@@ -69,7 +69,10 @@
             $("#<%=input%>Preview").children().remove();
             for (var i=0; i<filesJson.length; i++){
                 if (filesJson[i]!=null){
-                    var fileFrame = $('<div></div>').addClass('ckfinder-imgFrame').attr('name',filesJson[i].name);
+                    var fileFrame = $('<div></div>').addClass('ckfinder-imgFrame').attr({
+                        'name':filesJson[i].name,
+                        'data-id':filesJson[i].id
+                    });
                     <%if(typeof(showFormat)!='undefined'){%>
                         var thumb = <%-showFormat.replace(/\@/g,'"')%>;
                         filesJson[i].path =filesJson[i].path+filesJson[i].name+"_"+thumb.width+"x"+thumb.height;
@@ -84,7 +87,7 @@
                                 borderColor:'#EEEEEE',
                                 borderStyle:'solid',
                                 backgroundPosition:'center center',
-                                backgroundImage:'url('+filesJson[i].path+"."+filesJson[i].suffix+')',
+                                backgroundImage:'url(/getfile?id='+filesJson[i].id+'&format='+thumb.width+'x'+thumb.height+')',
                                 backgroundRepeat:'no-repeat',
                                 marginBottom:'10px',
                                 position:'relative'

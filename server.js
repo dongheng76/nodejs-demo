@@ -30,7 +30,14 @@ require('./config/routes')(app);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = http.createServer(app,function (req,res){
+    // if(req.url!=="/favicon.ico"){
+        // 超时直接回调
+        res.setTimeout(1000 * 60 * 2,function (){
+           console.log('响应超时.');
+        });
+    // }
+});
 
 /**
  * Listen on provided port, on all network interfaces.

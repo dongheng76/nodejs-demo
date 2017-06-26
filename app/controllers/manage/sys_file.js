@@ -249,8 +249,8 @@ module.exports = function (app, routeMethod) {
         }
         let suffix = fileAry[fileAry.length - 1];
         var fileId = uuidV1();
-        let fileDirPath = path.resolve(__dirname, '../../../') + '/public/files/' + now.getFullYear() + '/' + now.getMonth() + '/' + now.getDate() + '/';
-        let filePath = '/files/' + now.getFullYear() + '/' + now.getMonth() + '/' + now.getDate() + '/';
+        let fileDirPath = path.resolve(__dirname, '../../../') + '/public/files/' + now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate() + '/';
+        let filePath = '/files/' + now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate() + '/';
 
         if (fs.existsSync(fileDirPath)) {
             // 不做操作
@@ -263,35 +263,6 @@ module.exports = function (app, routeMethod) {
             file.mv(fileDirPath + fileId + '.' + suffix, async function (err) {
                 if (err)
                     return res.status(500).send(err);
-
-                // 如果有要求进行按比例缩放就进行缩放操作
-                if (typeof (req.body.format) != 'undefined') {
-                    let format = JSON.parse(req.body.format);
-                    let gmImage = gm(fileDirPath + fileId + '.' + suffix);
-                    for (let j = 0; j < format.length; j++) {
-                        console.log('已经缩放完成！！！');
-                        // 先判断是否需要缩放
-                        if (!(format[j].width >= dimensions.width && format[j].height >= dimensions.height)) {
-                            if (dimensions.width > dimensions.height) {
-                                gmImage.resize(format[j].width);
-                            } else if (dimensions.width < dimensions.height) {
-                                gmImage.resize(null, format[j].height);
-                            } else {
-                                gmImage.resize(format[j].width, format[j].height);
-                            }
-                        }
-
-                        await new Promise((resolve,reject) => {
-                            gmImage.write(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix, function (err) {
-                                if (err){
-                                    reject(err);
-                                }
-
-                                resolve(fileDirPath + fileId + '_' + format[j].width + 'x' + format[j].height + '.' + suffix);
-                            });
-                        });
-                    }
-                }
 
                 // 保存文件成功,为数据库增加一条记录
                 let result = await fileDao.storeFile(req, fileId.replace(/\-/g, ''), (type == 'images' ? 1 : 2), file_cate_id, fileId, dimensions.width, dimensions.height, ori_name, file.data.length, filePath, suffix, req.body.format, null);
@@ -401,6 +372,119 @@ module.exports = function (app, routeMethod) {
                 res.json({
                     result: true
                 });
+            });
+        });
+    });
+
+    /**
+     *  通过ID取得图片文件和流信息
+     */
+    app.get('/getfile', function (req, res) {
+
+        Promise.all([
+            fileDao.queryFileById(req.query.id)
+        ]).then(async result => {
+            let file = result[0];
+            let fileType = {
+                'gif': 'image/gif',
+                'ico': 'image/x-icon',
+                'jpeg': 'image/jpeg',
+                'jpg': 'image/jpeg',
+                'png': 'image/png',
+                'bmp': 'application/x-bmp'
+            };
+            
+            let absolutePath = path.resolve(__dirname, '../../../') + '/public' + file.path + file.name + '.' + file.suffix;
+
+            res.setHeader('Cache-Control', 'max-age=12000');
+            res.setHeader('Cache-Control', 'public');
+            res.setTimeout(1000 * 60 * 2,function (){
+                console.log('响应超时.');
+            });
+            
+            if (req.query.format){
+                let formatAry = req.query.format.split('x');
+                // 先判断需不需要缩放
+                if (file.width < formatAry[0] && file.height < formatAry[1]){
+
+                } else {
+                    // 检查缩放的文件是否存在
+                    fs.exists(absolutePath, function (exists){
+                        if (!exists){
+                            res.end();   
+                        } else {
+                            let zoomAbsolutePath = path.resolve(__dirname, '../../../') + '/public' + file.path + file.name + '_' + req.query.format + '.' + file.suffix;
+                            fs.exists(zoomAbsolutePath, function (ext){
+                                // 如果文件已经存在就读取存在的文件
+                                if (ext){
+                                    fs.stat(zoomAbsolutePath, function (err, stat){
+                                        let lastModified = stat.mtime.toUTCString();
+                                        if (lastModified == req.headers['if-modified-since']) {
+                                            res.writeHead(304, 'Not Modified');
+                                            // 服务器没有新的版本
+                                            res.end();
+                                        }
+                                        else {
+                                            let content =  fs.readFileSync(zoomAbsolutePath,'binary');
+                                            let lastModified = stat.mtime.toUTCString();
+                                            // 设置请求的返回头type,content的type类型列表见上面
+                                            if (typeof (fileType[file.suffix]) != 'undefined'){
+                                                res.setHeader('Content-Type', fileType[file.suffix]);
+                                            }
+                                            res.setHeader('Last-Modified',lastModified);
+                                            res.writeHead(200, 'OK');
+                                            res.write(content,'binary');
+                                            res.end();
+                                        }
+                                    });
+                                } else {
+                                    // 不存在进行缩放后取得图片
+                                    let gmImage = gm(absolutePath);
+                                    gmImage.resize(parseInt(formatAry[0]), parseInt(formatAry[1]));
+                                    gmImage.write(zoomAbsolutePath , function (err) {
+                                        fs.stat(zoomAbsolutePath, function (err, stat){
+                                            let content =  fs.readFileSync(zoomAbsolutePath,'binary');
+                                            let lastModified = stat.mtime.toUTCString();
+                                            // 设置请求的返回头type,content的type类型列表见上面
+                                            if (typeof (fileType[file.suffix]) != 'undefined'){
+                                                res.setHeader('Content-Type', fileType[file.suffix]);
+                                            }
+                                            res.setHeader('Last-Modified',lastModified);
+                                            res.writeHead(200, 'OK');
+                                            res.write(content,'binary');
+                                            res.end();
+                                        });
+                                    });
+                                }
+                            });
+                        }
+                    });                    
+                    return;
+                }                
+            }
+            
+            // 检查原始文件是否存在
+            fs.exists(absolutePath, function (exists){
+                if (exists){
+                    fs.stat(absolutePath, function (err, stat){
+                        let lastModified = stat.mtime.toUTCString();
+                        if (lastModified == req.headers['if-modified-since']) {
+                            res.writeHead(304, 'Not Modified');
+                            // 服务器没有新的版本
+                            res.end();
+                        }
+                        else {
+                            let content =  fs.readFileSync(absolutePath,'binary');
+                            let lastModified = stat.mtime.toUTCString();
+                            res.setHeader('Last-Modified',lastModified);
+                            res.writeHead(200, 'OK');
+                            res.write(content,'binary');
+                            res.end();
+                        }
+                    });
+                } else {
+                    res.end(); 
+                }
             });
         });
     });

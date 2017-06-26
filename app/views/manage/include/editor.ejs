@@ -7,23 +7,22 @@
     });
     
     function <%=input%>SelectAction(files){
-		var url="";
+		var ids="";
 		for(var i=0; i<files.length; i++){
-			url += files[i].path + files[i].name + '.' + files[i].suffix;
-			if (i<files.length-1) url+="|";
+			ids += files[i].id;
+			if (i<files.length-1) ids+="|";
 		}
-		$("#<%=input%>").val($("#<%=input%>").val()+($("#<%=input%>").val(url)==""?url:"|"+url));
-		$("#<%=input%>").val(url);
+		$("#<%=input%>").val(ids);
 		<%=input%>Preview();
 	}
     
     function <%=input%>Preview(){
-		var li, urls = $("#<%=input%>").val().split("|");
+		var li, ids = $("#<%=input%>").val().split("|");
 		$("#<%=input%>Preview").children().remove();
 		UE.getEditor('<%=input%>').focus();
-		for (var i=0; i<urls.length; i++){
+		for (var i=0; i<ids.length; i++){
 			UE.getEditor('<%=input%>').focus();  
-			UE.getEditor('<%=input%>').execCommand('inserthtml','<img src="'+urls[i]+'"/>'); 
+			UE.getEditor('<%=input%>').execCommand('inserthtml','<img src="/getfile?id='+ids[i]+'"/>'); 
 		}
 		if ($("#<%=input%>Preview").text() == ""){
 			$("#<%=input%>Preview").html("<li style='list-style:none;padding-top:5px;'>无</li>");

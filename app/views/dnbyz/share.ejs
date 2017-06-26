@@ -21,17 +21,17 @@
 		<div class="products-bottom">
 			<%anlis.forEach(function(al){%>
 				<div class="col-md-4 work-grid">
-					<div id="nivo-lightbox-demo">			
-						<a  href="images/pi.jpg" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">			   
-							<script>
-								var imgStr = '<%-al.image%>';
-								var obj = jsonImgPrint(imgStr,'_400x300','img-responsive');
-								$('#'+obj.id).parent().attr('href',obj.src);
-							</script>
-							<div class="rotate">
-								<i> </i>	
-							</div>				
-						</a> 
+					<div id="nivo-lightbox-demo">		
+						<%if(al.image_json){%>		
+							<%al.image_json.forEach(function(img){%>
+							<a  href="<%=img.path + img.name + '.' + img.suffix%>" data-lightbox-gallery="gallery1" id="nivo-lightbox-demo">	
+								<img src="/getfile?id=<%=img.id%>&format=400x300" class="img-responsive" alt=""/>
+								<div class="rotate">
+									<i> </i>	
+								</div>				
+							</a> 
+							<%})%>
+						<%}%>
 					</div>
 				</div>
 			<%});%>

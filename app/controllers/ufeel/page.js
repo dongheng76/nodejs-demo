@@ -55,23 +55,69 @@ module.exports = function (app, routeMethod) {
       // 我们的联系方式
       articleDao.queryArticleInfoByCateId('ade10740510d11e793fd39b7741cea1f'),
     ]).then(result => {
+      let ourTodoImg = result[1];
+      ourTodoImg.forEach(function (ourTodo){
+        if (ourTodo.image)
+          ourTodo.image_json = JSON.parse(ourTodo.image);
+      });
+      let teamMem = result[2];
+      teamMem.forEach(function (mm){
+        if (mm.image)
+          mm.image_json = JSON.parse(mm.image);
+      });
+      let qiyezuopin = result[3];
+      qiyezuopin.forEach(function (qiye){
+        if (qiye.image)
+          qiye.image_json = JSON.parse(qiye.image);
+      });
+      let gerenzuopin = result[4];
+      gerenzuopin.forEach(function (geren){
+        if (geren.image)
+          geren.image_json = JSON.parse(geren.image);
+      });
+      let yidongzuopin = result[5];
+      yidongzuopin.forEach(function (yidong){
+        if (yidong.image)
+          yidong.image_json = JSON.parse(yidong.image);
+      });
+      let yingjianzuopin = result[6];
+      yingjianzuopin.forEach(function (yingjian){
+        if (yingjian.image)
+          yingjian.image_json = JSON.parse(yingjian.image);
+      });
+      let says = result[11];
+      says.forEach(function (say){
+        if (say.image)
+          say.image_json = JSON.parse(say.image);
+      });
+      let news = result[7];
+      news.forEach(function (ne){
+        if (ne.image)
+          ne.image_json = JSON.parse(ne.image);
+      });
+      let logos = result[15];
+      logos.forEach(function (logo){
+        if (logo.image)
+          logo.image_json = JSON.parse(logo.image);
+      });
+
       res.render('ufeel/index', {
         cates: result[0],
-        ourTodoImg: result[1],
-        teamMem: result[2],
-        qiyezuopin: result[3],
-        gerenzuopin: result[4],
-        yidongzuopin: result[5],
-        yingjianzuopin: result[6],
-        news: result[7],
+        ourTodoImg: ourTodoImg,
+        teamMem: teamMem,
+        qiyezuopin: qiyezuopin,
+        gerenzuopin: gerenzuopin,
+        yidongzuopin: yidongzuopin,
+        yingjianzuopin: yingjianzuopin,
+        news: news,
         newsTitle: result[8],
         teamInfo: result[9],
         readyUs: result[10],
-        says: result[11],
+        says: says,
         tese: result[12],
         workPattern: result[13],
         todoWorks: result[14],
-        logos: result[15],
+        logos: logos,
         services: result[16],
         fuwu: result[17],
         contact: result[18]
@@ -94,6 +140,11 @@ module.exports = function (app, routeMethod) {
       articleDao.queryAllArticlePageByCateIds(['b389cef050e711e7875527e3b303b0fb','c96dc05050e711e7875527e3b303b0fb','01ed198050e811e7875527e3b303b0fb'
       ,'223fc9d050e811e7875527e3b303b0fb'],req,20,currentPage),
     ]).then(result => {
+      let cases = result[1];
+      cases.forEach(function (ca){
+        if (ca.image)
+          ca.image_json = JSON.parse(ca.image);
+      });
 
       res.render('ufeel/cases', {
         cates: result[0],
@@ -123,10 +174,16 @@ module.exports = function (app, routeMethod) {
       articleDao.queryAllArticleByCateIds(cateIds,req,currentPage,20),
       articleDao.queryAllArticlePageByCateIds(cateIds,req,20,currentPage),
     ]).then(result => {
+      let cases = result[1];
+      cases.forEach(function (ca){
+        if (ca.image)
+          ca.image_json = JSON.parse(ca.image);
+      });
+
       res.render('ufeel/template', {
         cates: result[0],
         cate_children: children,
-        cases: result[1],
+        cases: cases,
         casesPage: result[2],
         cate_id: req.query.cate_id ? req.query.cate_id : '0'
       });

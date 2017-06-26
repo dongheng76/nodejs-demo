@@ -112,7 +112,9 @@ $.fn.fileManage = function(config) {
 		    },
 		    "image" : function(row) {
 		    	var img = new Image();
-		    	var $img = $(img).hide().attr("src",(option.imagePrefix || "") + row.path+row.name+"."+row.suffix);
+		    	// var $img = $(img).hide().attr("src",(option.imagePrefix || "") + row.path+row.name+"."+row.suffix);
+				var $img = $(img).hide().attr("src","/getfile?id=" + row.id + '&format=150x150');
+
 		    	setImageSize($img);
 		    	var n = $('<div class="file_item" data-id="' + row.id + '"><div class="img_wrap"></div><div class="file_title"><div class="file_title_content" title="' + row.title + '">' + row.title + '</div><div class="file_title_suffix">.' + row.suffix + '</div></div>');
 		    	n.find(".img_wrap").html($img);

@@ -9,6 +9,7 @@
   <script src="/plugin/ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
 
   <script src="/js/common/jquery.validate.js" type="text/javascript"></script>
+  <script src="/js/common/jquery-ui.min.js" type="text/javascript"></script>
 
   <!-- 编辑器 -->
   <script type="text/javascript" charset="utf-8" src="/plugin/ueditor/ueditor.config.js"></script>
@@ -62,11 +63,37 @@
                   <label><%=cate.fields.image%>:</label>
                   <input type="hidden" id="image" name="image" <%if(typeof(article)!='undefined'){%> value="<%=article.image%>" <%}%>/>
                   <%if(typeof(cate)!='undefined' && cate.image_format){%>
-                    <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:cate.image_format,showFormat:cate.image_show_format})%>
+                    <%-include("../include/finder",{input:'image',type:'images',selectMultiple:true,format:cate.image_format,showFormat:cate.image_show_format})%>
                   <%}else{%>
-                    <%-include("../include/finder",{input:'image',type:'images',selectMultiple:false,format:'[{@width@:200,@height@:200}]',showFormat:'{@width@:200,@height@:200}'})%>
+                    <%-include("../include/finder",{input:'image',type:'images',selectMultiple:true,format:'[{@width@:200,@height@:200}]',showFormat:'{@width@:200,@height@:200}'})%>
                   <%}%>
                 </div>
+                <script>
+                  String.prototype.replaceAll  = function(s1,s2){   
+                      return this.replace(new RegExp(s1,"gm"),s2);   
+                  }
+
+                  $( "#imagePreview" ).sortable({
+                    deactivate: function( event, ui ) {
+                      // 重新整理图片顺序问题
+                      var files = $('#imagePreview .ckfinder-imgFrame');
+                      // 取得json信息
+                      var imgJson = JSON.parse($('#image').val());
+                      var newImgJson = [];
+                      files.each(function(){
+                        for(var i=0;i<imgJson.length;i++){
+                          if($(this).attr('data-id')==imgJson[i].id){
+                            imgJson[i].format = null;
+                            newImgJson.push(imgJson[i]);
+                            break;
+                          }
+                        }
+                      });
+                      $('#image').val(JSON.stringify(newImgJson));                      
+                    }
+                  });
+                  $( "#imagePreview" ).disableSelection();
+                </script>
               <%}%>
               <div class="field-box">
                   <label>排序号:</label>
@@ -125,7 +152,7 @@
           <%}else{%>
             <button type="submit" class="btn-glow inverse">确定添加</button>
           <%}%>
-          <a class="btn-glow" href="javascript:window.history.back();">返回</a>
+          <a class="btn-glow" href="javascript:window.location.href='/manage/cms_article?cate_id=<%=cate_id%>';">返回</a>
         </form>
       </div>
     </div>
