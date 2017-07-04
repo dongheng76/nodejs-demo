@@ -171,8 +171,8 @@ module.exports = function (app, routeMethod) {
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),
       // 模板信息
-      articleDao.queryAllArticleByCateIds(cateIds,req,currentPage,20),
-      articleDao.queryAllArticlePageByCateIds(cateIds,req,20,currentPage),
+      articleDao.queryAllArticleByCateIds(cateIds,req,currentPage,10),
+      articleDao.queryAllArticlePageByCateIds(cateIds,req,10,currentPage),
     ]).then(result => {
       let cases = result[1];
       cases.forEach(function (ca){

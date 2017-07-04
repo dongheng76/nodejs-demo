@@ -440,7 +440,16 @@ module.exports = function (app, routeMethod) {
                                 } else {
                                     // 不存在进行缩放后取得图片
                                     let gmImage = gm(absolutePath);
-                                    gmImage.resize(parseInt(formatAry[0]), parseInt(formatAry[1]));
+                                    // 如果宽不存在就按高缩放
+                                    if (typeof(formatAry[0]) == 'undefined' || formatAry[0] == 0){
+                                        gmImage.resize(null, parseInt(formatAry[1]));
+                                    } else if (typeof(formatAry[1]) == 'undefined' || formatAry[1] == 0) {
+                                        // 如果高不存在就按宽缩放
+                                         gmImage.resize(parseInt(formatAry[0]));
+                                    } else {
+                                        gmImage.resize(parseInt(formatAry[0]), parseInt(formatAry[1]));
+                                    }
+                                    
                                     gmImage.write(zoomAbsolutePath , function (err) {
                                         fs.stat(zoomAbsolutePath, function (err, stat){
                                             let content =  fs.readFileSync(zoomAbsolutePath,'binary');

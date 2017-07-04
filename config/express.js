@@ -42,7 +42,12 @@ module.exports = function (app) {
   app.use(cors());
 
   // 设置静态文件夹路径，已达到不被当成控制层的作用
-  app.use(express.static(config.root + '/public'));
+  app.use(express.static(config.root + '/public'),function (req,res){
+    // 超时直接回调
+    res.setTimeout(1000 * 60 * 2,function (){
+        console.log('响应超时.');
+    });
+  });
 
   // 输出控制层访问及其读秒库
   app.use(logger('dev'));
