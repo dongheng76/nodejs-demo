@@ -31,6 +31,35 @@ exports.queryMenuForRecursion = async function () {
 };
 
 /**
+ * 根据菜单id查询菜单家谱信息
+ */
+exports.queryMenuGenealById = async function (id) {
+    let menu = await mysql.queryOne('select * from sys_menu where id =?',[id]);
+    // 取得区域信息后切割父亲家谱信息
+    let pids = menu.parent_ids.split(',');
+    pids.pop();
+
+    let proPids = pids.map(async pid => {
+        let p_menu = await mysql.queryOne('select * from sys_menu where id=?', [pid]);
+
+        let parent_label = '';
+        if (typeof (p_menu) != 'undefined') {
+            parent_label += p_menu.name + '-';
+        }
+        return parent_label;
+    });
+
+    return Promise.all(proPids).then(parent_labels => {
+        let parent_labels_str = '';
+        for (let i = 0; i < parent_labels.length; i++) {
+            parent_labels_str += parent_labels[i];
+        }
+        parent_labels_str += menu.name;
+        return parent_labels_str;
+    });
+};
+
+/**
  * 非递归查询菜单信息
  */
 exports.queryMenus = function () {

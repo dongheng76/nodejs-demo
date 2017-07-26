@@ -7,14 +7,20 @@ const utils = require('../../utils');
 const cateDao = require('../../dao/cms_category.js');
 const articleDao = require('../../dao/cms_article.js');
 const guestbookDao = require('../../dao/cms_guestbook.js');
+const siteDao = require('../../dao/cms_site.js');
+const config = require('../../../config');
 
 
 module.exports = function (app, routeMethod) {
   /**
    * 网页首页
    */
-  app.all('/ufeel', function (req, res) {
+  app.all('/ufeel',async function (req, res) {
     let siteId = 'c46f915050dd11e79e03715d6c7b2c7d';
+    let domain = config.server.coreDomain;
+
+    // 根据站点ID查询站点信息
+    let site = await siteDao.querySiteById(siteId);
 
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),
@@ -54,6 +60,7 @@ module.exports = function (app, routeMethod) {
       articleDao.queryArticleInfoByCateId('bf2f078050e611e7875527e3b303b0fb'),
       // 我们的联系方式
       articleDao.queryArticleInfoByCateId('ade10740510d11e793fd39b7741cea1f'),
+      
     ]).then(result => {
       let ourTodoImg = result[1];
       ourTodoImg.forEach(function (ourTodo){
@@ -120,7 +127,9 @@ module.exports = function (app, routeMethod) {
         logos: logos,
         services: result[16],
         fuwu: result[17],
-        contact: result[18]
+        contact: result[18],
+        site:site,
+        domain: domain
       });
     });
   });
@@ -128,9 +137,13 @@ module.exports = function (app, routeMethod) {
   /**
    * 网站案例页
    */
-  app.all('/ufeel/cases', function (req, res) {
+  app.all('/ufeel/cases',async function (req, res) {
     let siteId = 'c46f915050dd11e79e03715d6c7b2c7d';
     let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
+    let domain = config.server.coreDomain;
+
+    // 根据站点ID查询站点信息
+    let site = await siteDao.querySiteById(siteId);
 
     Promise.all([
       cateDao.queryCmsCateForRecursion(siteId),
@@ -150,7 +163,9 @@ module.exports = function (app, routeMethod) {
         cates: result[0],
         cases: result[1],
         casesPage: result[2],
-        cate_id: req.query.cate_id ? req.query.cate_id : '0'
+        cate_id: req.query.cate_id ? req.query.cate_id : '0',
+        site:site,
+        domain: domain
       });
     });
   });
@@ -160,6 +175,10 @@ module.exports = function (app, routeMethod) {
    */
   app.all('/ufeel/template',async function (req, res) {
     let siteId = 'c46f915050dd11e79e03715d6c7b2c7d';
+    let domain = config.server.coreDomain;
+
+    // 根据站点ID查询站点信息
+    let site = await siteDao.querySiteById(siteId);
     let currentPage = req.query.page ? req.query.page : 1; // 获取当前页数，如果没有则为1
     // 查看所有的模板类型的分类
     let children = await cateDao.queryChildrenCateById('51ba08e0549b11e79dcadb83d1b88d12');
@@ -185,7 +204,9 @@ module.exports = function (app, routeMethod) {
         cate_children: children,
         cases: cases,
         casesPage: result[2],
-        cate_id: req.query.cate_id ? req.query.cate_id : '0'
+        cate_id: req.query.cate_id ? req.query.cate_id : '0',
+        site:site,
+        domain: domain
       });
     });
   });

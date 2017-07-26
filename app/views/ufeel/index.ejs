@@ -16,34 +16,34 @@
 
     <!-- CSS Files
     ================================================== -->
-    <link rel="stylesheet" href="/ufeel/css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/jpreloader.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/animate.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/flexslider.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/plugin.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/prettyPhoto.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/owl.theme.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/style.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/jpreloader.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/animate.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/flexslider.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/plugin.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/prettyPhoto.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/owl.theme.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/style.css" type="text/css">
 
     <!-- custom style css -->
-    <link rel="stylesheet" href="/ufeel/css/custom-style.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/custom-style.css" type="text/css">
 
     <!-- color scheme -->
-    <link rel="stylesheet" href="/ufeel/css/color.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/color.css" type="text/css">
 
     <!-- revolution slider -->
-    <link rel="stylesheet" href="/ufeel/rs-plugin/css/settings.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/css/rev-settings.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/rs-plugin/css/settings.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/css/rev-settings.css" type="text/css">
 
     <!-- load fonts -->
-    <link rel="stylesheet" href="/ufeel/fonts/font-awesome/css/font-awesome.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/fonts/elegant_font/HTML_CSS/style.css" type="text/css">
-    <link rel="stylesheet" href="/ufeel/fonts/et-line-font/style.css" type="text/css">
-    <script src="/ufeel/js/jquery.min.js"></script>
-    <script src="/ufeel/js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="<%=site.domain%>/fonts/font-awesome/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/fonts/elegant_font/HTML_CSS/style.css" type="text/css">
+    <link rel="stylesheet" href="<%=site.domain%>/fonts/et-line-font/style.css" type="text/css">
+    <script src="<%=site.domain%>/js/jquery.min.js"></script>
+    <script src="<%=site.domain%>/js/jquery.validate.js"></script>
 
-    <script src="/js/common/common.js"></script>
+    <script src="<%=domain%>/js/common/common.js"></script>
 </head>
 
 <body id="homepage">
@@ -85,7 +85,7 @@
                         <div class="text-item"><span class="id-color"><i class="icon-bike"></i></span>您准备好进入我们的家园了吗?</div>
                     </div>
                     <div class="spacer-single"></div>
-                    <a href="/ufeel/template" target="_blank" class="btn btn-border btn-big">我们的模板库</a>
+                    <a href="<%=site.domain%>/template" target="_blank" class="btn btn-border btn-big">我们的模板库</a>
                 </div>
             </section>
             <!-- section close -->
@@ -175,7 +175,7 @@
                 <div class="image-container col-md-5 pull-left animated" data-animation="fadeInLeft" data-delay="0">
                     <%if(ourTodoImg[0].image_json){%>
                         <%ourTodoImg[0].image_json.forEach(function(img){%>
-                            <img src="/getfile?id=<%=img.id%>&format=800x989" class="img-responsive"/>
+                            <img src="<%=domain%>/getfile?id=<%=img.id%>&format=800x989" class="img-responsive"/>
                         <%})%>
                     <%}%>
                 </div>
@@ -229,9 +229,9 @@
 
                     <!-- load your video here -->
                     <video autoplay="" loop="" muted="" poster="video/video-1.jpg">
-                        <source src="/ufeel/video/video-1.webm" type="video/webm" />
-                        <source src="/ufeel/video/video-1.mp4" type="video/mp4" />
-                        <source src="/ufeel/video/video-1.ogg" type="video/ogg" />
+                        <source src="<%=site.domain%>/video/video-1.webm" type="video/webm" />
+                        <source src="<%=site.domain%>/video/video-1.mp4" type="video/mp4" />
+                        <source src="<%=site.domain%>/video/video-1.ogg" type="video/ogg" />
                     </video>
 
 
@@ -263,7 +263,7 @@
                             <div class="team-pic">
                                 <%if(mem.image_json){%>
                                     <%mem.image_json.forEach(function(img){%>
-                                        <img src="/getfile?id=<%=img.id%>&format=400x400" class="img-responsive"/>
+                                        <img src="<%=domain%>/getfile?id=<%=img.id%>&format=400x400" class="img-responsive"/>
                                     <%})%>
                                 <%}%>
                             </div>
@@ -429,7 +429,7 @@
                         <div class="spacer-single"></div>
 
                         <div class="col-md-12 text-center animated" data-animation="fadeInUp" data-delay="400">
-                            <img src="/ufeel/images/cubic_ss.png" class="img-responsive" alt="">
+                            <img src="<%=site.domain%>/images/cubic_ss.png" class="img-responsive" alt="">
                         </div>
                     </div>
                 </div>
@@ -544,7 +544,7 @@
                                 <%qiye.image_json.forEach(function(img){%>
                                     <span class="overlay">
                                         <span class="icon">
-                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                            <a href="<%=domain%>/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
                                         </span>
                                         <span class="icon">
                                             <i class="fa fa-align-justify fa-external-link icon-info"></i>
@@ -554,7 +554,7 @@
                                             <span><%=qiye.description%></span>
                                         </span>
                                     </span>
-                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                    <img src="<%=domain%>/getfile?id=<%=img.id%>&format=700x466"/>
                                 <%})%>
                             <%}%>
                         </div>
@@ -570,7 +570,7 @@
                                 <%geren.image_json.forEach(function(img){%>
                                     <span class="overlay">
                                         <span class="icon">
-                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                            <a href="<%=domain%>/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
                                         </span>
                                         <span class="icon">
                                             <i class="fa fa-align-justify fa-external-link icon-info"></i>
@@ -580,7 +580,7 @@
                                             <span><%=geren.description%></span>
                                         </span>
                                     </span>
-                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                    <img src="<%=domain%>/getfile?id=<%=img.id%>&format=700x466"/>
                                 <%})%>
                             <%}%>
                         </div>
@@ -595,7 +595,7 @@
                                 <%yidong.image_json.forEach(function(img){%>
                                     <span class="overlay">
                                         <span class="icon">
-                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                            <a href="<%=domain%>/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
                                         </span>
                                         <span class="icon">
                                             <i class="fa fa-align-justify fa-external-link icon-info"></i>
@@ -605,7 +605,7 @@
                                             <span><%=yidong.description%></span>
                                         </span>
                                     </span>
-                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                    <img src="<%=domain%>/getfile?id=<%=img.id%>&format=700x466"/>
                                 <%})%>
                             <%}%>
                         </div>
@@ -619,7 +619,7 @@
                                 <%yingjian.image_json.forEach(function(img){%>
                                     <span class="overlay">
                                         <span class="icon">
-                                            <a href="/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
+                                            <a href="<%=domain%>/getfile?id=<%=img.id%>" data-type="prettyPhoto[gallery]"><i class="fa fa-search icon-view"></i></a>
                                         </span>
                                         <span class="icon">
                                             <i class="fa fa-align-justify fa-external-link icon-info"></i>
@@ -629,7 +629,7 @@
                                             <span><%=yingjian.description%></span>
                                         </span>
                                     </span>
-                                    <img src="/getfile?id=<%=img.id%>&format=700x466"/>
+                                    <img src="<%=domain%>/getfile?id=<%=img.id%>&format=700x466"/>
                                 <%})%>
                             <%}%>
                         </div>
@@ -647,7 +647,7 @@
 
             <!-- section begin -->
             <section id="view-all-projects" class="call-to-action bg-color dark text-center" data-speed="5" data-type="background">
-                <a href="/ufeel/cases" target="_blank" class="btn btn-border btn-big">查看所有项目</a>
+                <a href="<%=site.domain%>/cases" target="_blank" class="btn btn-border btn-big">查看所有项目</a>
             </section>
             <!-- logo carousel section close -->
 
@@ -674,7 +674,7 @@
                                     <div class="de_testi_pic">
                                         <%if(say.image_json){%>
                                             <%say.image_json.forEach(function(img){%>
-                                                <img src="/getfile?id=<%=img.id%>&format=100x100" class="img-circle"/>
+                                                <img src="<%=domain%>/getfile?id=<%=img.id%>&format=100x100" class="img-circle"/>
                                             <%})%>
                                         <%}%>
                                     </div>
@@ -718,7 +718,7 @@
                                             <li>
                                                 <%if(news.image_json){%>
                                                     <%news.image_json.forEach(function(img){%>
-                                                        <img src="/getfile?id=<%=img.id%>&format=800x400"/>
+                                                        <img src="<%=domain%>/getfile?id=<%=img.id%>&format=800x400"/>
                                                     <%})%>
                                                 <%}%>
                                             </li>
@@ -751,7 +751,7 @@
                                         <div class="col-md-2">
                                             <%if(logo.image_json){%>
                                                 <%logo.image_json.forEach(function(img){%>
-                                                    <img src="/getfile?id=<%=img.id%>&format=180x60"/>
+                                                    <img src="<%=domain%>/getfile?id=<%=img.id%>&format=180x60"/>
                                                 <%})%>
                                             <%}%>
                                         </div>
@@ -815,8 +815,7 @@
                                         content: "内容必须填写后提交"
                                     },
                                     submitHandler:function(form){
-                                        alert(123);
-                                        $.post('/ufeel/msgboard',$('form[name="contactForm"]').serialize(),function(data){
+                                        $.post('<%=site.domain%>/msgboard',$('form[name="contactForm"]').serialize(),function(data){
                                             if(data.result){
                                                 alert('您的信息发送成功，我们会地址时间与您沟通联系的。');
                                             }else{
@@ -868,21 +867,21 @@
 
     <!-- Javascript Files
     ================================================== -->
-    <script src="/ufeel/js/jpreLoader.js"></script>
-    <script src="/ufeel/js/bootstrap.min.js"></script>
-    <script src="/ufeel/js/jquery.isotope.min.js"></script>
-    <script src="/ufeel/js/jquery.prettyPhoto.js"></script>
-    <script src="/ufeel/js/easing.js"></script>
-    <script src="/ufeel/js/jquery.ui.totop.js"></script>
-    <script src="/ufeel/js/jquery.flexslider-min.js"></script>
-    <script src="/ufeel/js/jquery.scrollto.js"></script>
-    <script src="/ufeel/js/owl.carousel.js"></script>
-    <script src="/ufeel/js/jquery.countTo.js"></script>
-    <script src="/ufeel/js/classie.js"></script>
-    <script src="/ufeel/js/designesia.js"></script>
+    <script src="<%=site.domain%>/js/jpreLoader.js"></script>
+    <script src="<%=site.domain%>/js/bootstrap.min.js"></script>
+    <script src="<%=site.domain%>/js/jquery.isotope.min.js"></script>
+    <script src="<%=site.domain%>/js/jquery.prettyPhoto.js"></script>
+    <script src="<%=site.domain%>/js/easing.js"></script>
+    <script src="<%=site.domain%>/js/jquery.ui.totop.js"></script>
+    <script src="<%=site.domain%>/js/jquery.flexslider-min.js"></script>
+    <script src="<%=site.domain%>/js/jquery.scrollto.js"></script>
+    <script src="<%=site.domain%>/js/owl.carousel.js"></script>
+    <script src="<%=site.domain%>/js/jquery.countTo.js"></script>
+    <script src="<%=site.domain%>/js/classie.js"></script>
+    <script src="<%=site.domain%>/js/designesia.js"></script>
 
     <!-- SLIDER REVOLUTION SCRIPTS  -->
-    <script type="text/javascript" src="/ufeel/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
-    <script type="text/javascript" src="/ufeel/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="<%=site.domain%>/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="<%=site.domain%>/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 </body>
 </html>

@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "body-parser": "~1.15.1",
+    "body-parser-xml": "^1.1.0",
     "co": "~4.6.0",
     "compression": "~1.6.2",
     "connect-flash": "~0.1.1",
@@ -55,6 +56,7 @@
     "mongoose": "~4.7.2",
     "morgan": "^1.8.2",
     "mysql": "^2.13.0",
+    "node-schedule": "^1.2.3",
     "node-xlrd": "0.2.4",
     "node-xlsx": "^0.7.4",
     "notifier": "~0.1.7",
@@ -68,7 +70,8 @@
     "passport-twitter": "~1.0.3",
     "redis": "^2.7.1",
     "uuid": "^3.0.1",
-    "view-helpers": "~0.1.5"
+    "view-helpers": "~0.1.5",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "async": "^2.3.0",

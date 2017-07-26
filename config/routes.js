@@ -6,6 +6,7 @@ const routeTools = require('./routeTools');
 const urlTools = require('url');
 const env = process.env.NODE_ENV || 'development';
 const csrf = require('csurf');
+const envConfig = require('./index');
 
 /**
  * 添加session路由方法以及添加校验方法
@@ -91,6 +92,49 @@ const csrf = require('csurf');
 }();
 
 /**
+ * 添加session路由方法以及添加校验方法
+ */
+~ function () {
+  let sessionPermissions = [];
+  /**
+   * 添加验证session的url地址处理方法
+   */
+  routeTools.addRouteMethod('weixinSession', function (url) {
+    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+      throw new Error('permission url muse be string and not empty');
+    }
+    sessionPermissions.push(url.trim());
+  });
+
+  /**
+   * @return 返回true表示session验证成功,false表示失败
+   */
+  routeTools.addValidateMethod('weixinSession', function (req, res) {
+    let url = urlTools.parse(req.url).pathname;
+    if (!sessionPermissions.includes(url)) {
+      return true;
+    }
+    if (!req.session || !req.session.weixinUser) {
+      /* req.session.weixinUser = {
+        userId:'ef33dbe06d1a11e7b0888d5cfe5cb851',
+        user_parent_id: null,
+        user_union_id: 'o8tmf1SKPfrswmrXvry6lqYm1UGo',
+        user_login_name: null,
+        user_is_proxy: 0,
+        user_name: '董恒',
+        user_photo: 'http://wx.qlogo.cn/mmhead/hqDXUD6csUibS9dA7LdUPKuchYthicHZiaO2h62ODU33BBu3RMb8OKFZA/0'
+      };
+      return true; */
+      let winxinCallbackUrl = envConfig.server.myUrl + '/api/weixin/req_weixinuser_info';
+      let visitUrl = req.protocol + '://' + req.host + req.originalUrl;
+      res.redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx72878a9eb500ef96&redirect_uri=' + encodeURIComponent(winxinCallbackUrl).toLowerCase() + '&response_type=code&scope=snsapi_userinfo&state=' + encodeURIComponent(visitUrl).toLowerCase() + '#wechat_redirect');
+      return false;
+    }
+    return true;
+  });
+}();
+
+/**
  * 添加sign路由方法以及添加sign校验方法
  */
 ~ function () {
@@ -114,7 +158,7 @@ const csrf = require('csurf');
 
   let signPermissions = [];
   /**
-   * @return 返回none表示不验证session,success表示session验证成功,fail表示失败
+   * @return 返回true表示session验证成功,false表示失败
    */
   routeTools.addRouteMethod('sign', function (url) {
     if (!url || Object.prototype.toString.call(url) !== '[object String]') {

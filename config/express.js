@@ -25,11 +25,31 @@ const envConfig = require('./index');
 const log4js = require('log4js');
 log4js.configure(envConfig.log4js);
 
+const schedule = require('../app/schedule');
+
+require('body-parser-xml')(bodyParser);
+
 /**
  * Expose
  */
 
 module.exports = function (app) {
+
+  // 开启所有的调度程序
+  let objKeys = Object.keys(schedule);
+  objKeys.forEach(objKey => {
+    schedule[objKey]();
+  });
+
+  // 解决微信支付通知回调数据
+  app.use(bodyParser.xml({
+    limit: '2MB',   // Reject payload bigger than 1 MB
+    xmlParseOptions: {
+      normalize: true,     // Trim whitespace inside text nodes
+      normalizeTags: true, // Transform tags to lowercase
+      explicitArray: false // Only put nodes in array if >1
+    }
+  }));
 
   // default options
   app.use(fileUpload());
@@ -42,12 +62,7 @@ module.exports = function (app) {
   app.use(cors());
 
   // 设置静态文件夹路径，已达到不被当成控制层的作用
-  app.use(express.static(config.root + '/public'),function (req,res){
-    // 超时直接回调
-    res.setTimeout(1000 * 60 * 2,function (){
-        console.log('响应超时.');
-    });
-  });
+  app.use(express.static(config.root + '/public'));
 
   // 输出控制层访问及其读秒库
   app.use(logger('dev'));

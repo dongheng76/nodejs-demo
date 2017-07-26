@@ -86,7 +86,7 @@
             <% menus.forEach(function(menu){ %>
                 <% if(menu['parent_id']=='1'){ %>
                     <% if(currentMenu['parent_ids'].indexOf(menu['parent_ids']+menu['id']+',')!=-1){ %>
-                        var currentMenuId = <%=menu['id']%>;
+                        var currentMenuId = "<%=menu['id']%>";
                     <% } %>
                 <% } %>
             <% }) %>
@@ -103,7 +103,45 @@
         </script>
         <ul class="nav pull-right">
             <li class="hidden-phone">
-                <input class="search" type="text" placeholder='亲爱的"<%=user.name%>"这里搜索模块'/>
+                <input class="search" type="text" placeholder='亲爱的"<%=user.name%>"这里搜索模块' id="search_menu"/>
+                <ul id="keyMenus">
+                    
+                </ul>
+                <script type="text/javascript">
+                    $('#search_menu').keyup(function(e){
+                        if(e.which==13){
+                            $.post('/manage/menu/query_my_menu',{
+                                key:$('#search_menu').val(),
+                                _csrf:"<%= csrf_token %>"
+                            },function(data){
+                                if(data.result){
+                                    $('#keyMenus').empty().show();
+
+                                    for(var i=0;i<data.menus.length;i++){
+                                        $('#keyMenus').append('<li><a href="'+data.menus[i].href+'">'+data.menus[i].parent_labels_str+'</a></li>');
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    $(window).mouseup(function(e){
+                        // 点击的东西不是当前的就关闭掉
+                        var target = $(e.target);
+                        var close = true;
+                        for(var i=0;i<10;i++){
+                            if(target){
+                                if(target.hasClass('hidden-phone')){
+                                    close = false;
+                                    break;
+                                }else{
+                                    target = target.parent();
+                                }
+                            }
+                        }
+                        if(close)$('#keyMenus').hide();
+                    });
+                </script>
             </li>
             <li class="notification-dropdown hidden-phone">
                 <a href="#" class="trigger">
@@ -196,12 +234,11 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/manage/panel">我的账户信息</a></li>
-                    <li><a href="#">我要修改密码</a></li>
-                    <li><a href="#">我的业绩查看</a></li>
+                    <li><a href="/manage/user/modify_pwd">我要修改密码</a></li>
                 </ul>
             </li>
             <li class="settings hidden-phone">
-                <a href="personal-info.html" role="button">
+                <a href="/manage/panel" role="button">
                     <i class="icon-cog"></i>
                 </a>
             </li>

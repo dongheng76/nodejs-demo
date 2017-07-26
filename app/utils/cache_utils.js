@@ -11,7 +11,7 @@ function getSysCache () {
 // 取得某缓存的对象
 exports.get = async function (cacheName) {
     let sysCache = await getSysCache();
-    return sysCache[cacheName];
+    return sysCache ? sysCache[cacheName] : null;
 };
 
 // 写入缓存

@@ -22,5 +22,10 @@ module.exports = {
     server: '127.0.0.1',
     // password: 'adminmima',
     port: 6379
+  },
+  server: {
+    coreDomain: '',
+    // 微信服务地址
+    myUrl:'http://server75.x9w.com'
   }
 };

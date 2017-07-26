@@ -26,5 +26,9 @@ module.exports = {
     server: 'localhost',
     // password: 'adminmima',
     port: 6379
+  },
+  server: {
+    coreDomain: '',
+    myUrl:'http://server75.x9w.com'
   }
 };

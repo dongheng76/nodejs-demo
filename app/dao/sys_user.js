@@ -50,6 +50,17 @@ exports.queryUserMenuAuthority = function (userId) {
 };
 
 /**
+ * 根据用户ID和查询关键字搜索相关菜单信息
+ */
+exports.queryUserMenuAuthorityByKey = function (userId,key) {
+    return mysql.query(`
+        SELECT DISTINCT sm.* FROM sys_user su LEFT JOIN sys_user_role sur ON su.id = sur.user_id left join sys_role_menu srm on sur.role_id = srm.role_id 
+        left join sys_menu sm on srm.menu_id=sm.id where su.id=? and sm.del_flag='0' and sm.href is not null and sm.name like '%${key}%' order by sm.sort asc
+    `,
+        [userId]);
+};
+
+/**
  * 分页查询用户所有信息
  */
 exports.queryAllUser = function (req, currentPage, pagesize) {

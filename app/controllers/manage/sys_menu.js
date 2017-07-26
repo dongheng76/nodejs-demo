@@ -9,6 +9,7 @@ const util = require('../../utils');
 const menuDao = require('../../dao/sys_menu');
 const dictUtil = require('../../utils/dict_utils');
 const moment = require('moment');
+const userDao = require('../../dao/sys_user');
 
 module.exports = function (app, routeMethod) {
   /**
@@ -154,8 +155,38 @@ module.exports = function (app, routeMethod) {
     ]).then(result => {
       res.render('manage/sys_menu/index', {
         currentMenu: result[0],
-        menus: result[1]
+        my_menus: result[1]
       });
+    });
+  });
+
+  /**
+   * 根据关键词查询菜单目录信息
+   */
+  routeMethod.csurf('/manage/menu/query_my_menu');
+  routeMethod.session('/manage/menu/query_my_menu','sys:menu:view');
+  app.post('/manage/menu/query_my_menu', function (req, res) {
+    // 根据关键字查询相关菜单信息
+    let key = req.body.key;
+    let user = req.session.user;
+
+    Promise.all([
+      userDao.queryUserMenuAuthorityByKey(user.id,key)
+    ]).then(result => {
+      // 取得菜单信息并且把菜单家谱一并查询出来
+      let menus = result[0];
+
+      let proMenus = menus.map(async menu => {
+        menu.parent_labels_str = await menuDao.queryMenuGenealById(menu.id);
+        return menu;
+      });
+
+      Promise.all(proMenus).then(menus => {
+        res.json({
+          result:true,
+          menus:menus
+        });   
+      });        
     });
   });
 };
